@@ -1,8 +1,8 @@
 'use client';
 import {
   X, Target, Globe, Smartphone, Sparkles, CheckCircle, Briefcase,
-  LineChart, Compass, QrCode, FileText, PlayCircle, Layers, Zap,
-  Cpu, BarChart3, Search, Map, Quote, Calendar, ArrowUpRight,Users, ArrowRight, Languages, FileDown
+  LineChart, Compass, QrCode, ShieldCheck, FileText, PlayCircle, Layers, Zap,
+  Cpu, BarChart3, Monitor, Maximize2, Hexagon, Fingerprint, TrendingUp, Award, Search, Map, Quote, Calendar, ArrowUpRight,Users, ArrowRight, Languages, FileDown
 } from 'lucide-react';
 import { useEffect, useState, ReactNode } from 'react';
 
@@ -785,225 +785,211 @@ export default function ChapterOverlay({
     },
   };
 
-  const current = projectConfig[projectType] || projectConfig['smart-tourism'];
+ // Garantia de que o objeto existe para não quebrar o render
+ const current = projectConfig?.[projectType] || projectConfig?.['smart-tourism'] || {};
 
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      setActiveTab('overview');
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-  }, [isOpen]);
+ useEffect(() => {
+   if (isOpen) {
+     document.body.style.overflow = 'hidden';
+     setActiveTab('overview');
+   } else {
+     document.body.style.overflow = 'unset';
+   }
+ }, [isOpen]);
 
-  if (!isOpen) return null;
+ if (!isOpen || !current) return null;
 
-  return (
-    <div className="fixed inset-0 z-[500] flex items-center justify-center p-4 md:p-12 overflow-hidden font-sans animate-in fade-in duration-500">
-      {/* Backdrop: Suave e leitoso em vez de escuro */}
-      <div
-        className="absolute inset-0 bg-slate-100/80 backdrop-blur-xl"
-        onClick={onClose}
-      />
+ // Função segura para renderizar o Hero com efeito de cor alternada
+ const renderHero = () => {
+   const text = current.hero || "Project Overview";
+   if (typeof text !== 'string') return text;
+   
+   return text.split(" ").map((word: string, i: number) => (
+     <span key={i} className={i % 2 !== 0 ? "text-blue-600 block" : "block"}>
+       {word}
+     </span>
+   ));
+ };
 
-      {/* Main Container: Branco puro, escala contida e sombras leves */}
-      <div className="relative w-full max-w-5xl h-full md:h-[85vh] bg-white md:rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] flex flex-col overflow-hidden border border-slate-200">
-        
-        {/* Header: Compacto e Clean */}
-        <header className="relative flex items-center justify-between px-8 py-6 z-50 border-b border-slate-100">
-          <div className="flex items-center gap-10">
-            <div className="flex flex-col">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="w-1 h-1 bg-blue-600 rounded-full" />
-                <span className="text-[9px] font-bold text-blue-600 uppercase tracking-[0.3em]">
-                  {current.tag}
-                </span>
-              </div>
-              <h2 className="text-lg md:text-xl font-serif font-black text-slate-900 tracking-tight uppercase italic leading-none">
-                {current.headerTitle}
-              </h2>
-            </div>
+ return (
+   <div className="fixed inset-0 z-[600] flex items-center justify-center overflow-hidden animate-in fade-in duration-700 font-sans">
+     
+     {/* 1. BACKGROUND: Slate Ultra-Dark */}
+     <div className="absolute inset-0 bg-slate-950 z-0" />
+     
+     {/* 2. EFEITOS DE LUZ: Glow Blue Neon */}
+     <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-blue-600/10 blur-[150px] rounded-full z-[1]" />
+     <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-blue-900/10 blur-[150px] rounded-full z-[1]" />
 
-            <nav className="hidden lg:flex items-center gap-1 bg-slate-50 p-1 rounded-full border border-slate-200">
-              <NavButton active={activeTab === 'overview'} onClick={() => setActiveTab('overview')} icon={Target} label="Conceito" />
-              <NavButton active={activeTab === 'pillars'} onClick={() => setActiveTab('pillars')} icon={Layers} label={current.pillarTabLabel} />
-              <NavButton active={activeTab === 'media'} onClick={() => setActiveTab('media')} icon={PlayCircle} label="Visuals" />
-            </nav>
-          </div>
+     <div className="relative w-full h-full flex flex-col z-10 text-white overflow-hidden">
+       
+       {/* HEADER: Floating Glassmorphism */}
+       <header className="flex items-center justify-between px-8 md:px-16 py-10 z-[100]">
+         <div className="flex flex-col">
+           <div className="flex items-center gap-3 mb-2">
+             <span className="w-8 h-[1px] bg-blue-600" />
+             <span className="text-blue-500 font-black text-[10px] tracking-[0.5em] uppercase">
+               Confidential // Archive 2026
+             </span>
+           </div>
+           <h2 className="text-2xl md:text-3xl font-black uppercase italic tracking-tighter">
+             {current.headerTitle || 'Project Details'}
+           </h2>
+         </div>
 
-          <button
-            onClick={onClose}
-            className="w-10 h-10 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-200 transition-all duration-300 group"
-          >
-            <X className="w-4 h-4 group-hover:rotate-90 transition-transform" />
-          </button>
-        </header>
+         <div className="flex items-center gap-12">
+           <nav className="hidden lg:flex items-center gap-2 bg-white/5 p-1 rounded-full border border-white/10 backdrop-blur-md">
+             {[
+               { id: 'overview', label: 'Concept' },
+               { id: 'pillars', label: current.pillarTabLabel || 'Strategy' },
+               { id: 'media', label: 'Visuals' }
+             ].map((tab) => (
+               <button
+                 key={tab.id}
+                 onClick={() => setActiveTab(tab.id)}
+                 className={`px-8 py-3 text-[10px] font-black uppercase tracking-widest transition-all rounded-full ${
+                   activeTab === tab.id ? 'bg-blue-600 text-white' : 'text-white/40 hover:text-white'
+                 }`}
+               >
+                 {tab.label}
+               </button>
+             ))}
+           </nav>
 
-        {/* Main Content: Respiro e tipografia elegante */}
-        <main className="relative flex-1 overflow-y-auto z-10 px-8 md:px-16 py-10 custom-scrollbar-light scroll-smooth bg-white">
-          {activeTab === 'overview' && (
-            <div className="pb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
-              <div className="mb-16 mt-4">
-                <h1 className="text-[40px] md:text-[64px] leading-[0.9] font-serif font-black text-slate-900 tracking-tighter uppercase mb-10 italic">
-                  {current.hero}
-                </h1>
-                
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-                  <div className="lg:col-span-7">
-                    <p className="text-xl md:text-2xl text-slate-600 font-light leading-relaxed font-serif italic border-l-2 border-blue-500/20 pl-6">
-                      {current.description}
-                    </p>
-                  </div>
-                  <div className="lg:col-span-5">
-                     <div className="p-8 bg-slate-50 border border-slate-100 rounded-[2rem] transition-all duration-500">
-                        <Quote className="w-6 h-6 text-blue-400/40 mb-4" />
-                        <p className="text-lg font-serif italic text-slate-800 font-medium leading-snug">
-                          {current.quote}
-                        </p>
-                     </div>
-                  </div>
-                </div>
-              </div>
+           <button
+             onClick={onClose}
+             className="group w-14 h-14 rounded-2xl border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-500"
+           >
+             <X size={24} className="group-hover:rotate-90 transition-transform duration-500" />
+           </button>
+         </div>
+       </header>
 
-              {/* Grid de Métricas: Reduzido */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <SummaryCard icon={Search} title="Curadoria" desc="Filtragem estratégica de ativos territoriais." />
-                <SummaryCard icon={Globe} title="Global" desc="Posicionamento alinhado com standards mundiais." />
-                <div className="p-8 border border-slate-100 rounded-3xl flex flex-col justify-center items-center bg-blue-50/30 text-center">
-                   <span className="text-[9px] font-black text-blue-600 uppercase tracking-[0.4em]">Consultoria Estratégica</span>
-                </div>
-              </div>
-            </div>
-          )}
+       {/* MAIN CONTENT */}
+       <main className="flex-1 overflow-y-auto px-8 md:px-20 py-10 custom-scrollbar-dark">
+         
+         {activeTab === 'overview' && (
+           <div className="max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-10 duration-1000">
+             
+             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start mb-32">
+               {/* Lado Esquerdo: Tipografia Brutalista */}
+               <div className="lg:col-span-8 flex flex-col gap-12">
+                 <h1 className="text-7xl md:text-[130px] font-black uppercase italic leading-[0.8] tracking-tighter">
+                   {renderHero()}
+                 </h1>
+                 
+                 <div className="relative p-1 border-l-4 border-blue-600 pl-10">
+                   <p className="text-2xl md:text-4xl text-white/80 font-light leading-snug italic max-w-3xl">
+                     {current.description}
+                   </p>
+                 </div>
+               </div>
 
-          {activeTab === 'pillars' && (
-            <div className="pb-20 animate-in fade-in slide-in-from-right-4 duration-500 pt-4">
-              <div className="max-w-2xl mb-12">
-                <h3 className="text-3xl font-serif font-black text-slate-900 italic mb-4 uppercase tracking-tighter">
-                  {current.pillarTitle}
-                </h3>
-                <p className="text-lg text-slate-500 font-light leading-relaxed">
-                  {current.pillarDesc}
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {current.pillars.map((item: any, i: number) => (
-                    <div key={i} className="group flex items-start gap-6 p-8 bg-slate-50 border border-slate-100 rounded-2xl hover:bg-white hover:border-blue-100 hover:shadow-sm transition-all duration-300">
-                      <div className="flex-1">
-                        <span className="text-[9px] font-black text-blue-500 mb-1 block">0{i + 1}</span>
-                        <h4 className="text-lg font-serif font-black text-slate-900 uppercase italic tracking-tight">
-                          {item.title}
-                        </h4>
-                        <p className="text-slate-500 mt-2 text-sm leading-relaxed">
-                          {item.desc || (item.items && item.items.join(' • '))}
-                        </p>
-                      </div>
-                      <div className="w-10 h-10 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-400 group-hover:text-blue-500 transition-colors">
-                        <item.icon size={18} />
-                      </div>
-                    </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {activeTab === 'media' && (
-            <div className="pb-20 animate-in fade-in zoom-in-95 duration-500 pt-4">
-                <div className="columns-2 md:columns-3 gap-4 space-y-4">
-                  {current.gallery?.map((img: string, idx: number) => (
-                    <div key={idx} className="relative rounded-xl overflow-hidden border border-slate-200 bg-slate-50">
-                      <img
-                        src={img}
-                        className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700"
-                        alt=""
-                      />
-                    </div>
-                  ))}
-                </div>
-                {current.videoEmbed && (
-                   <div className="mt-8 rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-black">
-                      {current.videoEmbed}
+               {/* Lado Direito: Citação com Profundidade */}
+               <div className="lg:col-span-4 relative group">
+                 <div className="absolute inset-0 bg-blue-600/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                 <div className="relative p-12 bg-white/5 border border-white/10 rounded-[3rem] backdrop-blur-sm overflow-hidden">
+                   <Quote className="text-blue-600 w-16 h-16 mb-8 opacity-40" />
+                   <p className="text-2xl md:text-3xl font-black italic tracking-tight leading-tight mb-10">
+                     "{current.quote}"
+                   </p>
+                   <div className="flex items-center gap-4">
+                     <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center font-black italic text-xs">HB</div>
+                     <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30">Strategic Direction</span>
                    </div>
-                )}
-            </div>
-          )}
-        </main>
+                 </div>
+               </div>
+             </div>
 
-        {/* Footer: Compacto e Editorial */}
-        <footer className="relative px-8 py-6 bg-slate-50 border-t border-slate-200 flex justify-between items-center z-50">
-          <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white font-serif font-bold italic text-sm">
-              HB
-            </div>
-            <div className="flex flex-col">
-              <span className="text-[7px] font-black text-blue-600 uppercase tracking-[0.4em]">Strategy</span>
-              <h3 className="text-sm font-serif font-black text-slate-900 uppercase italic tracking-widest leading-none">
-                Hugo Barros
-              </h3>
-            </div>
+             {/* Grid de Features (Substituindo KPIs) */}
+             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+                <FeatureCard icon={Monitor} title="User Experience" label="Optimized Flow" />
+                <FeatureCard icon={Cpu} title="Architecture" label="Future-Proof Tech" />
+                <FeatureCard icon={Zap} title="Performance" label="High Efficiency" />
+             </div>
+           </div>
+         )}
+
+         {activeTab === 'pillars' && (
+           <div className="max-w-7xl mx-auto animate-in fade-in slide-in-from-right-10 duration-700">
+              <div className="mb-24 flex flex-col gap-6">
+                 <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-xs">Structural Pillars</span>
+                 <h3 className="text-5xl md:text-8xl font-black uppercase italic tracking-tighter">{current.pillarTitle}</h3>
+                 <p className="text-2xl text-white/50 font-light italic max-w-3xl leading-relaxed">{current.pillarDesc}</p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+               {current.pillars?.map((item: any, i: number) => (
+                   <div key={i} className="group p-12 bg-white/5 border border-white/10 rounded-[2.5rem] hover:bg-blue-600 transition-all duration-500">
+                     <div className="flex justify-between items-center mb-16">
+                        <div className="w-14 h-14 rounded-xl bg-blue-600 flex items-center justify-center">
+                           <item.icon size={28} className="text-white" />
+                        </div>
+                        <span className="text-6xl font-black opacity-5 group-hover:opacity-20 transition-opacity">0{i+1}</span>
+                     </div>
+                     <h4 className="text-3xl font-black uppercase italic mb-6 group-hover:translate-x-3 transition-transform">{item.title}</h4>
+                     <p className="text-white/40 group-hover:text-white/90 text-lg font-light leading-relaxed">
+                       {item.desc || (item.items && item.items.join(' • '))}
+                     </p>
+                   </div>
+               ))}
+              </div>
+           </div>
+         )}
+
+         {activeTab === 'media' && (
+           <div className="max-w-7xl mx-auto animate-in zoom-in-95 duration-700">
+              <div className="columns-1 md:columns-2 lg:columns-3 gap-10 space-y-10">
+                 {current.gallery?.map((img: string, idx: number) => (
+                   <div key={idx} className="relative group overflow-hidden rounded-[3rem] border border-white/10 bg-white/5">
+                     <img src={img} className="w-full h-auto grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-105" alt="" />
+                     <div className="absolute inset-0 bg-blue-600/60 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center">
+                        <Maximize2 className="text-white w-10 h-10 translate-y-4 group-hover:translate-y-0 transition-transform" />
+                     </div>
+                   </div>
+                 ))}
+              </div>
+           </div>
+         )}
+       </main>
+
+       {/* FOOTER: Black Edition */}
+       <footer className="px-8 md:px-16 py-12 bg-black border-t border-white/5 flex flex-col md:flex-row items-center justify-between z-[200] gap-10">
+          <div className="flex items-center gap-8">
+             <div className="text-5xl font-black italic tracking-tighter text-blue-600">HB</div>
+             <div className="flex flex-col">
+               <span className="text-[10px] font-black text-white/30 uppercase tracking-[0.5em] mb-1">Elite Case Study</span>
+               <span className="text-lg font-bold text-white uppercase italic tracking-widest">Hugo Barros // © 2026</span>
+             </div>
           </div>
-
-          <div className="flex items-center gap-3">
+          
+          <div className="flex items-center gap-6">
             {current.link && (
-              <button
+              <button 
                 onClick={() => window.open(current.link, '_blank')}
-                className="px-4 py-2 bg-white border border-slate-200 text-slate-600 hover:text-blue-600 hover:border-blue-200 rounded-lg transition-all duration-300 flex items-center gap-2"
+                className="px-12 py-6 bg-white text-black font-black uppercase text-[11px] tracking-[0.3em] hover:bg-blue-600 hover:text-white transition-all flex items-center gap-4 rounded-xl active:scale-95"
               >
-                <span className="text-[9px] font-black uppercase tracking-widest">
-                  {current.labelLink}
-                </span>
-                <ArrowUpRight size={12} />
+                Review Full Case <ArrowUpRight size={18} />
               </button>
             )}
-            
-            <div className="flex gap-1 border-l border-slate-200 pl-3">
-              {[
-                { link: current.linkEN, label: 'EN' },
-                { link: current.linkES, label: 'ES' }
-              ].map((item, i) => item.link && (
-                <button
-                  key={i}
-                  onClick={() => window.open(item.link, '_blank')}
-                  className="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-blue-600 text-[8px] font-black"
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
           </div>
-        </footer>
-      </div>
-    </div>
-  );
+       </footer>
+     </div>
+   </div>
+ );
 }
 
-function NavButton({ active, onClick, icon: Icon, label }: any) {
-  return (
-    <button
-      onClick={onClick}
-      className={`flex items-center gap-2 px-4 py-2 rounded-full text-[9px] font-black uppercase tracking-widest transition-all duration-300 ${
-        active
-          ? 'bg-white text-blue-600 shadow-sm'
-          : 'text-slate-400 hover:text-slate-600'
-      }`}
-    >
-      <Icon size={12} />
-      {label}
-    </button>
-  );
-}
-
-function SummaryCard({ icon: Icon, title, desc }: any) {
-  return (
-    <div className="p-6 bg-slate-50 border border-slate-100 rounded-2xl hover:bg-white transition-all duration-300">
-      <Icon className="w-4 h-4 text-blue-500 mb-3" />
-      <h4 className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-2">
-        {title}
-      </h4>
-      <p className="text-slate-600 text-sm font-serif italic leading-snug">
-        {desc}
-      </p>
-    </div>
-  );
+// Sub-componente de Feature para evitar repetição
+function FeatureCard({ icon: Icon, title, label }: any) {
+ return (
+   <div className="p-10 bg-white/5 border border-white/10 rounded-[2rem] flex items-center gap-8 hover:bg-white/10 transition-colors group">
+     <div className="w-16 h-16 rounded-full bg-blue-600/10 flex items-center justify-center text-blue-500 group-hover:bg-blue-600 group-hover:text-white transition-all">
+       <Icon size={24} />
+     </div>
+     <div className="flex flex-col">
+       <span className="text-[10px] font-black uppercase tracking-widest text-white/30 mb-1">{label}</span>
+       <h5 className="text-xl font-black uppercase italic tracking-tight">{title}</h5>
+     </div>
+   </div>
+ );
 }
