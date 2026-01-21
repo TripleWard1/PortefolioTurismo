@@ -2,7 +2,7 @@
 import {
   X, Target, Globe, Smartphone, Sparkles, CheckCircle, Briefcase,
   LineChart, Compass, QrCode, FileText, PlayCircle, Layers, Zap,
-  Cpu, BarChart3, Search, Map, Calendar, Users, Languages, FileDown
+  Cpu, BarChart3, Search, Map, Quote, Calendar, Users, ArrowRight, Languages, FileDown
 } from 'lucide-react';
 import { useEffect, useState, ReactNode } from 'react';
 
@@ -130,52 +130,31 @@ export default function ChapterOverlay({
     },
     'smart-tourism': {
       watermark: 'https://i.imgur.com/GBs8DY7.jpeg',
-      tag: 'Candidaturas // 2026',
-      headerTitle: 'Candidatura a European Capital of Smart Tourism',
+      tag: 'Candidaturas Europeias // 2026',
+      headerTitle: 'Smart Tourism Capital',
       hero: (
-        <>
-          Smart <br />
-          <span className="text-blue-600 italic">Tourism.</span>
-        </>
+        <div className="space-y-2">
+          <span className="text-blue-500 font-medium tracking-widest uppercase text-sm">Braga 2026</span>
+          <h1 className="text-6xl md:text-8xl font-light tracking-tighter text-white">
+            Smart <span className="italic font-serif text-blue-400">Tourism</span>
+          </h1>
+        </div>
       ),
       description: (
-        <>
-          Liderança técnica no desenho da estratégia e{' '}
-          <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8">
-            defesa institucional em Bruxelas
-          </span>{' '}
-          que garantiu a integração de Braga na prestigiada Rede Europeia de
-          Smart Tourism.
-        </>
+        <p className="text-lg md:text-xl text-slate-400 leading-relaxed font-light">
+          Liderança técnica na estratégia de <span className="text-white border-b border-blue-500/30">defesa institucional em Bruxelas</span>, consolidando Braga na elite dos destinos inteligentes europeus.
+        </p>
       ),
-      pillarTabLabel: 'Eixos Estratégicos',
-      pillarTitle: 'Eixos Fundamentais da Candidatura',
-      pillarDesc:
-        'A defesa em Bruxelas baseou-se nos quatro pilares obrigatórios da Comissão Europeia para a excelência turística.',
+      pillarTabLabel: 'Eixos',
+      pillarTitle: 'Pilares Estratégicos',
+      pillarDesc: 'Uma abordagem holística baseada nos critérios de excelência da Comissão Europeia.',
       pillars: [
-        {
-          title: 'Acessibilidade',
-          desc: 'Garantir que a cidade e os seus serviços digitais são inclusivos para todos.',
-          icon: Smartphone,
-        },
-        {
-          title: 'Sustentabilidade',
-          desc: 'Gestão de fluxos turísticos e preservação de recursos locais.',
-          icon: Globe,
-        },
-        {
-          title: 'Digitalização',
-          desc: 'Uso de tecnologia para melhorar a experiência do turista e a gestão do destino.',
-          icon: Zap,
-        },
-        {
-          title: 'Herança Cultural',
-          desc: 'Promoção do património material e imaterial através de meios inovadores.',
-          icon: Sparkles,
-        },
+        { title: 'Acessibilidade', desc: 'Inclusividade física e digital.', icon: Smartphone },
+        { title: 'Sustentabilidade', desc: 'Preservação do capital natural.', icon: Globe },
+        { title: 'Digitalização', desc: 'Gestão inteligente de dados.', icon: Zap },
+        { title: 'Herança Cultural', desc: 'Inovação no património vivo.', icon: Sparkles },
       ],
-      quote:
-        '"Acompanhamento técnico desde a fundação dos dados até à integração na Rede Europeia."',
+      quote: "A excelência turística nasce da harmonia entre tecnologia e identidade.",
       gallery: [
         'https://i.imgur.com/1t5plh4.jpeg',
         'https://i.imgur.com/cpFeHQk.jpeg',
@@ -820,284 +799,232 @@ export default function ChapterOverlay({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[500] flex items-center justify-center p-0 md:p-6 overflow-hidden font-sans">
+    <div className="fixed inset-0 z-[500] flex items-center justify-center p-0 md:p-8 overflow-hidden font-sans animate-in fade-in duration-700">
+      {/* Backdrop: Gradiente profundo para isolar o conteúdo */}
       <div
         className="absolute inset-0 bg-[#020617]/98 backdrop-blur-3xl"
         onClick={onClose}
       />
 
-      <div className="relative w-full max-w-[1800px] h-full md:h-[92vh] bg-[#020617] md:rounded-[3rem] shadow-2xl flex flex-col overflow-hidden border border-white/5">
-        <div className="absolute inset-0 opacity-[0.15] pointer-events-none">
+      {/* Main Container: Look de "Canvas" editorial */}
+      <div className="relative w-full max-w-[1750px] h-full md:h-[92vh] bg-[#020617] md:rounded-[3rem] shadow-[0_0_120px_rgba(0,0,0,0.9)] flex flex-col overflow-hidden border border-white/5">
+        
+        {/* Watermark: Animada e sutil */}
+        <div className="absolute inset-0 opacity-[0.05] pointer-events-none">
           <img
             src={current.watermark}
-            className="w-full h-full object-cover saturate-0"
+            className="w-full h-full object-cover scale-110 animate-slow-zoom blur-[1px]"
             alt=""
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#020617] via-transparent to-[#020617]" />
         </div>
 
-        <header className="relative flex items-center justify-between px-12 py-10 z-50">
-          <div className="flex items-center gap-12">
+        {/* Header: Flutuante e Minimalista */}
+        <header className="relative flex items-center justify-between px-10 md:px-20 py-12 z-50">
+          <div className="flex items-center gap-20">
             <div className="flex flex-col">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="w-2 h-2 bg-blue-600 rounded-full animate-pulse" />
+              <div className="flex items-center gap-3 mb-3">
+                <span className="w-1.5 h-1.5 bg-blue-500 rounded-full shadow-[0_0_12px_#3b82f6]" />
                 <span className="text-[10px] font-black text-blue-500 uppercase tracking-[0.5em]">
                   {current.tag}
                 </span>
               </div>
-              <h2 className="text-2xl font-serif font-black text-white tracking-tighter uppercase italic">
+              <h2 className="text-2xl md:text-3xl font-serif font-black text-white/90 tracking-tight uppercase italic leading-none">
                 {current.headerTitle}
               </h2>
             </div>
 
-            <nav className="hidden lg:flex items-center gap-1 bg-white/5 p-1 rounded-2xl border border-white/10 backdrop-blur-2xl">
-              <NavButton
-                active={activeTab === 'overview'}
-                onClick={() => setActiveTab('overview')}
-                icon={Target}
-                label="Sumário"
-              />
-              <NavButton
-                active={activeTab === 'pillars'}
-                onClick={() => setActiveTab('pillars')}
-                icon={Layers}
-                label={current.pillarTabLabel}
-              />
-              <NavButton
-                active={activeTab === 'media'}
-                onClick={() => setActiveTab('media')}
-                icon={PlayCircle}
-                label="Media"
-              />
+            <nav className="hidden xl:flex items-center gap-2 bg-white/[0.02] p-1.5 rounded-2xl border border-white/5 backdrop-blur-2xl">
+              <NavButton active={activeTab === 'overview'} onClick={() => setActiveTab('overview')} icon={Target} label="Conceito" />
+              <NavButton active={activeTab === 'pillars'} onClick={() => setActiveTab('pillars')} icon={Layers} label={current.pillarTabLabel} />
+              <NavButton active={activeTab === 'media'} onClick={() => setActiveTab('media')} icon={PlayCircle} label="Visuals" />
             </nav>
           </div>
 
           <button
             onClick={onClose}
-            className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-red-500/20 transition-all group"
+            className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/40 hover:bg-blue-600 hover:text-white hover:border-blue-500 transition-all duration-500 group"
           >
-            <X className="w-5 h-5 group-hover:rotate-90 transition-transform" />
+            <X className="w-6 h-6 group-hover:rotate-90 transition-transform" />
           </button>
         </header>
 
-        <main className="relative flex-1 overflow-y-auto z-10 px-12 custom-scrollbar">
+        {/* Main Content: Custom scrollbar integrada */}
+        <main className="relative flex-1 overflow-y-auto z-10 px-10 md:px-20 custom-scrollbar scroll-smooth">
           {activeTab === 'overview' && (
-            <div className="pb-20 animate-in fade-in slide-in-from-bottom-8 duration-700">
-              <div className="max-w-5xl mb-24 mt-10">
-                <h1 className="text-[140px] leading-[0.75] font-serif font-black text-white tracking-tighter uppercase mt-6">
+            <div className="pb-32 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+              <div className="mb-28 mt-8">
+                {/* Hero Typo: Proporções áureas */}
+                <h1 className="text-[70px] md:text-[140px] leading-[0.75] font-serif font-black text-white tracking-tighter uppercase mb-20 italic">
                   {current.hero}
                 </h1>
-                <p className="text-3xl text-slate-300 font-light leading-relaxed max-w-3xl border-l-4 border-blue-600 pl-10 mt-12">
-                  {current.description}
-                </p>
+                
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+                  <div className="lg:col-span-7">
+                    <div className="relative">
+                      <div className="absolute -left-10 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-600 to-transparent opacity-50" />
+                      <p className="text-3xl md:text-5xl text-slate-100 font-light leading-[1.3] tracking-tight font-serif italic">
+                        {current.description}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="lg:col-span-5">
+                     <div className="p-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-[3.5rem] shadow-3xl shadow-blue-900/20 -rotate-1 hover:rotate-0 transition-all duration-700">
+                        <Quote className="w-10 h-10 text-white/30 mb-6" />
+                        <p className="text-2xl md:text-3xl font-serif italic text-white font-bold leading-tight tracking-tight">
+                          {current.quote}
+                        </p>
+                     </div>
+                  </div>
+                </div>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <SummaryCard
-                    icon={Search}
-                    title="Curadoria"
-                    desc="Seleção criteriosa de espaços e momentos que definem a identidade da cidade."
-                  />
-                  <SummaryCard
-                    icon={Globe}
-                    title="Impacto"
-                    desc="Estratégia alinhada com as melhores práticas europeias de gestão turística."
-                  />
-                </div>
-                <div className="lg:col-span-4 p-12 bg-blue-600 rounded-[3.5rem] flex items-center">
-                  <p className="text-3xl font-serif italic text-white font-black leading-tight uppercase">
-                    {current.quote}
-                  </p>
+              {/* Grid de Métricas: Design ultra-clean */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <SummaryCard icon={Search} title="Curadoria" desc="Filtragem estratégica de ativos para maximizar a autenticidade do destino." />
+                <SummaryCard icon={Globe} title="Global" desc="Posicionamento de marca alinhado com standards internacionais de excelência." />
+                <div className="p-12 border border-white/5 rounded-[3.5rem] flex flex-col justify-center items-center bg-white/[0.01] text-center group hover:bg-white/[0.03] transition-all">
+                   <div className="w-2 h-2 bg-blue-500 rounded-full mb-4 animate-pulse" />
+                   <span className="text-[11px] font-black text-blue-500 uppercase tracking-[0.6em]">Consultoria Estratégica</span>
                 </div>
               </div>
             </div>
           )}
 
           {activeTab === 'pillars' && (
-            <div className="pb-20 animate-in fade-in slide-in-from-right-12 duration-700">
-              <div className="max-w-4xl mb-16 mt-6">
-                <h3 className="text-4xl font-serif font-black text-white italic mb-6 uppercase">
+            <div className="pb-32 animate-in fade-in slide-in-from-right-8 duration-700 pt-8">
+              <div className="max-w-4xl mb-24">
+                <h3 className="text-6xl font-serif font-black text-white italic mb-8 uppercase tracking-tighter">
                   {current.pillarTitle}
                 </h3>
-                <p className="text-xl text-slate-400 leading-relaxed border-l-2 border-blue-600 pl-8">
+                <p className="text-2xl text-slate-400 font-light leading-relaxed">
                   {current.pillarDesc}
                 </p>
               </div>
 
-              <div
-                className={
-                  isVisitBraga
-                    ? 'grid grid-cols-1 md:grid-cols-2 gap-8'
-                    : 'flex flex-col gap-6'
-                }
-              >
-                {current.pillars.map((item: any, i: number) =>
-                  isVisitBraga ? (
-                    <HorizontalPillarCard
-                      key={i}
-                      icon={item.icon}
-                      title={item.title}
-                      items={item.items}
-                    />
-                  ) : (
-                    <div
-                      key={i}
-                      className="flex items-center gap-10 p-10 bg-white/[0.02] border border-white/5 rounded-3xl hover:bg-white/5 transition-colors group"
-                    >
-                      <span className="text-5xl font-serif font-black text-blue-600/30 group-hover:text-blue-500 transition-colors">
-                        0{i + 1}
-                      </span>
-                      <div className="w-16 h-16 bg-blue-600/10 rounded-2xl flex items-center justify-center">
-                        <item.icon className="w-8 h-8 text-blue-500" />
+              <div className={isVisitBraga ? 'grid grid-cols-1 md:grid-cols-2 gap-10' : 'grid grid-cols-1 gap-6'}>
+                {current.pillars.map((item: any, i: number) => (
+                    <div key={i} className="group flex items-center gap-12 p-12 bg-white/[0.01] border border-white/5 rounded-[4rem] hover:bg-white/[0.03] hover:border-white/10 transition-all duration-700">
+                      <div className="flex flex-col items-center">
+                        <span className="text-[10px] font-black text-blue-500 mb-2">0{i + 1}</span>
+                        <div className="w-0.5 h-12 bg-gradient-to-b from-blue-500 to-transparent" />
                       </div>
-                      <div>
-                        <h4 className="text-2xl font-serif font-black text-white uppercase italic tracking-tight">
+                      <div className="flex-1">
+                        <h4 className="text-3xl font-serif font-black text-white uppercase italic tracking-tight group-hover:text-blue-500 transition-colors">
                           {item.title}
                         </h4>
-                        <p className="text-slate-400 mt-1 max-w-2xl text-lg">
-                          {item.desc}
+                        <p className="text-slate-400 mt-3 text-xl font-light leading-relaxed max-w-3xl">
+                          {item.desc || (item.items && item.items.join(' • '))}
                         </p>
                       </div>
+                      <div className="w-20 h-20 bg-white/5 rounded-[2rem] flex items-center justify-center group-hover:bg-blue-600 group-hover:rotate-6 transition-all duration-500">
+                        <item.icon className="w-8 h-8 text-white" />
+                      </div>
                     </div>
-                  )
-                )}
+                ))}
               </div>
             </div>
           )}
 
           {activeTab === 'media' && (
-            <div className="pb-20 animate-in fade-in slide-in-from-right-12 duration-700">
-              <div className="max-w-[1400px] mx-auto mt-10">
-                {/* Renderização condicional para incluir o VideoEmbed do roteiro de 3 dias */}
-                {current.videoEmbed ? (
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-                    <div className="lg:col-span-4 max-w-[400px] mx-auto w-full">
-                      <div className="rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl bg-black">
-                        {current.videoEmbed}
+            <div className="pb-32 animate-in fade-in zoom-in-95 duration-700 pt-10">
+                <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+                  {current.gallery?.map((img: string, idx: number) => (
+                    <div key={idx} className="relative rounded-[2.5rem] overflow-hidden border border-white/5 group bg-slate-950 shadow-2xl">
+                      <img
+                        src={img}
+                        className="w-full h-auto object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-[1.5s]"
+                        alt=""
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-10 flex items-end">
+                        <span className="text-[10px] font-black text-white uppercase tracking-[0.4em]">Asset Ref. 0{idx+1}</span>
                       </div>
                     </div>
-                    <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {current.gallery?.map((img: string, idx: number) => (
-                        <div
-                          key={idx}
-                          className="group relative aspect-video rounded-[2.5rem] overflow-hidden border border-white/10 bg-white/5"
-                        >
-                          <img
-                            src={img}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
-                            alt=""
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ) : isVisitBraga && current.videoUrl ? (
-                  <div className="rounded-[2.5rem] overflow-hidden border border-white/10 aspect-video relative bg-black shadow-2xl">
-                    <iframe
-                      src={current.videoUrl}
-                      className="absolute inset-0 w-full h-full border-none"
-                      allowFullScreen
-                    />
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {current.gallery?.map((img: string, idx: number) => (
-                      <div
-                        key={idx}
-                        className="group relative aspect-[4/3] rounded-[2.5rem] overflow-hidden border border-white/10 bg-white/5"
-                      >
-                        <img
-                          src={img}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
-                          alt=""
-                        />
-                        <div className="absolute inset-0 bg-blue-900/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-                      </div>
-                    ))}
-                  </div>
+                  ))}
+                </div>
+                {current.videoEmbed && (
+                   <div className="mt-12 rounded-[3rem] overflow-hidden border border-white/10 shadow-3xl bg-black">
+                      {current.videoEmbed}
+                   </div>
                 )}
-              </div>
             </div>
           )}
         </main>
 
-        <footer className="relative px-12 py-10 bg-[#020617] border-t border-white/5 flex justify-between items-center z-50">
+        {/* Footer: Minimalista e Editorial */}
+        <footer className="relative px-10 md:px-20 py-8 bg-[#020617] border-t border-white/[0.03] flex flex-col md:flex-row justify-between items-center z-50 gap-6">
           <div className="flex items-center gap-6">
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-900 flex items-center justify-center border border-white/20">
-              <span className="text-white font-serif font-black text-2xl italic">
-                HB
-              </span>
+            {/* Logo simplificado e menor */}
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-white/[0.05] to-transparent flex items-center justify-center border border-white/10 shadow-sm">
+              <span className="text-white/80 font-serif font-bold text-lg italic tracking-tighter">HB</span>
             </div>
-            <div>
-              <p className="text-[10px] font-black text-blue-500 uppercase tracking-[0.5em] mb-1">
-                Consultoria Estratégica
-              </p>
-              <h3 className="text-2xl font-serif font-black text-white uppercase italic tracking-tighter">
+            
+            <div className="flex flex-col">
+              <span className="text-[8px] font-black text-blue-500/60 uppercase tracking-[0.8em] mb-0.5">
+                Strategy & Design
+              </span>
+              <h3 className="text-xl font-serif font-black text-white/40 uppercase italic tracking-widest leading-none">
                 Hugo Barros
               </h3>
             </div>
           </div>
 
           <div className="flex items-center gap-4">
-            {/* Botão PT (Destaque) */}
+            {/* Botão Principal mais fino e elegante */}
             {current.link && (
               <button
                 onClick={() => window.open(current.link, '_blank')}
-                className="group relative px-8 py-5 bg-white text-black rounded-2xl overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-xl"
+                className="group px-6 py-3.5 bg-white/[0.03] hover:bg-white text-white/50 hover:text-black border border-white/5 rounded-xl transition-all duration-500 ease-out"
               >
-                <div className="absolute inset-0 bg-blue-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-                <div className="relative flex items-center gap-3 group-hover:text-white transition-colors">
-                  <span className="text-[11px] font-black uppercase tracking-[0.2em]">
+                <div className="flex items-center gap-3">
+                  <span className="text-[9px] font-black uppercase tracking-[0.3em]">
                     {current.labelLink}
                   </span>
-                  <FileDown className="w-4 h-4" />
+                  <FileDown className="w-4 h-4 opacity-50 group-hover:opacity-100" />
                 </div>
               </button>
             )}
 
-            {/* Botões Secundários (EN, ES, FR e Simplificado) */}
-            {[
-              { link: current.linkEN, label: current.labelLinkEN },
-              { link: current.linkES, label: current.labelLinkES },
-              { link: current.linkFR, label: current.labelLinkFR },
-              { link: current.linkLowCost, label: current.labelLowCost },
-            ].map(
-              (item, index) =>
-                item.link && (
-                  <button
-                    key={index}
-                    onClick={() => window.open(item.link, '_blank')}
-                    className="group relative px-8 py-5 bg-white/5 text-white border border-white/10 rounded-2xl overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-xl"
-                  >
-                    <div className="absolute inset-0 bg-blue-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-                    <div className="relative flex items-center gap-3 group-hover:text-white transition-colors">
-                      <span className="text-[11px] font-black uppercase tracking-[0.2em]">
-                        {item.label}
-                      </span>
-                      <FileDown className="w-4 h-4" />
-                    </div>
-                  </button>
-                )
-            )}
+            {/* Divisor subtil entre o botão principal e os idiomas */}
+            <div className="h-4 w-[1px] bg-white/10 mx-2 hidden md:block" />
+
+            {/* Idiomas em estilo ultra-minimalista */}
+            <div className="flex gap-1.5">
+              {[
+                { link: current.linkEN, label: 'EN' },
+                { link: current.linkES, label: 'ES' },
+                { link: current.linkFR, label: 'FR' },
+                { link: current.linkLowCost, label: 'LC' }
+              ].map((item, i) => item.link && (
+                <button
+                  key={i}
+                  onClick={() => window.open(item.link, '_blank')}
+                  className="w-10 h-10 flex items-center justify-center bg-transparent text-white/20 border border-transparent hover:border-white/10 hover:text-white rounded-lg transition-all duration-300"
+                >
+                  <span className="text-[8px] font-black tracking-tighter">{item.label}</span>
+                </button>
+              ))}
+            </div>
           </div>
         </footer>
-      </div>
+        </div>
     </div>
   );
 }
+
+// --- SUB-COMPONENTES REFINADOS (O QUE FALTA NO TEU CÓDIGO) ---
 
 function NavButton({ active, onClick, icon: Icon, label }: any) {
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-3 px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
+      className={`flex items-center gap-4 px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 ${
         active
-          ? 'bg-blue-600 text-white shadow-lg'
-          : 'text-slate-400 hover:text-white'
+          ? 'bg-blue-600 text-white shadow-[0_10px_25px_rgba(37,99,235,0.4)] scale-105'
+          : 'text-white/40 hover:text-white hover:bg-white/5'
       }`}
     >
-      <Icon className="w-3.5 h-3.5" />
+      <Icon className="w-4 h-4" />
       {label}
     </button>
   );
@@ -1105,40 +1032,16 @@ function NavButton({ active, onClick, icon: Icon, label }: any) {
 
 function SummaryCard({ icon: Icon, title, desc }: any) {
   return (
-    <div className="p-12 bg-white/[0.03] border border-white/5 rounded-[3.5rem] hover:bg-white/[0.05] transition-all group">
-      <div className="w-12 h-12 bg-blue-600/20 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-        <Icon className="w-6 h-6 text-blue-500" />
+    <div className="p-12 bg-white/[0.02] border border-white/5 rounded-[3.5rem] hover:bg-white/[0.04] hover:border-white/10 transition-all duration-700 group">
+      <div className="w-16 h-16 bg-blue-600/10 rounded-2xl flex items-center justify-center mb-10 group-hover:bg-blue-600 transition-all duration-500 group-hover:rotate-6">
+        <Icon className="w-8 h-8 text-blue-500 group-hover:text-white transition-colors" />
       </div>
-      <h4 className="text-sm font-black text-white uppercase tracking-widest mb-4">
+      <h4 className="text-[11px] font-black text-blue-500 uppercase tracking-[0.5em] mb-4">
         {title}
       </h4>
-      <p className="text-slate-400 text-base leading-relaxed">{desc}</p>
-    </div>
-  );
-}
-
-function HorizontalPillarCard({ icon: Icon, title, items }: any) {
-  return (
-    <div className="p-10 bg-white/[0.02] border border-white/5 rounded-[3rem] transition-all group hover:bg-white/[0.04]">
-      <div className="flex items-center gap-6 mb-8">
-        <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center group-hover:bg-blue-600 transition-colors">
-          <Icon className="w-6 h-6 text-white" />
-        </div>
-        <h4 className="text-xl font-serif font-black text-white uppercase italic tracking-tight">
-          {title}
-        </h4>
-      </div>
-      <ul className="grid grid-cols-1 gap-3">
-        {items.map((item: string, idx: number) => (
-          <li
-            key={idx}
-            className="flex items-center gap-3 text-[10px] font-black text-slate-500 uppercase tracking-widest"
-          >
-            <div className="w-1 h-1 rounded-full bg-blue-500" />
-            {item}
-          </li>
-        ))}
-      </ul>
+      <p className="text-slate-300 text-xl font-light leading-relaxed font-serif italic">
+        {desc}
+      </p>
     </div>
   );
 }
