@@ -846,7 +846,7 @@ export default function ChapterOverlay({
              ].map((tab) => (
                <button
                  key={tab.id}
-                 onClick={() => setActiveTab(tab.id)}
+                 onClick={() => setActiveTab(tab.id as any)}
                  className={`px-8 py-3 text-[10px] font-black uppercase tracking-widest transition-all rounded-full ${
                    activeTab === tab.id ? 'bg-blue-600 text-white' : 'text-white/40 hover:text-white'
                  }`}
