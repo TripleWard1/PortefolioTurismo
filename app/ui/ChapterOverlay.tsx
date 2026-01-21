@@ -1,42 +1,50 @@
 'use client';
 import {
-  X,
-  ChevronRight,
-  Target,
-  Globe,
-  Smartphone,
-  Sparkles,
-  CheckCircle,
-  Briefcase,
-  LineChart,
-  Compass,
-  QrCode,
-  FileText,
-  ArrowUpRight,
-  PlayCircle,
-  Layers,
-  Zap,
-  Cpu,
-  BarChart3,
-  Search,
-  Map,
-  Calendar,
-  Users,
-  Languages,
-  ExternalLink,
-  FileDown,
+  X, Target, Globe, Smartphone, Sparkles, CheckCircle, Briefcase,
+  LineChart, Compass, QrCode, FileText, PlayCircle, Layers, Zap,
+  Cpu, BarChart3, Search, Map, Calendar, Users, Languages, FileDown
 } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, ReactNode } from 'react';
+
+// --- ESTE BLOCO ABAIXO É O QUE CORRIGE O ERRO ---
+interface Pillar {
+  title: string;
+  desc?: string;
+  icon: any;
+  items?: string[];
+}
+
+interface ProjectData {
+  watermark: string;
+  tag: string;
+  headerTitle: string;
+  hero: React.ReactNode;
+  description: React.ReactNode;
+  pillarTabLabel: string;
+  pillarTitle: string;
+  pillarDesc: string;
+  pillars: any[];
+  quote: string;
+  // Propriedades opcionais com "?" para o TypeScript não reclamar
+  link?: string;
+  labelLink?: string;
+  videoUrl?: string;
+  videoEmbed?: React.ReactNode; 
+  gallery?: string[];
+  linkEN?: string;
+  labelLinkEN?: string;
+  linkES?: string;
+  labelLinkES?: string;
+  linkFR?: string;
+  labelLinkFR?: string;
+  linkLowCost?: string;
+  labelLowCost?: string;
+}
 
 interface OverlayProps {
   isOpen: boolean;
   onClose: () => void;
-  projectType?:
-    | 'smart-tourism'
-    | 'visit-braga'
-    | 'braga-after-dark'
-    | 'cidade-bracvs'
-    | 'roteiro-3-dias';
+  projectType?: string;
 }
 
 export default function ChapterOverlay({
@@ -44,13 +52,13 @@ export default function ChapterOverlay({
   onClose,
   projectType = 'smart-tourism',
 }: OverlayProps) {
-  const [activeTab, setActiveTab] = useState<'overview' | 'pillars' | 'media'>(
-    'overview'
-  );
+  const [activeTab, setActiveTab] = useState<'overview' | 'pillars' | 'media'>('overview');
 
   const isVisitBraga = projectType === 'visit-braga';
 
-  const projectConfig = {
+  // Adicionamos a tipagem : Record<string, ProjectData> aqui
+  const projectConfig: Record<string, ProjectData> = {
+// --- FIM DO BLOCO DE CORREÇÃO ---
     'visit-braga': {
       watermark:
         'https://visitbraga.travel/wp-content/uploads/2025/05/visit-braga.jpg',
