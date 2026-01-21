@@ -2,7 +2,7 @@
 import {
   X, Target, Globe, Smartphone, Sparkles, CheckCircle, Briefcase,
   LineChart, Compass, QrCode, FileText, PlayCircle, Layers, Zap,
-  Cpu, BarChart3, Search, Map, Quote, Calendar, Users, ArrowRight, Languages, FileDown
+  Cpu, BarChart3, Search, Map, Quote, Calendar, ArrowUpRight,Users, ArrowRight, Languages, FileDown
 } from 'lucide-react';
 import { useEffect, useState, ReactNode } from 'react';
 
@@ -785,7 +785,7 @@ export default function ChapterOverlay({
     },
   };
 
-  const current = projectConfig[projectType];
+  const current = projectConfig[projectType] || projectConfig['smart-tourism'];
 
   useEffect(() => {
     if (isOpen) {
@@ -799,42 +799,32 @@ export default function ChapterOverlay({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[500] flex items-center justify-center p-0 md:p-8 overflow-hidden font-sans animate-in fade-in duration-700">
-      {/* Backdrop: Gradiente profundo para isolar o conteúdo */}
+    <div className="fixed inset-0 z-[500] flex items-center justify-center p-4 md:p-12 overflow-hidden font-sans animate-in fade-in duration-500">
+      {/* Backdrop: Suave e leitoso em vez de escuro */}
       <div
-        className="absolute inset-0 bg-[#020617]/98 backdrop-blur-3xl"
+        className="absolute inset-0 bg-slate-100/80 backdrop-blur-xl"
         onClick={onClose}
       />
 
-      {/* Main Container: Look de "Canvas" editorial */}
-      <div className="relative w-full max-w-[1750px] h-full md:h-[92vh] bg-[#020617] md:rounded-[3rem] shadow-[0_0_120px_rgba(0,0,0,0.9)] flex flex-col overflow-hidden border border-white/5">
+      {/* Main Container: Branco puro, escala contida e sombras leves */}
+      <div className="relative w-full max-w-5xl h-full md:h-[85vh] bg-white md:rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] flex flex-col overflow-hidden border border-slate-200">
         
-        {/* Watermark: Animada e sutil */}
-        <div className="absolute inset-0 opacity-[0.05] pointer-events-none">
-          <img
-            src={current.watermark}
-            className="w-full h-full object-cover scale-110 animate-slow-zoom blur-[1px]"
-            alt=""
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#020617] via-transparent to-[#020617]" />
-        </div>
-
-        {/* Header: Flutuante e Minimalista */}
-        <header className="relative flex items-center justify-between px-10 md:px-20 py-12 z-50">
-          <div className="flex items-center gap-20">
+        {/* Header: Compacto e Clean */}
+        <header className="relative flex items-center justify-between px-8 py-6 z-50 border-b border-slate-100">
+          <div className="flex items-center gap-10">
             <div className="flex flex-col">
-              <div className="flex items-center gap-3 mb-3">
-                <span className="w-1.5 h-1.5 bg-blue-500 rounded-full shadow-[0_0_12px_#3b82f6]" />
-                <span className="text-[10px] font-black text-blue-500 uppercase tracking-[0.5em]">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="w-1 h-1 bg-blue-600 rounded-full" />
+                <span className="text-[9px] font-bold text-blue-600 uppercase tracking-[0.3em]">
                   {current.tag}
                 </span>
               </div>
-              <h2 className="text-2xl md:text-3xl font-serif font-black text-white/90 tracking-tight uppercase italic leading-none">
+              <h2 className="text-lg md:text-xl font-serif font-black text-slate-900 tracking-tight uppercase italic leading-none">
                 {current.headerTitle}
               </h2>
             </div>
 
-            <nav className="hidden xl:flex items-center gap-2 bg-white/[0.02] p-1.5 rounded-2xl border border-white/5 backdrop-blur-2xl">
+            <nav className="hidden lg:flex items-center gap-1 bg-slate-50 p-1 rounded-full border border-slate-200">
               <NavButton active={activeTab === 'overview'} onClick={() => setActiveTab('overview')} icon={Target} label="Conceito" />
               <NavButton active={activeTab === 'pillars'} onClick={() => setActiveTab('pillars')} icon={Layers} label={current.pillarTabLabel} />
               <NavButton active={activeTab === 'media'} onClick={() => setActiveTab('media')} icon={PlayCircle} label="Visuals" />
@@ -843,35 +833,31 @@ export default function ChapterOverlay({
 
           <button
             onClick={onClose}
-            className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/40 hover:bg-blue-600 hover:text-white hover:border-blue-500 transition-all duration-500 group"
+            className="w-10 h-10 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-200 transition-all duration-300 group"
           >
-            <X className="w-6 h-6 group-hover:rotate-90 transition-transform" />
+            <X className="w-4 h-4 group-hover:rotate-90 transition-transform" />
           </button>
         </header>
 
-        {/* Main Content: Custom scrollbar integrada */}
-        <main className="relative flex-1 overflow-y-auto z-10 px-10 md:px-20 custom-scrollbar scroll-smooth">
+        {/* Main Content: Respiro e tipografia elegante */}
+        <main className="relative flex-1 overflow-y-auto z-10 px-8 md:px-16 py-10 custom-scrollbar-light scroll-smooth bg-white">
           {activeTab === 'overview' && (
-            <div className="pb-32 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-              <div className="mb-28 mt-8">
-                {/* Hero Typo: Proporções áureas */}
-                <h1 className="text-[70px] md:text-[140px] leading-[0.75] font-serif font-black text-white tracking-tighter uppercase mb-20 italic">
+            <div className="pb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
+              <div className="mb-16 mt-4">
+                <h1 className="text-[40px] md:text-[64px] leading-[0.9] font-serif font-black text-slate-900 tracking-tighter uppercase mb-10 italic">
                   {current.hero}
                 </h1>
                 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
                   <div className="lg:col-span-7">
-                    <div className="relative">
-                      <div className="absolute -left-10 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-600 to-transparent opacity-50" />
-                      <p className="text-3xl md:text-5xl text-slate-100 font-light leading-[1.3] tracking-tight font-serif italic">
-                        {current.description}
-                      </p>
-                    </div>
+                    <p className="text-xl md:text-2xl text-slate-600 font-light leading-relaxed font-serif italic border-l-2 border-blue-500/20 pl-6">
+                      {current.description}
+                    </p>
                   </div>
                   <div className="lg:col-span-5">
-                     <div className="p-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-[3.5rem] shadow-3xl shadow-blue-900/20 -rotate-1 hover:rotate-0 transition-all duration-700">
-                        <Quote className="w-10 h-10 text-white/30 mb-6" />
-                        <p className="text-2xl md:text-3xl font-serif italic text-white font-bold leading-tight tracking-tight">
+                     <div className="p-8 bg-slate-50 border border-slate-100 rounded-[2rem] transition-all duration-500">
+                        <Quote className="w-6 h-6 text-blue-400/40 mb-4" />
+                        <p className="text-lg font-serif italic text-slate-800 font-medium leading-snug">
                           {current.quote}
                         </p>
                      </div>
@@ -879,46 +865,42 @@ export default function ChapterOverlay({
                 </div>
               </div>
 
-              {/* Grid de Métricas: Design ultra-clean */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <SummaryCard icon={Search} title="Curadoria" desc="Filtragem estratégica de ativos para maximizar a autenticidade do destino." />
-                <SummaryCard icon={Globe} title="Global" desc="Posicionamento de marca alinhado com standards internacionais de excelência." />
-                <div className="p-12 border border-white/5 rounded-[3.5rem] flex flex-col justify-center items-center bg-white/[0.01] text-center group hover:bg-white/[0.03] transition-all">
-                   <div className="w-2 h-2 bg-blue-500 rounded-full mb-4 animate-pulse" />
-                   <span className="text-[11px] font-black text-blue-500 uppercase tracking-[0.6em]">Consultoria Estratégica</span>
+              {/* Grid de Métricas: Reduzido */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <SummaryCard icon={Search} title="Curadoria" desc="Filtragem estratégica de ativos territoriais." />
+                <SummaryCard icon={Globe} title="Global" desc="Posicionamento alinhado com standards mundiais." />
+                <div className="p-8 border border-slate-100 rounded-3xl flex flex-col justify-center items-center bg-blue-50/30 text-center">
+                   <span className="text-[9px] font-black text-blue-600 uppercase tracking-[0.4em]">Consultoria Estratégica</span>
                 </div>
               </div>
             </div>
           )}
 
           {activeTab === 'pillars' && (
-            <div className="pb-32 animate-in fade-in slide-in-from-right-8 duration-700 pt-8">
-              <div className="max-w-4xl mb-24">
-                <h3 className="text-6xl font-serif font-black text-white italic mb-8 uppercase tracking-tighter">
+            <div className="pb-20 animate-in fade-in slide-in-from-right-4 duration-500 pt-4">
+              <div className="max-w-2xl mb-12">
+                <h3 className="text-3xl font-serif font-black text-slate-900 italic mb-4 uppercase tracking-tighter">
                   {current.pillarTitle}
                 </h3>
-                <p className="text-2xl text-slate-400 font-light leading-relaxed">
+                <p className="text-lg text-slate-500 font-light leading-relaxed">
                   {current.pillarDesc}
                 </p>
               </div>
 
-              <div className={isVisitBraga ? 'grid grid-cols-1 md:grid-cols-2 gap-10' : 'grid grid-cols-1 gap-6'}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {current.pillars.map((item: any, i: number) => (
-                    <div key={i} className="group flex items-center gap-12 p-12 bg-white/[0.01] border border-white/5 rounded-[4rem] hover:bg-white/[0.03] hover:border-white/10 transition-all duration-700">
-                      <div className="flex flex-col items-center">
-                        <span className="text-[10px] font-black text-blue-500 mb-2">0{i + 1}</span>
-                        <div className="w-0.5 h-12 bg-gradient-to-b from-blue-500 to-transparent" />
-                      </div>
+                    <div key={i} className="group flex items-start gap-6 p-8 bg-slate-50 border border-slate-100 rounded-2xl hover:bg-white hover:border-blue-100 hover:shadow-sm transition-all duration-300">
                       <div className="flex-1">
-                        <h4 className="text-3xl font-serif font-black text-white uppercase italic tracking-tight group-hover:text-blue-500 transition-colors">
+                        <span className="text-[9px] font-black text-blue-500 mb-1 block">0{i + 1}</span>
+                        <h4 className="text-lg font-serif font-black text-slate-900 uppercase italic tracking-tight">
                           {item.title}
                         </h4>
-                        <p className="text-slate-400 mt-3 text-xl font-light leading-relaxed max-w-3xl">
+                        <p className="text-slate-500 mt-2 text-sm leading-relaxed">
                           {item.desc || (item.items && item.items.join(' • '))}
                         </p>
                       </div>
-                      <div className="w-20 h-20 bg-white/5 rounded-[2rem] flex items-center justify-center group-hover:bg-blue-600 group-hover:rotate-6 transition-all duration-500">
-                        <item.icon className="w-8 h-8 text-white" />
+                      <div className="w-10 h-10 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-400 group-hover:text-blue-500 transition-colors">
+                        <item.icon size={18} />
                       </div>
                     </div>
                 ))}
@@ -927,23 +909,20 @@ export default function ChapterOverlay({
           )}
 
           {activeTab === 'media' && (
-            <div className="pb-32 animate-in fade-in zoom-in-95 duration-700 pt-10">
-                <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+            <div className="pb-20 animate-in fade-in zoom-in-95 duration-500 pt-4">
+                <div className="columns-2 md:columns-3 gap-4 space-y-4">
                   {current.gallery?.map((img: string, idx: number) => (
-                    <div key={idx} className="relative rounded-[2.5rem] overflow-hidden border border-white/5 group bg-slate-950 shadow-2xl">
+                    <div key={idx} className="relative rounded-xl overflow-hidden border border-slate-200 bg-slate-50">
                       <img
                         src={img}
-                        className="w-full h-auto object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-[1.5s]"
+                        className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700"
                         alt=""
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-10 flex items-end">
-                        <span className="text-[10px] font-black text-white uppercase tracking-[0.4em]">Asset Ref. 0{idx+1}</span>
-                      </div>
                     </div>
                   ))}
                 </div>
                 {current.videoEmbed && (
-                   <div className="mt-12 rounded-[3rem] overflow-hidden border border-white/10 shadow-3xl bg-black">
+                   <div className="mt-8 rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-black">
                       {current.videoEmbed}
                    </div>
                 )}
@@ -951,80 +930,65 @@ export default function ChapterOverlay({
           )}
         </main>
 
-        {/* Footer: Minimalista e Editorial */}
-        <footer className="relative px-10 md:px-20 py-8 bg-[#020617] border-t border-white/[0.03] flex flex-col md:flex-row justify-between items-center z-50 gap-6">
-          <div className="flex items-center gap-6">
-            {/* Logo simplificado e menor */}
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-white/[0.05] to-transparent flex items-center justify-center border border-white/10 shadow-sm">
-              <span className="text-white/80 font-serif font-bold text-lg italic tracking-tighter">HB</span>
+        {/* Footer: Compacto e Editorial */}
+        <footer className="relative px-8 py-6 bg-slate-50 border-t border-slate-200 flex justify-between items-center z-50">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white font-serif font-bold italic text-sm">
+              HB
             </div>
-            
             <div className="flex flex-col">
-              <span className="text-[8px] font-black text-blue-500/60 uppercase tracking-[0.8em] mb-0.5">
-                Strategy & Design
-              </span>
-              <h3 className="text-xl font-serif font-black text-white/40 uppercase italic tracking-widest leading-none">
+              <span className="text-[7px] font-black text-blue-600 uppercase tracking-[0.4em]">Strategy</span>
+              <h3 className="text-sm font-serif font-black text-slate-900 uppercase italic tracking-widest leading-none">
                 Hugo Barros
               </h3>
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
-            {/* Botão Principal mais fino e elegante */}
+          <div className="flex items-center gap-3">
             {current.link && (
               <button
                 onClick={() => window.open(current.link, '_blank')}
-                className="group px-6 py-3.5 bg-white/[0.03] hover:bg-white text-white/50 hover:text-black border border-white/5 rounded-xl transition-all duration-500 ease-out"
+                className="px-4 py-2 bg-white border border-slate-200 text-slate-600 hover:text-blue-600 hover:border-blue-200 rounded-lg transition-all duration-300 flex items-center gap-2"
               >
-                <div className="flex items-center gap-3">
-                  <span className="text-[9px] font-black uppercase tracking-[0.3em]">
-                    {current.labelLink}
-                  </span>
-                  <FileDown className="w-4 h-4 opacity-50 group-hover:opacity-100" />
-                </div>
+                <span className="text-[9px] font-black uppercase tracking-widest">
+                  {current.labelLink}
+                </span>
+                <ArrowUpRight size={12} />
               </button>
             )}
-
-            {/* Divisor subtil entre o botão principal e os idiomas */}
-            <div className="h-4 w-[1px] bg-white/10 mx-2 hidden md:block" />
-
-            {/* Idiomas em estilo ultra-minimalista */}
-            <div className="flex gap-1.5">
+            
+            <div className="flex gap-1 border-l border-slate-200 pl-3">
               {[
                 { link: current.linkEN, label: 'EN' },
-                { link: current.linkES, label: 'ES' },
-                { link: current.linkFR, label: 'FR' },
-                { link: current.linkLowCost, label: 'LC' }
+                { link: current.linkES, label: 'ES' }
               ].map((item, i) => item.link && (
                 <button
                   key={i}
                   onClick={() => window.open(item.link, '_blank')}
-                  className="w-10 h-10 flex items-center justify-center bg-transparent text-white/20 border border-transparent hover:border-white/10 hover:text-white rounded-lg transition-all duration-300"
+                  className="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-blue-600 text-[8px] font-black"
                 >
-                  <span className="text-[8px] font-black tracking-tighter">{item.label}</span>
+                  {item.label}
                 </button>
               ))}
             </div>
           </div>
         </footer>
-        </div>
+      </div>
     </div>
   );
 }
-
-// --- SUB-COMPONENTES REFINADOS (O QUE FALTA NO TEU CÓDIGO) ---
 
 function NavButton({ active, onClick, icon: Icon, label }: any) {
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-4 px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 ${
+      className={`flex items-center gap-2 px-4 py-2 rounded-full text-[9px] font-black uppercase tracking-widest transition-all duration-300 ${
         active
-          ? 'bg-blue-600 text-white shadow-[0_10px_25px_rgba(37,99,235,0.4)] scale-105'
-          : 'text-white/40 hover:text-white hover:bg-white/5'
+          ? 'bg-white text-blue-600 shadow-sm'
+          : 'text-slate-400 hover:text-slate-600'
       }`}
     >
-      <Icon className="w-4 h-4" />
+      <Icon size={12} />
       {label}
     </button>
   );
@@ -1032,14 +996,12 @@ function NavButton({ active, onClick, icon: Icon, label }: any) {
 
 function SummaryCard({ icon: Icon, title, desc }: any) {
   return (
-    <div className="p-12 bg-white/[0.02] border border-white/5 rounded-[3.5rem] hover:bg-white/[0.04] hover:border-white/10 transition-all duration-700 group">
-      <div className="w-16 h-16 bg-blue-600/10 rounded-2xl flex items-center justify-center mb-10 group-hover:bg-blue-600 transition-all duration-500 group-hover:rotate-6">
-        <Icon className="w-8 h-8 text-blue-500 group-hover:text-white transition-colors" />
-      </div>
-      <h4 className="text-[11px] font-black text-blue-500 uppercase tracking-[0.5em] mb-4">
+    <div className="p-6 bg-slate-50 border border-slate-100 rounded-2xl hover:bg-white transition-all duration-300">
+      <Icon className="w-4 h-4 text-blue-500 mb-3" />
+      <h4 className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-2">
         {title}
       </h4>
-      <p className="text-slate-300 text-xl font-light leading-relaxed font-serif italic">
+      <p className="text-slate-600 text-sm font-serif italic leading-snug">
         {desc}
       </p>
     </div>
