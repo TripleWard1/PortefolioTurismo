@@ -65,7 +65,7 @@ export default function ChapterOverlay({
   tag: 'Gestão de Destino // 2024 — 2025',
   headerTitle: 'Portal Visit Braga: Estratégia Digital',
   
-  officialNetwork: 'Município de Braga // InvestBraga',
+  officialNetwork: 'Município de Braga / InvestBraga',
   externalLink: 'https://visitbraga.travel',
   externalSource: 'VisitBraga.travel',
   externalLinkLabel: 'Explorar Portal',
