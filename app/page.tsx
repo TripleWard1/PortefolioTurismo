@@ -263,7 +263,7 @@ export default function Page() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {[
                 {
-                  id: 'portal-visit-braga',
+                  id: 'visit-braga',
                   title: 'Portal Visit Braga',
                   location: 'Braga, Portugal',
                   image:
@@ -440,6 +440,16 @@ export default function Page() {
                   tag: 'Cartografia Técnica',
                   year: '2024',
                   coord: '41.5480° N, 8.4300° W',
+                },
+                {
+                  id: 'experiencias-sustentaveis', // ID exato do teu ChapterOverlay
+                  title: 'Experiências Sustentáveis',
+                  image: 'https://www.cm-braga.pt/archive/cache/img/sz800x600/CMB17012025SERGIOFREITAS3022624430274.jpg',
+                  desc: 'Liderança técnica na conceção de 29 experiências turísticas. Estruturação de produtos que unem a identidade local às melhores práticas de sustentabilidade.',
+                  align: 'right', // Para manter o ziguezague do layout
+                  tag: 'Gestão de Produto',
+                  year: '2025',
+                  coord: '41.5510° N, 8.4280° W',
                 },
               ].map((p, idx) => (
                 <div
