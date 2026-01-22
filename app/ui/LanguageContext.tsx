@@ -1,14 +1,22 @@
 'use client';
-import { createContext, useContext, useState } from 'react';
 
-const LanguageContext = createContext({
-  lang: 'pt',
-  toggleLang: () => {},
-});
+import React, { createContext, useContext, useState } from 'react';
+
+type Language = 'pt' | 'en';
+
+interface LanguageContextType {
+  lang: Language;
+  toggleLang: () => void;
+}
+
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLang] = useState('pt');
-  const toggleLang = () => setLang((prev) => (prev === 'pt' ? 'en' : 'pt'));
+  const [lang, setLang] = useState<Language>('pt');
+
+  const toggleLang = () => {
+    setLang((prev) => (prev === 'pt' ? 'en' : 'pt'));
+  };
 
   return (
     <LanguageContext.Provider value={{ lang, toggleLang }}>
@@ -17,4 +25,10 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-export const useLang = () => useContext(LanguageContext);
+export function useLang() {
+  const context = useContext(LanguageContext);
+  if (context === undefined) {
+    throw new Error('useLang must be used within a LanguageProvider');
+  }
+  return context;
+}

@@ -2,9 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useLang } from './LanguageContext'; // Importação do cérebro do idioma
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  
+  // Ligação ao estado global de idioma
+  const { lang, toggleLang } = useLang();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,7 +52,8 @@ export default function Navbar() {
 
             <div className="flex items-center gap-2 mt-2">
               <span className="text-[8px] uppercase tracking-[0.6em] text-slate-950 font-[900]">
-                Portefólio Estratégico
+                {/* Texto traduzido na própria Navbar */}
+                {lang === 'pt' ? 'Portefólio Estratégico' : 'Strategic Portfolio'}
               </span>
               <div className="h-[2px] w-4 bg-blue-600/30 group-hover:w-8 group-hover:bg-blue-600 transition-all duration-500" />
             </div>
@@ -60,7 +65,10 @@ export default function Navbar() {
 
         {/* Links de Navegação */}
         <div className="hidden md:flex items-center gap-10">
-          {['Portefólio', 'Estratégia', 'Ecossistema', 'Contacto'].map(
+          {(lang === 'pt' 
+            ? ['Portefólio', 'Estratégia', 'Ecossistema', 'Contacto'] 
+            : ['Portfolio', 'Strategy', 'Ecosystem', 'Contact']
+          ).map(
             (item) => (
               <Link
                 key={item}
@@ -74,8 +82,18 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* Badge de Status */}
+        {/* Badge de Status e Botão de Idioma */}
         <div className="flex items-center gap-6">
+          {/* BOTÃO DE TOGGLE PT/EN */}
+          <button 
+            onClick={toggleLang}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 bg-white/50 backdrop-blur-sm hover:border-blue-300 transition-all group"
+          >
+            <span className={`text-[9px] font-black ${lang === 'pt' ? 'text-blue-600' : 'text-slate-400'}`}>PT</span>
+            <div className="w-[1px] h-2 bg-slate-200" />
+            <span className={`text-[9px] font-black ${lang === 'en' ? 'text-blue-600' : 'text-slate-400'}`}>EN</span>
+          </button>
+
           <div className="hidden lg:flex items-center gap-3 px-5 py-2 rounded-xl border border-blue-200/50 bg-blue-50/80 shadow-sm">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>

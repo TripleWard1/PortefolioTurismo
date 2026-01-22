@@ -1,10 +1,11 @@
 'use client';
 import {
   X, Target, Smartphone, CheckCircle, Briefcase,
-  LineChart, Compass, Globe, Sparkles, Activity,ChevronRight, QrCode, ShieldCheck, FileText, PlayCircle, Layers, Zap,
-  Cpu, BarChart3, Monitor, Maximize2, Hexagon, Fingerprint, TrendingUp, Award, Search, Map, Quote, Calendar, ArrowUpRight,Users, ArrowRight, Languages, FileDown
+  LineChart, Compass, Globe, Sparkles, Activity, ChevronRight, QrCode, ShieldCheck, FileText, PlayCircle, Layers, Zap,
+  Cpu, BarChart3, Monitor, Maximize2, Hexagon, Fingerprint, TrendingUp, Award, Search, Map, Quote, Calendar, ArrowUpRight, Users, ArrowRight, Languages, FileDown
 } from 'lucide-react';
 import React, { useEffect, useState, isValidElement, ReactNode } from 'react';
+import { useLang } from './LanguageContext'; // Adicionado para ouvir o botão da Navbar
 
 // --- ESTE BLOCO ABAIXO É O QUE CORRIGE O ERRO ---
 interface Pillar {
@@ -63,6 +64,12 @@ export default function ChapterOverlay({
 }: OverlayProps) {
   const [activeTab, setActiveTab] = useState<'overview' | 'pillars' | 'media'>('overview');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  // --- LÓGICA DE IDIOMA INTEGRADA ---
+  const { lang } = useLang(); 
+
+  // Esta função garante que se não houver tradução, o site não parte e usa PT
+  const t = (pt: any, en?: any) => (lang === 'en' && en ? en : pt);
 
   const isVisitBraga = projectType === 'visit-braga';
 
@@ -154,220 +161,284 @@ export default function ChapterOverlay({
     </div>
   ),
 },
-    'smart-tourism': {
-      watermark: 'https://i.imgur.com/GBs8DY7.jpeg',
-      tag: 'European Shortlisted City // 2024 — 2026',
-      headerTitle: 'European Capital of Smart Tourism',
-      // Chaves para o Footer Dinâmico
-      officialNetwork: 'European Capital of Smart Tourism Network',
-  externalLink: 'https://smart-tourism-capital.ec.europa.eu/winners-and-finalists/cities-2026/braga-shortlisted-2026-european-capital-smart-tourism-competition_en',
-  externalSource: 'Comissão Europeia',
-  externalLinkLabel: 'Portal de Finalista 2026',
-  acreditacao: 'European Commission Recognition / Smart Tourism Network', // Novo nome para Chancela
-  hideMainBtn: true, // Adicionado para esconder o botão de "Documentação Integral" aqui
-      
-  stats: [
-    { label: "Posicionamento", value: "Elite Europeia" },
-    { label: "Missão em Bruxelas", value: "Defesa Técnica" },
-    { label: "Reconhecimento", value: "EU Shortlisted" }
-  ],    
+'smart-tourism': {
+  watermark: 'https://i.imgur.com/GBs8DY7.jpeg',
+  tag: t('European Shortlisted City // 2024 — 2026', 'European Shortlisted City // 2024 — 2026'),
+  headerTitle: t('European Capital of Smart Tourism', 'European Capital of Smart Tourism'),
   
+  // Chaves para o Footer Dinâmico
+  officialNetwork: t('European Capital of Smart Tourism Network', 'European Capital of Smart Tourism Network'),
+  externalLink: 'https://smart-tourism-capital.ec.europa.eu/winners-and-finalists/cities-2026/braga-shortlisted-2026-european-capital-smart-tourism-competition_en',
+  externalSource: t('Comissão Europeia', 'European Commission'),
+  externalLinkLabel: t('Portal de Finalista 2026', '2026 Finalist Portal'),
+  acreditacao: t('European Commission Recognition / Smart Tourism Network', 'European Commission Recognition / Smart Tourism Network'), 
+  hideMainBtn: true, 
+  
+  stats: [
+    { label: t("Posicionamento", "Positioning"), value: t("Elite Europeia", "European Elite") },
+    { label: t("Missão em Bruxelas", "Mission in Brussels"), value: t("Defesa Técnica", "Technical Defense") },
+    { label: t("Reconhecimento", "Recognition"), value: t("EU Shortlisted", "EU Shortlisted") }
+  ],    
+
   hero: (
-        <div className="space-y-4">
-          <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full">Finalista Europeu</span>
-          <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
-            Shortlisted <br />
-            <span className="text-blue-600">Smart Tourism</span>
-          </h1>
-        </div>
-      ),
-      description: (
-        <div className="space-y-6">
-          <p>
-            A integração na equipa técnica responsável pela <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">defesa da candidatura em Bruxelas</span> marcou um ponto de viragem na estratégia turística da região. Este processo não foi apenas uma apresentação formal, mas um exame rigoroso de políticas públicas, inovação e sustentabilidade.
-          </p>
-          <p className="text-white/40 text-lg leading-relaxed">
-            O culminar deste esforço resultou na seleção de Braga como uma das poucas finalistas europeias, garantindo um assento de destaque na prestigiada Rede Europeia de Destinos Inteligentes. Esta posição permite o intercâmbio direto de boas práticas com as cidades mais inovadoras do mundo, consolidando um ecossistema focado no visitante e no residente.
-          </p>
-        </div>
-      ),
-      pillarTabLabel: 'Eixos Estratégicos',
-      pillarTitle: 'Missão em Bruxelas',
-      pillarDesc: 'Um compromisso institucional que alinha a governança local com os mais altos padrões de excelência da União Europeia.',
-      pillars: [
-        { title: 'Defesa no Júri Europeu', desc: 'Representação institucional de alto nível e defesa técnica perante a Comissão Europeia e o Júri Internacional, focada na resiliência e inovação do destino.', icon: Globe },
-        { title: 'Acesso à Rede Europeia', desc: 'Entrada direta num ecossistema de elite, promovendo o networking internacional e a visibilidade de Braga como referência em turismo sustentável.', icon: Compass },
-        { title: 'Consolidação de Evidências', desc: 'Transformação de dados brutos e políticas municipais em casos de estudo de sucesso, reconhecidos pela sua capacidade de transferência para outras capitais.', icon: CheckCircle },
-        { title: 'Diplomacia Urbana', desc: 'Articulação transversal entre stakeholders e a Smart Tourism Secretariat, alinhando a cidade com as prioridades da UE.', icon: Users },
-      ],
-      quote: "A distinção europeia valida a nossa infraestrutura; a nossa visão define o futuro dos destinos inteligentes.",
-      gallery: [
-        'https://i.imgur.com/1t5plh4.jpeg', 'https://i.imgur.com/cpFeHQk.jpeg',
-        'https://i.imgur.com/HecgfPz.jpeg', 'https://i.imgur.com/GBs8DY7.jpeg',
-        'https://i.imgur.com/AM6Z3uu.jpeg', 'https://i.imgur.com/FFH12zK.jpeg',
-      ],
+    <div className="space-y-4">
+      <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+        {t('Finalista Europeu', 'European Finalist')}
+      </span>
+      <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
+        Shortlisted <br />
+        <span className="text-blue-600">Smart Tourism</span>
+      </h1>
+    </div>
+  ),
+
+  description: (
+    <div className="space-y-6">
+      <p>
+        {t(
+          <>A integração na equipa técnica responsável pela <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">defesa da candidatura em Bruxelas</span> marcou um ponto de viragem na estratégia turística da região. Este processo não foi apenas uma apresentação formal, mas um exame rigoroso de políticas públicas, inovação e sustentabilidade.</>,
+          <>Joining the technical team responsible for the <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">candidacy defense in Brussels</span> marked a turning point in the region's tourism strategy. This process was not merely a formal presentation, but a rigorous examination of public policy, innovation, and sustainability.</>
+        )}
+      </p>
+      <p className="text-white/40 text-lg leading-relaxed">
+        {t(
+          "O culminar deste esforço resultou na seleção de Braga como uma das poucas finalistas europeias, garantindo um assento de destaque na prestigiada Rede Europeia de Destinos Inteligentes. Esta posição permite o intercâmbio direto de boas práticas com as cidades mais inovadoras do mundo, consolidando um ecossistema focado no visitante e no residente.",
+          "The culmination of this effort resulted in Braga’s selection as one of the few European finalists, securing a prominent seat in the prestigious European Network of Smart Destinations. This position enables the direct exchange of best practices with the world's most innovative cities, consolidating an ecosystem focused on both visitors and residents."
+        )}
+      </p>
+    </div>
+  ),
+
+  pillarTabLabel: t('Eixos Estratégicos', 'Strategic Pillars'),
+  pillarTitle: t('Missão em Bruxelas', 'Mission in Brussels'),
+  pillarDesc: t(
+    'Um compromisso institucional que alinha a governança local com os mais altos padrões de excelência da União Europeia.',
+    'An institutional commitment that aligns local governance with the European Union’s highest standards of excellence.'
+  ),
+
+  pillars: [
+    { 
+      title: t('Defesa no Júri Europeu', 'European Jury Defense'), 
+      desc: t('Representação institucional de alto nível e defesa técnica perante a Comissão Europeia e o Júri Internacional, focada na resiliência e inovação do destino.', 'High-level institutional representation and technical defense before the European Commission and International Jury, focused on destination resilience and innovation.'), 
+      icon: Globe 
     },
-    'cidade-bracvs': {
-      watermark: 'https://visitbraga.travel/wp-content/uploads/2025/07/guia-infantil.jpg',
-      tag: 'Educação & Património // 2024 — 2025',
-      headerTitle: 'A Cidade do Bracvs: Roteiro Educativo',
-      
-      // Chaves para o Footer Dinâmico
-      officialNetwork: 'Município de Braga // Divisão de Educação',
-      externalLink: 'https://visitbraga.travel/wp-content/uploads/2025/07/Roteiro-Infantil-CMB-Visit-Braga.pdf',
-      externalSource: 'VisitBraga.travel',
-      externalLinkLabel: 'Visualizar PDF Oficial',
-      acreditacao: 'Divisão de Economia e Turismo - Municipio de Braga / LKCOM',
-      hideMainBtn: false, 
-      link: 'https://visitbraga.travel/wp-content/uploads/2025/07/Roteiro-Infantil-CMB-Visit-Braga.pdf',
-    
-      // Métricas Institucionais Dinâmicas (Stats)
-      stats: [
-        { label: "Educação Patrimonial", value: "Novos Públicos" },
-        { label: "Interpretação", value: "Lúdico-Pedagógica" },
-        { label: "Valorização", value: "Identidade Local" }
-      ],
-    
-      hero: (
-        <div className="space-y-4">
-          <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full">Publicação Editorial</span>
-          <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
-            Cidade do <br />
-            <span className="text-blue-600">Bracvs.</span>
-          </h1>
-        </div>
-      ),
-    
-      description: (
-        <div className="space-y-6">
-          <p>
-            A conceção de conteúdos e revisão editorial desta <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">publicação lúdico-educativa</span> representou um desafio de tradução cultural para as novas gerações.
-          </p>
-          <p className="text-white/40 text-lg leading-relaxed">
-            O projeto foca-se na aproximação das famílias ao património histórico de Braga através de uma narrativa envolvente. O meu papel foi transversal: desde a definição da estrutura narrativa e seleção de pontos de interesse, até à validação final de produção e maquetagem, garantindo que o rigor histórico coexistisse com uma linguagem acessível e dinâmica.
-          </p>
-        </div>
-      ),
-    
-      pillarTabLabel: 'Contributos Técnicos',
-      pillarTitle: 'Eixos de Intervenção',
-      pillarDesc: 'O meu papel foi transversal, garantindo a coesão entre a narrativa histórica, a pedagogia infantil e o design editorial.',
-      
-      pillars: [
-        { 
-          title: 'Conceção de Conteúdos', 
-          desc: 'Definição da estrutura narrativa, seleção estratégica de pontos de interesse e criação de mecânicas de jogos interativos.', 
-          icon: Map 
-        },
-        { 
-          title: 'Revisão Editorial', 
-          desc: 'Adaptação de linguagem para o público infantojuvenil com validação rigorosa de dados históricos e arqueológicos.', 
-          icon: Search 
-        },
-        { 
-          title: 'Coordenação Criativa', 
-          desc: 'Articulação entre os departamentos de Turismo, Educação e Design para assegurar a coerência visual e textual da obra.', 
-          icon: Layers 
-        },
-        { 
-          title: 'Estratégia de Família', 
-          desc: 'Enquadramento do roteiro no contexto de turismo criativo, reforçando a oferta de lazer educativo da cidade.', 
-          icon: Users 
-        },
-      ],
-    
-      quote: "Aproximar as novas gerações do património através de uma narrativa interativa e lúdica.",
-      
-      gallery: [
-        'https://visitbraga.travel/wp-content/uploads/2025/07/guia-infantil.jpg',
-        'https://i.imgur.com/K5ZnO4x.png',
-        'https://i.imgur.com/L4RnX9W.png',
-      ],
+    { 
+      title: t('Acesso à Rede Europeia', 'European Network Access'), 
+      desc: t('Entrada direta num ecossistema de elite, promovendo o networking internacional e a visibilidade de Braga como referência em turismo sustentável.', 'Direct entry into an elite ecosystem, promoting international networking and Braga’s visibility as a benchmark for sustainable tourism.'), 
+      icon: Compass 
     },
-    'braga-after-dark': {
-      watermark: 'https://i.imgur.com/mgdxHtt.jpeg',
-      tag: 'Curadoria & Eventos // 2024 — 2025',
-      headerTitle: 'Braga After Dark: Economia Noturna',
-      
-      // Chaves para o Footer Dinâmico
-      officialNetwork: 'URBACT Cities After Dark Network',
-      externalLink: 'https://visitbraga.travel/wp-content/uploads/2025/06/Roteiro-Braga-After-Dark.pdf',
-      externalSource: 'VisitBraga.travel',
-      externalLinkLabel: 'Roteiro Braga After Dark',
-      acreditacao: 'URBACT European Program',
-      hideMainBtn: false, 
-      link: 'https://visitbraga.travel/wp-content/uploads/2025/06/Roteiro-Braga-After-Dark.pdf',
-    
-      // Métricas Institucionais Dinâmicas (Stats)
-      stats: [
-        { label: "Rede Europeia", value: "URBACT" },
-        { label: "Economia Noturna", value: "Planeamento" },
-        { label: "Governação", value: "Sustentável" }
-      ],
-    
-      hero: (
-        <div className="space-y-4">
-          <span className="text-indigo-400 font-black tracking-[0.5em] uppercase text-[10px] bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Cidades Europeias</span>
-          <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
-            After <br />
-            <span className="text-blue-600">Dark.</span>
-          </h1>
-        </div>
-      ),
-    
-      description: (
-        <div className="space-y-6">
-          <p>
-            A conceção e curadoria do <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">roteiro cultural e gastronómico</span> oficial da noite de Braga marca a nossa integração no projeto europeu **URBACT Cities After Dark**.
-          </p>
-          <p className="text-white/40 text-lg leading-relaxed">
-            Este trabalho não é apenas um guia, mas uma ferramenta estratégica para a gestão da economia noturna. O foco reside na criação de uma narrativa que equilibra a vibração cultural com a sustentabilidade urbana, promovendo a segurança, a inclusão e a mobilidade ecológica, garantindo que Braga se afirme como um destino dinâmico 24 horas por dia.
-          </p>
-        </div>
-      ),
-    
-      pillarTabLabel: 'Eixos do Roteiro',
-      pillarTitle: 'Momentos da Experiência Noturna',
-      pillarDesc: 'O guia estrutura a oferta da cidade em três momentos chave, integrando a governança noturna com as melhores práticas europeias.',
-      
-      pillars: [
-        { 
-          title: 'Braga by Sunset', 
-          desc: 'Valorização do património monumental durante o "golden hour" e dinamização estratégica de esplanadas e espaços abertos.', 
-          icon: Sparkles 
-        },
-        { 
-          title: 'Braga by Night', 
-          desc: 'Promoção da identidade gastronómica e dos vinhos locais, reforçando a economia de restauração no centro histórico.', 
-          icon: Globe 
-        },
-        { 
-          title: 'Braga by Dark', 
-          desc: 'Exploração da cultura vibrante e dos espaços de diversão, garantindo uma noite segura e diversificada para todos.', 
-          icon: Zap 
-        },
-        { 
-          title: 'Responsabilidade', 
-          desc: 'Foco em mobilidade ecológica, segurança inclusiva e economia circular dentro do ecossistema noturno da cidade.', 
-          icon: Target 
-        },
-      ],
-    
-      quote: "Promover uma noite vibrante, inclusiva e sustentável através de uma gestão estratégica da economia noturna.",
-      
-      gallery: [
-        'https://i.imgur.com/mgdxHtt.jpeg',
-        'https://i.imgur.com/to9jbOB.jpeg',
-        'https://i.imgur.com/2NVOugs.jpeg',
-        'https://i.imgur.com/WFOPGd2.jpeg',
-        'https://i.imgur.com/JHpp607.jpeg',
-        'https://i.imgur.com/rXl3zkj.jpeg',
-        'https://i.imgur.com/7Ttw6ak.jpeg',
-        'https://i.imgur.com/OkowZdn.jpeg',
-        'https://i.imgur.com/ZCSF2lK.jpeg',
-        'https://i.imgur.com/YCZr9xN.jpeg',
-      ],
+    { 
+      title: t('Consolidação de Evidências', 'Evidence Consolidation'), 
+      desc: t('Transformação de dados brutos e políticas municipais em casos de estudo de sucesso, reconhecidos pela sua capacidade de transferência para outras capitais.', 'Transforming raw data and municipal policies into successful case studies, recognized for their transferability to other capitals.'), 
+      icon: CheckCircle 
     },
+    { 
+      title: t('Diplomacia Urbana', 'Urban Diplomacy'), 
+      desc: t('Articulação transversal entre stakeholders e a Smart Tourism Secretariat, alinhando a cidade com as prioridades da UE.', 'Cross-cutting articulation between stakeholders and the Smart Tourism Secretariat, aligning the city with EU priorities.'), 
+      icon: Users 
+    },
+  ],
+
+  quote: t(
+    "A distinção europeia valida a nossa infraestrutura; a nossa visão define o futuro dos destinos inteligentes.",
+    "The European distinction validates our infrastructure; our vision defines the future of smart destinations."
+  ),
+
+  gallery: [
+    'https://i.imgur.com/1t5plh4.jpeg', 'https://i.imgur.com/cpFeHQk.jpeg',
+    'https://i.imgur.com/HecgfPz.jpeg', 'https://i.imgur.com/GBs8DY7.jpeg',
+    'https://i.imgur.com/AM6Z3uu.jpeg', 'https://i.imgur.com/FFH12zK.jpeg',
+  ],
+},
+'cidade-bracvs': {
+  watermark: 'https://visitbraga.travel/wp-content/uploads/2025/07/guia-infantil.jpg',
+  tag: t('Educação & Património // 2024 — 2025', 'Education & Heritage // 2024 — 2025'),
+  headerTitle: t('A Cidade do Bracvs: Roteiro Educativo', 'The City of Bracvs: Educational Itinerary'),
+  
+  // Chaves para o Footer Dinâmico
+  officialNetwork: t('Município de Braga // Divisão de Educação', 'Municipality of Braga // Education Department'),
+  externalLink: 'https://visitbraga.travel/wp-content/uploads/2025/07/Roteiro-Infantil-CMB-Visit-Braga.pdf',
+  externalSource: 'VisitBraga.travel',
+  externalLinkLabel: t('Visualizar PDF Oficial', 'View Official PDF'),
+  acreditacao: t('Divisão de Economia e Turismo - Municipio de Braga / LKCOM', 'Economy and Tourism Department - Municipality of Braga / LKCOM'),
+  hideMainBtn: false, 
+  link: 'https://visitbraga.travel/wp-content/uploads/2025/07/Roteiro-Infantil-CMB-Visit-Braga.pdf',
+
+  // Métricas Institucionais Dinâmicas (Stats)
+  stats: [
+    { label: t("Educação Patrimonial", "Heritage Education"), value: t("Novos Públicos", "New Audiences") },
+    { label: t("Interpretação", "Interpretation"), value: t("Lúdico-Pedagógica", "Playful-Pedagogical") },
+    { label: t("Valorização", "Valorization"), value: t("Identidade Local", "Local Identity") }
+  ],
+
+  hero: (
+    <div className="space-y-4">
+      <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+        {t('Publicação Editorial', 'Editorial Publication')}
+      </span>
+      <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
+        Cidade do <br />
+        <span className="text-blue-600">Bracvs.</span>
+      </h1>
+    </div>
+  ),
+
+  description: (
+    <div className="space-y-6">
+      <p>
+        {t(
+          <>A conceção de conteúdos e revisão editorial desta <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">publicação lúdico-educativa</span> representou um desafio de tradução cultural para as novas gerações.</>,
+          <>The content creation and editorial review of this <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">playful-educational publication</span> represented a challenge of cultural translation for the new generations.</>
+        )}
+      </p>
+      <p className="text-white/40 text-lg leading-relaxed">
+        {t(
+          "O projeto foca-se na aproximação das famílias ao património histórico de Braga através de uma narrativa envolvente. O meu papel foi transversal: desde a definição da estrutura narrativa e seleção de pontos de interesse, até à validação final de produção e maquetagem, garantindo que o rigor histórico coexistisse com uma linguagem acessível e dinâmica.",
+          "The project focuses on bringing families closer to Braga's historical heritage through an engaging narrative. My role was cross-functional: from defining the narrative structure and selecting strategic points of interest to final production validation and layout, ensuring that historical accuracy coexisted with accessible and dynamic language."
+        )}
+      </p>
+    </div>
+  ),
+
+  pillarTabLabel: t('Contributos Técnicos', 'Technical Contributions'),
+  pillarTitle: t('Eixos de Intervenção', 'Areas of Intervention'),
+  pillarDesc: t(
+    'O meu papel foi transversal, garantindo a coesão entre a narrativa histórica, a pedagogia infantil e o design editorial.',
+    'My role was cross-functional, ensuring cohesion between the historical narrative, children’s pedagogy, and editorial design.'
+  ),
+  
+  pillars: [
+    { 
+      title: t('Conceção de Conteúdos', 'Content Conception'), 
+      desc: t('Definição da estrutura narrativa, seleção estratégica de pontos de interesse e criação de mecânicas de jogos interativos.', 'Definition of the narrative structure, strategic selection of points of interest, and creation of interactive game mechanics.'), 
+      icon: Map 
+    },
+    { 
+      title: t('Revisão Editorial', 'Editorial Review'), 
+      desc: t('Adaptação de linguagem para o público infantojuvenil com validação rigorosa de dados históricos e arqueológicos.', 'Adapting language for children and youth with rigorous validation of historical and archaeological data.'), 
+      icon: Search 
+    },
+    { 
+      title: t('Coordenação Criativa', 'Creative Coordination'), 
+      desc: t('Articulação entre os departamentos de Turismo, Educação e Design para assegurar a coerência visual e textual da obra.', 'Liaising between Tourism, Education, and Design departments to ensure the visual and textual coherence of the work.'), 
+      icon: Layers 
+    },
+    { 
+      title: t('Estratégia de Família', 'Family Strategy'), 
+      desc: t('Enquadramento do roteiro no contexto de turismo criativo, reforçando a oferta de lazer educativo da cidade.', 'Framing the itinerary within the context of creative tourism, strengthening the city’s educational leisure offerings.'), 
+      icon: Users 
+    },
+  ],
+
+  quote: t(
+    "Aproximar as novas gerações do património através de uma narrativa interativa e lúdica.",
+    "Bringing new generations closer to heritage through an interactive and playful narrative."
+  ),
+  
+  gallery: [
+    'https://visitbraga.travel/wp-content/uploads/2025/07/guia-infantil.jpg',
+    'https://i.imgur.com/K5ZnO4x.png',
+    'https://i.imgur.com/L4RnX9W.png',
+  ],
+},
+'braga-after-dark': {
+  watermark: 'https://i.imgur.com/mgdxHtt.jpeg',
+  tag: t('Curadoria & Eventos // 2024 — 2025', 'Curatorship & Events // 2024 — 2025'),
+  headerTitle: t('Braga After Dark: Economia Noturna', 'Braga After Dark: Night-time Economy'),
+  
+  // Chaves para o Footer Dinâmico
+  officialNetwork: 'URBACT Cities After Dark Network',
+  externalLink: 'https://visitbraga.travel/wp-content/uploads/2025/06/Roteiro-Braga-After-Dark.pdf',
+  externalSource: 'VisitBraga.travel',
+  externalLinkLabel: t('Roteiro Braga After Dark', 'Braga After Dark Itinerary'),
+  acreditacao: 'URBACT European Program',
+  hideMainBtn: false, 
+  link: 'https://visitbraga.travel/wp-content/uploads/2025/06/Roteiro-Braga-After-Dark.pdf',
+
+  // Métricas Institucionais Dinâmicas (Stats)
+  stats: [
+    { label: t("Rede Europeia", "European Network"), value: "URBACT" },
+    { label: t("Economia Noturna", "Night Economy"), value: t("Planeamento", "Planning") },
+    { label: t("Governação", "Governance"), value: t("Sustentável", "Sustainable") }
+  ],
+
+  hero: (
+    <div className="space-y-4">
+      <span className="text-indigo-400 font-black tracking-[0.5em] uppercase text-[10px] bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">
+        {t('Cidades Europeias', 'European Cities')}
+      </span>
+      <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
+        After <br />
+        <span className="text-blue-600">Dark.</span>
+      </h1>
+    </div>
+  ),
+
+  description: (
+    <div className="space-y-6">
+      <p>
+        {t(
+          <>A conceção e curadoria do <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">roteiro cultural e gastronómico</span> oficial da noite de Braga marca a nossa integração no projeto europeu **URBACT Cities After Dark**.</>,
+          <>The design and curatorship of Braga’s official <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">cultural and gastronomic itinerary</span> marks our integration into the European project **URBACT Cities After Dark**.</>
+        )}
+      </p>
+      <p className="text-white/40 text-lg leading-relaxed">
+        {t(
+          "Este trabalho não é apenas um guia, mas uma ferramenta estratégica para a gestão da economia noturna. O foco reside na criação de uma narrativa que equilibra a vibração cultural com a sustentabilidade urbana, promovendo a segurança, a inclusão e a mobilidade ecológica, garantindo que Braga se afirme como um destino dinâmico 24 horas por dia.",
+          "This work is not just a guide, but a strategic tool for managing the night-time economy. The focus lies in creating a narrative that balances cultural vibrancy with urban sustainability, promoting safety, inclusion, and ecological mobility, ensuring that Braga establishes itself as a dynamic 24-hour destination."
+        )}
+      </p>
+    </div>
+  ),
+
+  pillarTabLabel: t('Eixos do Roteiro', 'Itinerary Pillars'),
+  pillarTitle: t('Momentos da Experiência Noturna', 'Night-time Experience Moments'),
+  pillarDesc: t(
+    'O guia estrutura a oferta da cidade em três momentos chave, integrando a governança noturna com as melhores práticas europeias.',
+    'The guide structures the city’s offerings into three key moments, integrating night-time governance with European best practices.'
+  ),
+  
+  pillars: [
+    { 
+      title: 'Braga by Sunset', 
+      desc: t('Valorização do património monumental durante o "golden hour" e dinamização estratégica de esplanadas e espaços abertos.', 'Showcasing monumental heritage during the "golden hour" and strategically boosting terraces and open spaces.'), 
+      icon: Sparkles 
+    },
+    { 
+      title: 'Braga by Night', 
+      desc: t('Promoção da identidade gastronómica e dos vinhos locais, reforçando a economia de restauração no centro histórico.', 'Promoting gastronomic identity and local wines, strengthening the restaurant economy in the historical center.'), 
+      icon: Globe 
+    },
+    { 
+      title: 'Braga by Dark', 
+      desc: t('Exploração da cultura vibrante e dos espaços de diversão, garantindo uma noite segura e diversificada para todos.', 'Exploring vibrant culture and entertainment spaces, ensuring a safe and diverse night for everyone.'), 
+      icon: Zap 
+    },
+    { 
+      title: t('Responsabilidade', 'Responsibility'), 
+      desc: t('Foco em mobilidade ecológica, segurança inclusiva e economia circular dentro do ecossistema noturno da cidade.', 'Focus on green mobility, inclusive safety, and circular economy within the city’s night-time ecosystem.'), 
+      icon: Target 
+    },
+  ],
+
+  quote: t(
+    "Promover uma noite vibrante, inclusiva e sustentável através de uma gestão estratégica da economia noturna.",
+    "Promoting a vibrant, inclusive, and sustainable night through strategic management of the night-time economy."
+  ),
+  
+  gallery: [
+    'https://i.imgur.com/mgdxHtt.jpeg',
+    'https://i.imgur.com/to9jbOB.jpeg',
+    'https://i.imgur.com/2NVOugs.jpeg',
+    'https://i.imgur.com/WFOPGd2.jpeg',
+    'https://i.imgur.com/JHpp607.jpeg',
+    'https://i.imgur.com/rXl3zkj.jpeg',
+    'https://i.imgur.com/7Ttw6ak.jpeg',
+    'https://i.imgur.com/OkowZdn.jpeg',
+    'https://i.imgur.com/ZCSF2lK.jpeg',
+    'https://i.imgur.com/YCZr9xN.jpeg',
+  ],
+},
     'roteiro-3-dias': {
       watermark: 'https://visitbraga.travel/wp-content/uploads/2025/07/Roteiro-3-Dias-PT.webp',
       tag: 'Coordenação Editorial // 2024 — 2025',

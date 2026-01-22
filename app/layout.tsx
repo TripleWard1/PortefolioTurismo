@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
+import { LanguageProvider } from './ui/LanguageContext'; // Importação do Provider
 
 const inter = Inter({
   subsets: ['latin'],
@@ -50,14 +51,17 @@ export default function RootLayout({
           selection:text-white
         `}
       >
-        {/* Camada de Fundo Dinâmica (Mesh & Grain definidos no globals.css) */}
-        <div
-          className="mesh-bg fixed inset-0 z-0 pointer-events-none"
-          aria-hidden="true"
-        />
+        {/* O LanguageProvider agora envolve toda a aplicação para permitir a tradução */}
+        <LanguageProvider>
+          {/* Camada de Fundo Dinâmica (Mesh & Grain definidos no globals.css) */}
+          <div
+            className="mesh-bg fixed inset-0 z-0 pointer-events-none"
+            aria-hidden="true"
+          />
 
-        {/* Conteúdo Principal */}
-        <div className="relative z-10">{children}</div>
+          {/* Conteúdo Principal */}
+          <div className="relative z-10">{children}</div>
+        </LanguageProvider>
 
         {/* Script para suavizar o scroll ou outros detalhes pode vir aqui no futuro */}
       </body>
