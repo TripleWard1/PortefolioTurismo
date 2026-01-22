@@ -1,7 +1,7 @@
 'use client';
 import {
-  X, Target, Globe, Smartphone, Sparkles, CheckCircle, Briefcase,
-  LineChart, Compass, Activity,ChevronRight, QrCode, ShieldCheck, FileText, PlayCircle, Layers, Zap,
+  X, Target, Smartphone, CheckCircle, Briefcase,
+  LineChart, Compass, Globe, Sparkles, Activity,ChevronRight, QrCode, ShieldCheck, FileText, PlayCircle, Layers, Zap,
   Cpu, BarChart3, Monitor, Maximize2, Hexagon, Fingerprint, TrendingUp, Award, Search, Map, Quote, Calendar, ArrowUpRight,Users, ArrowRight, Languages, FileDown
 } from 'lucide-react';
 import React, { useEffect, useState, isValidElement, ReactNode } from 'react';
@@ -39,6 +39,15 @@ interface ProjectData {
   labelLinkFR?: string;
   linkLowCost?: string;
   labelLowCost?: string;
+
+  // --- NOVAS PROPRIEDADES ADICIONADAS PARA CORRIGIR O ERRO ---
+  officialNetwork?: string;
+  externalLink?: string;
+  externalSource?: string;
+  externalLinkLabel?: string;
+  acreditacao?: string;
+  hideMainBtn?: boolean;
+  stats?: { label: string; value: string }[];
 }
 
 interface OverlayProps {
