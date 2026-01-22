@@ -166,7 +166,13 @@ export default function ChapterOverlay({
   acreditacao: 'European Commission Recognition / Smart Tourism Network', // Novo nome para Chancela
   hideMainBtn: true, // Adicionado para esconder o botão de "Documentação Integral" aqui
       
-      hero: (
+  stats: [
+    { label: "Posicionamento", value: "Elite Europeia" },
+    { label: "Missão em Bruxelas", value: "Defesa Técnica" },
+    { label: "Reconhecimento", value: "EU Shortlisted" }
+  ],    
+  
+  hero: (
         <div className="space-y-4">
           <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full">Finalista Europeu</span>
           <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
