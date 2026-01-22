@@ -4,7 +4,7 @@ import {
   LineChart, Compass, QrCode, ShieldCheck, FileText, PlayCircle, Layers, Zap,
   Cpu, BarChart3, Monitor, Maximize2, Hexagon, Fingerprint, TrendingUp, Award, Search, Map, Quote, Calendar, ArrowUpRight,Users, ArrowRight, Languages, FileDown
 } from 'lucide-react';
-import { useEffect, useState, ReactNode } from 'react';
+import React, { useEffect, useState, isValidElement, ReactNode } from 'react';
 
 // --- ESTE BLOCO ABAIXO É O QUE CORRIGE O ERRO ---
 interface Pillar {
@@ -130,31 +130,48 @@ export default function ChapterOverlay({
     },
     'smart-tourism': {
       watermark: 'https://i.imgur.com/GBs8DY7.jpeg',
-      tag: 'Candidaturas Europeias // 2026',
-      headerTitle: 'Smart Tourism Capital',
+      tag: 'European Shortlisted City // 2024 — 2026',
+      headerTitle: 'European Capital of Smart Tourism',
       hero: (
         <div className="space-y-2">
-          <span className="text-blue-500 font-medium tracking-widest uppercase text-sm">Braga 2026</span>
-          <h1 className="text-6xl md:text-8xl font-light tracking-tighter text-white">
-            Smart <span className="italic font-serif text-blue-400">Tourism</span>
+          <span className="text-blue-500 font-black tracking-[0.4em] uppercase text-xs">Finalista Europeu</span>
+          <h1 className="text-6xl md:text-[110px] font-black tracking-tighter text-white uppercase italic leading-[0.8]">
+            Shortlisted <br />
+            <span className="text-blue-600">Smart Tourism</span>
           </h1>
         </div>
       ),
       description: (
-        <p className="text-lg md:text-xl text-slate-400 leading-relaxed font-light">
-          Liderança técnica na estratégia de <span className="text-white border-b border-blue-500/30">defesa institucional em Bruxelas</span>, consolidando Braga na elite dos destinos inteligentes europeus.
-        </p>
+        <>
+          Integração da equipa técnica responsável pela <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8">defesa da candidatura em Bruxelas</span>. Um processo rigoroso que culminou na seleção de Braga como finalista europeia, garantindo a entrada direta na prestigiada Rede Europeia de Smart Tourism.
+        </>
       ),
-      pillarTabLabel: 'Eixos',
-      pillarTitle: 'Pilares Estratégicos',
-      pillarDesc: 'Uma abordagem holística baseada nos critérios de excelência da Comissão Europeia.',
+      pillarTabLabel: 'Eixos de Atuação',
+      pillarTitle: 'Missão em Bruxelas',
+      pillarDesc: 'O culminar de um trabalho estratégico que uniu o Município às redes de cooperação europeias mais exigentes.',
       pillars: [
-        { title: 'Acessibilidade', desc: 'Inclusividade física e digital.', icon: Smartphone },
-        { title: 'Sustentabilidade', desc: 'Preservação do capital natural.', icon: Globe },
-        { title: 'Digitalização', desc: 'Gestão inteligente de dados.', icon: Zap },
-        { title: 'Herança Cultural', desc: 'Inovação no património vivo.', icon: Sparkles },
+        { 
+          title: 'Defesa no Júri Europeu', 
+          desc: 'Representação institucional e apresentação direta da candidatura perante a Comissão Europeia e o Júri Internacional.', 
+          icon: Globe 
+        },
+        { 
+          title: 'Acesso à Rede Europeia', 
+          desc: 'Posicionamento estratégico que garantiu a Braga o estatuto de Shortlisted City, consolidando a rede de networking internacional.', 
+          icon: Compass 
+        },
+        { 
+          title: 'Consolidação de Evidências', 
+          desc: 'Sistematização de políticas públicas e projetos municipais em exemplos de excelência transferíveis a nível europeu.', 
+          icon: CheckCircle 
+        },
+        { 
+          title: 'Diplomacia Urbana', 
+          desc: 'Articulação transversal entre stakeholders e a Smart Tourism Secretariat, alinhando a cidade com as prioridades da UE.', 
+          icon: Users 
+        },
       ],
-      quote: "A excelência turística nasce da harmonia entre tecnologia e identidade.",
+      quote: "Braga entre as melhores da Europa: um reconhecimento que valida a nossa visão de um destino inteligente e focado nas pessoas.",
       gallery: [
         'https://i.imgur.com/1t5plh4.jpeg',
         'https://i.imgur.com/cpFeHQk.jpeg',
@@ -785,211 +802,200 @@ export default function ChapterOverlay({
     },
   };
 
- // Garantia de que o objeto existe para não quebrar o render
- const current = projectConfig?.[projectType] || projectConfig?.['smart-tourism'] || {};
-
- useEffect(() => {
-   if (isOpen) {
-     document.body.style.overflow = 'hidden';
-     setActiveTab('overview');
-   } else {
-     document.body.style.overflow = 'unset';
-   }
- }, [isOpen]);
-
- if (!isOpen || !current) return null;
-
- // Função segura para renderizar o Hero com efeito de cor alternada
- const renderHero = () => {
-   const text = current.hero || "Project Overview";
-   if (typeof text !== 'string') return text;
-   
-   return text.split(" ").map((word: string, i: number) => (
-     <span key={i} className={i % 2 !== 0 ? "text-blue-600 block" : "block"}>
-       {word}
-     </span>
-   ));
- };
-
- return (
-   <div className="fixed inset-0 z-[600] flex items-center justify-center overflow-hidden animate-in fade-in duration-700 font-sans">
      
-     {/* 1. BACKGROUND: Slate Ultra-Dark */}
-     <div className="absolute inset-0 bg-slate-950 z-0" />
-     
-     {/* 2. EFEITOS DE LUZ: Glow Blue Neon */}
-     <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-blue-600/10 blur-[150px] rounded-full z-[1]" />
-     <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-blue-900/10 blur-[150px] rounded-full z-[1]" />
+    const current = projectConfig?.[projectType] || projectConfig?.['smart-tourism'] || {};
+  
+    useEffect(() => {
+      if (isOpen) {
+        document.body.style.overflow = 'hidden';
+        setActiveTab('overview');
+      } else {
+        document.body.style.overflow = 'unset';
+      }
+    }, [isOpen]);
+  
+    if (!isOpen || !current) return null;
+  
+    // CORREÇÃO: Função segura que aceita JSX (image_70889a.jpg)
+    const renderHero = () => {
+      const heroContent = current.hero || "Project Overview";
+      if (isValidElement(heroContent)) return heroContent;
+      
+      if (typeof heroContent === 'string') {
+        return heroContent.split(" ").map((word: string, i: number) => (
+          <span key={i} className={i % 2 !== 0 ? "text-blue-600 block" : "block"}>
+            {word}
+          </span>
+        ));
+      }
+     return null;
+  };
 
-     <div className="relative w-full h-full flex flex-col z-10 text-white overflow-hidden">
-       
-       {/* HEADER: Floating Glassmorphism */}
-       <header className="flex items-center justify-between px-8 md:px-16 py-10 z-[100]">
-         <div className="flex flex-col">
-           <div className="flex items-center gap-3 mb-2">
-             <span className="w-8 h-[1px] bg-blue-600" />
-             <span className="text-blue-500 font-black text-[10px] tracking-[0.5em] uppercase">
-               Confidential // Archive 2026
-             </span>
-           </div>
-           <h2 className="text-2xl md:text-3xl font-black uppercase italic tracking-tighter">
-             {current.headerTitle || 'Project Details'}
-           </h2>
-         </div>
-
-         <div className="flex items-center gap-12">
-           <nav className="hidden lg:flex items-center gap-2 bg-white/5 p-1 rounded-full border border-white/10 backdrop-blur-md">
-             {[
-               { id: 'overview', label: 'Concept' },
-               { id: 'pillars', label: current.pillarTabLabel || 'Strategy' },
-               { id: 'media', label: 'Visuals' }
-             ].map((tab) => (
-               <button
-                 key={tab.id}
-                 onClick={() => setActiveTab(tab.id as any)}
-                 className={`px-8 py-3 text-[10px] font-black uppercase tracking-widest transition-all rounded-full ${
-                   activeTab === tab.id ? 'bg-blue-600 text-white' : 'text-white/40 hover:text-white'
-                 }`}
-               >
-                 {tab.label}
-               </button>
-             ))}
-           </nav>
-
-           <button
-             onClick={onClose}
-             className="group w-14 h-14 rounded-2xl border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-500"
-           >
-             <X size={24} className="group-hover:rotate-90 transition-transform duration-500" />
-           </button>
-         </div>
-       </header>
-
-       {/* MAIN CONTENT */}
-       <main className="flex-1 overflow-y-auto px-8 md:px-20 py-10 custom-scrollbar-dark">
-         
-         {activeTab === 'overview' && (
-           <div className="max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-10 duration-1000">
-             
-             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start mb-32">
-               {/* Lado Esquerdo: Tipografia Brutalista */}
-               <div className="lg:col-span-8 flex flex-col gap-12">
-                 <h1 className="text-7xl md:text-[130px] font-black uppercase italic leading-[0.8] tracking-tighter">
-                   {renderHero()}
-                 </h1>
-                 
-                 <div className="relative p-1 border-l-4 border-blue-600 pl-10">
-                   <p className="text-2xl md:text-4xl text-white/80 font-light leading-snug italic max-w-3xl">
-                     {current.description}
-                   </p>
-                 </div>
-               </div>
-
-               {/* Lado Direito: Citação com Profundidade */}
-               <div className="lg:col-span-4 relative group">
-                 <div className="absolute inset-0 bg-blue-600/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                 <div className="relative p-12 bg-white/5 border border-white/10 rounded-[3rem] backdrop-blur-sm overflow-hidden">
-                   <Quote className="text-blue-600 w-16 h-16 mb-8 opacity-40" />
-                   <p className="text-2xl md:text-3xl font-black italic tracking-tight leading-tight mb-10">
-                     "{current.quote}"
-                   </p>
-                   <div className="flex items-center gap-4">
-                     <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center font-black italic text-xs">HB</div>
-                     <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30">Strategic Direction</span>
-                   </div>
-                 </div>
-               </div>
-             </div>
-
-             {/* Grid de Features (Substituindo KPIs) */}
-             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-                <FeatureCard icon={Monitor} title="User Experience" label="Optimized Flow" />
-                <FeatureCard icon={Cpu} title="Architecture" label="Future-Proof Tech" />
-                <FeatureCard icon={Zap} title="Performance" label="High Efficiency" />
-             </div>
-           </div>
-         )}
-
-         {activeTab === 'pillars' && (
-           <div className="max-w-7xl mx-auto animate-in fade-in slide-in-from-right-10 duration-700">
-              <div className="mb-24 flex flex-col gap-6">
-                 <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-xs">Structural Pillars</span>
-                 <h3 className="text-5xl md:text-8xl font-black uppercase italic tracking-tighter">{current.pillarTitle}</h3>
-                 <p className="text-2xl text-white/50 font-light italic max-w-3xl leading-relaxed">{current.pillarDesc}</p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-               {current.pillars?.map((item: any, i: number) => (
-                   <div key={i} className="group p-12 bg-white/5 border border-white/10 rounded-[2.5rem] hover:bg-blue-600 transition-all duration-500">
-                     <div className="flex justify-between items-center mb-16">
-                        <div className="w-14 h-14 rounded-xl bg-blue-600 flex items-center justify-center">
-                           <item.icon size={28} className="text-white" />
-                        </div>
-                        <span className="text-6xl font-black opacity-5 group-hover:opacity-20 transition-opacity">0{i+1}</span>
-                     </div>
-                     <h4 className="text-3xl font-black uppercase italic mb-6 group-hover:translate-x-3 transition-transform">{item.title}</h4>
-                     <p className="text-white/40 group-hover:text-white/90 text-lg font-light leading-relaxed">
-                       {item.desc || (item.items && item.items.join(' • '))}
-                     </p>
-                   </div>
-               ))}
-              </div>
-           </div>
-         )}
-
-         {activeTab === 'media' && (
-           <div className="max-w-7xl mx-auto animate-in zoom-in-95 duration-700">
-              <div className="columns-1 md:columns-2 lg:columns-3 gap-10 space-y-10">
-                 {current.gallery?.map((img: string, idx: number) => (
-                   <div key={idx} className="relative group overflow-hidden rounded-[3rem] border border-white/10 bg-white/5">
-                     <img src={img} className="w-full h-auto grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-105" alt="" />
-                     <div className="absolute inset-0 bg-blue-600/60 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center">
-                        <Maximize2 className="text-white w-10 h-10 translate-y-4 group-hover:translate-y-0 transition-transform" />
-                     </div>
-                   </div>
-                 ))}
-              </div>
-           </div>
-         )}
-       </main>
-
-       {/* FOOTER: Black Edition */}
-       <footer className="px-8 md:px-16 py-12 bg-black border-t border-white/5 flex flex-col md:flex-row items-center justify-between z-[200] gap-10">
-          <div className="flex items-center gap-8">
-             <div className="text-5xl font-black italic tracking-tighter text-blue-600">HB</div>
-             <div className="flex flex-col">
-               <span className="text-[10px] font-black text-white/30 uppercase tracking-[0.5em] mb-1">Elite Case Study</span>
-               <span className="text-lg font-bold text-white uppercase italic tracking-widest">Hugo Barros // © 2026</span>
-             </div>
-          </div>
+  // Remova qualquer ; ou símbolo que possa estar aqui escondido
+  return (
+    <div className="fixed inset-0 z-[600] flex items-center justify-center overflow-hidden animate-in fade-in duration-700 font-sans">
+        
+        {/* 1. BACKGROUND: Slate Ultra-Dark */}
+        <div className="absolute inset-0 bg-slate-950 z-0" />
+        
+        {/* 2. EFEITOS DE LUZ: Glow Blue Neon */}
+        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-blue-600/10 blur-[150px] rounded-full z-[1]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-blue-900/10 blur-[150px] rounded-full z-[1]" />
+  
+        <div className="relative w-full h-full flex flex-col z-10 text-white overflow-hidden">
           
-          <div className="flex items-center gap-6">
-            {current.link && (
-              <button 
-                onClick={() => window.open(current.link, '_blank')}
-                className="px-12 py-6 bg-white text-black font-black uppercase text-[11px] tracking-[0.3em] hover:bg-blue-600 hover:text-white transition-all flex items-center gap-4 rounded-xl active:scale-95"
-              >
-                Review Full Case <ArrowUpRight size={18} />
+          {/* HEADER */}
+          <header className="flex items-center justify-between px-8 md:px-16 py-10 z-[100]">
+            <div className="flex flex-col text-white">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="w-8 h-[1px] bg-blue-600" />
+                <span className="text-blue-500 font-black text-[10px] tracking-[0.5em] uppercase">
+                  {current.tag || 'Project Dossier // 2026'}
+                </span>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-black uppercase italic tracking-tighter">
+                {current.headerTitle || 'Project Details'}
+              </h2>
+            </div>
+  
+            <div className="flex items-center gap-12">
+              <nav className="hidden lg:flex items-center gap-2 bg-white/5 p-1 rounded-full border border-white/10 backdrop-blur-md">
+                {[
+                  { id: 'overview', label: 'Concept' },
+                  { id: 'pillars', label: current.pillarTabLabel || 'Strategy' },
+                  { id: 'media', label: 'Visuals' }
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`px-8 py-3 text-[10px] font-black uppercase tracking-widest transition-all rounded-full ${
+                      activeTab === tab.id ? 'bg-blue-600 text-white' : 'text-white/40 hover:text-white'
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </nav>
+  
+              <button onClick={onClose} className="group w-14 h-14 rounded-2xl border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-500">
+                <X size={24} className="group-hover:rotate-90 transition-transform duration-500" />
               </button>
-            )}
+            </div>
+          </header>
+  
+          {/* MAIN CONTENT */}
+          <main className="flex-1 overflow-y-auto px-8 md:px-20 py-10 custom-scrollbar-dark">
+            
+          {activeTab === 'overview' && (
+  <div className="max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-10 duration-1000">
+    
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start mb-32">
+      <div className="lg:col-span-8 flex flex-col gap-12">
+        <div className="text-7xl md:text-[130px] font-black uppercase italic leading-[0.8] tracking-tighter text-white">
+          {renderHero()}
+        </div>
+        
+        <div className="relative p-1 border-l-4 border-blue-600 pl-10">
+          <div className="text-2xl md:text-4xl text-white/80 font-light leading-snug italic max-w-3xl">
+            {current.description}
           </div>
-       </footer>
-     </div>
-   </div>
- );
-}
+        </div>
+      </div>
 
-// Sub-componente de Feature para evitar repetição
-function FeatureCard({ icon: Icon, title, label }: any) {
- return (
-   <div className="p-10 bg-white/5 border border-white/10 rounded-[2rem] flex items-center gap-8 hover:bg-white/10 transition-colors group">
-     <div className="w-16 h-16 rounded-full bg-blue-600/10 flex items-center justify-center text-blue-500 group-hover:bg-blue-600 group-hover:text-white transition-all">
-       <Icon size={24} />
+      <div className="lg:col-span-4 relative group">
+        <div className="absolute inset-0 bg-blue-600/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+        <div className="relative p-12 bg-white/5 border border-white/10 rounded-[3rem] backdrop-blur-sm overflow-hidden text-white">
+          <Quote className="text-blue-600 w-16 h-16 mb-8 opacity-40" />
+          <p className="text-2xl md:text-3xl font-black italic tracking-tight leading-tight mb-10">
+            "{current.quote}"
+          </p>
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center font-black italic text-xs text-white">HB</div>
+            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30">Direcão Estratégica</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* OTIMIZAÇÃO: Grelha de Destaques Rápidos (sem descrições longas para evitar duplicação) */}
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20">
+      {current.pillars?.slice(0, 4).map((pilar: any, idx: number) => (
+        <div key={idx} className="p-6 bg-white/5 border border-white/10 rounded-2xl flex flex-col gap-4 hover:border-blue-600/50 transition-all group">
+          <div className="w-10 h-10 rounded-full bg-blue-600/10 flex items-center justify-center text-blue-500 group-hover:bg-blue-600 group-hover:text-white transition-all">
+            {pilar.icon ? <pilar.icon size={18} /> : <Sparkles size={18} />}
+          </div>
+          <h5 className="text-sm font-black uppercase italic tracking-tight text-white/80 group-hover:text-white transition-colors">{pilar.title}</h5>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
+
+{activeTab === 'pillars' && (
+  <div className="max-w-7xl mx-auto animate-in fade-in slide-in-from-right-10 duration-700">
+     <div className="mb-24 flex flex-col gap-6">
+        <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-xs">Technical Framework</span>
+        <h3 className="text-5xl md:text-8xl font-black uppercase italic tracking-tighter text-white">{current.pillarTitle}</h3>
+        <p className="text-2xl text-white/50 font-light italic max-w-3xl leading-relaxed">{current.pillarDesc}</p>
      </div>
-     <div className="flex flex-col">
-       <span className="text-[10px] font-black uppercase tracking-widest text-white/30 mb-1">{label}</span>
-       <h5 className="text-xl font-black uppercase italic tracking-tight">{title}</h5>
+
+     {/* AQUI MANTEMOS O DOSSIER COMPLETO: Com título, ícone grande e a descrição detalhada (desc) */}
+     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      {current.pillars?.map((item: any, i: number) => (
+          <div key={i} className="group p-12 bg-white/5 border border-white/10 rounded-[2.5rem] hover:bg-blue-600 transition-all duration-500">
+            <div className="flex justify-between items-center mb-16">
+               <div className="w-14 h-14 rounded-xl bg-blue-600 flex items-center justify-center text-white">
+                  {item.icon ? <item.icon size={28} /> : <Sparkles size={28} />}
+               </div>
+               <span className="text-6xl font-black opacity-5 group-hover:opacity-20 transition-opacity text-white">0{i+1}</span>
+            </div>
+            <h4 className="text-3xl font-black uppercase italic mb-6 group-hover:translate-x-3 transition-transform text-white">{item.title}</h4>
+            <p className="text-white/40 group-hover:text-white/90 text-lg font-light leading-relaxed">
+              {item.desc}
+            </p>
+          </div>
+      ))}
      </div>
-   </div>
- );
-}
+  </div>
+)}
+  
+            {activeTab === 'media' && (
+              <div className="max-w-7xl mx-auto animate-in zoom-in-95 duration-700">
+                 <div className="columns-1 md:columns-2 lg:columns-3 gap-10 space-y-10">
+                    {current.gallery?.map((img: string, idx: number) => (
+                      <div key={idx} className="relative group overflow-hidden rounded-[3rem] border border-white/10 bg-white/5">
+                        <img src={img} className="w-full h-auto grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-105" alt="" />
+                        <div className="absolute inset-0 bg-blue-600/60 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center">
+                           <Maximize2 className="text-white w-10 h-10 translate-y-4 group-hover:translate-y-0 transition-transform" />
+                        </div>
+                      </div>
+                    ))}
+                 </div>
+              </div>
+            )}
+          </main>
+  
+          <footer className="px-8 md:px-16 py-12 bg-black border-t border-white/5 flex flex-col md:flex-row items-center justify-between z-[200] gap-10">
+             <div className="flex items-center gap-8">
+                <div className="text-5xl font-black italic tracking-tighter text-blue-600">HB</div>
+                <div className="flex flex-col">
+                  <span className="text-[10px] font-black text-white/30 uppercase tracking-[0.5em] mb-1">Strategic Case Study</span>
+                  <span className="text-lg font-bold text-white uppercase italic tracking-widest">Hugo Barros // © 2026</span>
+                </div>
+             </div>
+             
+             <div className="flex items-center gap-6">
+               {current.link && (
+                 <button 
+                   onClick={() => window.open(current.link, '_blank')}
+                   className="px-12 py-6 bg-white text-black font-black uppercase text-[11px] tracking-[0.3em] hover:bg-blue-600 hover:text-white transition-all flex items-center gap-4 rounded-xl active:scale-95"
+                 >
+                   Review Full Case <ArrowUpRight size={18} />
+                 </button>
+               )}
+             </div>
+          </footer>
+        </div>
+      </div>
+    );
+  }
