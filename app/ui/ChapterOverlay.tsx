@@ -83,10 +83,10 @@ export default function ChapterOverlay({
   link: 'https://visitbraga.travel',
 
   stats: [
-    { label: "Alcance Digital", value: "Global" },
-    { label: "User Experience", value: "Mobile/PC" },
-    { label: "Arquitetura", value: "Escalável" }
-  ],
+    { label: "Promoção de Destino", value: "Estratégica" },
+    { label: "Alcance do Mercado", value: "Internacional" },
+    { label: "Hub de Informação", value: "Multicanal" }
+],
 
   hero: (
     <div className="space-y-4">
@@ -217,9 +217,9 @@ export default function ChapterOverlay({
     
       // Métricas Institucionais Dinâmicas (Stats)
       stats: [
-        { label: "Público-Alvo", value: "Infantil" },
-        { label: "Formato", value: "Híbrido" },
-        { label: "Conteúdo", value: "Interativo" }
+        { label: "Educação Patrimonial", value: "Novos Públicos" },
+        { label: "Interpretação", value: "Lúdico-Pedagógica" },
+        { label: "Valorização", value: "Identidade Local" }
       ],
     
       hero: (
@@ -294,9 +294,9 @@ export default function ChapterOverlay({
     
       // Métricas Institucionais Dinâmicas (Stats)
       stats: [
-        { label: "Programa", value: "URBACT" },
-        { label: "Estratégia", value: "Noturna" },
-        { label: "Impacto", value: "Sustentável" }
+        { label: "Rede Europeia", value: "URBACT" },
+        { label: "Economia Noturna", value: "Planeamento" },
+        { label: "Governação", value: "Sustentável" }
       ],
     
       hero: (
@@ -375,12 +375,15 @@ export default function ChapterOverlay({
       acreditacao: 'Divisão de Economia e Turismo - Municipio de Braga / LKCOM',
       hideMainBtn: false, 
       link: 'https://visitbraga.travel/wp-content/uploads/2025/07/Roteiro-Descobrir-Braga-em-3-Dias-Portugues.pdf',
+      
+      // Adicionado link da versão Inglesa (EN)
+      linkEN: 'https://visitbraga.travel/wp-content/uploads/2025/07/CMB_roteiro3diasEN_capa-e-miolo_spreads_200250722_VC2_Baixa-Qualidade-WEBSITE.pdf',
+      labelLinkEN: 'English Version (PDF)',
     
-      // Métricas Institucionais Dinâmicas (Stats)
       stats: [
-        { label: "Publicação", value: "Bilingue" },
-        { label: "Precisão", value: "Fact-Checked" },
-        { label: "Acessibilidade", value: "PMR Ready" }
+        { label: "Capacidade de Resposta", value: "Bilingue" },
+        { label: "Rigor Histórico", value: "Validado" },
+        { label: "Planeamento", value: "Otimizado" }
       ],
     
       hero: (
@@ -409,26 +412,10 @@ export default function ChapterOverlay({
       pillarDesc: 'Foco absoluto na utilidade do conteúdo, garantindo uma ferramenta robusta tanto para o turista ocasional como para o visitante cultural.',
       
       pillars: [
-        { 
-          title: 'Fact-Checking', 
-          desc: 'Validação rigorosa de toponímia e estilos arquitetónicos, assegurando uma integração técnica precisa entre a narrativa textual e a cartografia.', 
-          icon: Search 
-        },
-        { 
-          title: 'UX Writing', 
-          desc: 'Inclusão de métricas práticas como tempos médios de visita, ícones de acessibilidade (PMR) e dinâmicas de percurso otimizadas.', 
-          icon: Map 
-        },
-        { 
-          title: 'Qualidade Final', 
-          desc: 'Revisão linguística profunda sob o AO90 e eliminação de artefactos técnicos para garantir uma leitura fluida e profissional.', 
-          icon: CheckCircle 
-        },
-        { 
-          title: 'Camada Digital', 
-          desc: 'Implementação estratégica de QR Codes, permitindo que horários e preçários se mantenham atualizados dinamicamente via portal oficial.', 
-          icon: QrCode 
-        },
+        { title: 'Fact-Checking', desc: 'Validação rigorosa de toponímia e estilos arquitetónicos.', icon: Search },
+        { title: 'UX Writing', desc: 'Inclusão de métricas práticas como tempos médios de visita e PMR.', icon: Map },
+        { title: 'Qualidade Final', desc: 'Revisão linguística profunda sob o AO90 e rigor técnico.', icon: CheckCircle },
+        { title: 'Camada Digital', desc: 'Implementação estratégica de QR Codes para atualização dinâmica.', icon: QrCode },
       ],
     
       quote: "O guia essencial para uma imersão completa na história e cultura bracarense, desenhado para a máxima utilidade no terreno.",
@@ -438,15 +425,16 @@ export default function ChapterOverlay({
         'https://visitbraga.travel/wp-content/uploads/2025/07/Roteiro-3-Dias.webp',
       ],
     
-      // Mantendo o teu vídeo para ser renderizado na aba Media
       videoEmbed: (
-        <div className="relative w-full h-0 pb-[177.77%] overflow-hidden rounded-[2.5rem] border border-white/10 bg-black/20">
-          <iframe
-            className="absolute inset-0 w-full h-full"
-            allow="fullscreen"
-            allowFullScreen
-            src="https://streamable.com/e/5qyf9a?"
-          />
+        <div className="w-full max-w-md mx-auto animate-in zoom-in-95 duration-1000">
+          <div className="relative w-full h-0 pb-[177.77%] overflow-hidden rounded-[2.5rem] border border-white/10 bg-black/20">
+            <iframe
+              className="absolute inset-0 w-full h-full"
+              allow="fullscreen"
+              allowFullScreen
+              src="https://streamable.com/e/5qyf9a"
+            />
+          </div>
         </div>
       ),
     },
@@ -455,20 +443,24 @@ export default function ChapterOverlay({
       tag: 'Cartografia & Design // 2024 — 2025',
       headerTitle: 'Novo Mapa Turístico Oficial de Braga',
       
-      // Chaves para o Footer Dinâmico
       officialNetwork: 'Município de Braga // Divisão de Turismo',
       externalLink: 'https://visitbraga.travel/wp-content/uploads/2025/11/Mapa_Turistico_Oficial_De_Braga_Portugues.pdf',
       externalSource: 'VisitBraga.travel',
       externalLinkLabel: 'Visualizar Mapa (PDF)',
-      acreditacao: 'Cartographic Information Design',
+      acreditacao: 'Divisão de Economia e Turismo - Municipio de Braga / Hund',
       hideMainBtn: false, 
       link: 'https://visitbraga.travel/wp-content/uploads/2025/11/Mapa_Turistico_Oficial_De_Braga_Portugues.pdf',
     
-      // Métricas Institucionais Dinâmicas (Stats)
+      // Adicionando os novos links multilingue
+      linkEN: 'https://visitbraga.travel/wp-content/uploads/2025/10/Official_Tourist_Map_Of_Braga_EN.pdf',
+      linkES: 'https://visitbraga.travel/wp-content/uploads/2025/11/Plano_Turistico_Oficial_De_Braga_Espanol.pdf',
+      linkFR: 'https://visitbraga.travel/wp-content/uploads/2025/10/Carte_Touristique_Officielle_de_Braga_FR.pdf',
+      linkLowCost: 'https://visitbraga.travel/wp-content/uploads/2025/11/Mapa_Turistico_Oficial_LOW_COST.pdf',
+    
       stats: [
-        { label: "Idiomas", value: "Tetralingue" },
+        { label: "Capacidade de Resposta", value: "PT / EN / ES / FR" },
         { label: "Toponímia", value: "Rigorosa" },
-        { label: "Património", value: "UNESCO Focus" }
+        { label: "Qualificação", value: "Experiência de Destino" }
       ],
     
       hero: (
@@ -487,7 +479,7 @@ export default function ChapterOverlay({
             O desenvolvimento técnico deste <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">novo suporte cartográfico oficial</span> representa a união entre a precisão geográfica e o design de informação contemporâneo.
           </p>
           <p className="text-white/40 text-lg leading-relaxed">
-            Este projeto multidisciplinar focou-se na reestruturação total da cartografia do território, otimizando a experiência do visitante através de uma hierarquização clara de pontos de interesse. Desde a ilustração 2D de ícones patrimoniais até à gestão de conteúdos em quatro idiomas, cada detalhe foi desenhado para servir como a ferramenta definitiva de orientação e promoção do destino Braga.
+            Este projeto multidisciplinar focou-se na reestruturação total da cartografia do território, otimizando a experiência do visitante através de uma hierarquização clara de pontos de interesse. Cada detalhe foi desenhado para servir como a ferramenta definitiva de orientação e promoção do destino Braga.
           </p>
         </div>
       ),
@@ -497,26 +489,10 @@ export default function ChapterOverlay({
       pillarDesc: 'Da estruturação de conteúdos à ilustração patrimonial, o foco incidiu na clareza informativa e na eficiência da jornada do visitante.',
       
       pillars: [
-        { 
-          title: 'Arquitetura de Informação', 
-          desc: 'Hierarquização inteligente de monumentos, museus e serviços públicos, organizados por categorias cromáticas para uma consulta instintiva.', 
-          icon: Layers 
-        },
-        { 
-          title: 'Desenvolvimento Cartográfico', 
-          desc: 'Produção técnica de bases do centro histórico e malha urbana com rigor toponímico absoluto e foco prioritário em zonas pedonais.', 
-          icon: Compass 
-        },
-        { 
-          title: 'Representação Patrimonial', 
-          desc: 'Criação de ilustrações vetoriais de ícones como a Sé e o Bom Jesus (UNESCO) para facilitar o reconhecimento visual no terreno.', 
-          icon: Map 
-        },
-        { 
-          title: 'Gestão Multilingue', 
-          desc: 'Adaptação gráfica e funcional para quatro idiomas (PT, EN, ES, FR), garantindo coerência visual e precisão terminológica em todos os suportes.', 
-          icon: Languages 
-        },
+        { title: 'Arquitetura de Informação', desc: 'Hierarquização inteligente de monumentos e serviços organizados por categorias cromáticas.', icon: Layers },
+        { title: 'Desenvolvimento Cartográfico', desc: 'Produção técnica com rigor toponímico absoluto e foco prioritário em zonas pedonais.', icon: Compass },
+        { title: 'Representação Patrimonial', desc: 'Criação de ilustrações vetoriais de ícones como a Sé e o Bom Jesus (UNESCO).', icon: Map },
+        { title: 'Gestão Multilingue', desc: 'Adaptação gráfica e funcional para quatro idiomas (PT, EN, ES, FR), garantindo coerência visual.', icon: Languages },
       ],
     
       quote: "Uma ferramenta contemporânea que combina o rigor da cartografia técnica com a nova identidade visual do destino Braga.",
@@ -539,7 +515,7 @@ export default function ChapterOverlay({
       externalLink: 'https://www.fietsenwandelbeurs.be/',
       externalSource: 'Official Event Site',
       externalLinkLabel: 'Website do Evento',
-      acreditacao: 'International Market Representation',
+      acreditacao: 'Divisão de Economia e Turismo - Municipio de Braga',
       hideMainBtn: true, // Escondido porque é uma representação presencial
       link: '',
     
@@ -617,15 +593,15 @@ export default function ChapterOverlay({
       externalLink: 'https://expovacaciones.bilbaookke.eu/',
       externalSource: 'Bilbao Exhibition Centre',
       externalLinkLabel: 'Website da Expo',
-      acreditacao: 'Iberian Market Promotion',
+      acreditacao: 'Divisão de Economia e Turismo - Municipio de Braga / TPNP',
       hideMainBtn: true, 
       link: '',
     
       // Métricas Institucionais Dinâmicas (Stats)
       stats: [
-        { label: "Mercado", value: "Espanha" },
-        { label: "Foco", value: "CPC 2025" },
-        { label: "Proximidade", value: "Cross-Border" }
+        { label: "Inteligência de Mercado", value: "Espanha (Norte)" },
+        { label: "Promoção Estratégica", value: "Património & Cultura" },
+        { label: "Dinâmicas de Fluxo", value: "Turismo Transfronteiriço" }
       ],
     
       hero: (
@@ -696,15 +672,17 @@ export default function ChapterOverlay({
       externalLink: 'https://www.cm-braga.pt',
       externalSource: 'Município de Braga',
       externalLinkLabel: 'Portal Institucional',
-      acreditacao: 'Sustainable Tourism Management',
+      acreditacao: 'Divisão de Economia e Turismo - Municipio de Braga / INNOTUR',
       hideMainBtn: false, 
       link: 'https://www.cm-braga.pt',
     
       // Métricas Institucionais Dinâmicas (Stats)
       stats: [
+        
+        { label: "Coordenação", value: "Desenvolvimento de Produto" },
         { label: "Experiências", value: "29 Ativas" },
         { label: "Parceiros", value: "30+ Entidades" },
-        { label: "Compliance", value: "RNAAT/RNAVT" }
+        
       ],
     
       hero: (
@@ -781,9 +759,9 @@ export default function ChapterOverlay({
     
       // Métricas Institucionais Dinâmicas (Stats)
       stats: [
-        { label: "Scope", value: "EU Level" },
-        { label: "Focus", value: "Retail Tech" },
-        { label: "Status", value: "Finalist 2026" }
+        { label: "Impacto Territorial", value: "Escala Europeia" },
+        { label: "Dinamização", value: "Comércio Local" },
+        { label: "Reconhecimento", value: "Finalista 2026" }
       ],
     
       hero: (
@@ -838,8 +816,7 @@ export default function ChapterOverlay({
       
       gallery: [
         'https://transition-pathways.europa.eu/sites/default/files/styles/time_dependent_full/public/discussion_form_post/2025-12/ECOSR%20-%20Thumbnail_0.jpg?itok=1-QARVo7',
-        'https://i.imgur.com/GBs8DY7.jpeg',
-      ],
+        ],
     },
     'music-cities-awards': {
       watermark: 'https://static.wixstatic.com/media/214dbc_25ced84144eb414c945f6072bd97b0c4~mv2.jpg/v1/fill/w_719,h_719,q_90,enc_avif,quality_auto/214dbc_25ced84144eb414c945f6072bd97b0c4~mv2.jpg',
@@ -857,9 +834,9 @@ export default function ChapterOverlay({
     
       // Métricas Institucionais Dinâmicas (Stats)
       stats: [
-        { label: "Nomination", value: "Global Top" },
-        { label: "Event", value: "Arkansas, USA" },
-        { label: "Category", value: "Night Economy" }
+        { label: "Mérito Internacional", value: "Global Top 3" },
+        { label: "Palco Estratégico", value: "Arkansas, USA" },
+        { label: "Especialização", value: "Night-Time Economy" }
       ],
     
       hero: (
@@ -932,9 +909,9 @@ export default function ChapterOverlay({
     
       // Métricas Institucionais Dinâmicas (Stats)
       stats: [
-        { label: "Ecossistema", value: "Deep Tech" },
-        { label: "Network", value: "SystemEU" },
-        { label: "Impacto", value: "Regional" }
+        { label: "Ecossistema", value: "Inovação & Talento" },
+        { label: "Rede Estratégica", value: "System EU" },
+        { label: "Fomento", value: "Economia Regional" }
       ],
     
       hero: (
@@ -1231,38 +1208,75 @@ export default function ChapterOverlay({
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-6 flex-1">
-                {current.acreditacao && (
-                  <div className="hidden lg:flex flex-col items-end leading-none border-r border-slate-700/50 pr-6">
-                    <span className="text-[7px] text-slate-500 uppercase font-black tracking-[0.3em] mb-1">Acreditação</span>
-                    <span className="text-[9px] text-slate-400 font-light italic leading-none">{current.acreditacao}</span>
-                  </div>
-                )}
+              <div className="flex items-center justify-end gap-3 flex-1">
+  {current.acreditacao && (
+    <div className="hidden xl:flex flex-col items-end leading-none border-r border-slate-700/50 pr-4">
+      <span className="text-[7px] text-slate-500 uppercase font-black tracking-[0.3em] mb-1">Acreditação</span>
+      <span className="text-[9px] text-slate-400 font-light italic leading-none">{current.acreditacao}</span>
+    </div>
+  )}
 
-                {/* BOTÃO ÚNICO PREMIUM */}
-                {(current.externalLink || current.link) && (
-                  <button 
-                    onClick={() => window.open(current.externalLink || current.link, '_blank')}
-                    className="group relative h-11 pl-5 pr-2 flex items-center gap-4 overflow-hidden rounded-full bg-slate-900 border border-white/10 transition-all duration-500 hover:border-blue-500/50 hover:shadow-[0_0_20px_rgba(37,99,235,0.2)]"
-                  >
-                    {/* Efeito de Reflexo Interno */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                    
-                    <div className="flex flex-col items-start leading-none relative z-10">
-                      <span className="text-[7px] font-black text-blue-500 uppercase tracking-[0.2em] mb-0.5">
-                        {current.externalLinkLabel || 'Explorar'}
-                      </span>
-                      <span className="text-[10px] text-slate-200 font-bold tracking-wide uppercase">
-                        {current.externalSource || 'Documentação'}
-                      </span>
-                    </div>
+  {/* CÁPSULA DE IDIOMAS E MAPA SIMPLIFICADO */}
+  <div className="flex items-center gap-3 bg-white/[0.03] p-1.5 pl-4 rounded-full border border-white/10 backdrop-blur-md min-w-fit">
+    <div className="flex flex-col items-start leading-none pr-3 border-r border-white/10">
+      <span className="text-[6px] font-black text-blue-400 uppercase tracking-widest">Available</span>
+      <span className="text-[8px] font-bold text-white/40 uppercase">Versions</span>
+    </div>
+    
+    <div className="flex items-center gap-1.5">
+      {current.linkFR && (
+        <button onClick={() => window.open(current.linkFR, '_blank')} className="group flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-white/5 border border-white/5 hover:bg-blue-600 transition-all duration-300">
+          <span className="text-[9px] font-black text-white/70 group-hover:text-white">FR</span>
+        </button>
+      )}
 
-                    <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center relative z-10 shadow-lg group-hover:scale-110 transition-transform duration-500">
-                      <ArrowUpRight size={14} className="text-white group-hover:rotate-45 transition-transform duration-500" />
-                    </div>
-                  </button>
-                )}
-              </div>
+      {current.linkES && (
+        <button onClick={() => window.open(current.linkES, '_blank')} className="group flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-white/5 border border-white/5 hover:bg-blue-600 transition-all duration-300">
+          <span className="text-[9px] font-black text-white/70 group-hover:text-white">ES</span>
+        </button>
+      )}
+
+      {current.linkEN && (
+        <button onClick={() => window.open(current.linkEN, '_blank')} className="group flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-white/5 border border-white/5 hover:bg-blue-600 transition-all duration-300">
+          <span className="text-[9px] font-black text-white/70 group-hover:text-white">EN</span>
+        </button>
+      )}
+    </div>
+
+    {/* BOTÃO MAPA SIMPLIFICADO (DENTRO DA MESMA CÁPSULA) */}
+    {current.linkLowCost && (
+      <button 
+        onClick={() => window.open(current.linkLowCost, '_blank')}
+        className="group flex flex-shrink-0 items-center gap-2 h-8 px-3 rounded-full bg-blue-500/10 border border-blue-500/20 hover:bg-blue-600 transition-all duration-300"
+      >
+        <span className="text-[8px] font-black text-blue-400 group-hover:text-white uppercase">Simplificado</span>
+        <ArrowUpRight size={10} className="text-blue-400 group-hover:text-white" />
+      </button>
+    )}
+  </div>
+
+  {/* BOTÃO PRINCIPAL (PT) - SEMPRE VISÍVEL */}
+  {(current.externalLink || current.link) && (
+    <button 
+      onClick={() => window.open(current.externalLink || current.link, '_blank')}
+      className="group relative h-12 pl-6 pr-1 flex flex-shrink-0 items-center gap-4 overflow-hidden rounded-full bg-blue-600 transition-all duration-500 hover:scale-105 hover:shadow-[0_0_30px_rgba(37,99,235,0.6)] active:scale-95"
+    >
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+      <div className="absolute inset-0 rounded-full bg-blue-400 opacity-20 animate-pulse group-hover:hidden" />
+      <div className="flex flex-col items-start leading-none relative z-10">
+        <span className="text-[8px] font-black text-blue-100 uppercase tracking-[0.25em] mb-0.5 opacity-80">
+          {current.externalLinkLabel || 'Explorar'}
+        </span>
+        <span className="text-[11px] text-white font-black tracking-wider uppercase">
+          {current.externalSource || 'Aceder Agora'}
+        </span>
+      </div>
+      <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center relative z-10 shadow-xl group-hover:bg-slate-900 transition-colors duration-300">
+        <ArrowUpRight size={18} className="text-blue-600 group-hover:text-white group-hover:rotate-45 transition-all duration-500" />
+      </div>
+    </button>
+  )}
+</div>
             </div>
           </footer>
         </div>

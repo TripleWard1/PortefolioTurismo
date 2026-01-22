@@ -93,7 +93,7 @@ export default function Contact() {
                 <Briefcase className="w-5 h-5 text-blue-600" />
                 <div className="flex flex-col">
                   <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest">
-                    Afiliação
+                    Vínculo
                   </span>
                   <span className="text-[11px] font-bold text-slate-700 uppercase tracking-widest">
                     Município de Braga
