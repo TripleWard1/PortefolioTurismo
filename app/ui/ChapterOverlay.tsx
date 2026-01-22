@@ -1158,25 +1158,37 @@ export default function ChapterOverlay({
 
 {activeTab === 'media' && (
   <div className="max-w-7xl mx-auto animate-in fade-in duration-700">
-    {/* Usamos flex-col para o vídeo ocupar a largura toda por cima ou por baixo */}
     <div className="flex flex-col gap-12">
       
-      {/* VÍDEO EM DESTAQUE (LARGURA TOTAL) */}
+      {/* 1. VÍDEO (Se existir) */}
       {current.videoEmbed && (
         <div className="w-full">
           {current.videoEmbed}
         </div>
       )}
 
-      {/* GALERIA DE IMAGENS (EM BAIXO DO VÍDEO) */}
+      {/* 2. GALERIA DE FOTOS (Com clique para ampliar) */}
       {current.gallery && current.gallery.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {current.gallery.map((img, idx) => (
             <div 
               key={idx} 
-              className="aspect-video rounded-[2rem] overflow-hidden border border-white/10"
+              // ESTA LINHA RECUPERA O ZOOM:
+              onClick={() => setSelectedImage(img)} 
+              className="group relative aspect-video rounded-[2rem] overflow-hidden border border-white/10 bg-white/5 cursor-zoom-in"
             >
-              <img src={img} className="w-full h-full object-cover" alt="" />
+              {/* Overlay de hover para indicar que é clicável */}
+              <div className="absolute inset-0 bg-blue-600/0 group-hover:bg-blue-600/20 z-10 transition-colors flex items-center justify-center">
+                <div className="opacity-0 group-hover:opacity-100 transition-opacity bg-white/20 backdrop-blur-md p-3 rounded-full border border-white/30">
+                  <Maximize2 size={20} className="text-white" />
+                </div>
+              </div>
+              
+              <img 
+                src={img} 
+                alt="" 
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+              />
             </div>
           ))}
         </div>
