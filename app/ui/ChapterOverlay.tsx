@@ -866,14 +866,15 @@ export default function ChapterOverlay({
                   { id: 'media', label: 'Visuals' }
                 ].map((tab) => (
                   <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
-                    className={`px-8 py-3 text-[10px] font-black uppercase tracking-widest transition-all rounded-full ${
-                      activeTab === tab.id ? 'bg-blue-600 text-white' : 'text-white/40 hover:text-white'
-                    }`}
-                  >
-                    {tab.label}
-                  </button>
+  key={tab.id}
+  // Adiciona o "as 'overview' | 'pillars' | 'media'" para satisfazer o TypeScript
+  onClick={() => setActiveTab(tab.id as 'overview' | 'pillars' | 'media')}
+  className={`px-8 py-3 text-[10px] font-black uppercase tracking-widest transition-all rounded-full ${
+    activeTab === tab.id ? 'bg-blue-600 text-white' : 'text-white/40 hover:text-white'
+  }`}
+>
+  {tab.label}
+</button>
                 ))}
               </nav>
   
