@@ -237,38 +237,23 @@ body::before {
     display: flex !important;
     flex-direction: column !important;
     gap: 1.5rem !important;
-    padding: 2rem 1rem 4rem 1rem !important; /* Aumentado padding inferior para segurança */
+    padding: 2rem 1rem !important;
     align-items: center !important;
     text-align: center !important;
-    height: auto !important;
-    min-height: fit-content !important;
   }
 
   footer.p-8.border-t.border-white\/10 .flex {
     flex-direction: column !important;
     width: 100% !important;
     align-items: center !important;
-    gap: 1.5rem !important;
-    flex-wrap: wrap !important; /* Permite que os botões de língua saltem de linha */
+    gap: 1rem !important;
   }
 
-  footer a[download], footer button.bg-blue-600, footer .bg-blue-600 {
+  footer a[download], footer button.bg-blue-600 {
     width: 100% !important;
-    max-width: 100% !important; /* Ocupa a largura toda no mobile para ser clicável */
-    display: flex !important;
+    max-width: 300px !important;
     justify-content: center !important;
-    padding: 14px 20px !important;
-    font-size: 0.85rem !important;
-    white-space: normal !important; /* Permite que o texto do botão quebre se for grande */
-    order: -1 !important; /* Coloca o botão principal no topo no mobile */
-  }
-
-  /* Garante que o grupo de botões extras (Available Versions) não esmague o principal */
-  .flex.items-center.gap-4.bg-white\/5 {
-    width: 100% !important;
-    justify-content: center !important;
-    padding: 10px !important;
-    flex-wrap: wrap !important;
+    padding: 12px !important;
   }
 }
 
