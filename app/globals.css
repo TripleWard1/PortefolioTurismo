@@ -231,6 +231,7 @@ body::before {
     padding: 2rem 1.5rem !important;
     align-items: flex-start !important; 
     text-align: left !important; 
+    height: auto !important; /* Garante que o footer cresça conforme o conteúdo */
   }
 
   footer.p-8.border-t.border-white\/10 .flex {
@@ -244,16 +245,21 @@ body::before {
   footer .flex.items-center.gap-4 {
     align-items: flex-start !important;
     justify-content: flex-start !important;
-    flex-direction: row !important; /* Mantém as flags/siglas lado a lado mas à esquerda */
+    flex-direction: row !important;
     flex-wrap: wrap !important;
+    width: 100% !important;
   }
 
-  footer a[download], footer button.bg-blue-600 {
-    width: auto !important; 
-    min-width: 200px !important;
+  /* CORREÇÃO DO BOTÃO GRANDE CORTADO */
+  footer a[download], footer button.bg-blue-600, footer a.bg-blue-600 {
+    width: 100% !important; /* Força largura total para o texto não ser cortado */
+    max-width: 100% !important;
+    display: flex !important;
     justify-content: center !important;
-    padding: 12px 20px !important;
-    margin-left: 0 !important; /* Garante que não há margem empurrando */
+    text-align: center !important;
+    padding: 16px 20px !important; /* Aumenta o padding para visibilidade */
+    margin-top: 10px !important; /* Dá espaço em relação aos botões de cima */
+    order: 10 !important; /* Garante que ele é o último elemento do empilhamento */
   }
 }
 
