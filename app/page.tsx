@@ -563,7 +563,7 @@ export default function Page() {
                         </span>
                       </div>
                       <h3 className="text-6xl lg:text-[80px] font-playfair font-bold text-slate-900 tracking-tighter leading-[0.85]">
-                        {p.title.split(' ').map((word, i) => (
+                      {p.title.split(' ').map((word: string, i: number) => (
                           <span
                             key={i}
                             className="block group-hover:translate-x-4 transition-transform duration-700"
