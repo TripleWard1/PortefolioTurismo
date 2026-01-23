@@ -185,6 +185,40 @@ body::before {
   .custom-scrollbar-dark {
     padding: 1rem !important;
   }
+
+  /* NOVAS REGRAS DE REFORÇO PARA O OVERLAY (Sem apagar as anteriores) */
+  .fixed.inset-0.z-\[600\] {
+    display: block !important;
+    overflow-y: auto !important;
+  }
+
+  nav.flex.items-center.gap-2 {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    width: 100% !important;
+    gap: 4px !important;
+  }
+
+  nav.flex.items-center.gap-2 button {
+    padding: 8px 2px !important;
+    font-size: 7px !important;
+    text-align: center !important;
+  }
+
+  main.flex-1 {
+    padding: 1.5rem 1rem !important;
+    overflow: visible !important;
+  }
+
+  .h-\[500px\], .h-\[600px\], .aspect-video {
+    height: 250px !important;
+    width: 100% !important;
+  }
+
+  .flex.gap-12 {
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
 }
 
 /* Fix para navegadores que não suportam scroll-behavior suave via JS */
