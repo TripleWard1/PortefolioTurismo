@@ -195,16 +195,22 @@ body::before {
   }
 
   nav.flex.items-center.gap-2 {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
-    width: 100% !important;
-    gap: 4px !important;
+    display: flex !important; /* Muda de grid para flex para alinhar à esquerda */
+    flex-wrap: wrap !important;
+    justify-content: flex-start !important; /* Puxa tudo para a esquerda */
+    grid-template-columns: none !important; 
+    gap: 8px !important;
   }
 
   nav.flex.items-center.gap-2 button {
-    padding: 8px 2px !important;
-    font-size: 7px !important;
-    text-align: center !important;
+    width: auto !important; /* Impede que ocupem a largura toda */
+    padding: 8px 12px !important; /* Dá um espaçamento interno melhor */
+    font-size: 10px !important; /* Aumentei ligeiramente para legibilidade */
+    text-align: left !important;
+  }
+
+  .flex-wrap {
+    justify-content: flex-start !important; /* Garante que outros elementos flex também alinhem à esquerda */
   }
 
   main.flex-1 {
