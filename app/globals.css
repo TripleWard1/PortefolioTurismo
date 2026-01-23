@@ -189,7 +189,8 @@ body::before {
   /* NOVAS REGRAS DE REFORÇO PARA O OVERLAY (Sem apagar as anteriores) */
   .fixed.inset-0.z-\[600\] {
     display: block !important;
-    overflow-y: auto !important;
+    overflow-y: auto !important; /* Permite o scroll no contentor principal */
+    -webkit-overflow-scrolling: touch !important; /* Scroll suave em iOS */
   }
 
   nav.flex.items-center.gap-2 {
@@ -207,7 +208,8 @@ body::before {
 
   main.flex-1 {
     padding: 1.5rem 1rem !important;
-    overflow: visible !important;
+    overflow: visible !important; /* Garante que o scroll flua para o pai */
+    height: auto !important; /* Impede que a altura fique presa */
   }
 
   .h-\[500px\], .h-\[600px\], .aspect-video {
@@ -218,6 +220,13 @@ body::before {
   .flex.gap-12 {
     flex-direction: column !important;
     gap: 1rem !important;
+  }
+  
+  /* REFORÇO FINAL PARA O SCROLL */
+  .relative.w-full.h-full.flex.flex-col {
+    height: auto !important;
+    min-height: 100vh !important;
+    overflow-y: visible !important;
   }
 }
 
