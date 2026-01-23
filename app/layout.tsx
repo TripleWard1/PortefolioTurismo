@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
-import { LanguageProvider } from './ui/LanguageContext'; // Importação do Provider
+import { LanguageProvider } from './ui/LanguageContext';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -24,11 +25,11 @@ export const metadata: Metadata = {
   icons: {
     icon: 'https://imgur.com/Dx42oze.png',
   },
-  // Adicionado para um aspeto mais profissional em partilhas de links
   openGraph: {
     title: 'Hugo Barros | Território & Inovação',
     description: 'Arquitetura de estratégia urbana e turismo inteligente.',
     images: ['https://i.imgur.com/SvJ4bdR.jpeg'],
+    type: 'website',
   },
 };
 
@@ -51,19 +52,21 @@ export default function RootLayout({
           selection:text-white
         `}
       >
-        {/* O LanguageProvider agora envolve toda a aplicação para permitir a tradução */}
         <LanguageProvider>
-          {/* Camada de Fundo Dinâmica (Mesh & Grain definidos no globals.css) */}
+          {/* Camada de Fundo Dinâmica */}
           <div
             className="mesh-bg fixed inset-0 z-0 pointer-events-none"
             aria-hidden="true"
           />
 
           {/* Conteúdo Principal */}
-          <div className="relative z-10">{children}</div>
+          <div className="relative z-10">
+            {children}
+          </div>
         </LanguageProvider>
 
-        {/* Script para suavizar o scroll ou outros detalhes pode vir aqui no futuro */}
+        {/* Google Analytics - Inserido corretamente no final do body */}
+        <GoogleAnalytics gaId="G-CC0E6CZ11N" />
       </body>
     </html>
   );
