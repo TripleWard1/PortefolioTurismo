@@ -244,16 +244,30 @@ body::before {
   footer .flex.items-center.gap-4 {
     align-items: flex-start !important;
     justify-content: flex-start !important;
-    flex-direction: row !important; /* Mantém as flags/siglas lado a lado mas à esquerda */
+    flex-direction: row !important;
     flex-wrap: wrap !important;
+    order: 1 !important; /* Fica acima do botão principal */
   }
 
-  footer a[download], footer button.bg-blue-600 {
-    width: auto !important; 
-    min-width: 200px !important;
+  /* BOTÃO PRINCIPAL (AZUL) - AJUSTADO PARA BAIXO */
+  footer a.bg-blue-600, 
+  footer button.bg-blue-600,
+  footer .bg-blue-600,
+  footer a[href*="visitar"],
+  footer a[href*="visualizar"] {
+    display: flex !important;
+    width: 100% !important; /* Ocupa a largura para não ser cortado */
+    max-width: 100% !important;
+    order: 2 !important; /* GARANTE QUE FICA ABAIXO DE TUDO */
+    margin-top: 1rem !important;
     justify-content: center !important;
-    padding: 12px 20px !important;
-    margin-left: 0 !important; /* Garante que não há margem empurrando */
+    padding: 14px !important;
+    border-radius: 12px !important;
+  }
+
+  /* Texto HB Portfolio Estratégico */
+  footer .text-left {
+    order: 0 !important; /* Mantém o título no topo */
   }
 }
 
