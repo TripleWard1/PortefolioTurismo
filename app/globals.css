@@ -118,29 +118,29 @@ body::before {
 @media (max-width: 768px) {
   /* Ajuste de Tipografia Dinâmica: Impede que títulos saiam do ecrã */
   h1, .text-6xl, .text-7xl, .text-\[100px\], .text-\[96px\] {
-    font-size: clamp(2.5rem, 12vw, 4rem) !important;
+    font-size: clamp(2.2rem, 10vw, 3rem) !important; /* Reduzi ligeiramente para não encavalitar */
     line-height: 1.1 !important;
     letter-spacing: -0.04em !important;
     word-break: break-word;
   }
 
   h2, .text-5xl {
-    font-size: clamp(2rem, 10vw, 3rem) !important;
+    font-size: clamp(1.8rem, 8vw, 2.5rem) !important;
   }
 
   /* Normalização de Espaçamento Global em Mobile */
   section {
-    padding-left: 1.25rem !important;
-    padding-right: 1.25rem !important;
-    padding-top: 5rem !important;
-    padding-bottom: 5rem !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
   }
 
   /* Força Grids de PC (7/5, 8/4, 12 colunas) a ficarem em coluna única no Telemóvel */
   .grid, .grid-cols-12, .lg\:grid-cols-12, .grid-cols-2 {
     display: flex !important;
     flex-direction: column !important;
-    gap: 2.5rem !important;
+    gap: 2rem !important;
   }
 
   /* Ajuste de Componentes Específicos (ChapterOverlay e Contacto) */
@@ -152,18 +152,18 @@ body::before {
   img {
     max-width: 100% !important;
     height: auto !important;
+    object-fit: contain !important; /* Ajuda a não deformar em ecrãs muito pequenos */
   }
 
   /* Ajuste da Identidade na Navbar Mobile */
   nav .font-playfair {
-    font-size: 1.25rem !important;
+    font-size: 1.1rem !important;
   }
 
   /* Melhora a legibilidade dos parágrafos em ecrãs pequenos */
   p, .text-lg, .text-xl {
-    font-size: 1rem !important;
-    line-height: 1.6 !important;
-    border-left-width: 2px !important; /* Mantém o detalhe visual de design */
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
   }
 
   /* Ajuste para as Badges e Cards que podem ficar muito apertados */
@@ -174,10 +174,22 @@ body::before {
   .group.block {
     width: 100% !important;
   }
+
+  /* REFORÇO PARA O CHAPTER OVERLAY (Imagens da tua galeria mobile) */
+  header.flex.items-center.justify-between {
+    padding: 1rem !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+  
+  .custom-scrollbar-dark {
+    padding: 1rem !important;
+  }
 }
 
 /* Fix para navegadores que não suportam scroll-behavior suave via JS */
 html {
   scroll-behavior: smooth !important;
   scroll-padding-top: 80px;
+  overflow-x: hidden; /* Evita que o site "dance" para os lados no telemóvel */
 }
