@@ -18,7 +18,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: 'Hugo Barros | Strategic Portfolio',
+  title: 'Hugo Barros | Portfolio Estratégico',
   description:
     'Estratégia de destino, inovação territorial e desenvolvimento turístico — Município de Braga.',
   icons: {
