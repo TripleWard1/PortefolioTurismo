@@ -228,67 +228,84 @@ body::before {
   footer.p-8.border-t.border-white\/10 {
     display: flex !important;
     flex-direction: column !important;
-    padding: 2.5rem 1rem 5rem 1rem !important;
+    padding: 2.5rem 1.5rem 5rem 1.5rem !important;
     gap: 2rem !important;
     background: #0f172a !important;
-    border-top: 1px solid rgba(255,255,255,0.1) !important;
+    height: auto !important;
+    min-height: fit-content !important;
+    position: relative !important;
   }
 
-  /* Forçar os elementos internos a ficarem em coluna única */
+  /* Forçar os elementos internos a ficarem em coluna única e desativar o justify-between */
   footer.p-8.border-t.border-white\/10 > div.flex {
+    display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     width: 100% !important;
-    gap: 2rem !important;
+    gap: 1.5rem !important;
+    justify-content: flex-start !important;
   }
 
-  /* Identificação (HB Portfolio) */
-  footer.p-8.border-t.border-white\/10 .text-left {
-    text-align: center !important;
-    order: 3 !important; /* Vai para o fim */
-  }
-
-  /* Botão Azul Principal - Forçar visibilidade e largura */
+  /* Botão Azul Principal - Ocupa a largura toda e fica no topo */
   footer a.bg-blue-600, 
-  footer button.bg-blue-600 {
+  footer button.bg-blue-600,
+  footer .bg-blue-600 {
     display: flex !important;
-    order: 1 !important; /* Vai para o topo */
     width: 100% !important;
     max-width: 100% !important;
-    min-height: 50px !important;
-    justify-content: center !important;
-    align-items: center !important;
-    padding: 14px !important;
+    padding: 18px !important;
+    font-size: 0.95rem !important;
+    background-color: #005eff !important;
+    color: white !important;
     border-radius: 12px !important;
-    font-weight: 600 !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-
-  /* Container das Versões/Idiomas (Onde o Mapa Territorial falha) */
-  footer.p-8.border-t.border-white\/10 div.flex.items-center.gap-4 {
-    order: 2 !important; /* Fica no meio */
-    flex-direction: column !important; /* Empilha os idiomas */
-    width: 100% !important;
-    gap: 10px !important;
-  }
-
-  /* Links individuais de idiomas */
-  footer div.flex.items-center.gap-4 a,
-  footer div.flex.items-center.gap-4 button {
-    width: 100% !important;
     justify-content: center !important;
-    background: rgba(255,255,255,0.05) !important;
-    padding: 10px !important;
-    border-radius: 8px !important;
+    order: -2 !important; /* Força para o topo absoluto */
+    text-align: center !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Container dos Idiomas (Available Versions) */
+  footer div.flex.items-center.gap-4 {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 12px !important;
+    order: -1 !important; /* Fica abaixo do botão azul, mas acima do texto */
+    padding: 1.5rem !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 16px !important;
     border: 1px solid rgba(255,255,255,0.1) !important;
   }
 
-  /* Título "Available Versions" */
+  /* Links FR, ES, EN individuais */
+  footer div.flex.items-center.gap-4 a,
+  footer div.flex.items-center.gap-4 button {
+    display: flex !important;
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 12px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px !important;
+    color: white !important;
+    font-size: 0.85rem !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  }
+
+  /* Ocultar o span de texto "Available Versions" se estiver a estorvar, ou centrar */
   footer span.text-sm.text-slate-400 {
     display: block !important;
-    margin-bottom: 5px !important;
     text-align: center !important;
+    margin-bottom: 8px !important;
+    width: 100% !important;
+  }
+
+  /* Texto HB Portfolio Estratégico */
+  footer .text-left {
+    text-align: center !important;
+    width: 100% !important;
+    margin-top: 1rem !important;
+    order: 2 !important;
   }
 }
 
