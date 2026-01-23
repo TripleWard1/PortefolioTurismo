@@ -49,6 +49,10 @@ interface ProjectData {
   acreditacao?: string;
   hideMainBtn?: boolean;
   stats?: { label: string; value: string }[];
+  
+  // ADICIONADAS PARA O FOOTER DINÂMICO
+  authorTitle?: string;
+  authorSub?: string;
 }
 
 interface OverlayProps {
@@ -1321,40 +1325,43 @@ export default function ChapterOverlay({
             </div>
           </header>
 
-          {/* MAIN CONTENT */}
-          <main className="flex-1 overflow-y-auto px-12 py-16 custom-scrollbar-dark">
-          {activeTab === 'overview' && (
-    <div className="max-w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-20">
-      <div className="lg:col-span-8 space-y-16">
-        <div className="animate-in slide-in-from-left duration-700">
-          {renderHero()}
-        </div>
-        
-        <div className="flex gap-12">
-          <div className="w-1.5 bg-blue-600 rounded-full shrink-0" />
-          <div className="text-xl md:text-2xl text-white/70 font-light leading-relaxed max-w-4xl">
-            {current.description}
-          </div>
-        </div>
+         {/* MAIN CONTENT */}
+         <main className="flex-1 overflow-y-auto px-12 py-16 custom-scrollbar-dark">
+            
+            {activeTab === 'overview' && (
+              <div className="max-w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-20">
+                {/* COLUNA ESQUERDA (8) */}
+                <div className="lg:col-span-8 space-y-16">
+                  <div className="animate-in slide-in-from-left duration-700">
+                    {renderHero()}
+                  </div>
+                  
+                  <div className="flex gap-12">
+                    <div className="w-1.5 bg-blue-600 rounded-full shrink-0" />
+                    <div className="text-xl md:text-2xl text-white/70 font-light leading-relaxed max-w-4xl">
+                      {current.description}
+                    </div>
+                  </div>
 
-        {/* SECÇÃO DE MÉTRICAS: Só aparece se existirem métricas no config do projeto */}
-        {metrics.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-            {metrics.map((m: any, i: number) => (
-              <div key={i} className="p-10 bg-white/[0.03] border border-white/5 rounded-[2rem] hover:bg-white/[0.05] transition-colors group">
-                <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest block mb-4 group-hover:text-blue-300 transition-colors">
-                  {m.label}
-                </span>
-                <div className="text-4xl font-black tracking-tighter text-white">
-                  {m.value}
+                  {/* SECÇÃO DE MÉTRICAS */}
+                  {metrics.length > 0 && (
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+                      {metrics.map((m: any, i: number) => (
+                        <div key={i} className="p-10 bg-white/[0.03] border border-white/5 rounded-[2rem] hover:bg-white/[0.05] transition-colors group">
+                          <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest block mb-4 group-hover:text-blue-300 transition-colors">
+                            {m.label}
+                          </span>
+                          <div className="text-4xl font-black tracking-tighter text-white">
+                            {m.value}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
 
-      <div className="lg:col-span-4 space-y-8">
+                {/* COLUNA DIREITA (4) - Bloco da Citação / Autor */}
+                <div className="lg:col-span-4 space-y-8">
                   <div className="p-12 bg-gradient-to-br from-white/[0.05] to-transparent border border-white/10 rounded-[3.5rem]">
                     <Quote className="text-blue-500/20 w-12 h-12 mb-8" />
                     <p className="text-3xl font-bold italic text-white/90 mb-12">"{current.quote}"</p>
@@ -1365,24 +1372,26 @@ export default function ChapterOverlay({
                       </div>
                       <div className="flex flex-col">
                         <span className="text-xs font-black uppercase tracking-wider text-white">
-                          {current.authorTitle || t("Unidade de Missão", "Mission Unit")}
+                          {(current as any).authorTitle || t("Unidade de Missão", "Mission Unit")}
                         </span>
                         <span className="text-[10px] text-white/30 uppercase font-bold">
-                          {current.authorSub || t("Estratégia Territorial", "Territorial Strategy")}
+                          {(current as any).authorSub || t("Estratégia Territorial", "Territorial Strategy")}
                         </span>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> // Fecha a Grid Principal
             )}
 
             {activeTab === 'pillars' && (
               <div className="max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-700">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {current.pillars?.map((pillar, idx) => (
+                  {current.pillars?.map((pillar: any, idx: number) => (
                     <div key={idx} className="p-10 bg-white/[0.03] border border-white/10 rounded-[2.5rem] group hover:bg-blue-600/10 transition-all">
-                      <div className="w-14 h-14 rounded-2xl bg-blue-600/20 flex items-center justify-center mb-8"><pillar.icon className="text-blue-500" size={28} /></div>
+                      <div className="w-14 h-14 rounded-2xl bg-blue-600/20 flex items-center justify-center mb-8">
+                        <pillar.icon className="text-blue-500" size={28} />
+                      </div>
                       <h4 className="text-xl font-bold mb-4">{pillar.title}</h4>
                       <p className="text-white/40 leading-relaxed">{pillar.desc}</p>
                     </div>
@@ -1391,7 +1400,7 @@ export default function ChapterOverlay({
               </div>
             )}
 
-{activeTab === 'media' && (
+            {activeTab === 'media' && (
   <div className="max-w-7xl mx-auto animate-in fade-in duration-700">
     <div className="flex flex-col gap-12">
       
