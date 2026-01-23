@@ -1306,23 +1306,28 @@ export default function ChapterOverlay({
             </div>
 
             <div className="flex items-center gap-8">
-              <nav className="flex items-center gap-2 bg-white/5 p-1.5 rounded-2xl border border-white/10">
-                {['overview', 'pillars', 'media'].map((tab) => (
-                  <button
-                    key={tab}
-                    onClick={() => setActiveTab(tab as any)}
-                    className={`px-8 py-2.5 text-[10px] font-black uppercase tracking-widest transition-all rounded-xl ${
-                      activeTab === tab ? 'bg-white text-slate-900 shadow-xl' : 'text-white/40 hover:text-white'
-                    }`}
-                  >
-                    {tab === 'overview' ? 'Visão Geral' : tab === 'pillars' ? 'Eixos' : 'Media'}
-                  </button>
-                ))}
-              </nav>
-              <button onClick={onClose} className="w-12 h-12 rounded-2xl border border-white/10 flex items-center justify-center hover:bg-white hover:text-slate-900 transition-all">
-                <X size={20} />
-              </button>
-            </div>
+  <nav className="flex items-center gap-2 bg-white/5 p-1.5 rounded-2xl border border-white/10">
+    {['overview', 'pillars', 'media'].map((tab) => (
+      <button
+        key={tab}
+        onClick={() => setActiveTab(tab as any)}
+        className={`px-8 py-2.5 text-[10px] font-black uppercase tracking-widest transition-all rounded-xl ${
+          activeTab === tab ? 'bg-white text-slate-900 shadow-xl' : 'text-white/40 hover:text-white'
+        }`}
+      >
+        {/* Lógica de tradução aplicada às abas */}
+        {tab === 'overview' 
+          ? (lang === 'pt' ? 'Visão Geral' : 'Overview') 
+          : tab === 'pillars' 
+            ? (lang === 'pt' ? 'Eixos' : 'Pillars') 
+            : 'Media'}
+      </button>
+    ))}
+  </nav>
+  <button onClick={onClose} className="w-12 h-12 rounded-2xl border border-white/10 flex items-center justify-center hover:bg-white hover:text-slate-900 transition-all">
+    <X size={20} />
+  </button>
+</div>
           </header>
 
          {/* MAIN CONTENT */}
