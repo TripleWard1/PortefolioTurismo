@@ -66,7 +66,7 @@ export default function RootLayout({
         </LanguageProvider>
 
         {/* Google Analytics - Inserido corretamente no final do body */}
-        <GoogleAnalytics gaId="G-XQCN8G0SRC" />
+        <GoogleAnalytics gaId="G-C9ZYJ5XB1E" />
       </body>
     </html>
   );
