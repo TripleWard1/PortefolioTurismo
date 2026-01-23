@@ -223,46 +223,37 @@ body::before {
     background-color: #0f172a !important;
   }
 
-  /* --- CORREÇÃO FINAL FOOTER - HIERARQUIA VERTICAL --- */
+  /* --- CORREÇÃO FINAL FOOTER ALINHADO À ESQUERDA --- */
   footer.p-8.border-t.border-white\/10 {
     display: flex !important;
     flex-direction: column !important;
-    gap: 2rem !important; /* Espaço entre as secções */
-    padding: 2rem 1rem !important;
-    align-items: flex-start !important;
-  }
-
-  /* Forçar os containers de flex para coluna para evitar cortes laterais */
-  footer.p-8.border-t.border-white\/10 > div,
-  footer.p-8.border-t.border-white\/10 .flex.items-center.justify-between {
-    flex-direction: column !important;
-    align-items: flex-start !important;
     gap: 1.5rem !important;
-    width: 100% !important;
+    padding: 2rem 1.5rem !important;
+    align-items: flex-start !important; 
+    text-align: left !important; 
   }
 
-  /* 1. Secção de Versões Disponíveis (CIMA) */
+  footer.p-8.border-t.border-white\/10 .flex {
+    flex-direction: column !important;
+    width: 100% !important;
+    align-items: flex-start !important; 
+    gap: 1.5rem !important;
+  }
+
+  /* Container de versões disponíveis alinhado à esquerda */
   footer .flex.items-center.gap-4 {
-    display: flex !important;
-    flex-direction: row !important; /* Siglas ficam lado a lado */
-    flex-wrap: wrap !important;
+    align-items: flex-start !important;
     justify-content: flex-start !important;
-    width: 100% !important;
-    gap: 10px !important;
+    flex-direction: row !important; /* Mantém as flags/siglas lado a lado mas à esquerda */
+    flex-wrap: wrap !important;
   }
 
-  /* 2. Botão Principal Azul (BAIXO) */
-  footer a.bg-blue-600, 
-  footer button.bg-blue-600,
-  footer .bg-blue-600 {
-    display: flex !important;
-    width: 100% !important; /* Largura total para evitar corte */
-    max-width: 100% !important;
-    justify-content: center !important; /* Centra o texto dentro do botão */
-    text-align: center !important;
-    padding: 14px 20px !important;
-    margin-left: 0 !important;
-    border-radius: 12px !important;
+  footer a[download], footer button.bg-blue-600 {
+    width: auto !important; 
+    min-width: 200px !important;
+    justify-content: center !important;
+    padding: 12px 20px !important;
+    margin-left: 0 !important; /* Garante que não há margem empurrando */
   }
 }
 
