@@ -231,6 +231,30 @@ body::before {
     overflow-y: visible !important;
     background-color: #0f172a !important; /* Mesma cor para não haver quebras */
   }
+
+  /* CORREÇÃO DO FOOTER NO CHAPTER OVERLAY (DOWNLOAD BUTTON) */
+  footer.p-8.border-t.border-white\/10 {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+    padding: 2rem 1rem !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  footer.p-8.border-t.border-white\/10 .flex {
+    flex-direction: column !important;
+    width: 100% !important;
+    align-items: center !important;
+    gap: 1rem !important;
+  }
+
+  footer a[download], footer button.bg-blue-600 {
+    width: 100% !important;
+    max-width: 300px !important;
+    justify-content: center !important;
+    padding: 12px !important;
+  }
 }
 
 /* Fix para navegadores que não suportam scroll-behavior suave via JS */
