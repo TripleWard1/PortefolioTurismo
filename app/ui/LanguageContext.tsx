@@ -7,6 +7,8 @@ type Language = 'pt' | 'en';
 interface LanguageContextType {
   lang: Language;
   toggleLang: () => void;
+  // 1. ADICIONAR ESTA LINHA NA INTERFACE
+  t: (pt: any, en: any) => any;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -18,8 +20,12 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     setLang((prev) => (prev === 'pt' ? 'en' : 'pt'));
   };
 
+  // 2. ADICIONAR A LÓGICA DA FUNÇÃO T AQUI
+  const t = (pt: any, en: any) => (lang === 'pt' ? pt : en);
+
   return (
-    <LanguageContext.Provider value={{ lang, toggleLang }}>
+    // 3. ADICIONAR O 't' NO VALUE DO PROVIDER
+    <LanguageContext.Provider value={{ lang, toggleLang, t }}>
       {children}
     </LanguageContext.Provider>
   );

@@ -31,67 +31,63 @@ export default function Navbar() {
             : 'bg-white/70 backdrop-blur-md border-white/50 shadow-none'
         }`}
       >
-        {/* Identidade de Alto Impacto (Estática e Dinâmica) */}
-        <Link href="/" className="group flex items-center">
-          <div className="flex flex-col relative overflow-hidden">
-            <h1 className="font-playfair text-xl md:text-2xl tracking-tighter leading-none flex items-center">
-              {/* Hugo: Peso Black para destaque imediato */}
-              <span className="text-slate-950 font-[900] transition-colors duration-300 group-hover:text-blue-700">
+        {/* Identidade Refinada */}
+        <Link href="/" className="group flex items-center gap-4">
+          <div className="relative">
+            <h1 className="font-playfair text-2xl md:text-3xl tracking-tighter leading-none flex items-center">
+              <span className="text-slate-950 font-[900] transition-transform duration-500 group-hover:-translate-y-px">
                 Hugo
               </span>
-
-              {/* Barros: Itálico Azul com Kerning Ajustado */}
-              <span className="text-blue-600 italic font-light ml-2 relative">
+              <span className="text-blue-600 italic font-light ml-1.5 relative transition-transform duration-500 group-hover:translate-y-px">
                 Barros
-                {/* Linha de base fixa para autoridade visual */}
-                <span className="absolute -bottom-1 left-0 w-full h-[1.5px] bg-blue-600/20" />
-                {/* Linha de destaque no hover */}
-                <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-blue-600 transition-all duration-500 group-hover:w-full" />
+                <span className="absolute -bottom-1 left-0 w-full h-[1px] bg-blue-600/10" />
               </span>
             </h1>
-
-            <div className="flex items-center gap-2 mt-2">
-              <span className="text-[8px] uppercase tracking-[0.6em] text-slate-950 font-[900]">
-                {/* Texto traduzido na própria Navbar */}
+            <div className="flex items-center gap-2 mt-1.5">
+              <div className="h-[1px] w-3 bg-blue-600/40 transition-all duration-500 group-hover:w-6" />
+              <span className="text-[7px] uppercase tracking-[0.8em] text-slate-500 font-black">
                 {lang === 'pt' ? 'Portefólio Estratégico' : 'Strategic Portfolio'}
               </span>
-              <div className="h-[2px] w-4 bg-blue-600/30 group-hover:w-8 group-hover:bg-blue-600 transition-all duration-500" />
             </div>
-
-            {/* Brilho interno contido (overflow-hidden no pai resolve o problema de sair fora) */}
-            <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite] pointer-events-none" />
           </div>
         </Link>
 
         {/* Links de Navegação */}
         <div className="hidden md:flex items-center gap-10">
-          {(lang === 'pt' 
-            ? ['Portefólio', 'Estratégia', 'Ecossistema', 'Contacto'] 
-            : ['Portfolio', 'Strategy', 'Ecosystem', 'Contact']
-          ).map(
-            (item) => (
-              <Link
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                className="text-[10px] uppercase tracking-[0.3em] font-black text-slate-900 hover:text-blue-700 transition-all relative group"
-              >
-                {item}
-                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-blue-700 transition-all duration-300 group-hover:w-full"></span>
-              </Link>
-            )
-          )}
+          {[
+            { label: lang === 'pt' ? 'Portefólio' : 'Portfolio', id: 'capitulo-01' },
+            { label: lang === 'pt' ? 'Ecossistema' : 'Ecosystem', id: 'capitulo-02' },
+            { label: lang === 'pt' ? 'Estratégia' : 'Strategy', id: 'estratégia' },
+            { label: lang === 'pt' ? 'Contacto' : 'Contact', id: 'contacto' },
+          ].map((item) => (
+            <Link
+              key={item.id}
+              href={`#${item.id}`}
+              className="text-[10px] uppercase tracking-[0.3em] font-black text-slate-900 hover:text-blue-700 transition-all relative group"
+            >
+              {item.label}
+              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-blue-700 transition-all duration-300 group-hover:w-full"></span>
+            </Link>
+          ))}
         </div>
 
-        {/* Badge de Status e Botão de Idioma */}
+        {/* Interface de Ações */}
         <div className="flex items-center gap-6">
-          {/* BOTÃO DE TOGGLE PT/EN */}
+          {/* SELETOR DE IDIOMA ESTILO PILL SWITCH */}
           <button 
             onClick={toggleLang}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 bg-white/50 backdrop-blur-sm hover:border-blue-300 transition-all group"
+            className="relative flex items-center p-1 rounded-full bg-slate-100 border border-slate-200 w-[70px] h-[32px] transition-all hover:border-blue-300"
           >
-            <span className={`text-[9px] font-black ${lang === 'pt' ? 'text-blue-600' : 'text-slate-400'}`}>PT</span>
-            <div className="w-[1px] h-2 bg-slate-200" />
-            <span className={`text-[9px] font-black ${lang === 'en' ? 'text-blue-600' : 'text-slate-400'}`}>EN</span>
+            {/* Slider Indicador */}
+            <div 
+              className={`absolute top-1 bottom-1 w-[30px] rounded-full bg-white shadow-sm border border-slate-200/50 transition-all duration-300 ease-out ${
+                lang === 'en' ? 'translate-x-[30px]' : 'translate-x-0'
+              }`}
+            />
+            <div className="relative z-10 flex justify-between w-full px-2">
+              <span className={`text-[9px] font-black transition-colors duration-300 ${lang === 'pt' ? 'text-blue-600' : 'text-slate-400'}`}>PT</span>
+              <span className={`text-[9px] font-black transition-colors duration-300 ${lang === 'en' ? 'text-blue-600' : 'text-slate-400'}`}>EN</span>
+            </div>
           </button>
 
           <div className="hidden lg:flex items-center gap-3 px-5 py-2 rounded-xl border border-blue-200/50 bg-blue-50/80 shadow-sm">
@@ -124,6 +120,13 @@ export default function Navbar() {
       </div>
 
       <style jsx global>{`
+        :root {
+          scroll-behavior: smooth !important;
+        }
+        html {
+          scroll-behavior: smooth !important;
+          scroll-padding-top: 100px;
+        }
         @keyframes shimmer {
           0% { transform: translateX(-150%); }
           100% { transform: translateX(150%); }

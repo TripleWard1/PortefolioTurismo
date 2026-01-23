@@ -110,3 +110,74 @@ body::before {
 .profile-frame {
   @apply relative p-1 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-400 glow-blue;
 }
+
+/* -------------------------------------------------------------------------- */
+/* 7. AUTOMATIZAÇÃO MOBILE (SISTEMA ADAPTATIVO SEM QUEBRA DE PC VIEW)        */
+/* -------------------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  /* Ajuste de Tipografia Dinâmica: Impede que títulos saiam do ecrã */
+  h1, .text-6xl, .text-7xl, .text-\[100px\], .text-\[96px\] {
+    font-size: clamp(2.5rem, 12vw, 4rem) !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.04em !important;
+    word-break: break-word;
+  }
+
+  h2, .text-5xl {
+    font-size: clamp(2rem, 10vw, 3rem) !important;
+  }
+
+  /* Normalização de Espaçamento Global em Mobile */
+  section {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+    padding-top: 5rem !important;
+    padding-bottom: 5rem !important;
+  }
+
+  /* Força Grids de PC (7/5, 8/4, 12 colunas) a ficarem em coluna única no Telemóvel */
+  .grid, .grid-cols-12, .lg\:grid-cols-12, .grid-cols-2 {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2.5rem !important;
+  }
+
+  /* Ajuste de Componentes Específicos (ChapterOverlay e Contacto) */
+  .lg\:col-span-7, .lg\:col-span-5, .lg\:col-span-4, .lg\:col-span-8 {
+    width: 100% !important;
+  }
+
+  /* Garante que as imagens não "estiquem" o layout horizontalmente */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Ajuste da Identidade na Navbar Mobile */
+  nav .font-playfair {
+    font-size: 1.25rem !important;
+  }
+
+  /* Melhora a legibilidade dos parágrafos em ecrãs pequenos */
+  p, .text-lg, .text-xl {
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+    border-left-width: 2px !important; /* Mantém o detalhe visual de design */
+  }
+
+  /* Ajuste para as Badges e Cards que podem ficar muito apertados */
+  .flex-wrap {
+    justify-content: center;
+  }
+  
+  .group.block {
+    width: 100% !important;
+  }
+}
+
+/* Fix para navegadores que não suportam scroll-behavior suave via JS */
+html {
+  scroll-behavior: smooth !important;
+  scroll-padding-top: 80px;
+}

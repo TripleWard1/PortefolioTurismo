@@ -9,8 +9,11 @@ import {
   Briefcase,
   MessagesSquare,
 } from 'lucide-react';
+import { useLang } from './LanguageContext';
 
 export default function Contact() {
+  const { t } = useLang();
+
   return (
     <section
       id="contacto"
@@ -33,7 +36,7 @@ export default function Contact() {
         {/* Título Minimalista e Posicionado no Topo */}
         <div className="mb-12 flex items-center gap-4">
           <h3 className="text-sm uppercase tracking-[0.3em] font-black text-slate-900">
-            Contacto
+            {t('Contacto', 'Contact')}
           </h3>
           <div className="h-[1px] flex-1 bg-slate-100" />
         </div>
@@ -69,22 +72,23 @@ export default function Contact() {
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 rounded-full border border-blue-100">
                   <MessagesSquare className="w-3.5 h-3.5 text-blue-600" />
                   <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-700">
-                    Novos Pontos de Contacto
+                    {t('Novos Pontos de Contacto', 'New Contact Points')}
                   </span>
                 </div>
                 <h2 className="text-5xl md:text-7xl font-playfair font-black text-slate-900 leading-[0.9] tracking-tighter">
-                  Expandir <br />
+                  {t('Expandir', 'Expanding')} <br />
                   <span className="text-blue-600 italic font-light">
-                    perspetivas.
+                    {t('perspetivas.', 'perspectives.')}
                   </span>
                 </h2>
               </div>
             </div>
 
             <p className="text-lg md:text-xl text-slate-500 font-light leading-relaxed max-w-xl border-l-2 border-blue-100 pl-6">
-              Acredito que o valor real nasce da interseção entre visão
-              territorial e execução estratégica. Mantenho-me atento a projetos
-              que desafiem o status quo e promovam impacto sustentável.
+              {t(
+                'Acredito que o valor real nasce da interseção entre visão territorial e execução estratégica. Mantenho-me atento a projetos que desafiem o status quo e promovam impacto sustentável.',
+                'I believe true value is born from the intersection of territorial vision and strategic execution. I stay attentive to projects that challenge the status quo and promote sustainable impact.'
+              )}
             </p>
 
             {/* Badges de Credibilidade */}
@@ -93,10 +97,10 @@ export default function Contact() {
                 <Briefcase className="w-5 h-5 text-blue-600" />
                 <div className="flex flex-col">
                   <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest">
-                    Vínculo
+                    {t('Vínculo', 'Affiliation')}
                   </span>
                   <span className="text-[11px] font-bold text-slate-700 uppercase tracking-widest">
-                    Município de Braga
+                    {t('Município de Braga', 'Braga Municipality')}
                   </span>
                 </div>
               </div>
@@ -104,10 +108,10 @@ export default function Contact() {
                 <ShieldCheck className="w-5 h-5 text-emerald-500" />
                 <div className="flex flex-col">
                   <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest">
-                    Foco
+                    {t('Foco', 'Focus')}
                   </span>
                   <span className="text-[11px] font-bold text-slate-700 uppercase tracking-widest">
-                    Estratégia Territorial
+                    {t('Estratégia Territorial', 'Territorial Strategy')}
                   </span>
                 </div>
               </div>
@@ -131,7 +135,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <p className="text-[9px] font-black text-blue-600 uppercase tracking-widest mb-0.5">
-                        Ligar Visões
+                        {t('Ligar Visões', 'Connecting Visions')}
                       </p>
                       <p className="text-base md:text-lg font-bold text-slate-900 lowercase">
                         hugo.barros@cm-braga.pt
@@ -164,7 +168,7 @@ export default function Contact() {
                     </div>
                   </div>
                   <div className="px-3 py-1 rounded-full bg-blue-50 text-[10px] font-bold text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                    Conectar
+                    {t('Conectar', 'Connect')}
                   </div>
                 </div>
               </a>
@@ -174,10 +178,10 @@ export default function Contact() {
                 <MapPin className="w-5 h-5" />
                 <div className="flex-1">
                   <p className="text-[10px] font-black uppercase tracking-[0.2em] mb-1">
-                    Localização
+                    {t('Localização', 'Location')}
                   </p>
                   <p className="text-sm font-medium text-slate-600">
-                    Braga, Portugal — Disponibilidade Global
+                    {t('Braga, Portugal — Disponibilidade Global', 'Braga, Portugal — Global Availability')}
                   </p>
                 </div>
                 <div className="flex gap-1">
@@ -202,16 +206,16 @@ export default function Contact() {
               Hugo Barros
             </h4>
             <p className="text-[10px] uppercase tracking-[0.4em] text-slate-400 font-bold">
-              Territorial Strategy & Impact
+              {t('Territorial Strategy & Impact', 'Territorial Strategy & Impact')}
             </p>
           </div>
           <div className="flex flex-col items-end gap-3 text-right">
             <div className="flex gap-6 text-[10px] font-bold uppercase tracking-widest text-slate-400">
               <span className="hover:text-blue-600 cursor-pointer transition-colors">
-                Curadoria
+                {t('Curadoria', 'Curation')}
               </span>
               <span className="hover:text-blue-600 cursor-pointer transition-colors">
-                Inovação
+                {t('Inovação', 'Innovation')}
               </span>
             </div>
             <p className="text-[10px] font-mono text-slate-300">

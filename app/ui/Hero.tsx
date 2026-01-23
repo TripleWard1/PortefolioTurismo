@@ -1,7 +1,10 @@
 'use client';
 import { ArrowRight, ShieldCheck } from 'lucide-react';
+import { useLang } from './LanguageContext'; // Caminho corrigido: ambos na mesma pasta (app/ui/)
 
 export default function Hero() {
+  const { t } = useLang();
+
   return (
     <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden pt-24 pb-12">
       {/* BACKGROUND: Camada de Imagem com Fade */}
@@ -15,16 +18,10 @@ export default function Hero() {
         {/* 1. Escurecimento para leitura */}
         <div className="absolute inset-0 bg-slate-900/20" />
 
-        {/* 2. O SEGREDO DO MERGE: 
-           Este gradiente vai da cor escura no topo para TOTALMENTE TRANSPARENTE.
-           Isso permite que a grelha de pontos da Page.tsx apareça por baixo.
-        */}
+        {/* 2. O SEGREDO DO MERGE */}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-transparent to-transparent" />
 
-        {/* 3. MÁSCARA DE SAÍDA (Fade Out):
-           Usamos uma máscara linear para apagar a imagem gradualmente no final,
-           expondo o fundo da Page.tsx sem usar cores sólidas que "tapem" a grelha.
-        */}
+        {/* 3. MÁSCARA DE SAÍDA (Fade Out) */}
         <div
           className="absolute inset-0"
           style={{
@@ -34,7 +31,6 @@ export default function Hero() {
         />
       </div>
 
-      {/* ... Resto do seu conteúdo do Hero (Mantido exatamente igual) ... */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 flex flex-col items-center text-center">
         {/* FOTO CENTRALIZADA */}
         <div className="relative mb-4 animate-reveal z-10">
@@ -72,37 +68,37 @@ export default function Hero() {
           <div className="flex items-center justify-center gap-3 mt-4 opacity-80">
             <div className="h-[1px] w-8 bg-blue-500" />
             <span className="text-[10px] uppercase tracking-[0.6em] text-white font-medium">
-              Senior Economic and Tourism Development Officer
+              {t('Senior Economic and Tourism Development Officer', 'Senior Economic and Tourism Development Officer')}
             </span>
             <div className="h-[1px] w-8 bg-blue-500" />
           </div>
         </div>
 
         <h1 className="text-5xl md:text-[6.2rem] font-playfair font-black tracking-tighter leading-[0.9] mb-8 text-slate-900 drop-shadow-sm">
-          Estratégia em Ação: <br />
+          {t('Estratégia em Ação:', 'Strategy in Action:')} <br />
           <span className="italic font-light text-blue-600">
-            O Impacto no Território.
+            {t('O Impacto no Território.', 'The Impact on the Territory.')}
           </span>
         </h1>
 
         <div className="max-w-2xl mx-auto space-y-8">
           <p className="text-lg md:text-xl text-slate-800 font-medium leading-relaxed px-4">
-            Portefólio de{' '}
+            {t('Portefólio de', 'Portfolio of')}{' '}
             <span className="font-bold text-slate-900">
-              projetos e governação de destino
+              {t('projetos e governação de destino', 'projects and destination governance')}
             </span>
             .
             <br className="hidden md:block" />
-            Conheça as estratégias elaboradas para consolidar Braga como uma{' '}
+            {t('Conheça as estratégias elaboradas para consolidar Braga como uma', 'Discover the strategies designed to consolidate Braga as a')}{' '}
             <span className="font-bold text-slate-900 border-b-2 border-blue-600/40">
-              referência de valor
+              {t('referência de valor', 'reference of value')}
             </span>
             .
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-8 pt-2">
             <button className="group relative px-10 py-5 bg-slate-900 text-white rounded-2xl font-bold flex items-center gap-4 transition-all hover:bg-blue-700 hover:-translate-y-1 shadow-xl">
-              CONSULTAR PORTEFÓLIO TÉCNICO
+              {t('CONSULTAR PORTEFÓLIO TÉCNICO', 'VIEW TECHNICAL PORTFOLIO')}
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
             <div className="text-left border-l-4 border-blue-600 pl-6 hidden sm:block">
@@ -110,7 +106,7 @@ export default function Hero() {
                 Hugo Barros
               </p>
               <p className="text-[10px] font-bold text-blue-600 uppercase tracking-widest">
-                Direção de Estratégia
+                {t('Direção de Estratégia', 'Strategy Directorate')}
               </p>
             </div>
           </div>

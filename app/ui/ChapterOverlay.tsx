@@ -78,26 +78,28 @@ export default function ChapterOverlay({
 // --- FIM DO BLOCO DE CORREÇÃO ---
 'visit-braga': {
   watermark: 'https://images.unsplash.com/photo-1626202114254-47709a34938a?q=80&w=2000',
-  tag: 'Gestão de Destino // 2024 — 2025',
-  headerTitle: 'Portal Visit Braga: Estratégia Digital',
+  tag: t('Gestão de Destino // 2024 — 2025', 'Destination Management // 2024 — 2025'),
+  headerTitle: t('Portal Visit Braga: Estratégia Digital', 'Visit Braga Portal: Digital Strategy'),
   
   officialNetwork: 'Município de Braga / InvestBraga',
   externalLink: 'https://visitbraga.travel',
   externalSource: 'VisitBraga.travel',
-  externalLinkLabel: 'Explorar Portal',
-  acreditacao: 'Marca Territorial: Visit Braga / Divisão de Economia e Turismo - Município de Braga',
+  externalLinkLabel: t('Explorar Portal', 'Explore Portal'),
+  acreditacao: t('Marca Territorial: Visit Braga / Divisão de Economia e Turismo - Município de Braga', 'Territorial Brand: Visit Braga / Economy and Tourism Department - Municipality of Braga'),
   hideMainBtn: false, 
   link: 'https://visitbraga.travel',
 
   stats: [
-    { label: "Promoção de Destino", value: "Estratégica" },
-    { label: "Alcance do Mercado", value: "Internacional" },
-    { label: "Hub de Informação", value: "Multicanal" }
-],
+    { label: t("Promoção de Destino", "Destination Promotion"), value: t("Estratégica", "Strategic") },
+    { label: t("Alcance do Mercado", "Market Reach"), value: t("Internacional", "International") },
+    { label: t("Hub de Informação", "Information Hub"), value: t("Multichannel", "Multichannel") }
+  ],
 
   hero: (
     <div className="space-y-4">
-      <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">Lançamento 2025</span>
+      <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+        {t('Lançamento 2025', '2025 Launch')}
+      </span>
       <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
         Visit <br />
         <span className="text-blue-600 font-serif">Braga.</span>
@@ -108,42 +110,54 @@ export default function ChapterOverlay({
   description: (
     <div className="space-y-6">
       <p>
-        A colaboração no desenvolvimento do novo portal Visit Braga centrou-se na <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">reengenharia de conteúdos</span>, visando uma comunicação direta e eficiente com o turista moderno.
+        {t(
+          <>A colaboração no desenvolvimento do novo portal Visit Braga centrou-se na <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">reengenharia de conteúdos</span>, visando uma comunicação direta e eficiente com o turista moderno.</>,
+          <>Collaboration on the development of the new Visit Braga portal focused on <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">content reengineering</span>, aiming for direct and efficient communication with the modern tourist.</>
+        )}
       </p>
       <p className="text-white/40 text-lg leading-relaxed">
-        O foco principal foi a simplificação da jornada do utilizador (User Journey), transformando a vasta oferta cultural, histórica e comercial de Braga num ecossistema digital intuitivo. Este trabalho permitiu elevar o padrão de promoção do território, alinhando a presença online com o prestígio internacional crescente da cidade.
+        {t(
+          "O foco principal foi a simplificação da jornada do utilizador (User Journey), transformando a vasta oferta cultural, histórica e comercial de Braga num ecossistema digital intuitivo. Este trabalho permitiu elevar o padrão de promoção do território, alinhando a presença online com o prestígio internacional crescente da cidade.",
+          "The main focus was simplifying the User Journey, transforming Braga’s vast cultural, historical, and commercial offerings into an intuitive digital ecosystem. This work raised the territory's promotional standards, aligning its online presence with the city’s growing international prestige."
+        )}
       </p>
     </div>
   ),
 
-  pillarTabLabel: 'Estratégia de Promoção',
-  pillarTitle: 'Pilares da Experiência Digital',
-  pillarDesc: 'O novo portal foi estruturado para ser a porta de entrada principal da cidade, otimizando a forma como o destino comunica com o mundo.',
+  pillarTabLabel: t('Estratégia de Promoção', 'Promotion Strategy'),
+  pillarTitle: t('Pilares da Experiência Digital', 'Digital Experience Pillars'),
+  pillarDesc: t(
+    'O novo portal foi estruturado para ser a porta de entrada principal da cidade, otimizando a forma como o destino comunica com o mundo.',
+    'The new portal was structured to be the city’s main gateway, optimizing how the destination communicates with the world.'
+  ),
   
   pillars: [
     { 
-      title: 'Promoção Global', 
-      desc: 'Desenvolvimento de uma estratégia multilingue e SEO focada em captar o interesse de mercados emissores estratégicos para a região.', 
+      title: t('Promoção Global', 'Global Promotion'), 
+      desc: t('Desenvolvimento de uma estratégia multilingue e SEO focada em captar o interesse de mercados emissores estratégicos para a região.', 'Development of a multilingual and SEO strategy focused on capturing interest from strategic source markets for the region.'), 
       icon: Globe 
     },
     { 
-      title: 'Dinamização de Agenda', 
-      desc: 'Implementação de sistemas de atualização em tempo real para eventos e notícias, garantindo que o visitante tenha sempre a informação mais recente.', 
+      title: t('Dinamização de Agenda', 'Agenda Revitalization'), 
+      desc: t('Implementação de sistemas de atualização em tempo real para eventos e notícias, garantindo que o visitante tenha sempre a informação mais recente.', 'Implementation of real-time update systems for events and news, ensuring visitors always have the latest information.'), 
       icon: Calendar 
     },
     { 
-      title: 'Curadoria de Oferta', 
-      desc: 'Criação de roteiros temáticos que ligam o património milenar à oferta hoteleira e comercial contemporânea de Braga.', 
+      title: t('Curadoria de Oferta', 'Offer Curatorship'), 
+      desc: t('Criação de roteiros temáticos que ligam o património milenar à oferta hoteleira e comercial contemporânea de Braga.', 'Creation of thematic itineraries linking millennial heritage to Braga’s contemporary hotel and commercial offerings.'), 
       icon: Map 
     },
     { 
-      title: 'Interface Inovadora', 
-      desc: 'Foco total na experiência mobile e numa interface limpa, reduzindo a fricção entre a curiosidade do turista e a reserva do destino.', 
+      title: t('Interface Inovadora', 'Innovative Interface'), 
+      desc: t('Foco total na experiência mobile e numa interface limpa, reduzindo a fricção entre a curiosidade do turista e a reserva do destino.', 'Total focus on mobile experience and a clean interface, reducing friction between tourist curiosity and destination booking.'), 
       icon: Sparkles 
     },
   ],
 
-  quote: "Uma montra digital de excelência que reflete a ambição e a modernidade de Braga como destino europeu de referência.",
+  quote: t(
+    "Uma montra digital de excelência que reflete a ambição e a modernidade de Braga como destino europeu de referência.",
+    "A digital showcase of excellence reflecting Braga’s ambition and modernity as a leading European destination."
+  ),
   
   gallery: [], 
 
@@ -277,8 +291,10 @@ export default function ChapterOverlay({
         {t('Publicação Editorial', 'Editorial Publication')}
       </span>
       <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
-        Cidade do <br />
-        <span className="text-blue-600">Bracvs.</span>
+        {t(
+          <>Cidade do <br /><span className="text-blue-600">Bracvs.</span></>,
+          <>The City of <br /><span className="text-blue-600">Bracvs.</span></>
+        )}
       </h1>
     </div>
   ),
@@ -439,335 +455,439 @@ export default function ChapterOverlay({
     'https://i.imgur.com/YCZr9xN.jpeg',
   ],
 },
-    'roteiro-3-dias': {
-      watermark: 'https://visitbraga.travel/wp-content/uploads/2025/07/Roteiro-3-Dias-PT.webp',
-      tag: 'Coordenação Editorial // 2024 — 2025',
-      headerTitle: 'Roteiro Oficial: Descobrir Braga',
-      
-      // Chaves para o Footer Dinâmico
-      officialNetwork: 'Município de Braga // Posto de Turismo',
-      externalLink: 'https://visitbraga.travel/wp-content/uploads/2025/07/Roteiro-Descobrir-Braga-em-3-Dias-Portugues.pdf',
-      externalSource: 'VisitBraga.travel',
-      externalLinkLabel: 'Edição Digital (PDF)',
-      acreditacao: 'Divisão de Economia e Turismo - Municipio de Braga / LKCOM',
-      hideMainBtn: false, 
-      link: 'https://visitbraga.travel/wp-content/uploads/2025/07/Roteiro-Descobrir-Braga-em-3-Dias-Portugues.pdf',
-      
-      // Adicionado link da versão Inglesa (EN)
-      linkEN: 'https://visitbraga.travel/wp-content/uploads/2025/07/CMB_roteiro3diasEN_capa-e-miolo_spreads_200250722_VC2_Baixa-Qualidade-WEBSITE.pdf',
-      labelLinkEN: 'English Version (PDF)',
-    
-      stats: [
-        { label: "Capacidade de Resposta", value: "Bilingue" },
-        { label: "Rigor Histórico", value: "Validado" },
-        { label: "Planeamento", value: "Otimizado" }
-      ],
-    
-      hero: (
-        <div className="space-y-4">
-          <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">Guia de Referência</span>
-          <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
-            Braga em <br />
-            <span className="text-blue-600">3 Dias.</span>
-          </h1>
-        </div>
-      ),
-    
-      description: (
-        <div className="space-y-6">
-          <p>
-            A coordenação da edição e a <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">garantia de qualidade editorial</span> deste guia oficial representou um exercício de rigor factual e otimização da experiência do utilizador.
-          </p>
-          <p className="text-white/40 text-lg leading-relaxed">
-            O foco principal foi elevar o padrão informativo do Município, garantindo que a transição entre o conteúdo histórico e a utilidade prática no terreno fosse perfeita. O trabalho incluiu a validação técnica de dados, a implementação de normas de acessibilidade e a integração de camadas digitais para manter a relevância da informação em tempo real.
-          </p>
-        </div>
-      ),
-    
-      pillarTabLabel: 'UX Editorial',
-      pillarTitle: 'Eixos de Coordenação',
-      pillarDesc: 'Foco absoluto na utilidade do conteúdo, garantindo uma ferramenta robusta tanto para o turista ocasional como para o visitante cultural.',
-      
-      pillars: [
-        { title: 'Fact-Checking', desc: 'Validação rigorosa de toponímia e estilos arquitetónicos.', icon: Search },
-        { title: 'UX Writing', desc: 'Inclusão de métricas práticas como tempos médios de visita e PMR.', icon: Map },
-        { title: 'Qualidade Final', desc: 'Revisão linguística profunda sob o AO90 e rigor técnico.', icon: CheckCircle },
-        { title: 'Camada Digital', desc: 'Implementação estratégica de QR Codes para atualização dinâmica.', icon: QrCode },
-      ],
-    
-      quote: "O guia essencial para uma imersão completa na história e cultura bracarense, desenhado para a máxima utilidade no terreno.",
-      
-      gallery: [
-        'https://visitbraga.travel/wp-content/uploads/2025/07/Roteiro-3-Dias-PT.webp',
-        'https://visitbraga.travel/wp-content/uploads/2025/07/Roteiro-3-Dias.webp',
-      ],
-    
-      videoEmbed: (
-        <div className="w-full max-w-md mx-auto animate-in zoom-in-95 duration-1000">
-          <div className="relative w-full h-0 pb-[177.77%] overflow-hidden rounded-[2.5rem] border border-white/10 bg-black/20">
-            <iframe
-              className="absolute inset-0 w-full h-full"
-              allow="fullscreen"
-              allowFullScreen
-              src="https://streamable.com/e/5qyf9a"
-            />
-          </div>
-        </div>
-      ),
+'roteiro-3-dias': {
+  watermark: 'https://visitbraga.travel/wp-content/uploads/2025/07/Roteiro-3-Dias-PT.webp',
+  tag: t('Coordenação Editorial // 2024 — 2025', 'Editorial Coordination // 2024 — 2025'),
+  headerTitle: t('Roteiro Oficial: Descobrir Braga', 'Official Guide: Discover Braga'),
+  
+  // Chaves para o Footer Dinâmico
+  officialNetwork: t('Município de Braga // Posto de Turismo', 'Municipality of Braga // Tourist Office'),
+  externalLink: t(
+    'https://visitbraga.travel/wp-content/uploads/2025/07/Roteiro-Descobrir-Braga-em-3-Dias-Portugues.pdf',
+    'https://visitbraga.travel/wp-content/uploads/2025/07/CMB_roteiro3diasEN_capa-e-miolo_spreads_200250722_VC2_Baixa-Qualidade-WEBSITE.pdf'
+  ),
+  externalSource: 'VisitBraga.travel',
+  externalLinkLabel: t('Edição Digital (PDF)', 'Digital Edition (PDF)'),
+  acreditacao: t('Divisão de Economia e Turismo - Municipio de Braga / LKCOM', 'Economy and Tourism Department - Municipality of Braga / LKCOM'),
+  hideMainBtn: false, 
+  link: t(
+    'https://visitbraga.travel/wp-content/uploads/2025/07/Roteiro-Descobrir-Braga-em-3-Dias-Portugues.pdf',
+    'https://visitbraga.travel/wp-content/uploads/2025/07/CMB_roteiro3diasEN_capa-e-miolo_spreads_200250722_VC2_Baixa-Qualidade-WEBSITE.pdf'
+  ),
+  
+  // Links de backup (Mantidos conforme o teu original)
+  linkEN: 'https://visitbraga.travel/wp-content/uploads/2025/07/CMB_roteiro3diasEN_capa-e-miolo_spreads_200250722_VC2_Baixa-Qualidade-WEBSITE.pdf',
+  labelLinkEN: 'English Version (PDF)',
+
+  stats: [
+    { label: t("Capacidade de Resposta", "Responsiveness"), value: t("Bilingue", "Bilingual") },
+    { label: t("Rigor Histórico", "Historical Rigor"), value: t("Validado", "Validated") },
+    { label: t("Planeamento", "Planning"), value: t("Otimizado", "Optimized") }
+  ],
+
+  hero: (
+    <div className="space-y-4">
+      <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+        {t('Guia de Referência', 'Reference Guide')}
+      </span>
+      <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
+        {t(
+          <>Braga em <br /><span className="text-blue-600">3 Dias.</span></>,
+          <>Braga in <br /><span className="text-blue-600">3 Days.</span></>
+        )}
+      </h1>
+    </div>
+  ),
+
+  description: (
+    <div className="space-y-6">
+      <p>
+        {t(
+          <>A coordenação da edição e a <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">garantia de qualidade editorial</span> deste guia oficial representou um exercício de rigor factual e otimização da experiência do utilizador.</>,
+          <>Editorial coordination and <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">quality assurance</span> of this official guide represented an exercise in factual rigor and user experience optimization.</>
+        )}
+      </p>
+      <p className="text-white/40 text-lg leading-relaxed">
+        {t(
+          "O foco principal foi elevar o padrão informativo do Município, garantindo que a transição entre o conteúdo histórico e a utilidade prática no terreno fosse perfeita. O trabalho incluiu a validação técnica de dados, a implementação de normas de acessibilidade e a integração de camadas digitais para manter a relevância da informação em tempo real.",
+          "The main focus was to raise the Municipality's informative standards, ensuring a seamless transition between historical content and practical on-the-ground utility. The work included technical data validation, implementation of accessibility standards, and the integration of digital layers to maintain real-time information relevance."
+        )}
+      </p>
+    </div>
+  ),
+
+  pillarTabLabel: t('UX Editorial', 'Editorial UX'),
+  pillarTitle: t('Eixos de Coordenação', 'Coordination Pillars'),
+  pillarDesc: t(
+    'Foco absoluto na utilidade do conteúdo, garantindo uma ferramenta robusta tanto para o turista ocasional como para o visitante cultural.',
+    'Absolute focus on content utility, ensuring a robust tool for both the casual tourist and the cultural visitor.'
+  ),
+  
+  pillars: [
+    { 
+      title: 'Fact-Checking', 
+      desc: t('Validação rigorosa de toponímia e estilos arquitetónicos.', 'Rigorous validation of toponymy and architectural styles.'), 
+      icon: Search 
     },
-    'mapa-turistico-braga': {
-      watermark: 'https://visitbraga.travel/wp-content/uploads/2025/11/Captura-de-ecra-2025-11-05-120931.png',
-      tag: 'Cartografia & Design // 2024 — 2025',
-      headerTitle: 'Novo Mapa Turístico Oficial de Braga',
-      
-      officialNetwork: 'Município de Braga // Divisão de Turismo',
-      externalLink: 'https://visitbraga.travel/wp-content/uploads/2025/11/Mapa_Turistico_Oficial_De_Braga_Portugues.pdf',
-      externalSource: 'VisitBraga.travel',
-      externalLinkLabel: 'Visualizar Mapa (PDF)',
-      acreditacao: 'Divisão de Economia e Turismo - Municipio de Braga / Hund',
-      hideMainBtn: false, 
-      link: 'https://visitbraga.travel/wp-content/uploads/2025/11/Mapa_Turistico_Oficial_De_Braga_Portugues.pdf',
-    
-      // Adicionando os novos links multilingue
-      linkEN: 'https://visitbraga.travel/wp-content/uploads/2025/10/Official_Tourist_Map_Of_Braga_EN.pdf',
-      linkES: 'https://visitbraga.travel/wp-content/uploads/2025/11/Plano_Turistico_Oficial_De_Braga_Espanol.pdf',
-      linkFR: 'https://visitbraga.travel/wp-content/uploads/2025/10/Carte_Touristique_Officielle_de_Braga_FR.pdf',
-      linkLowCost: 'https://visitbraga.travel/wp-content/uploads/2025/11/Mapa_Turistico_Oficial_LOW_COST.pdf',
-    
-      stats: [
-        { label: "Capacidade de Resposta", value: "PT / EN / ES / FR" },
-        { label: "Toponímia", value: "Rigorosa" },
-        { label: "Qualificação", value: "Experiência de Destino" }
-      ],
-    
-      hero: (
-        <div className="space-y-4">
-          <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">Infraestrutura de Informação</span>
-          <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
-            City <br />
-            <span className="text-blue-600">Mapping.</span>
-          </h1>
-        </div>
-      ),
-    
-      description: (
-        <div className="space-y-6">
-          <p>
-            O desenvolvimento técnico deste <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">novo suporte cartográfico oficial</span> representa a união entre a precisão geográfica e o design de informação contemporâneo.
-          </p>
-          <p className="text-white/40 text-lg leading-relaxed">
-            Este projeto multidisciplinar focou-se na reestruturação total da cartografia do território, otimizando a experiência do visitante através de uma hierarquização clara de pontos de interesse. Cada detalhe foi desenhado para servir como a ferramenta definitiva de orientação e promoção do destino Braga.
-          </p>
-        </div>
-      ),
-    
-      pillarTabLabel: 'Eixos do Projeto',
-      pillarTitle: 'Contributo Estratégico',
-      pillarDesc: 'Da estruturação de conteúdos à ilustração patrimonial, o foco incidiu na clareza informativa e na eficiência da jornada do visitante.',
-      
-      pillars: [
-        { title: 'Arquitetura de Informação', desc: 'Hierarquização inteligente de monumentos e serviços organizados por categorias cromáticas.', icon: Layers },
-        { title: 'Desenvolvimento Cartográfico', desc: 'Produção técnica com rigor toponímico absoluto e foco prioritário em zonas pedonais.', icon: Compass },
-        { title: 'Representação Patrimonial', desc: 'Criação de ilustrações vetoriais de ícones como a Sé e o Bom Jesus (UNESCO).', icon: Map },
-        { title: 'Gestão Multilingue', desc: 'Adaptação gráfica e funcional para quatro idiomas (PT, EN, ES, FR), garantindo coerência visual.', icon: Languages },
-      ],
-    
-      quote: "Uma ferramenta contemporânea que combina o rigor da cartografia técnica com a nova identidade visual do destino Braga.",
-      
-      gallery: [
-        'https://visitbraga.travel/wp-content/uploads/2025/11/Captura-de-ecra-2025-11-05-120931.png',
-        'https://visitbraga.travel/wp-content/uploads/2025/11/Captura-de-ecra-2025-11-05-120519.png',
-        'https://visitbraga.travel/wp-content/uploads/2025/10/Mapa-Ingles.png',
-        'https://visitbraga.travel/wp-content/uploads/2025/10/Mapa-Frances-2.png',
-        'https://visitbraga.travel/wp-content/uploads/2025/11/Captura-de-ecra-2025-11-05-144144-768x724.png',
-      ],
+    { 
+      title: 'UX Writing', 
+      desc: t('Inclusão de métricas práticas como tempos médios de visita e PMR.', 'Inclusion of practical metrics such as average visit times and PRM accessibility.'), 
+      icon: Map 
     },
-    'fiets-wandelbeurs-gante': {
-      watermark: 'https://i.imgur.com/tg4YOqy.png',
-      tag: 'Missão Internacional // 2025',
-      headerTitle: 'Braga na Fiets en Wandelbeurs — Bélgica',
-      
-      // Chaves para o Footer Dinâmico
-      officialNetwork: 'Visit Braga // Mercado Benelux',
-      externalLink: 'https://www.fietsenwandelbeurs.be/',
-      externalSource: 'Official Event Site',
-      externalLinkLabel: 'Website do Evento',
-      acreditacao: 'Divisão de Economia e Turismo - Municipio de Braga',
-      hideMainBtn: true, // Escondido porque é uma representação presencial
-      link: '',
-    
-      // Métricas Institucionais Dinâmicas (Stats)
-      stats: [
-        { label: "Mercado", value: "Benelux" },
-        { label: "Segmento", value: "Hike & Bike" },
-        { label: "Foco", value: "B2B / B2C" }
-      ],
-    
-      hero: (
-        <div className="space-y-4">
-          <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">Promoção Global</span>
-          <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
-            Global <br />
-            <span className="text-blue-600">Promotion.</span>
-          </h1>
-        </div>
-      ),
-    
-      description: (
-        <div className="space-y-6">
-          <p>
-            A representação técnica e institucional do Município de Braga na Bélgica focou-se no posicionamento da <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">nova marca territorial</span> perante o exigente mercado Benelux.
-          </p>
-          <p className="text-white/40 text-lg leading-relaxed">
-            Esta missão estratégica visou afirmar Braga como um destino de referência para o turismo ativo e sustentável. Através de uma narrativa coerente e materiais bilingues de alta qualidade, promovemos a convergência entre o património histórico e as novas dinâmicas de exploração do território, captando o interesse de operadores e do público final especializado em ciclismo e caminhadas.
-          </p>
-        </div>
-      ),
-    
-      pillarTabLabel: 'Eixos de Atuação',
-      pillarTitle: 'Estratégia de Mercado',
-      pillarDesc: 'Foco na geração de leads qualificados e na afirmação de Braga como destino de elite para o mercado de turismo de natureza.',
-      
-      pillars: [
-        { 
-          title: 'Desenvolvimento de Negócio', 
-          desc: 'Reuniões técnicas com operadores e DMCs para a negociação de fam trips e integração de Braga em novas rotas de programação cultural.', 
-          icon: Briefcase 
-        },
-        { 
-          title: 'Afirmação de Marca', 
-          desc: 'Apresentação da nova identidade territorial, garantindo uma narrativa institucional forte e coerente nos mercados internacionais.', 
-          icon: Globe 
-        },
-        { 
-          title: 'Curadoria de Conteúdos', 
-          desc: 'Seleção estratégica de percursos pedestres e cicláveis (Bike & Hike) com elevada afinidade ao perfil de consumo do mercado belga.', 
-          icon: Compass 
-        },
-        { 
-          title: 'Análise & Reporting', 
-          desc: 'Recolha de métricas de atendimento e feedback qualitativo de mercado para suporte direto à decisão estratégica do Município.', 
-          icon: LineChart 
-        },
-      ],
-    
-      quote: "Uma presença estratégica que une a promoção do património à nova dinâmica de turismo ativo e sustentável de Braga.",
-      
-      gallery: [
-        'https://i.imgur.com/tg4YOqy.png',
-        'https://i.imgur.com/0dqZKA5.png',
-        'https://i.imgur.com/eiRaC5f.png',
-        'https://i.imgur.com/yAm0gSC.png',
-      ],
+    { 
+      title: t('Qualidade Final', 'Final Quality'), 
+      desc: t('Revisão linguística profunda sob o AO90 e rigor técnico.', 'Deep linguistic review under the AO90 agreement and technical rigor.'), 
+      icon: CheckCircle 
     },
-    'expovacaciones-bilbao': {
-      watermark: 'https://i.imgur.com/JL0PcZe.png',
-      tag: 'Missão Estratégica // 2024 — 2025',
-      headerTitle: 'Braga na ExpoVacaciones — Bilbao',
-      
-      // Chaves para o Footer Dinâmico
-      officialNetwork: 'Visit Braga // Porto e Norte de Portugal',
-      externalLink: 'https://expovacaciones.bilbaookke.eu/',
-      externalSource: 'Bilbao Exhibition Centre',
-      externalLinkLabel: 'Website da Expo',
-      acreditacao: 'Divisão de Economia e Turismo - Municipio de Braga / TPNP',
-      hideMainBtn: true, 
-      link: '',
-    
-      // Métricas Institucionais Dinâmicas (Stats)
-      stats: [
-        { label: "Inteligência de Mercado", value: "Espanha (Norte)" },
-        { label: "Promoção Estratégica", value: "Património & Cultura" },
-        { label: "Dinâmicas de Fluxo", value: "Turismo Transfronteiriço" }
-      ],
-    
-      hero: (
-        <div className="space-y-4">
-          <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">Mercado de Proximidade</span>
-          <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
-            Strategic <br />
-            <span className="text-blue-600">Market.</span>
-          </h1>
-        </div>
-      ),
-    
-      description: (
-        <div className="space-y-6">
-          <p>
-            A representação institucional no mercado espanhol, com foco no País Basco e Cantábria, centrou-se na afirmação de Braga como <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">Capital Portuguesa da Cultura 2025</span>.
-          </p>
-          <p className="text-white/40 text-lg leading-relaxed">
-            Esta presença em Bilbao foi fundamental para consolidar Braga como um destino de excelência no Norte de Portugal perante um mercado de proximidade altamente qualificado. O trabalho envolveu a promoção ativa dos eventos âncora da cidade e a articulação estratégica com entidades regionais, garantindo que a autenticidade e competitividade de Braga fossem comunicadas de forma impactante.
-          </p>
-        </div>
-      ),
-    
-      pillarTabLabel: 'Eixos Estratégicos',
-      pillarTitle: 'Presença em Bilbao',
-      pillarDesc: 'Reforço da notoriedade cultural e recolha de inteligência competitiva num dos mercados emissores mais importantes para o destino.',
-      
-      pillars: [
-        { 
-          title: 'Promoção Cultural', 
-          desc: 'Divulgação prioritária da Capital Portuguesa da Cultura 2025 e de grandes eventos como a Braga Romana e as Festas de São João.', 
-          icon: Globe 
-        },
-        { 
-          title: 'Inteligência de Mercado', 
-          desc: 'Recolha sistemática de insights e perceções do público espanhol sobre o destino para ajuste contínuo da estratégia promocional municipal.', 
-          icon: BarChart3 
-        },
-        { 
-          title: 'Networking Sectorial', 
-          desc: 'Articulação transversal com o Turismo do Porto e Norte e estabelecimento de contactos de alto nível com operadores e entidades do setor.', 
-          icon: Briefcase 
-        },
-        { 
-          title: 'Atendimento Técnico', 
-          desc: 'Qualificação de potenciais visitantes através de informação personalizada sobre roteiros, logística e experiências diferenciadoras no território.', 
-          icon: Map 
-        },
-      ],
-    
-      quote: "Uma oportunidade fundamental para ouvir o mercado e afirmar Braga como um destino cultural, competitivo e autêntico.",
-      
-      gallery: [
-        'https://i.imgur.com/JL0PcZe.png',
-        'https://i.imgur.com/6wtSxjp.png',
-        'https://i.imgur.com/zhIXUOY.png',
-        'https://i.imgur.com/C4uKurT.png',
-        'https://i.imgur.com/FexeN3Z.png',
-      ],
+    { 
+      title: t('Camada Digital', 'Digital Layer'), 
+      desc: t('Implementação estratégica de QR Codes para atualização dinâmica.', 'Strategic implementation of QR Codes for dynamic updates.'), 
+      icon: QrCode 
     },
+  ],
+
+  quote: t(
+    "O guia essencial para uma imersão completa na história e cultura bracarense, desenhado para a máxima utilidade no terreno.",
+    "The essential guide for a complete immersion in Braga's history and culture, designed for maximum utility on the ground."
+  ),
+  
+  gallery: [
+    'https://visitbraga.travel/wp-content/uploads/2025/07/Roteiro-3-Dias-PT.webp',
+    'https://visitbraga.travel/wp-content/uploads/2025/07/Roteiro-3-Dias.webp',
+  ],
+
+  videoEmbed: (
+    <div className="w-full max-w-md mx-auto animate-in zoom-in-95 duration-1000">
+      <div className="relative w-full h-0 pb-[177.77%] overflow-hidden rounded-[2.5rem] border border-white/10 bg-black/20">
+        <iframe
+          className="absolute inset-0 w-full h-full"
+          allow="fullscreen"
+          allowFullScreen
+          src="https://streamable.com/e/5qyf9a"
+        />
+      </div>
+    </div>
+  ),
+},
+'mapa-turistico-braga': {
+  watermark: 'https://visitbraga.travel/wp-content/uploads/2025/11/Captura-de-ecra-2025-11-05-120931.png',
+  tag: t('Cartografia & Design // 2024 — 2025', 'Cartography & Design // 2024 — 2025'),
+  headerTitle: t('Novo Mapa Turístico Oficial de Braga', 'Braga’s New Official Tourist Map'),
+  
+  officialNetwork: t('Município de Braga // Divisão de Turismo', 'Municipality of Braga // Tourism Department'),
+  externalLink: t(
+    'https://visitbraga.travel/wp-content/uploads/2025/11/Mapa_Turistico_Oficial_De_Braga_Portugues.pdf',
+    'https://visitbraga.travel/wp-content/uploads/2025/10/Official_Tourist_Map_Of_Braga_EN.pdf'
+  ),
+  externalSource: 'VisitBraga.travel',
+  externalLinkLabel: t('Visualizar Mapa (PDF)', 'View Map (PDF)'),
+  acreditacao: t('Divisão de Economia e Turismo - Municipio de Braga / Hund', 'Economy and Tourism Department - Municipality of Braga / Hund'),
+  hideMainBtn: false, 
+  link: t(
+    'https://visitbraga.travel/wp-content/uploads/2025/11/Mapa_Turistico_Oficial_De_Braga_Portugues.pdf',
+    'https://visitbraga.travel/wp-content/uploads/2025/10/Official_Tourist_Map_Of_Braga_EN.pdf'
+  ),
+
+  // Adicionando os novos links multilingue (Mantidos como referência técnica)
+  linkEN: 'https://visitbraga.travel/wp-content/uploads/2025/10/Official_Tourist_Map_Of_Braga_EN.pdf',
+  linkES: 'https://visitbraga.travel/wp-content/uploads/2025/11/Plano_Turistico_Oficial_De_Braga_Espanol.pdf',
+  linkFR: 'https://visitbraga.travel/wp-content/uploads/2025/10/Carte_Touristique_Officielle_de_Braga_FR.pdf',
+  linkLowCost: 'https://visitbraga.travel/wp-content/uploads/2025/11/Mapa_Turistico_Oficial_LOW_COST.pdf',
+
+  stats: [
+    { label: t("Capacidade de Resposta", "Responsiveness"), value: "PT / EN / ES / FR" },
+    { label: t("Toponímia", "Toponymy"), value: t("Rigorosa", "Rigorous") },
+    { label: t("Qualificação", "Qualification"), value: t("Experiência de Destino", "Destination Experience") }
+  ],
+
+  hero: (
+    <div className="space-y-4">
+      <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+        {t('Infraestrutura de Informação', 'Information Infrastructure')}
+      </span>
+      <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
+        City <br />
+        <span className="text-blue-600">Mapping.</span>
+      </h1>
+    </div>
+  ),
+
+  description: (
+    <div className="space-y-6">
+      <p>
+        {t(
+          <>O desenvolvimento técnico deste <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">novo suporte cartográfico oficial</span> representa a união entre a precisão geográfica e o design de informação contemporâneo.</>,
+          <>The technical development of this <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">new official cartographic support</span> represents the union between geographical precision and contemporary information design.</>
+        )}
+      </p>
+      <p className="text-white/40 text-lg leading-relaxed">
+        {t(
+          "Este projeto multidisciplinar focou-se na reestruturação total da cartografia do território, otimizando a experiência do visitante através de uma hierarquização clara de pontos de interesse. Cada detalhe foi desenhado para servir como a ferramenta definitiva de orientação e promoção do destino Braga.",
+          "This multidisciplinary project focused on the complete restructuring of the territory's cartography, optimizing the visitor experience through a clear hierarchy of points of interest. Every detail was designed to serve as the ultimate tool for orientation and promotion of the Braga destination."
+        )}
+      </p>
+    </div>
+  ),
+
+  pillarTabLabel: t('Eixos do Projeto', 'Project Pillars'),
+  pillarTitle: t('Contributo Estratégico', 'Strategic Contribution'),
+  pillarDesc: t(
+    'Da estruturação de conteúdos à ilustração patrimonial, o foco incidiu na clareza informativa e na eficiência da jornada do visitante.',
+    'From content structuring to heritage illustration, the focus was on informative clarity and the efficiency of the visitor journey.'
+  ),
+  
+  pillars: [
+    { 
+      title: t('Arquitetura de Informação', 'Information Architecture'), 
+      desc: t('Hierarquização inteligente de monumentos e serviços organizados por categorias cromáticas.', 'Intelligent hierarchy of monuments and services organized by chromatic categories.'), 
+      icon: Layers 
+    },
+    { 
+      title: t('Desenvolvimento Cartográfico', 'Cartographic Development'), 
+      desc: t('Produção técnica com rigor toponímico absoluto e foco prioritário em zonas pedonais.', 'Technical production with absolute toponymic rigor and a priority focus on pedestrian zones.'), 
+      icon: Compass 
+    },
+    { 
+      title: t('Representação Patrimonial', 'Heritage Representation'), 
+      desc: t('Criação de ilustrações vetoriais de ícones como a Sé e o Bom Jesus (UNESCO).', 'Creation of vector illustrations of icons such as the Cathedral and Bom Jesus (UNESCO).'), 
+      icon: Map 
+    },
+    { 
+      title: t('Gestão Multilingue', 'Multilingual Management'), 
+      desc: t('Adaptação gráfica e funcional para quatro idiomas (PT, EN, ES, FR), garantindo coerência visual.', 'Graphic and functional adaptation for four languages (PT, EN, ES, FR), ensuring visual coherence.'), 
+      icon: Languages 
+    },
+  ],
+
+  quote: t(
+    "Uma ferramenta contemporânea que combina o rigor da cartografia técnica com a nova identidade visual do destino Braga.",
+    "A contemporary tool that combines the rigor of technical cartography with the new visual identity of the Braga destination."
+  ),
+  
+  gallery: [
+    'https://visitbraga.travel/wp-content/uploads/2025/11/Captura-de-ecra-2025-11-05-120931.png',
+    'https://visitbraga.travel/wp-content/uploads/2025/11/Captura-de-ecra-2025-11-05-120519.png',
+    'https://visitbraga.travel/wp-content/uploads/2025/10/Mapa-Ingles.png',
+    'https://visitbraga.travel/wp-content/uploads/2025/10/Mapa-Frances-2.png',
+    'https://visitbraga.travel/wp-content/uploads/2025/11/Captura-de-ecra-2025-11-05-144144-768x724.png',
+  ],
+},
+'fiets-wandelbeurs-gante': {
+  watermark: 'https://i.imgur.com/tg4YOqy.png',
+  tag: t('Missão Internacional // 2025', 'International Mission // 2025'),
+  headerTitle: t('Braga na Fiets en Wandelbeurs — Bélgica', 'Braga at Fiets en Wandelbeurs — Belgium'),
+  
+  // Chaves para o Footer Dinâmico
+  officialNetwork: t('Visit Braga // Mercado Benelux', 'Visit Braga // Benelux Market'),
+  externalLink: 'https://www.fietsenwandelbeurs.be/',
+  externalSource: 'Official Event Site',
+  externalLinkLabel: t('Website do Evento', 'Event Website'),
+  acreditacao: t('Divisão de Economia e Turismo - Municipio de Braga', 'Economy and Tourism Department - Municipality of Braga'),
+  hideMainBtn: true, 
+  link: '',
+
+  // Métricas Institucionais Dinâmicas (Stats)
+  stats: [
+    { label: t("Mercado", "Market"), value: "Benelux" },
+    { label: t("Segmento", "Segment"), value: "Hike & Bike" },
+    { label: t("Foco", "Focus"), value: "B2B / B2C" }
+  ],
+
+  hero: (
+    <div className="space-y-4">
+      <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+        {t('Promoção Global', 'Global Promotion')}
+      </span>
+      <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
+        Global <br />
+        <span className="text-blue-600">Promotion.</span>
+      </h1>
+    </div>
+  ),
+
+  description: (
+    <div className="space-y-6">
+      <p>
+        {t(
+          <>A representação técnica e institucional do Município de Braga na Bélgica focou-se no posicionamento da <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">nova marca territorial</span> perante o exigente mercado Benelux.</>,
+          <>The technical and institutional representation of the Municipality of Braga in Belgium focused on positioning the <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">new territorial brand</span> before the demanding Benelux market.</>
+        )}
+      </p>
+      <p className="text-white/40 text-lg leading-relaxed">
+        {t(
+          "Esta missão estratégica visou afirmar Braga como um destino de referência para o turismo ativo e sustentável. Através de uma narrativa coerente e materiais bilingues de alta qualidade, promovemos a convergência entre o património histórico e as novas dinâmicas de exploração do território, captando o interesse de operadores e do público final especializado em ciclismo e caminhadas.",
+          "This strategic mission aimed to establish Braga as a leading destination for active and sustainable tourism. Through a coherent narrative and high-quality bilingual materials, we promoted the convergence between historical heritage and new territorial exploration dynamics, capturing the interest of operators and a specialized audience in cycling and hiking."
+        )}
+      </p>
+    </div>
+  ),
+
+  pillarTabLabel: t('Eixos de Atuação', 'Action Pillars'),
+  pillarTitle: t('Estratégia de Mercado', 'Market Strategy'),
+  pillarDesc: t(
+    'Foco na geração de leads qualificados e na afirmação de Braga como destino de elite para o mercado de turismo de natureza.',
+    'Focus on generating qualified leads and establishing Braga as an elite destination for the nature tourism market.'
+  ),
+  
+  pillars: [
+    { 
+      title: t('Desenvolvimento de Negócio', 'Business Development'), 
+      desc: t('Reuniões técnicas com operadores e DMCs para a negociação de fam trips e integração de Braga em novas rotas de programação cultural.', 'Technical meetings with operators and DMCs for negotiating fam trips and integrating Braga into new cultural programming routes.'), 
+      icon: Briefcase 
+    },
+    { 
+      title: t('Afirmação de Marca', 'Brand Assertion'), 
+      desc: t('Apresentação da nova identidade territorial, garantindo uma narrativa institucional forte e coerente nos mercados internacionais.', 'Presentation of the new territorial identity, ensuring a strong and coherent institutional narrative in international markets.'), 
+      icon: Globe 
+    },
+    { 
+      title: t('Curadoria de Conteúdos', 'Content Curatorship'), 
+      desc: t('Seleção estratégica de percursos pedestres e cicláveis (Bike & Hike) com elevada afinidade ao perfil de consumo do mercado belga.', 'Strategic selection of hiking and cycling routes (Bike & Hike) with high affinity for the Belgian market consumption profile.'), 
+      icon: Compass 
+    },
+    { 
+      title: t('Análise & Reporting', 'Analysis & Reporting'), 
+      desc: t('Recolha de métricas de atendimento e feedback qualitativo de mercado para suporte direto à decisão estratégica do Município.', 'Collection of service metrics and qualitative market feedback for direct support of the Municipality\'s strategic decision-making.'), 
+      icon: LineChart 
+    },
+  ],
+
+  quote: t(
+    "Uma presença estratégica que une a promoção do património à nova dinâmica de turismo ativo e sustentável de Braga.",
+    "A strategic presence that unites heritage promotion with Braga's new active and sustainable tourism dynamics."
+  ),
+  
+  gallery: [
+    'https://i.imgur.com/tg4YOqy.png',
+    'https://i.imgur.com/0dqZKA5.png',
+    'https://i.imgur.com/eiRaC5f.png',
+    'https://i.imgur.com/yAm0gSC.png',
+  ],
+},
+'expovacaciones-bilbao': {
+  watermark: 'https://i.imgur.com/JL0PcZe.png',
+  tag: t('Missão Estratégica // 2024 — 2025', 'Strategic Mission // 2024 — 2025'),
+  headerTitle: t('Braga na ExpoVacaciones — Bilbao', 'Braga at ExpoVacaciones — Bilbao'),
+  
+  // Chaves para o Footer Dinâmico
+  officialNetwork: t('Visit Braga // Porto e Norte de Portugal', 'Visit Braga // Porto and North of Portugal'),
+  externalLink: 'https://expovacaciones.bilbaookke.eu/',
+  externalSource: 'Bilbao Exhibition Centre',
+  externalLinkLabel: t('Website da Expo', 'Expo Website'),
+  acreditacao: t('Divisão de Economia e Turismo - Municipio de Braga / TPNP', 'Economy and Tourism Department - Municipality of Braga / TPNP'),
+  hideMainBtn: true, 
+  link: '',
+
+  // Métricas Institucionais Dinâmicas (Stats)
+  stats: [
+    { label: t("Inteligência de Mercado", "Market Intelligence"), value: t("Espanha (Norte)", "Spain (North)") },
+    { label: t("Promoção Estratégica", "Strategic Promotion"), value: t("Património & Cultura", "Heritage & Culture") },
+    { label: t("Dinâmicas de Fluxo", "Flow Dynamics"), value: t("Turismo Transfronteiriço", "Cross-border Tourism") }
+  ],
+
+  hero: (
+    <div className="space-y-4">
+      <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+        {t('Mercado de Proximidade', 'Proximity Market')}
+      </span>
+      <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
+        Strategic <br />
+        <span className="text-blue-600">Market.</span>
+      </h1>
+    </div>
+  ),
+
+  description: (
+    <div className="space-y-6">
+      <p>
+        {t(
+          <>A representação institucional no mercado espanhol, com foco no País Basco e Cantábria, centrou-se na afirmação de Braga como <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">Capital Portuguesa da Cultura 2025</span>.</>,
+          <>Institutional representation in the Spanish market, focusing on the Basque Country and Cantabria, centered on establishing Braga as the <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">2025 Portuguese Capital of Culture</span>.</>
+        )}
+      </p>
+      <p className="text-white/40 text-lg leading-relaxed">
+        {t(
+          "Esta presença em Bilbao foi fundamental para consolidar Braga como um destino de excelência no Norte de Portugal perante um mercado de proximidade altamente qualificado. O trabalho envolveu a promoção ativa dos eventos âncora da cidade e a articulação estratégica com entidades regionais, garantindo que a autenticidade e competitividade de Braga fossem comunicadas de forma impactante.",
+          "This presence in Bilbao was fundamental to consolidating Braga as a destination of excellence in the North of Portugal before a highly qualified proximity market. The work involved actively promoting the city's anchor events and strategic coordination with regional entities, ensuring that Braga's authenticity and competitiveness were communicated with high impact."
+        )}
+      </p>
+    </div>
+  ),
+
+  pillarTabLabel: t('Eixos Estratégicos', 'Strategic Pillars'),
+  pillarTitle: t('Presença em Bilbao', 'Presence in Bilbao'),
+  pillarDesc: t(
+    'Reforço da notoriedade cultural e recolha de inteligência competitiva num dos mercados emissores mais importantes para o destino.',
+    'Strengthening cultural awareness and gathering competitive intelligence in one of the most important source markets for the destination.'
+  ),
+  
+  pillars: [
+    { 
+      title: t('Promoção Cultural', 'Cultural Promotion'), 
+      desc: t('Divulgação prioritária da Capital Portuguesa da Cultura 2025 e de grandes eventos como a Braga Romana e as Festas de São João.', 'Priority promotion of the 2025 Portuguese Capital of Culture and major events such as Braga Romana and the São João Festivities.'), 
+      icon: Globe 
+    },
+    { 
+      title: t('Inteligência de Mercado', 'Market Intelligence'), 
+      desc: t('Recolha sistemática de insights e perceções do público espanhol sobre o destino para ajuste contínuo da estratégia promocional municipal.', 'Systematic collection of insights and perceptions from the Spanish public regarding the destination for continuous adjustment of the municipal promotional strategy.'), 
+      icon: BarChart3 
+    },
+    { 
+      title: t('Networking Sectorial', 'Sector Networking'), 
+      desc: t('Articulação transversal com o Turismo do Porto e Norte e estabelecimento de contactos de alto nível com operadores e entidades do setor.', 'Cross-functional coordination with Porto and North of Portugal Tourism and establishing high-level contacts with operators and sector entities.'), 
+      icon: Briefcase 
+    },
+    { 
+      title: t('Atendimento Técnico', 'Technical Support'), 
+      desc: t('Qualificação de potenciais visitantes através de informação personalizada sobre roteiros, logística e experiências diferenciadoras no território.', 'Qualifying potential visitors through personalized information about itineraries, logistics, and distinctive experiences within the territory.'), 
+      icon: Map 
+    },
+  ],
+
+  quote: t(
+    "Uma oportunidade fundamental para ouvir o mercado e afirmar Braga como um destino cultural, competitivo e autêntico.",
+    "A fundamental opportunity to listen to the market and establish Braga as a cultural, competitive, and authentic destination."
+  ),
+
+  gallery: [
+    'https://i.imgur.com/JL0PcZe.png',
+    'https://i.imgur.com/6wtSxjp.png',
+    'https://i.imgur.com/zhIXUOY.png',
+    'https://i.imgur.com/C4uKurT.png',
+    'https://i.imgur.com/FexeN3Z.png',
+  ],
+},
     'experiencias-sustentaveis': {
       watermark: 'https://www.cm-braga.pt/archive/cache/img/sz800x600/CMB17012025SERGIOFREITAS3022624430274.jpg',
-      tag: 'Gestão de Produto // 2024 — 2025',
-      headerTitle: 'Experiências Turísticas Sustentáveis',
+      tag: t('Gestão de Produto // 2024 — 2025', 'Product Management // 2024 — 2025'),
+      headerTitle: t('Experiências Turísticas Sustentáveis', 'Sustainable Tourism Experiences'),
       
       // Chaves para o Footer Dinâmico
-      officialNetwork: 'Unidade de Turismo // Rede de Operadores Locais',
+      officialNetwork: t('Unidade de Turismo // Rede de Operadores Locais', 'Tourism Unit // Local Operators Network'),
       externalLink: 'https://www.cm-braga.pt',
-      externalSource: 'Município de Braga',
-      externalLinkLabel: 'Portal Institucional',
+      externalSource: t('Município de Braga', 'Municipality of Braga'),
+      externalLinkLabel: t('Portal Institucional', 'Institutional Portal'),
       acreditacao: 'Divisão de Economia e Turismo - Municipio de Braga / INNOTUR',
       hideMainBtn: false, 
       link: 'https://www.cm-braga.pt',
     
       // Métricas Institucionais Dinâmicas (Stats)
       stats: [
-        
-        { label: "Coordenação", value: "Desenvolvimento de Produto" },
-        { label: "Experiências", value: "29 Ativas" },
-        { label: "Parceiros", value: "30+ Entidades" },
-        
+        { label: t("Coordenação", "Coordination"), value: t("Desenvolvimento de Produto", "Product Development") },
+        { label: t("Experiências", "Experiences"), value: t("29 Ativas", "29 Active") },
+        { label: t("Parceiros", "Partners"), value: t("30+ Entidades", "30+ Entities") },
       ],
     
       hero: (
         <div className="space-y-4">
-          <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">Desenvolvimento de Produto</span>
+          <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+            {t('Desenvolvimento de Produto', 'Product Development')}
+          </span>
           <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
-            Experiências <br />
-            <span className="text-blue-600 font-serif">Sustentáveis.</span>
+            {t(
+              <>Experiências <br /><span className="text-blue-600 font-serif">Turísticas.</span></>,
+              <>Touristic <br /><span className="text-blue-600 font-serif">Experiences.</span></>
+            )}
           </h1>
         </div>
       ),
@@ -775,42 +895,54 @@ export default function ChapterOverlay({
       description: (
         <div className="space-y-6">
           <p>
-            A liderança técnica na conceção e validação deste <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">portefólio de 29 experiências</span> comercializáveis marca um novo patamar na oferta turística da região.
+            {t(
+              <>A liderança técnica na conceção e validação deste <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">portefólio de 29 experiências</span> comercializáveis marca um novo patamar na oferta turística da região.</>,
+              <>Technical leadership in the design and validation of this <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">portfolio of 29 marketable experiences</span> marks a new level in the region's tourism offer.</>
+            )}
           </p>
           <p className="text-white/40 text-lg leading-relaxed">
-            O projeto focou-se na estruturação de produtos que unem a identidade local às melhores práticas de sustentabilidade. Coordenei o ciclo completo: desde a articulação com mais de 30 operadores e a assessoria na interpretação da legislação turística, até à supervisão de consultoria externa para marketing e FAM Trips, garantindo um ecossistema de oferta robusto, legalmente validado e pronto para o mercado global.
+            {t(
+              "O projeto focou-se na estruturação de produtos que unem a identidade local às melhores práticas de sustentabilidade. Coordenei o ciclo completo: desde a articulação com mais de 30 operadores e a assessoria na interpretação da legislação turística, até à supervisão de consultoria externa para marketing e FAM Trips, garantindo um ecossistema de oferta robusto, legalmente validado e pronto para o mercado global.",
+              "The project focused on structuring products that bridge local identity with sustainability best practices. I coordinated the full cycle: from liaising with over 30 operators and advising on tourism legislation interpretation, to supervising external consultancy for marketing and FAM Trips, ensuring a robust, legally validated offer ecosystem ready for the global market."
+            )}
           </p>
         </div>
       ),
     
-      pillarTabLabel: 'Eixos do Projeto',
-      pillarTitle: 'Gestão e Estruturação Técnica',
-      pillarDesc: 'Coordenação transversal assegurando a viabilidade legal, a qualidade operacional e a atratividade comercial do produto.',
+      pillarTabLabel: t('Eixos do Projeto', 'Project Pillars'),
+      pillarTitle: t('Gestão e Estruturação Técnica', 'Technical Management & Structuring'),
+      pillarDesc: t(
+        'Coordenação transversal assegurando a viabilidade legal, a qualidade operacional e a atratividade comercial do produto.',
+        'Cross-functional coordination ensuring legal viability, operational quality, and commercial attractiveness of the product.'
+      ),
       
       pillars: [
         { 
-          title: 'Gestão de Stakeholders', 
-          desc: 'Articulação direta com mais de 30 operadores locais, gerindo todo o ciclo de submissão, revisão técnica e validação das propostas de experiência.', 
+          title: t('Gestão de Stakeholders', 'Stakeholder Management'), 
+          desc: t('Articulação direta com mais de 30 operadores locais, gerindo todo o ciclo de submissão, revisão técnica e validação das propostas de experiência.', 'Direct coordination with over 30 local operators, managing the entire submission cycle, technical review, and validation of experience proposals.'), 
           icon: Users 
         },
         { 
-          title: 'Consultoria Técnica', 
-          desc: 'Assessoria estratégica na interpretação normativa (RNAAT/RNAVT) e apoio à formalização legal da atividade dos operadores parceiros.', 
+          title: t('Consultoria Técnica', 'Technical Consultancy'), 
+          desc: t('Assessoria estratégica na interpretação normativa (RNAAT/RNAVT) e apoio à formalização legal da atividade dos operadores parceiros.', 'Strategic advice on regulatory interpretation (RNAAT/RNAVT) and support for the legal formalization of partner operators\' activities.'), 
           icon: Search 
         },
         { 
-          title: 'Supervisão de Projetos', 
-          desc: 'Coordenação da consultora externa INNOTUR na execução de FAM Trips, estratégias de marketing e produção de ativos digitais de alta qualidade.', 
+          title: t('Supervisão de Projetos', 'Project Supervision'), 
+          desc: t('Coordenação da consultora externa INNOTUR na execução de FAM Trips, estratégias de marketing e produção de ativos digitais de alta qualidade.', 'Coordination of the external consultant INNOTUR in executing FAM Trips, marketing strategies, and high-quality digital asset production.'), 
           icon: Layers 
         },
         { 
-          title: 'Dossier de Mercado', 
-          desc: 'Estruturação de preçários e modelos logísticos para a contratação da entidade operadora centralizadora, garantindo a viabilidade comercial.', 
+          title: t('Dossier de Mercado', 'Market Dossier'), 
+          desc: t('Estruturação de preçários e modelos logísticos para a contratação da entidade operadora centralizadora, garantindo a viabilidade comercial.', 'Structuring pricing and logistics models for hiring the centralizing operating entity, ensuring commercial viability.'), 
           icon: CheckCircle 
         },
       ],
     
-      quote: "Um portefólio validado e pronto para o mercado, que posiciona Braga como um destino sustentável, inclusivo e maduro.",
+      quote: t(
+        "Um portefólio validado e pronto para o mercado, que posiciona Braga como um destino sustentável, inclusivo e maduro.",
+        "A validated, market-ready portfolio that positions Braga as a sustainable, inclusive, and mature destination."
+      ),
       
       gallery: [
         'https://i.imgur.com/rKEHbnY.jpeg',
@@ -822,28 +954,30 @@ export default function ChapterOverlay({
     },
     'small-retail-braga': {
       watermark: 'https://transition-pathways.europa.eu/sites/default/files/styles/time_dependent_full/public/discussion_form_post/2025-12/ECOSR%20-%20Thumbnail_0.jpg?itok=1-QARVo7',
-      tag: 'Estratégia Europeia // 2025 — 2026',
-      headerTitle: 'European Capital of Small Retail',
+      tag: t('Estratégia Europeia // 2025 — 2026', 'European Strategy // 2025 — 2026'),
+      headerTitle: t('European Capital of Small Retail', 'European Capital of Small Retail'),
       
       // Chaves para o Footer Dinâmico
       officialNetwork: 'European Commission // Transition Pathways',
       externalLink: 'https://transition-pathways.europa.eu/retail/events/european-capitals-small-retail-awards-ceremony-2026',
-      externalSource: 'Comissão Europeia',
-      externalLinkLabel: 'Portal do Evento 2026',
+      externalSource: t('Comissão Europeia', 'European Commission'),
+      externalLinkLabel: t('Portal do Evento 2026', '2026 Event Portal'),
       acreditacao: 'ECoSR Secretariat',
       hideMainBtn: false, 
       link: 'https://transition-pathways.europa.eu/retail/events/european-capitals-small-retail-awards-ceremony-2026',
     
       // Métricas Institucionais Dinâmicas (Stats)
       stats: [
-        { label: "Impacto Territorial", value: "Escala Europeia" },
-        { label: "Dinamização", value: "Comércio Local" },
-        { label: "Reconhecimento", value: "Finalista 2026" }
+        { label: t("Impacto Territorial", "Territorial Impact"), value: t("Escala Europeia", "European Scale") },
+        { label: t("Dinamização", "Revitalization"), value: t("Comércio Local", "Local Retail") },
+        { label: t("Reconhecimento", "Recognition"), value: t("Finalista 2026", "2026 Finalist") }
       ],
     
       hero: (
         <div className="space-y-4">
-          <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">Candidatura Europeia</span>
+          <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+            {t('Candidatura Europeia', 'European Candidacy')}
+          </span>
           <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
             Small <br />
             <span className="text-blue-600">Retail.</span>
@@ -854,42 +988,54 @@ export default function ChapterOverlay({
       description: (
         <div className="space-y-6">
           <p>
-            A liderança técnica e editorial na construção da <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">estratégia europeia de Braga</span> para o comércio de proximidade marca um compromisso com o futuro urbano sustentável.
+            {t(
+              <>A liderança técnica e editorial na construção da <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">estratégia europeia de Braga</span> para o comércio de proximidade marca um compromisso com o futuro urbano sustentável.</>,
+              <>Technical and editorial leadership in building <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">Braga’s European strategy</span> for local retail marks a commitment to a sustainable urban future.</>
+            )}
           </p>
           <p className="text-white/40 text-lg leading-relaxed">
-            Este projeto unifica as dimensões da sustentabilidade, digitalização e coesão social num dossier estratégico submetido à Comissão Europeia. O meu papel incidiu na articulação de um modelo de Distrito Comercial Digital, na integração de soluções de logística urbana partilhada e na valorização do património vivo das Lojas com História, transformando políticas públicas em indicadores de impacto e resiliência económica.
+            {t(
+              "Este projeto unifica as dimensões da sustentabilidade, digitalização e coesão social num dossier estratégico submetido à Comissão Europeia. O meu papel incidiu na articulação de um modelo de Distrito Comercial Digital, na integração de soluções de logística urbana partilhada e na valorização do património vivo das Lojas com História, transformando políticas públicas em indicadores de impacto e resiliência económica.",
+              "This project unifies the dimensions of sustainability, digitalization, and social cohesion into a strategic dossier submitted to the European Commission. My role focused on articulating a Digital Business District model, integrating shared urban logistics solutions, and valuing the living heritage of 'Lojas com História', transforming public policies into indicators of impact and economic resilience."
+            )}
           </p>
         </div>
       ),
     
-      pillarTabLabel: 'Eixos da Candidatura',
-      pillarTitle: 'Pilares de Desenvolvimento Urbano',
-      pillarDesc: 'A candidatura foi estruturada em quatro grandes vetores que alinham o ecossistema comercial de Braga com as prioridades do Green Deal e da Década Digital Europeia.',
+      pillarTabLabel: t('Eixos da Candidatura', 'Candidacy Pillars'),
+      pillarTitle: t('Pilares de Desenvolvimento Urbano', 'Urban Development Pillars'),
+      pillarDesc: t(
+        'A candidatura foi estruturada em quatro grandes vetores que alinham o ecossistema comercial de Braga com as prioridades do Green Deal e da Década Digital Europeia.',
+        'The candidacy was structured into four major vectors that align Braga’s commercial ecosystem with the priorities of the Green Deal and the European Digital Decade.'
+      ),
       
       pillars: [
         { 
-          title: 'Digitalização & Inovação', 
-          desc: 'Desenvolvimento do modelo de Distrito Comercial Digital, focado na capacitação tecnológica e na criação de ecossistemas de dados para pequenos comerciantes.', 
+          title: t('Digitalização & Inovação', 'Digitalization & Innovation'), 
+          desc: t('Desenvolvimento do modelo de Distrito Comercial Digital, focado na capacitação tecnológica e na criação de ecossistemas de dados para pequenos comerciantes.', 'Development of the Digital Business District model, focused on technological capacity building and the creation of data ecosystems for small retailers.'), 
           icon: Smartphone 
         },
         { 
-          title: 'Sustentabilidade Verde', 
-          desc: 'Integração de logística urbana de última milha, estratégias de pedonalização e economia circular aplicadas ao centro histórico.', 
+          title: t('Sustentabilidade Verde', 'Green Sustainability'), 
+          desc: t('Integração de logística urbana de última milha, estratégias de pedonalização e economia circular aplicadas ao centro histórico.', 'Integration of last-mile urban logistics, pedestrianization strategies, and circular economy applied to the historical center.'), 
           icon: Globe 
         },
         { 
-          title: 'Inclusão & Sociedade', 
-          desc: 'Valorização do património imaterial através do programa Lojas com História e modelos de governança participativa para o comércio local.', 
+          title: t('Inclusão & Sociedade', 'Inclusion & Society'), 
+          desc: t('Valorização do património imaterial através do programa Lojas com História e modelos de governança participativa para o comércio local.', 'Valorization of intangible heritage through the "Lojas com História" program and participatory governance models for local retail.'), 
           icon: Users 
         },
         { 
-          title: 'Robustez Estratégica', 
-          desc: 'Tratamento rigoroso de dados económicos, construção de indicadores de performance e redação técnica do dossier em inglês institucional de alto nível.', 
+          title: t('Robustez Estratégica', 'Strategic Robustness'), 
+          desc: t('Tratamento rigoroso de dados económicos, construção de indicadores de performance e redação técnica do dossier em inglês institucional de alto nível.', 'Rigorous processing of economic data, construction of performance indicators, and technical writing of the dossier in high-level institutional English.'), 
           icon: FileText 
         },
       ],
     
-      quote: "Transformar Braga num laboratório europeu de comércio de proximidade, colocando as pessoas no centro da inovação económica e tecnológica.",
+      quote: t(
+        "Transformar Braga num laboratório europeu de comércio de proximidade, colocando as pessoas no centro da inovação económica e tecnológica.",
+        "Transforming Braga into a European laboratory for local retail, placing people at the center of economic and technological innovation."
+      ),
       
       gallery: [
         'https://transition-pathways.europa.eu/sites/default/files/styles/time_dependent_full/public/discussion_form_post/2025-12/ECOSR%20-%20Thumbnail_0.jpg?itok=1-QARVo7',
@@ -897,28 +1043,30 @@ export default function ChapterOverlay({
     },
     'music-cities-awards': {
       watermark: 'https://static.wixstatic.com/media/214dbc_25ced84144eb414c945f6072bd97b0c4~mv2.jpg/v1/fill/w_719,h_719,q_90,enc_avif,quality_auto/214dbc_25ced84144eb414c945f6072bd97b0c4~mv2.jpg',
-      tag: 'International Awards // Arkansas, USA 2025',
-      headerTitle: 'Music Cities Awards: Braga After Dark',
+      tag: t('International Awards // Arkansas, USA 2025', 'International Awards // Arkansas, USA 2025'),
+      headerTitle: t('Music Cities Awards: Braga After Dark', 'Music Cities Awards: Braga After Dark'),
       
       // Chaves para o Footer Dinâmico
       officialNetwork: 'Music Cities Events // Night-Time Economy',
       externalLink: 'https://www.musiccitiesevents.com/2025-nominees?pgid=mbys9xbd1-c14d419a-28c9-44cd-af38-31558691727d',
       externalSource: 'Music Cities Events',
-      externalLinkLabel: 'Official Nominees Page',
+      externalLinkLabel: t('Página Oficial de Nomeados', 'Official Nominees Page'),
       acreditacao: 'Music City Awards / Music Diplomacy',
       hideMainBtn: false, 
       link: 'https://www.musiccitiesevents.com/2025-nominees?pgid=mbys9xbd1-c14d419a-28c9-44cd-af38-31558691727d',
     
       // Métricas Institucionais Dinâmicas (Stats)
       stats: [
-        { label: "Mérito Internacional", value: "Global Top 3" },
-        { label: "Palco Estratégico", value: "Arkansas, USA" },
-        { label: "Especialização", value: "Night-Time Economy" }
+        { label: t("Mérito Internacional", "International Merit"), value: t("Top 3 Global", "Global Top 3") },
+        { label: t("Palco Estratégico", "Strategic Stage"), value: "Arkansas, USA" },
+        { label: t("Especialização", "Specialization"), value: "Night-Time Economy" }
       ],
     
       hero: (
         <div className="space-y-4">
-          <span className="text-purple-400 font-black tracking-[0.5em] uppercase text-[10px] bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">Reconhecimento Global</span>
+          <span className="text-purple-400 font-black tracking-[0.5em] uppercase text-[10px] bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">
+            {t('Reconhecimento Global', 'Global Recognition')}
+          </span>
           <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
             Music <br />
             <span className="text-purple-600 font-serif">Cities.</span>
@@ -929,71 +1077,85 @@ export default function ChapterOverlay({
       description: (
         <div className="space-y-6">
           <p>
-            A redação estratégica e submissão da candidatura de Braga aos <span className="text-white font-bold italic underline decoration-purple-500 underline-offset-8 text-2xl">Music Cities Awards</span> representou um marco na diplomacia cultural da cidade.
+            {t(
+              <>A redação estratégica e submissão da candidatura de Braga aos <span className="text-white font-bold italic underline decoration-purple-500 underline-offset-8 text-2xl">Music Cities Awards</span> representou um marco na diplomacia cultural da cidade.</>,
+              <>The strategic writing and submission of Braga’s candidacy for the <span className="text-white font-bold italic underline decoration-purple-500 underline-offset-8 text-2xl">Music Cities Awards</span> represented a milestone in the city’s cultural diplomacy.</>
+            )}
           </p>
           <p className="text-white/40 text-lg leading-relaxed">
-            Este projeto foi um exercício de storytelling institucional de alto nível, onde a estratégia de economia noturna "Braga After Dark" foi adaptada para o palco mundial. A narrativa fundiu o património milenar de Braga com a sua vitalidade jovem e criativa, culminando na seleção da cidade como finalista global e na sua representação oficial em Arkansas, EUA, consolidando a marca Braga perante um júri internacional de peritos em música e urbanismo.
+            {t(
+              "Este projeto foi um exercício de storytelling institucional de alto nível, onde a estratégia de economia noturna \"Braga After Dark\" foi adaptada para o palco mundial. A narrativa fundiu o património milenar de Braga com a sua vitalidade jovem e criativa, culminando na seleção da cidade como finalista global e na sua representação oficial em Arkansas, EUA, consolidando a marca Braga perante um júri internacional de peritos em música e urbanismo.",
+              "This project was a high-level institutional storytelling exercise, where the \"Braga After Dark\" night-time economy strategy was adapted for the global stage. The narrative merged Braga’s ancient heritage with its youthful and creative vitality, culminating in the city’s selection as a global finalist and its official representation in Arkansas, USA, solidifying the Braga brand before an international jury of music and urban planning experts."
+            )}
           </p>
         </div>
       ),
     
-      pillarTabLabel: 'Processo Criativo',
-      pillarTitle: 'Estratégia de Candidatura',
-      pillarDesc: 'Sintetizar a vitalidade de Braga numa proposta competitiva para um júri transatlântico, focada na inovação e no impacto social.',
+      pillarTabLabel: t('Processo Criativo', 'Creative Process'),
+      pillarTitle: t('Estratégia de Candidatura', 'Candidacy Strategy'),
+      pillarDesc: t(
+        'Sintetizar a vitalidade de Braga numa proposta competitiva para um júri transatlântico, focada na inovação e no impacto social.',
+        'Synthesizing Braga’s vitality into a competitive proposal for a transatlantic jury, focused on innovation and social impact.'
+      ),
       
       pillars: [
         { 
-          title: 'Impacto Transatlântico', 
-          desc: 'Adaptação rigorosa da narrativa urbana para o contexto global, assegurando a competitividade de Braga perante cidades de todo o mundo.', 
+          title: t('Impacto Transatlântico', 'Transatlantic Impact'), 
+          desc: t('Adaptação rigorosa da narrativa urbana para o contexto global, assegurando a competitividade de Braga perante cidades de todo o mundo.', 'Rigorous adaptation of the urban narrative for a global context, ensuring Braga’s competitiveness among cities worldwide.'), 
           icon: Globe 
         },
         { 
-          title: 'Storytelling Urbano', 
-          desc: 'Construção de uma tese estratégica que funde a identidade histórica com a visão contemporânea de "Night Economy".', 
+          title: t('Storytelling Urbano', 'Urban Storytelling'), 
+          desc: t('Construção de uma tese estratégica que funde a identidade histórica com a visão contemporânea de \"Night Economy\".', 'Development of a strategic thesis merging historical identity with a contemporary vision of \"Night Economy\".'), 
           icon: FileText 
         },
         { 
-          title: 'Visão de Futuro', 
-          desc: 'Desenvolvimento de planos para a institucionalização de políticas públicas focadas na cultura noturna e na sustentabilidade social.', 
+          title: t('Visão de Futuro', 'Future Vision'), 
+          desc: t('Desenvolvimento de planos para a institucionalização de políticas públicas focadas na cultura noturna e na sustentabilidade social.', 'Development of plans for the institutionalization of public policies focused on night culture and social sustainability.'), 
           icon: Zap 
         },
         { 
-          title: 'Advocacy & Pitch', 
-          desc: 'Preparação técnica bilingue (PT/EN) orientada para a defesa da candidatura e comunicação com stakeholders globais.', 
+          title: t('Advocacy & Pitch', 'Advocacy & Pitch'), 
+          desc: t('Preparação técnica bilingue (PT/EN) orientada para a defesa da candidatura e comunicação com stakeholders globais.', 'Bilingual technical preparation (PT/EN) oriented towards candidacy defense and communication with global stakeholders.'), 
           icon: Cpu 
         },
       ],
     
-      quote: "Braga After Dark: elevando a economia noturna da cidade mais antiga de Portugal ao reconhecimento global no palco internacional do Arkansas.",
-      
+      quote: t(
+        "Braga After Dark: elevando a economia noturna da cidade mais antiga de Portugal ao reconhecimento global no palco internacional do Arkansas.",
+        "Braga After Dark: elevating the night economy of Portugal's oldest city to global recognition on the international stage in Arkansas."
+      ),
+    
       gallery: [
         'https://static.wixstatic.com/media/214dbc_25ced84144eb414c945f6072bd97b0c4~mv2.jpg/v1/fill/w_719,h_719,q_90,enc_avif,quality_auto/214dbc_25ced84144eb414c945f6072bd97b0c4~mv2.jpg',
       ],
     },
     'systemeu-salamanca': {
       watermark: 'https://i.imgur.com/SeyCGBk.png',
-      tag: 'Missão Tecnológica // Salamanca 2024 — 2025',
-      headerTitle: 'Startup OLÉ & SystemEU Summit',
+      tag: t('Missão Tecnológica // Salamanca 2024 — 2025', 'Tech Mission // Salamanca 2024 — 2025'),
+      headerTitle: t('Startup OLÉ & SystemEU Summit', 'Startup OLÉ & SystemEU Summit'),
       
       // Chaves para o Footer Dinâmico
       officialNetwork: 'SystemEU European Network // Startup OLÉ',
       externalLink: 'https://startupole.eu/',
       externalSource: 'Startup OLÉ Official',
-      externalLinkLabel: 'Website do Summit',
-      acreditacao: 'Município de Braga / Startup Braga',
+      externalLinkLabel: t('Website do Summit', 'Summit Website'),
+      acreditacao: t('Município de Braga / Startup Braga', 'Municipality of Braga / Startup Braga'),
       hideMainBtn: true, 
       link: 'https://startupole.eu/',
     
       // Métricas Institucionais Dinâmicas (Stats)
       stats: [
-        { label: "Ecossistema", value: "Inovação & Talento" },
-        { label: "Rede Estratégica", value: "System EU" },
-        { label: "Fomento", value: "Economia Regional" }
+        { label: t("Ecossistema", "Ecosystem"), value: t("Inovação & Talento", "Innovation & Talent") },
+        { label: t("Rede Estratégica", "Strategic Network"), value: "System EU" },
+        { label: t("Fomento", "Development"), value: t("Economia Regional", "Regional Economy") }
       ],
     
       hero: (
         <div className="space-y-4">
-          <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">Inovação Europeia</span>
+          <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+            {t('Inovação Europeia', 'European Innovation')}
+          </span>
           <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
             SystemEU <br />
             <span className="text-blue-600 font-serif">Summit.</span>
@@ -1004,42 +1166,54 @@ export default function ChapterOverlay({
       description: (
         <div className="space-y-6">
           <p>
-            A representação institucional do <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">Município de Braga</span> em Salamanca consolidou a cidade no maior palco de inovação e transferência de tecnologia entre ecossistemas europeus.
+            {t(
+              <>A representação institucional do <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">Município de Braga</span> em Salamanca consolidou a cidade no maior palco de inovação e transferência de tecnologia entre ecossistemas europeus.</>,
+              <>The institutional representation of the <span className="text-white font-bold italic underline decoration-blue-500 underline-offset-8 text-2xl">Municipality of Braga</span> in Salamanca consolidated the city on the largest stage for innovation and technology transfer among European ecosystems.</>
+            )}
           </p>
           <p className="text-white/40 text-lg leading-relaxed">
-            Esta missão no SystemEU Summit visou posicionar Braga como um hub de referência na inovação sistémica. Através de um networking estratégico com universidades e centros de investigação de elite, reforçámos o papel da cidade e da Startup Braga como motores de desenvolvimento regional, identificando sinergias críticas em sustentabilidade tecnológica e governação urbana para uma Europa mais integrada e resiliente.
+            {t(
+              "Esta missão no SystemEU Summit visou posicionar Braga como um hub de referência na inovação sistémica. Através de um networking estratégico com universidades e centros de investigação de elite, reforçámos o papel da cidade e da Startup Braga como motores de desenvolvimento regional, identificando sinergias críticas em sustentabilidade tecnológica e governação urbana para uma Europa mais integrada e resiliente.",
+              "This mission at the SystemEU Summit aimed to position Braga as a leading hub for systemic innovation. Through strategic networking with elite universities and research centers, we strengthened the role of the city and Startup Braga as drivers of regional development, identifying critical synergies in technological sustainability and urban governance for a more integrated and resilient Europe."
+            )}
           </p>
         </div>
       ),
     
-      pillarTabLabel: 'Atuação Internacional',
-      pillarTitle: 'Diplomacia de Inovação',
-      pillarDesc: 'Articulação entre o ecossistema local e as redes europeias para acelerar a transferência de conhecimento e tecnologia.',
+      pillarTabLabel: t('Atuação Internacional', 'International Action'),
+      pillarTitle: t('Diplomacia de Inovação', 'Innovation Diplomacy'),
+      pillarDesc: t(
+        'Articulação entre o ecossistema local e as redes europeias para acelerar a transferência de conhecimento e tecnologia.',
+        'Articulation between the local ecosystem and European networks to accelerate knowledge and technology transfer.'
+      ),
       
       pillars: [
         { 
-          title: 'Networking Estratégico', 
-          desc: 'Estabelecimento de ligações diretas com redes europeias de inovação e stakeholders de topo do empreendedorismo tecnológico.', 
+          title: t('Networking Estratégico', 'Strategic Networking'), 
+          desc: t('Estabelecimento de ligações diretas com redes europeias de inovação e stakeholders de topo do empreendedorismo tecnológico.', 'Establishing direct links with European innovation networks and top-tier technological entrepreneurship stakeholders.'), 
           icon: Globe 
         },
         { 
-          title: 'Posicionamento Urbano', 
-          desc: 'Promoção ativa do Município e da Startup Braga como catalisadores de talento e investimento em setores de alto valor acrescentado.', 
+          title: t('Posicionamento Urbano', 'Urban Positioning'), 
+          desc: t('Promoção ativa do Município e da Startup Braga como catalisadores de talento e investimento em setores de alto valor acrescentado.', 'Active promotion of the Municipality and Startup Braga as catalysts for talent and investment in high-value-added sectors.'), 
           icon: Cpu 
         },
         { 
-          title: 'Sinergias Tecnológicas', 
-          desc: 'Identificação de oportunidades em inovação urbana e sustentabilidade para aplicação direta no ecossistema local.', 
+          title: t('Sinergias Tecnológicas', 'Tech Synergies'), 
+          desc: t('Identificação de oportunidades em inovação urbana e sustentabilidade para aplicação direta no ecossistema local.', 'Identification of opportunities in urban innovation and sustainability for direct application within the local ecosystem.'), 
           icon: Zap 
         },
         { 
-          title: 'Colaboração Regional', 
-          desc: 'Reforço da cooperação entre ecossistemas de inovação vizinhos, promovendo a coesão territorial ibérica e europeia.', 
+          title: t('Colaboração Regional', 'Regional Collaboration'), 
+          desc: t('Reforço da cooperação entre ecossistemas de inovação vizinhos, promovendo a coesão territorial ibérica e europeia.', 'Strengthening cooperation between neighboring innovation ecosystems, promoting Iberian and European territorial cohesion.'), 
           icon: Users 
         },
       ],
     
-      quote: "Consolidar Braga no ecossistema europeu de inovação, transformando parcerias internacionais em impacto local e crescimento económico.",
+      quote: t(
+        "Consolidar Braga no ecossistema europeu de inovação, transformando parcerias internacionais em impacto local e crescimento económico.",
+        "Consolidating Braga within the European innovation ecosystem, transforming international partnerships into local impact and economic growth."
+      ),
       
       gallery: [
         'https://i.imgur.com/SeyCGBk.png',
@@ -1180,15 +1354,22 @@ export default function ChapterOverlay({
         )}
       </div>
 
-                <div className="lg:col-span-4 space-y-8">
+      <div className="lg:col-span-4 space-y-8">
                   <div className="p-12 bg-gradient-to-br from-white/[0.05] to-transparent border border-white/10 rounded-[3.5rem]">
                     <Quote className="text-blue-500/20 w-12 h-12 mb-8" />
                     <p className="text-3xl font-bold italic text-white/90 mb-12">"{current.quote}"</p>
+                    
                     <div className="flex items-center gap-5 pt-10 border-t border-white/10">
-                      <div className="w-14 h-14 rounded-2xl bg-blue-600 flex items-center justify-center font-black italic shadow-lg shadow-blue-500/20">HB</div>
+                      <div className="w-14 h-14 rounded-2xl bg-blue-600 flex items-center justify-center font-black italic shadow-lg shadow-blue-500/20 text-white">
+                        HB
+                      </div>
                       <div className="flex flex-col">
-                        <span className="text-xs font-black uppercase tracking-wider">Unidade de Missão</span>
-                        <span className="text-[10px] text-white/30 uppercase font-bold">Turismo Inteligente</span>
+                        <span className="text-xs font-black uppercase tracking-wider text-white">
+                          {current.authorTitle || t("Unidade de Missão", "Mission Unit")}
+                        </span>
+                        <span className="text-[10px] text-white/30 uppercase font-bold">
+                          {current.authorSub || t("Estratégia Territorial", "Territorial Strategy")}
+                        </span>
                       </div>
                     </div>
                   </div>

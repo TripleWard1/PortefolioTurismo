@@ -18,8 +18,10 @@ import Navbar from './ui/Navbar';
 import ProjectCard from './ui/ProjectCard';
 import ChapterOverlay from './ui/ChapterOverlay';
 import Contact from './ui/Contact';
+import { useLang } from './ui/LanguageContext'; // <--- ADICIONADO
 
 export default function Page() {
+  const { t } = useLang(); // <--- ADICIONADO
   const [overlayData, setOverlayData] = useState<any>({
     isOpen: false,
     title: '',
@@ -66,20 +68,22 @@ export default function Page() {
                 <div className="flex items-center gap-4 mb-6">
                   <div className="h-[2px] w-8 bg-blue-600" />
                   <span className="text-[11px] font-black tracking-[0.4em] uppercase text-blue-600">
-                    Capítulo 01 / Estratégia
+                    {t('Capítulo 01 / Estratégia', 'Chapter 01 / Strategy')}
                   </span>
                 </div>
                 <h2 className="text-6xl md:text-[100px] font-playfair font-black text-slate-900 leading-[0.85] tracking-tighter">
-                  Posicionamento <br />
+                  {t('Posicionamento', 'Global')} <br />
                   <span className="text-blue-600 italic font-light">
-                    Global.
+                    {t('Global.', 'Positioning.')}
                   </span>
                 </h2>
               </div>
               <div className="lg:col-span-4 pb-4">
                 <p className="text-slate-500 text-lg font-light leading-relaxed border-l-2 border-slate-200 pl-6">
-                  Reforçar a presença de Braga no mapa das decisões europeias,
-                  transformando potencial em influência direta.
+                  {t(
+                    'Reforçar a presença de Braga no mapa das decisões europeias, transformando potencial em influência direta.',
+                    'Strengthening Braga’s presence on the European decision-making map, transforming potential into direct influence.'
+                  )}
                 </p>
               </div>
             </div>
@@ -90,40 +94,60 @@ export default function Page() {
                 {
                   id: 'smart-tourism',
                   title: 'Smart Tourism',
-                  location: 'Bruxelas / Braga',
+                  location: t('Bruxelas / Braga', 'Brussels / Braga'),
                   image: 'https://i.imgur.com/SvJ4bdR.jpeg',
-                  description:
+                  description: t(
                     'Defesa estratégica da candidatura de Braga ao título de European Capital of Smart Tourism junto da Comissão Europeia.',
-                  metrics: { label: 'Status', value: 'Nível Alto' },
+                    'Strategic defense of Braga’s candidacy for the European Capital of Smart Tourism title before the European Commission.'
+                  ),
+                  metrics: { 
+                    label: t('Status', 'Status'), 
+                    value: t('Nível Alto', 'High Level') 
+                  },
                 },
                 {
                   id: 'small-retail-braga',
                   title: 'Small Retail',
-                  location: 'Candidatura 2026',
+                  location: t('Candidatura 2026', '2026 Candidacy'),
                   image:
                     'https://transition-pathways.europa.eu/sites/default/files/styles/time_dependent_full/public/discussion_form_post/2025-12/ECOSR%20-%20Thumbnail_0.jpg?itok=1-QARVo7',
-                  description:
+                  description: t(
                     'Desenvolvimento do dossiê técnico para a Capital Europeia do Comércio, focando na sustentabilidade do retalho local.',
-                  metrics: { label: 'Impacto', value: 'Económico' },
+                    'Development of the technical dossier for the European Capital of Small Retail, focusing on local retail sustainability.'
+                  ),
+                  metrics: { 
+                    label: t('Impacto', 'Impact'), 
+                    value: t('Económico', 'Economic') 
+                  },
                 },
                 {
                   id: 'braga-after-dark',
                   title: 'After Dark',
-                  location: 'Rede URBACT',
+                  location: t('Rede URBACT', 'URBACT Network'),
                   image: 'https://i.imgur.com/mgdxHtt.jpeg',
-                  description:
+                  description: t(
                     'Criação do primeiro roteiro oficial e estratégia de governação para a vida noturna de Braga dentro da rede europeia.',
-                  metrics: { label: 'Foco', value: 'Estratégico' },
+                    'Creation of the first official roadmap and governance strategy for Braga’s nightlife within the European network.'
+                  ),
+                  metrics: { 
+                    label: t('Foco', 'Focus'), 
+                    value: t('Estratégico', 'Strategic') 
+                  },
                 },
                 {
                   id: 'music-cities-awards',
                   title: 'Music Cities',
-                  location: 'Arkansas, EUA',
+                  location: t('Arkansas, EUA', 'Arkansas, USA'),
                   image:
                     'https://static.wixstatic.com/media/214dbc_25ced84144eb414c945f6072bd97b0c4~mv2.jpg',
-                  description:
+                  description: t(
                     'Posicionamento de Braga como referência mundial em políticas de música, culminando na final global nos Estados Unidos.',
-                  metrics: { label: 'Alcance', value: 'Mundial' },
+                    'Positioning Braga as a global reference in music policies, culminating in the global final in the United States.'
+                  ),
+                  metrics: { 
+                    label: t('Alcance', 'Reach'), 
+                    value: t('Mundial', 'Worldwide') 
+                  },
                 },
               ].map((p) => (
                 <div
@@ -206,7 +230,7 @@ export default function Page() {
                 className="flex items-center gap-6 group"
               >
                 <span className="text-[12px] font-black uppercase tracking-[0.5em] text-slate-400 group-hover:text-slate-900 transition-colors">
-                  Continuar para Ecossistema Digital
+                  {t('Continuar para Ecossistema Digital', 'Continue to Digital Ecosystem')}
                 </span>
                 <div className="w-14 h-14 rounded-full border border-slate-200 flex items-center justify-center group-hover:bg-slate-900 group-hover:border-slate-900 transition-all duration-700 shadow-xl">
                   <ArrowRight className="w-5 h-5 text-slate-400 group-hover:text-white transition-transform group-hover:translate-x-2" />
@@ -241,20 +265,22 @@ export default function Page() {
                 <div className="flex items-center gap-4 mb-6">
                   <div className="h-[2px] w-8 bg-blue-500" />
                   <span className="text-[11px] font-black tracking-[0.4em] uppercase text-blue-500">
-                    Capítulo 02 / Digital
+                    {t('Capítulo 02 / Digital', 'Chapter 02 / Digital')}
                   </span>
                 </div>
                 <h2 className="text-6xl md:text-[100px] font-playfair font-black text-white leading-[0.85] tracking-tighter">
-                  Ecossistema <br />
+                  {t('Ecossistema', 'Digital')} <br />
                   <span className="text-blue-500 italic font-light">
-                    Digital.
+                    {t('Digital.', 'Ecosystem.')}
                   </span>
                 </h2>
               </div>
               <div className="lg:col-span-4 pb-4">
                 <p className="text-slate-400 text-lg font-light leading-relaxed border-l-2 border-blue-900/50 pl-6">
-                  Criação de infraestrutura tecnológica e governação de dados
-                  para suportar a nova economia urbana.
+                  {t(
+                    'Criação de infraestrutura tecnológica e governação de dados para suportar a nova economia urbana.',
+                    'Creation of technological infrastructure and data governance to support the new urban economy.'
+                  )}
                 </p>
               </div>
             </div>
@@ -264,22 +290,32 @@ export default function Page() {
               {[
                 {
                   id: 'visit-braga',
-                  title: 'Portal Visit Braga',
-                  location: 'Braga, Portugal',
+                  title: t('Portal Visit Braga', 'Visit Braga Portal'),
+                  location: t('Braga, Portugal', 'Braga, Portugal'),
                   image:
                     'https://visitbraga.travel/wp-content/uploads/2025/05/visit-braga.jpg',
-                  description:
+                  description: t(
                     'Conceção de UX e arquitetura de dados para a principal plataforma turística da cidade.',
-                  metrics: { label: 'Foco', value: 'Conversão' },
+                    'UX design and data architecture for the city\'s main tourism platform.'
+                  ),
+                  metrics: { 
+                    label: t('Foco', 'Focus'), 
+                    value: t('Conversão', 'Conversion') 
+                  },
                 },
                 {
                   id: 'systemeu-salamanca',
                   title: 'SYSTEMEU',
-                  location: 'Salamanca / Braga',
-                  image: 'https://imgur.com/SeyCGBk.jpg', // Adicionado .jpg para garantir renderização no card
-                  description:
+                  location: t('Salamanca / Braga', 'Salamanca / Braga'),
+                  image: 'https://imgur.com/SeyCGBk.jpg',
+                  description: t(
                     'Redes de inovação inter-regionais para a transferência de conhecimento tecnológico.',
-                  metrics: { label: 'Rede', value: 'Europeia' },
+                    'Inter-regional innovation networks for the transfer of technological knowledge.'
+                  ),
+                  metrics: { 
+                    label: t('Rede', 'Network'), 
+                    value: t('Europeia', 'European') 
+                  },
                 },
               ].map((p) => (
                 <div
@@ -356,7 +392,7 @@ export default function Page() {
                 className="flex items-center gap-6 group"
               >
                 <span className="text-[12px] font-black uppercase tracking-[0.5em] text-slate-500 group-hover:text-white transition-colors">
-                  Continuar para Governação Urbana
+                  {t('Continuar para Governação Urbana', 'Continue to Urban Governance')}
                 </span>
                 <div className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-white group-hover:border-white transition-all duration-700">
                   <ArrowRight className="w-5 h-5 text-white group-hover:text-slate-900 transition-transform group-hover:translate-x-2" />
@@ -396,12 +432,12 @@ export default function Page() {
             <div className="flex flex-col items-center text-center mb-40">
               <div className="inline-block px-6 py-2 border border-slate-200 bg-white/50 backdrop-blur-sm rounded-full mb-10 shadow-sm">
                 <span className="text-[10px] font-black tracking-[0.5em] uppercase text-slate-500">
-                  Capítulo 03 / Produto & Identidade
+                  {t('Capítulo 03 / Produto & Identidade', 'Chapter 03 / Product & Identity')}
                 </span>
               </div>
               <h2 className="text-7xl md:text-[140px] font-playfair font-black text-slate-900 leading-[0.8] tracking-tighter">
-                Herança & <br />
-                <span className="text-blue-600 italic font-light">Futuro.</span>
+                {t('Herança &', 'Heritage &')} <br />
+                <span className="text-blue-600 italic font-light">{t('Futuro.', 'Future.')}</span>
               </h2>
             </div>
 
@@ -410,44 +446,56 @@ export default function Page() {
               {[
                 {
                   id: 'cidade-bracvs',
-                  title: 'A Cidade do Bracvs',
+                  title: t('A Cidade do Bracvs', 'The City of Bracvs'),
                   image:
                     'https://visitbraga.travel/wp-content/uploads/2025/07/guia-infantil.jpg',
-                  desc: 'Roteiro lúdico-educativo para crianças e famílias. Conteúdos concebidos para aproximar as novas gerações do património romano de Braga.',
+                  desc: t(
+                    'Roteiro lúdico-educativo para crianças e famílias. Conteúdos concebidos para aproximar as novas gerações do património romano de Braga.',
+                    'Playful-educational itinerary for children and families. Content designed to bring new generations closer to Braga’s Roman heritage.'
+                  ),
                   align: 'left',
-                  tag: 'Educação & Família',
+                  tag: t('Educação & Família', 'Education & Family'),
                   year: '2025',
                   coord: '41.5503° N, 8.4200° W',
                 },
                 {
                   id: 'roteiro-3-dias',
-                  title: 'Descobrir Braga em 3 Dias',
+                  title: t('Descobrir Braga em 3 Dias', 'Discover Braga in 3 Days'),
                   image:
                     'https://visitbraga.travel/wp-content/uploads/2025/07/Roteiro-3-Dias-PT.webp',
-                  desc: 'Coordenação editorial, factual e estrutural do guia oficial da cidade. Foco na otimização de fluxos turísticos e experiência do utilizador.',
+                  desc: t(
+                    'Coordenação editorial, factual e estrutural do guia oficial da cidade. Foco na otimização de fluxos turísticos e experiência do utilizador.',
+                    'Editorial, factual, and structural coordination of the city\'s official guide. Focus on optimizing tourist flows and user experience.'
+                  ),
                   align: 'right',
-                  tag: 'Coordenação Editorial',
+                  tag: t('Coordenação Editorial', 'Editorial Coordination'),
                   year: '2025',
                   coord: '41.5450° N, 8.4260° W',
                 },
                 {
                   id: 'mapa-turistico-braga',
-                  title: 'Novo Mapa Territorial',
+                  title: t('Novo Mapa Territorial', 'New Territorial Map'),
                   image:
                     'https://visitbraga.travel/wp-content/uploads/2025/11/Captura-de-ecra-2025-11-05-144144-768x724.png',
-                  desc: 'Desenvolvimento técnico e design de informação para o suporte cartográfico oficial, unindo precisão geográfica e identidade visual.',
+                  desc: t(
+                    'Desenvolvimento técnico e design de informação para o suporte cartográfico oficial, unindo precisão geográfica e identidade visual.',
+                    'Technical development and information design for official cartographic support, merging geographical precision and visual identity.'
+                  ),
                   align: 'left',
-                  tag: 'Cartografia Técnica',
+                  tag: t('Cartografia Técnica', 'Technical Cartography'),
                   year: '2024',
                   coord: '41.5480° N, 8.4300° W',
                 },
                 {
-                  id: 'experiencias-sustentaveis', // ID exato do teu ChapterOverlay
-                  title: 'Experiências Sustentáveis',
+                  id: 'experiencias-sustentaveis',
+                  title: t('Experiências Sustentáveis', 'Sustainable Experiences'),
                   image: 'https://www.cm-braga.pt/archive/cache/img/sz800x600/CMB17012025SERGIOFREITAS3022624430274.jpg',
-                  desc: 'Liderança técnica na conceção de 29 experiências turísticas. Estruturação de produtos que unem a identidade local às melhores práticas de sustentabilidade.',
-                  align: 'right', // Para manter o ziguezague do layout
-                  tag: 'Gestão de Produto',
+                  desc: t(
+                    'Liderança técnica na conceção de 29 experiências turísticas. Estruturação de produtos que unem a identidade local às melhores práticas de sustentabilidade.',
+                    'Technical leadership in the design of 29 tourist experiences. Structuring products that combine local identity with best sustainability practices.'
+                  ),
+                  align: 'right',
+                  tag: t('Gestão de Produto', 'Product Management'),
                   year: '2025',
                   coord: '41.5510° N, 8.4280° W',
                 },
@@ -541,10 +589,10 @@ export default function Page() {
                       </div>
                       <div className="flex flex-col items-start">
                         <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 group-hover/btn:text-blue-600 transition-colors">
-                          Explorar
+                          {t('Explorar', 'Explore')}
                         </span>
                         <span className="text-xs font-bold text-slate-900">
-                          Projecto Completo
+                          {t('Projecto Completo', 'Full Project')}
                         </span>
                       </div>
                     </button>
@@ -562,43 +610,44 @@ export default function Page() {
                     Networking
                   </h4>
                   <h3 className="text-6xl md:text-8xl font-playfair font-bold text-slate-900 tracking-tighter leading-[0.9]">
-                    Presença <br />
+                    {t('Presença', 'Institutional')} <br />
                     <span className="italic font-light text-slate-400">
-                      Institucional.
+                      {t('Institucional.', 'Presence.')}
                     </span>
                   </h3>
                 </div>
                 <div className="lg:col-span-5 lg:pb-4">
                   <p className="text-slate-500 text-lg font-light leading-relaxed border-l-2 border-blue-600 pl-8">
-                    Curadoria estratégica e representação técnica em certames
-                    europeus, posicionando Braga como destino de excelência em
-                    mercados de alto valor.
+                    {t(
+                      'Curadoria estratégica e representação técnica em certames europeus, posicionando Braga como destino de excelência em mercados de alto valor.',
+                      'Strategic curation and technical representation at European events, positioning Braga as a destination of excellence in high-value markets.'
+                    )}
                   </p>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                {/* Intro Card - ALTERADO CONFORME PEDIDO */}
+                {/* Intro Card */}
                 <div className="bg-slate-900 rounded-[3rem] p-12 flex flex-col justify-between text-white relative overflow-hidden group transition-all duration-700 hover:shadow-2xl hover:shadow-blue-900/40">
                   <div className="relative z-10">
                     <div className="w-20 h-20 bg-blue-600/20 rounded-3xl flex items-center justify-center mb-10 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-700 border border-white/5">
                       <Globe className="w-10 h-10 text-blue-400" />
                     </div>
                     <p className="text-4xl font-playfair font-medium leading-tight">
-                      Expansão e <br />
+                      {t('Expansão e', 'Expansion and')} <br />
                       <span className="text-blue-400 italic">
-                        Estratégia
+                        {t('Estratégia', 'Territorial Strategy')}
                       </span>{' '}
-                      Territorial.
+                      {t('Territorial.', '')}
                     </p>
                   </div>
                   <div className="mt-20 relative z-10 flex flex-wrap gap-2">
-                    {['Networking', 'Promoção', 'Mercados'].map((t) => (
+                    {[t('Networking', 'Networking'), t('Promoção', 'Promotion'), t('Mercados', 'Markets')].map((tag) => (
                       <span
-                        key={t}
+                        key={tag}
                         className="px-5 py-2 bg-white/5 border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-widest text-blue-200 backdrop-blur-md"
                       >
-                        {t}
+                        {tag}
                       </span>
                     ))}
                   </div>
@@ -612,16 +661,16 @@ export default function Page() {
                   {
                     id: 'fiets-wandelbeurs-gante',
                     title: 'Fiets en Wandelbeurs',
-                    location: 'Gante, Bélgica',
+                    location: t('Gante, Bélgica', 'Ghent, Belgium'),
                     image: 'https://i.imgur.com/tg4YOqy.png',
-                    tag: 'Turismo Ativo',
+                    tag: t('Turismo Ativo', 'Active Tourism'),
                   },
                   {
                     id: 'expovacaciones-bilbao',
                     title: 'ExpoVacaciones',
-                    location: 'Bilbao, Espanha',
+                    location: t('Bilbao, Espanha', 'Bilbao, Spain'),
                     image: 'https://i.imgur.com/JL0PcZe.png',
-                    tag: 'Estratégia Ibérica',
+                    tag: t('Estratégia Ibérica', 'Iberian Strategy'),
                   },
                 ].map((inst) => (
                   <div
@@ -673,8 +722,7 @@ export default function Page() {
         </section>
 
         <Contact />
-      </div>{' '}
-      {/* Este fecha a div que envolve as secções, se houver uma */}
+      </div>
       <ChapterOverlay
         isOpen={overlayData.isOpen}
         projectType={overlayData.projectType}
