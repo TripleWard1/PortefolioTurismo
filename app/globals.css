@@ -223,7 +223,7 @@ body::before {
     background-color: #0f172a !important;
   }
 
-  /* --- CORREÇÃO FINAL FOOTER ALINHADO À ESQUERDA --- */
+  /* --- AJUSTE DO FOOTER NO MOBILE --- */
   footer.p-8.border-t.border-white\/10 {
     display: flex !important;
     flex-direction: column !important;
@@ -240,34 +240,32 @@ body::before {
     gap: 1.5rem !important;
   }
 
-  /* Container de versões disponíveis alinhado à esquerda */
+  /* 1. LÍNGUAS EM CIMA */
   footer .flex.items-center.gap-4 {
     align-items: flex-start !important;
     justify-content: flex-start !important;
     flex-direction: row !important;
     flex-wrap: wrap !important;
-    order: 1 !important; /* Fica acima do botão principal */
+    order: 1 !important; /* Primeira posição após o texto */
   }
 
-  /* BOTÃO PRINCIPAL (AZUL) - AJUSTADO PARA BAIXO */
+  /* 2. BOTÃO GRANDE EM BAIXO (Preservando Design Original) */
   footer a.bg-blue-600, 
   footer button.bg-blue-600,
   footer .bg-blue-600,
   footer a[href*="visitar"],
   footer a[href*="visualizar"] {
-    display: flex !important;
-    width: 100% !important; /* Ocupa a largura para não ser cortado */
-    max-width: 100% !important;
-    order: 2 !important; /* GARANTE QUE FICA ABAIXO DE TUDO */
-    margin-top: 1rem !important;
+    display: inline-flex !important; /* Mantém o tamanho original do conteúdo */
+    width: auto !important; /* Não deforma nem estica */
+    max-width: max-content !important;
+    order: 2 !important; /* Fica por baixo das línguas */
     justify-content: center !important;
-    padding: 14px !important;
-    border-radius: 12px !important;
+    align-items: center !important;
+    margin-top: 0.5rem !important;
   }
 
-  /* Texto HB Portfolio Estratégico */
   footer .text-left {
-    order: 0 !important; /* Mantém o título no topo */
+    order: 0 !important; /* Título HB Portfolio sempre em primeiro */
   }
 }
 
