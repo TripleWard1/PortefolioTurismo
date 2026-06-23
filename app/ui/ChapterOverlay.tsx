@@ -81,7 +81,7 @@ export default function ChapterOverlay({
   const projectConfig: Record<string, ProjectData> = {
 // --- FIM DO BLOCO DE CORREÇÃO ---
 'visit-braga': {
-  watermark: 'https://images.unsplash.com/photo-1626202114254-47709a34938a?q=80&w=2000',
+  watermark: 'https://i.imgur.com/e0wCEWM.jpeg',
   tag: t('Gestão de Destino // 2024 — 2025', 'Destination Management // 2024 — 2025'),
   headerTitle: t('Portal Visit Braga: Estratégia Digital', 'Visit Braga Portal: Digital Strategy'),
   
@@ -166,14 +166,14 @@ export default function ChapterOverlay({
   gallery: [], 
 
   videoEmbed: (
-    <div className="w-full max-w-5xl mx-auto animate-in zoom-in-95 duration-1000">
-      <div className="relative w-full h-0 pb-[56.25%] overflow-hidden rounded-[2.5rem] border border-white/20 bg-black shadow-2xl">
+    <div className="w-full max-w-md mx-auto animate-in zoom-in-95 duration-1000">
+      <div className="relative w-full h-0 pb-[177.77%] overflow-hidden rounded-[2.5rem] border border-white/10 bg-black/20">
         <iframe
           className="absolute inset-0 w-full h-full"
-          allow="fullscreen; autoplay"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share; fullscreen"
           allowFullScreen
-          src="https://streamable.com/e/pmp04s"
-          style={{ border: 'none' }}
+          scrolling="no"
+          src="https://www.instagram.com/reel/DMqLs9yMpRQ/embed"
         />
       </div>
     </div>
@@ -568,36 +568,37 @@ export default function ChapterOverlay({
           className="absolute inset-0 w-full h-full"
           allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share; fullscreen"
           allowFullScreen
-          src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fshare%2Fv%2F1GwB3mioBi%2F&show_text=false&width=400"
+          scrolling="no"
+          src="https://www.instagram.com/reel/DMvVPZeICA8/embed"
         />
       </div>
     </div>
   ),
 },
 'mapa-turistico-braga': {
-  watermark: 'https://visitbraga.travel/wp-content/uploads/2025/11/Captura-de-ecra-2025-11-05-120931.png',
+  watermark: 'https://i.imgur.com/P54M1Ko.png',
   tag: t('Cartografia & Design // 2024 — 2025', 'Cartography & Design // 2024 — 2025'),
   headerTitle: t('Novo Mapa Turístico Oficial de Braga', 'Braga’s New Official Tourist Map'),
   
   officialNetwork: t('Município de Braga // Divisão de Turismo', 'Municipality of Braga // Tourism Department'),
   externalLink: t(
-    'https://visitbraga.travel/wp-content/uploads/2025/11/Mapa_Turistico_Oficial_De_Braga_Portugues.pdf',
-    'https://visitbraga.travel/wp-content/uploads/2025/10/Official_Tourist_Map_Of_Braga_EN.pdf'
+    'https://cmbraga-my.sharepoint.com/:b:/g/personal/hugo_barros_cm-braga_pt/IQAUDJgQjgbuS7hLwJrLFGd9AXOszioW1Wd72Fm0Uz1qGok?e=vPgIYp',
+    'https://cmbraga-my.sharepoint.com/:b:/g/personal/hugo_barros_cm-braga_pt/IQBfSu4RZgIcTolEh_oDtex7ATmrMQ0ghEWlEweeXAmfPBk?e=Ky4KWo'
   ),
   externalSource: 'VisitBraga.travel',
   externalLinkLabel: t('Visualizar Mapa (PDF)', 'View Map (PDF)'),
   acreditacao: t('Divisão de Economia e Turismo - Municipio de Braga / Hund', 'Economy and Tourism Department - Municipality of Braga / Hund'),
   hideMainBtn: false, 
   link: t(
-    'https://visitbraga.travel/wp-content/uploads/2025/11/Mapa_Turistico_Oficial_De_Braga_Portugues.pdf',
+    'https://cmbraga-my.sharepoint.com/:b:/g/personal/hugo_barros_cm-braga_pt/IQAUDJgQjgbuS7hLwJrLFGd9AXOszioW1Wd72Fm0Uz1qGok?e=vPgIYp',
     'https://visitbraga.travel/wp-content/uploads/2025/10/Official_Tourist_Map_Of_Braga_EN.pdf'
   ),
 
   // Adicionando os novos links multilingue (Mantidos como referência técnica)
-  linkEN: 'https://visitbraga.travel/wp-content/uploads/2025/10/Official_Tourist_Map_Of_Braga_EN.pdf',
-  linkES: 'https://visitbraga.travel/wp-content/uploads/2025/11/Plano_Turistico_Oficial_De_Braga_Espanol.pdf',
-  linkFR: 'https://visitbraga.travel/wp-content/uploads/2025/10/Carte_Touristique_Officielle_de_Braga_FR.pdf',
-  linkLowCost: 'https://visitbraga.travel/wp-content/uploads/2025/11/Mapa_Turistico_Oficial_LOW_COST.pdf',
+  linkEN: 'https://cmbraga-my.sharepoint.com/:b:/g/personal/hugo_barros_cm-braga_pt/IQBfSu4RZgIcTolEh_oDtex7ATmrMQ0ghEWlEweeXAmfPBk?e=ibbD9E',
+  linkES: 'https://cmbraga-my.sharepoint.com/:b:/g/personal/hugo_barros_cm-braga_pt/IQA7PR3KFBAgRqkcOm2RwPORAWRH7GsjYujWggZO5PtY4YY?e=EzPmjX',
+  linkFR: 'https://cmbraga-my.sharepoint.com/:b:/g/personal/hugo_barros_cm-braga_pt/IQC3oBO70YCmRr49_aaQasyfAUtt7I1gg8QDbJ1O6DccRIw?e=QHuy7t',
+  linkLowCost: 'https://cmbraga-my.sharepoint.com/:b:/g/personal/hugo_barros_cm-braga_pt/IQAJnzALpwUqR4GcMbhvAWuyAdjCK4w9OQ_mz1y_zQIjzL8?e=5upf9g',
 
   stats: [
     { label: t("Capacidade de Resposta", "Responsiveness"), value: "PT / EN / ES / FR" },
@@ -670,11 +671,10 @@ export default function ChapterOverlay({
   ),
   
   gallery: [
-    'https://visitbraga.travel/wp-content/uploads/2025/11/Captura-de-ecra-2025-11-05-120931.png',
-    'https://visitbraga.travel/wp-content/uploads/2025/11/Captura-de-ecra-2025-11-05-120519.png',
-    'https://visitbraga.travel/wp-content/uploads/2025/10/Mapa-Ingles.png',
-    'https://visitbraga.travel/wp-content/uploads/2025/10/Mapa-Frances-2.png',
-    'https://visitbraga.travel/wp-content/uploads/2025/11/Captura-de-ecra-2025-11-05-144144-768x724.png',
+    'https://i.imgur.com/P54M1Ko.png',
+    'https://i.imgur.com/pXB2EtP.png',
+    'https://i.imgur.com/e9g7BBJ.png',
+    'https://i.imgur.com/NVwoMGm.png',
   ],
 },
 'fiets-wandelbeurs-gante': {

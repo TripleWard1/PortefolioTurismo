@@ -293,7 +293,7 @@ export default function Page() {
                   title: t('Portal Visit Braga', 'Visit Braga Portal'),
                   location: t('Braga, Portugal', 'Braga, Portugal'),
                   image:
-                    'https://visitbraga.travel/wp-content/uploads/2025/05/visit-braga.jpg',
+                    'https://i.imgur.com/e0wCEWM.jpeg',
                   description: t(
                     'Conceção de UX e arquitetura de dados para a principal plataforma turística da cidade.',
                     'UX design and data architecture for the city\'s main tourism platform.'
@@ -476,7 +476,7 @@ export default function Page() {
                   id: 'mapa-turistico-braga',
                   title: t('Novo Mapa Territorial', 'New Territorial Map'),
                   image:
-                    'https://visitbraga.travel/wp-content/uploads/2025/11/Captura-de-ecra-2025-11-05-144144-768x724.png',
+                    'https://i.imgur.com/P54M1Ko.png',
                   desc: t(
                     'Desenvolvimento técnico e design de informação para o suporte cartográfico oficial, unindo precisão geográfica e identidade visual.',
                     'Technical development and information design for official cartographic support, merging geographical precision and visual identity.'
