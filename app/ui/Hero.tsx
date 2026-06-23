@@ -1,46 +1,58 @@
 'use client';
-import { ArrowRight, ShieldCheck } from 'lucide-react';
-import { useLang } from './LanguageContext'; // Caminho corrigido: ambos na mesma pasta (app/ui/)
+import { ArrowRight, ShieldCheck, ArrowDown } from 'lucide-react';
+import { useLang } from './LanguageContext';
 
 export default function Hero() {
   const { t } = useLang();
 
+  const goToPortfolio = () =>
+    document.getElementById('arquivo')?.scrollIntoView({ behavior: 'smooth' });
+
   return (
-    <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden pt-24 pb-12">
-      {/* BACKGROUND: Camada de Imagem com Fade */}
+    <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden pt-28 pb-16">
+      {/* FUNDO — imagem com profundidade e fade de saída */}
       <div className="absolute inset-0 z-0">
         <img
           src="https://i.imgur.com/SvJ4bdR.jpeg"
           alt="Braga Strategic View"
-          className="w-full h-full object-cover opacity-100 blur-[8px]"
+          className="w-full h-full object-cover blur-[8px] scale-105"
         />
-
-        {/* 1. Escurecimento para leitura */}
-        <div className="absolute inset-0 bg-slate-900/20" />
-
-        {/* 2. O SEGREDO DO MERGE */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-transparent to-transparent" />
-
-        {/* 3. MÁSCARA DE SAÍDA (Fade Out) */}
+        <div className="absolute inset-0 bg-[var(--ink)]/25" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--ink)]/55 via-transparent to-transparent" />
         <div
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(to bottom, rgba(241, 243, 245, 0) 60%, rgba(241, 243, 245, 1) 100%)',
+              'linear-gradient(to bottom, rgba(246,247,249,0) 58%, var(--paper) 100%)',
           }}
         />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 flex flex-col items-center text-center">
-        {/* FOTO CENTRALIZADA */}
-        <div className="relative mb-4 animate-reveal z-10">
+        {/* META — linha de dossier cartográfico (assinatura discreta) */}
+        <div className="rise-in flex items-center gap-3 sm:gap-5 mb-8 [animation-delay:80ms]">
+          <span className="font-mono text-[9px] uppercase tracking-[0.4em] text-white/70">
+            41.5503° N
+          </span>
+          <span className="h-[1px] w-6 bg-white/30" />
+          <span className="font-mono text-[9px] uppercase tracking-[0.4em] text-white/90 font-bold">
+            {t('Dossier Estratégico', 'Strategic Dossier')}
+          </span>
+          <span className="h-[1px] w-6 bg-white/30" />
+          <span className="font-mono text-[9px] uppercase tracking-[0.4em] text-white/70">
+            8.4200° W
+          </span>
+        </div>
+
+        {/* RETRATO */}
+        <div className="relative mb-6 animate-reveal z-10 [animation-delay:120ms]">
           <div className="relative p-8 flex justify-center items-center">
-            <div className="absolute inset-0 rounded-full border-[3px] border-blue-500/60 shadow-[0_0_40px_rgba(37,99,235,0.4)] animate-[spin_30s_linear_infinite]" />
+            <div className="absolute inset-0 rounded-full border-[3px] border-[var(--sky)]/55 shadow-[0_0_40px_rgba(10,92,255,0.4)] animate-[spin_30s_linear_infinite]" />
             <div className="absolute inset-3 rounded-full border border-white/40" />
             <div className="absolute inset-0 rounded-full animate-[spin_15s_linear_infinite]">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3.5 h-3.5 bg-blue-600 rounded-full shadow-[0_0_25px_#2563eb] border-2 border-white" />
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3.5 h-3.5 bg-[var(--primary)] rounded-full shadow-[0_0_25px_var(--primary)] border-2 border-white" />
             </div>
-            <div className="relative w-56 h-56 md:w-72 md:h-72 rounded-full border-[10px] border-white shadow-2xl bg-white flex items-center justify-center overflow-hidden z-10">
+            <div className="relative w-52 h-52 md:w-72 md:h-72 rounded-full border-[10px] border-white shadow-2xl bg-white flex items-center justify-center overflow-hidden z-10">
               <div className="relative w-full h-full overflow-hidden flex items-center justify-center bg-slate-50">
                 <img
                   src="https://imgur.com/Dx42oze.png"
@@ -55,57 +67,71 @@ export default function Hero() {
                 />
               </div>
             </div>
-            <div className="absolute bottom-10 right-10 md:bottom-14 md:right-14 bg-blue-600 p-3 rounded-2xl shadow-2xl border-2 border-white z-20">
+            <div className="absolute bottom-9 right-9 md:bottom-14 md:right-14 bg-[var(--primary)] p-3 rounded-2xl shadow-2xl border-2 border-white z-20">
               <ShieldCheck className="w-6 h-6 text-white" />
             </div>
           </div>
         </div>
 
-        <div className="relative mb-12 group cursor-default">
+        {/* NOME + FUNÇÃO */}
+        <div className="relative mb-10 group cursor-default rise-in [animation-delay:200ms]">
           <h2 className="text-5xl md:text-7xl font-playfair font-bold tracking-tight text-white drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)] leading-none">
-            Hugo <span className="italic font-light text-blue-400">Barros</span>
+            Hugo <span className="italic font-light text-[var(--sky)]">Barros</span>
           </h2>
-          <div className="flex items-center justify-center gap-3 mt-4 opacity-80">
-            <div className="h-[1px] w-8 bg-blue-500" />
-            <span className="text-[10px] uppercase tracking-[0.6em] text-white font-medium">
-              {t('Senior Economic and Tourism Development Officer', 'Senior Economic and Tourism Development Officer')}
+          <div className="flex items-center justify-center gap-3 mt-4 opacity-90">
+            <div className="h-[1px] w-8 bg-[var(--sky)]" />
+            <span className="font-mono text-[9px] uppercase tracking-[0.45em] text-white font-medium">
+              {t(
+                'Senior Economic and Tourism Development Officer',
+                'Senior Economic and Tourism Development Officer'
+              )}
             </span>
-            <div className="h-[1px] w-8 bg-blue-500" />
+            <div className="h-[1px] w-8 bg-[var(--sky)]" />
           </div>
         </div>
 
-        <h1 className="text-5xl md:text-[6.2rem] font-playfair font-black tracking-tighter leading-[0.9] mb-8 text-slate-900 drop-shadow-sm">
+        {/* TÍTULO PRINCIPAL */}
+        <h1 className="text-5xl md:text-[6.2rem] font-playfair font-black tracking-tighter leading-[0.9] mb-8 text-slate-900 drop-shadow-sm text-balance rise-in [animation-delay:280ms]">
           {t('Estratégia em Ação:', 'Strategy in Action:')} <br />
-          <span className="italic font-light text-blue-600">
+          <span className="italic font-light text-[var(--primary)]">
             {t('O Impacto no Território.', 'The Impact on the Territory.')}
           </span>
         </h1>
 
-        <div className="max-w-2xl mx-auto space-y-8">
-          <p className="text-lg md:text-xl text-slate-800 font-medium leading-relaxed px-4">
+        <div className="max-w-2xl mx-auto space-y-9 rise-in [animation-delay:360ms]">
+          <p className="text-lg md:text-xl text-slate-700 font-medium leading-relaxed px-4 text-balance">
             {t('Portefólio de', 'Portfolio of')}{' '}
             <span className="font-bold text-slate-900">
               {t('projetos e governação de destino', 'projects and destination governance')}
             </span>
             .
             <br className="hidden md:block" />
-            {t('Conheça as estratégias elaboradas para consolidar Braga como uma', 'Discover the strategies designed to consolidate Braga as a')}{' '}
-            <span className="font-bold text-slate-900 border-b-2 border-blue-600/40">
+            {t(
+              'Conheça as estratégias elaboradas para consolidar Braga como uma',
+              'Discover the strategies designed to consolidate Braga as a'
+            )}{' '}
+            <span className="font-bold text-slate-900 border-b-2 border-[var(--primary)]/40">
               {t('referência de valor', 'reference of value')}
             </span>
             .
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-8 pt-2">
-            <button className="group relative px-10 py-5 bg-slate-900 text-white rounded-2xl font-bold flex items-center gap-4 transition-all hover:bg-blue-700 hover:-translate-y-1 shadow-xl">
-              {t('CONSULTAR PORTEFÓLIO TÉCNICO', 'VIEW TECHNICAL PORTFOLIO')}
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <button
+              onClick={goToPortfolio}
+              className="group relative px-9 py-5 bg-slate-900 text-white rounded-2xl font-bold flex items-center gap-4 transition-all duration-500 hover:bg-[var(--primary)] hover:-translate-y-1 shadow-xl overflow-hidden"
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+              <span className="relative z-10 text-[13px] tracking-wide">
+                {t('CONSULTAR PORTEFÓLIO TÉCNICO', 'VIEW TECHNICAL PORTFOLIO')}
+              </span>
+              <ArrowRight className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
-            <div className="text-left border-l-4 border-blue-600 pl-6 hidden sm:block">
+            <div className="text-left border-l-4 border-[var(--primary)] pl-6 hidden sm:block">
               <p className="text-[10px] font-black text-slate-900 uppercase tracking-[0.15em] mb-0.5">
                 Hugo Barros
               </p>
-              <p className="text-[10px] font-bold text-blue-600 uppercase tracking-widest">
+              <p className="font-mono text-[10px] font-bold text-[var(--primary)] uppercase tracking-widest">
                 {t('Direção de Estratégia', 'Strategy Directorate')}
               </p>
             </div>
@@ -113,9 +139,19 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
-        <div className="w-[2px] h-10 bg-gradient-to-b from-blue-600 to-transparent opacity-40" />
-      </div>
+      {/* INDICADOR DE SCROLL */}
+      <button
+        onClick={goToPortfolio}
+        aria-label={t('Continuar', 'Scroll down')}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 group"
+      >
+        <span className="font-mono text-[8px] uppercase tracking-[0.4em] text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity">
+          {t('Explorar', 'Explore')}
+        </span>
+        <div className="w-9 h-9 rounded-full border border-slate-300 flex items-center justify-center group-hover:border-[var(--primary)] group-hover:bg-[var(--primary)] transition-all duration-500">
+          <ArrowDown className="w-4 h-4 text-slate-400 group-hover:text-white transition-colors animate-bounce" />
+        </div>
+      </button>
     </section>
   );
 }

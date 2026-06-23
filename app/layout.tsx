@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
-import { Inter, Playfair_Display } from 'next/font/google';
+import { Inter, Playfair_Display, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { LanguageProvider } from './ui/LanguageContext';
+import ScrollReveal from './ui/ScrollReveal';
 import { GoogleAnalytics } from '@next/third-parties/google';
 
 const inter = Inter({
@@ -16,6 +17,14 @@ const playfair = Playfair_Display({
   variable: '--font-playfair',
   display: 'swap',
   weight: ['400', '700', '900'],
+});
+
+// Face mono para captions técnicos, coordenadas e eyebrows de "dossier"
+const mono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap',
+  weight: ['400', '500', '700'],
 });
 
 export const metadata: Metadata = {
@@ -42,30 +51,29 @@ export default function RootLayout({
     <html lang="pt" className="scroll-smooth">
       <body
         className={`
-          ${inter.variable} 
-          ${playfair.variable} 
-          font-sans 
-          antialiased 
-          bg-[#fcfdfe] 
-          text-slate-900 
-          selection:bg-blue-600 
-          selection:text-white
+          ${inter.variable}
+          ${playfair.variable}
+          ${mono.variable}
+          font-sans
+          antialiased
+          bg-[var(--paper)]
+          text-slate-900
         `}
       >
         <LanguageProvider>
-          {/* Camada de Fundo Dinâmica */}
+          {/* Camada de fundo dinâmica */}
           <div
             className="mesh-bg fixed inset-0 z-0 pointer-events-none"
             aria-hidden="true"
           />
 
-          {/* Conteúdo Principal */}
-          <div className="relative z-10">
-            {children}
-          </div>
+          {/* Conteúdo principal */}
+          <div className="relative z-10">{children}</div>
+
+          {/* Observer global de scroll-reveal */}
+          <ScrollReveal />
         </LanguageProvider>
 
-        {/* Google Analytics - Inserido corretamente no final do body */}
         <GoogleAnalytics gaId="G-C9ZYJ5XB1E" />
       </body>
     </html>
