@@ -448,7 +448,7 @@ export default function Page() {
                   id: 'cidade-bracvs',
                   title: t('A Cidade do Bracvs', 'The City of Bracvs'),
                   image:
-                    'https://visitbraga.travel/wp-content/uploads/2025/07/guia-infantil.jpg',
+                    'https://i.imgur.com/NRTWHRW.png',
                   desc: t(
                     'Roteiro lúdico-educativo para crianças e famílias. Conteúdos concebidos para aproximar as novas gerações do património romano de Braga.',
                     'Playful-educational itinerary for children and families. Content designed to bring new generations closer to Braga’s Roman heritage.'
@@ -462,7 +462,7 @@ export default function Page() {
                   id: 'roteiro-3-dias',
                   title: t('Descobrir Braga em 3 Dias', 'Discover Braga in 3 Days'),
                   image:
-                    'https://visitbraga.travel/wp-content/uploads/2025/07/Roteiro-3-Dias-PT.webp',
+                    'https://i.imgur.com/yWtlcEL.png',
                   desc: t(
                     'Coordenação editorial, factual e estrutural do guia oficial da cidade. Foco na otimização de fluxos turísticos e experiência do utilizador.',
                     'Editorial, factual, and structural coordination of the city\'s official guide. Focus on optimizing tourist flows and user experience.'

@@ -269,13 +269,13 @@ export default function ChapterOverlay({
   ],
 },
 'cidade-bracvs': {
-  watermark: 'https://visitbraga.travel/wp-content/uploads/2025/07/guia-infantil.jpg',
+  watermark: 'https://i.imgur.com/NRTWHRW.png',
   tag: t('Educação & Património // 2024 — 2025', 'Education & Heritage // 2024 — 2025'),
   headerTitle: t('A Cidade do Bracvs: Roteiro Educativo', 'The City of Bracvs: Educational Itinerary'),
   
   // Chaves para o Footer Dinâmico
   officialNetwork: t('Município de Braga // Divisão de Educação', 'Municipality of Braga // Education Department'),
-  externalLink: 'https://visitbraga.travel/wp-content/uploads/2025/07/Roteiro-Infantil-CMB-Visit-Braga.pdf',
+  externalLink: 'https://cmbraga-my.sharepoint.com/:b:/g/personal/hugo_barros_cm-braga_pt/IQBTExVPkalaQLtE4HFUCNb2AezN7qLyt-8BYhUh2XWT23o?e=7xvekq',
   externalSource: 'VisitBraga.travel',
   externalLinkLabel: t('Visualizar PDF Oficial', 'View Official PDF'),
   acreditacao: t('Divisão de Economia e Turismo - Municipio de Braga / LKCOM', 'Economy and Tourism Department - Municipality of Braga / LKCOM'),
@@ -356,7 +356,7 @@ export default function ChapterOverlay({
   ),
   
   gallery: [
-    'https://visitbraga.travel/wp-content/uploads/2025/07/guia-infantil.jpg',
+    'https://i.imgur.com/NRTWHRW.png',
     'https://i.imgur.com/K5ZnO4x.png',
     'https://i.imgur.com/L4RnX9W.png',
   ],
@@ -460,27 +460,27 @@ export default function ChapterOverlay({
   ],
 },
 'roteiro-3-dias': {
-  watermark: 'https://visitbraga.travel/wp-content/uploads/2025/07/Roteiro-3-Dias-PT.webp',
+  watermark: 'https://i.imgur.com/yWtlcEL.png',
   tag: t('Coordenação Editorial // 2024 — 2025', 'Editorial Coordination // 2024 — 2025'),
   headerTitle: t('Roteiro Oficial: Descobrir Braga', 'Official Guide: Discover Braga'),
   
   // Chaves para o Footer Dinâmico
   officialNetwork: t('Município de Braga // Posto de Turismo', 'Municipality of Braga // Tourist Office'),
   externalLink: t(
-    'https://visitbraga.travel/wp-content/uploads/2025/07/Roteiro-Descobrir-Braga-em-3-Dias-Portugues.pdf',
-    'https://visitbraga.travel/wp-content/uploads/2025/07/CMB_roteiro3diasEN_capa-e-miolo_spreads_200250722_VC2_Baixa-Qualidade-WEBSITE.pdf'
+    'https://cmbraga-my.sharepoint.com/:b:/g/personal/hugo_barros_cm-braga_pt/IQAREwUp6GmPRotJifBAMTJ6AXpADZ6zTx2vddXtgOrWovA?e=KIFubd',
+    'https://cmbraga-my.sharepoint.com/:b:/g/personal/hugo_barros_cm-braga_pt/IQAWCOx-0ki2SofmrdgKzurbAaLxBTL6L9PPUOqBbgaV6Dc?e=A8FAAe'
   ),
   externalSource: 'VisitBraga.travel',
   externalLinkLabel: t('Edição Digital (PDF)', 'Digital Edition (PDF)'),
   acreditacao: t('Divisão de Economia e Turismo - Municipio de Braga / LKCOM', 'Economy and Tourism Department - Municipality of Braga / LKCOM'),
   hideMainBtn: false, 
   link: t(
-    'https://visitbraga.travel/wp-content/uploads/2025/07/Roteiro-Descobrir-Braga-em-3-Dias-Portugues.pdf',
-    'https://visitbraga.travel/wp-content/uploads/2025/07/CMB_roteiro3diasEN_capa-e-miolo_spreads_200250722_VC2_Baixa-Qualidade-WEBSITE.pdf'
+    'https://cmbraga-my.sharepoint.com/:b:/g/personal/hugo_barros_cm-braga_pt/IQAREwUp6GmPRotJifBAMTJ6AXpADZ6zTx2vddXtgOrWovA?e=KIFubd',
+    'https://cmbraga-my.sharepoint.com/:b:/g/personal/hugo_barros_cm-braga_pt/IQAWCOx-0ki2SofmrdgKzurbAaLxBTL6L9PPUOqBbgaV6Dc?e=A8FAAe'
   ),
   
   // Links de backup (Mantidos conforme o teu original)
-  linkEN: 'https://visitbraga.travel/wp-content/uploads/2025/07/CMB_roteiro3diasEN_capa-e-miolo_spreads_200250722_VC2_Baixa-Qualidade-WEBSITE.pdf',
+  linkEN: 'https://cmbraga-my.sharepoint.com/:b:/g/personal/hugo_barros_cm-braga_pt/IQAWCOx-0ki2SofmrdgKzurbAaLxBTL6L9PPUOqBbgaV6Dc?e=A8FAAe',
   labelLinkEN: 'English Version (PDF)',
 
   stats: [
@@ -556,8 +556,9 @@ export default function ChapterOverlay({
   ),
   
   gallery: [
-    'https://visitbraga.travel/wp-content/uploads/2025/07/Roteiro-3-Dias-PT.webp',
-    'https://visitbraga.travel/wp-content/uploads/2025/07/Roteiro-3-Dias.webp',
+    'https://i.imgur.com/S2u20iH.png',
+    'https://i.imgur.com/JPfjvIt.png',
+    'https://i.imgur.com/Rp78zAC.png',
   ],
 
   videoEmbed: (
@@ -565,9 +566,9 @@ export default function ChapterOverlay({
       <div className="relative w-full h-0 pb-[177.77%] overflow-hidden rounded-[2.5rem] border border-white/10 bg-black/20">
         <iframe
           className="absolute inset-0 w-full h-full"
-          allow="fullscreen"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share; fullscreen"
           allowFullScreen
-          src="https://streamable.com/e/5qyf9a"
+          src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fshare%2Fv%2F1GwB3mioBi%2F&show_text=false&width=400"
         />
       </div>
     </div>
