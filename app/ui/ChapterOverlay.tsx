@@ -2,7 +2,7 @@
 import {
   X, Target, Smartphone, CheckCircle, Briefcase,
   LineChart, Compass, Globe, Sparkles, Activity, ChevronRight, QrCode, ShieldCheck, FileText, PlayCircle, Layers, Zap,
-  Cpu, BarChart3, Monitor, Maximize2, Hexagon, Fingerprint, TrendingUp, Award, Search, Map, Quote, Calendar, ArrowUpRight, Users, ArrowRight, Languages, FileDown
+  Cpu, BarChart3, Monitor, Maximize2, Hexagon, Fingerprint, TrendingUp, Award, Search, Map, Quote, Calendar, ArrowUpRight, Users, ArrowRight, ChevronLeft, Languages, FileDown
 } from 'lucide-react';
 import React, { useEffect, useState, isValidElement, ReactNode } from 'react';
 import { useLang } from './LanguageContext'; // Adicionado para ouvir o botão da Navbar
@@ -59,12 +59,20 @@ interface OverlayProps {
   isOpen: boolean;
   onClose: () => void;
   projectType?: string;
+  onPrev?: () => void;
+  onNext?: () => void;
+  prevTitle?: string;
+  nextTitle?: string;
 }
 
 export default function ChapterOverlay({
   isOpen,
   onClose,
   projectType = 'smart-tourism',
+  onPrev,
+  onNext,
+  prevTitle,
+  nextTitle,
 }: OverlayProps) {
   const [activeTab, setActiveTab] = useState<'overview' | 'pillars' | 'media'>('overview');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -82,7 +90,7 @@ export default function ChapterOverlay({
 // --- FIM DO BLOCO DE CORREÇÃO ---
 'visit-braga': {
   watermark: 'https://i.imgur.com/e0wCEWM.jpeg',
-  tag: t('Gestão de Destino // 2024 — 2025', 'Destination Management // 2024 — 2025'),
+  tag: t('Gestão de Destino // 2024 - 2025', 'Destination Management // 2024 - 2025'),
   headerTitle: t('Portal Visit Braga: Estratégia Digital', 'Visit Braga Portal: Digital Strategy'),
   
   officialNetwork: 'Município de Braga / InvestBraga',
@@ -101,12 +109,12 @@ export default function ChapterOverlay({
 
   hero: (
     <div className="space-y-4">
-      <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+      <span className="text-[var(--sky)] font-black tracking-[0.5em] uppercase text-[10px] bg-[var(--sky)]/10 px-3 py-1 rounded-full border border-[var(--sky)]/20">
         {t('Lançamento 2025', '2025 Launch')}
       </span>
       <h1 className="text-4xl md:text-[58px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
         Visit <br />
-        <span className="text-blue-600 font-serif">Braga.</span>
+        <span className="text-[var(--primary)] font-serif">Braga.</span>
       </h1>
     </div>
   ),
@@ -181,7 +189,7 @@ export default function ChapterOverlay({
 },
 'smart-tourism': {
   watermark: 'https://i.imgur.com/GBs8DY7.jpeg',
-  tag: t('European Shortlisted City // 2024 — 2026', 'European Shortlisted City // 2024 — 2026'),
+  tag: t('European Shortlisted City // 2024 - 2026', 'European Shortlisted City // 2024 - 2026'),
   headerTitle: t('European Capital of Smart Tourism', 'European Capital of Smart Tourism'),
   
   // Chaves para o Footer Dinâmico
@@ -200,12 +208,12 @@ export default function ChapterOverlay({
 
   hero: (
     <div className="space-y-4">
-      <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+      <span className="text-[var(--sky)] font-black tracking-[0.5em] uppercase text-[10px] bg-[var(--sky)]/10 px-3 py-1 rounded-full border border-[var(--sky)]/20">
         {t('Finalista Europeu', 'European Finalist')}
       </span>
       <h1 className="text-4xl md:text-[58px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
         Shortlisted <br />
-        <span className="text-blue-600">Smart Tourism</span>
+        <span className="text-[var(--primary)]">Smart Tourism</span>
       </h1>
     </div>
   ),
@@ -270,7 +278,7 @@ export default function ChapterOverlay({
 },
 'cidade-bracvs': {
   watermark: 'https://i.imgur.com/NRTWHRW.png',
-  tag: t('Educação & Património // 2024 — 2025', 'Education & Heritage // 2024 — 2025'),
+  tag: t('Educação & Património // 2024 - 2025', 'Education & Heritage // 2024 - 2025'),
   headerTitle: t('A Cidade do Bracvs: Roteiro Educativo', 'The City of Bracvs: Educational Itinerary'),
   
   // Chaves para o Footer Dinâmico
@@ -291,13 +299,13 @@ export default function ChapterOverlay({
 
   hero: (
     <div className="space-y-4">
-      <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+      <span className="text-[var(--sky)] font-black tracking-[0.5em] uppercase text-[10px] bg-[var(--sky)]/10 px-3 py-1 rounded-full border border-[var(--sky)]/20">
         {t('Publicação Editorial', 'Editorial Publication')}
       </span>
       <h1 className="text-4xl md:text-[58px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
         {t(
-          <>Cidade do <br /><span className="text-blue-600">Bracvs.</span></>,
-          <>The City of <br /><span className="text-blue-600">Bracvs.</span></>
+          <>Cidade do <br /><span className="text-[var(--primary)]">Bracvs.</span></>,
+          <>The City of <br /><span className="text-[var(--primary)]">Bracvs.</span></>
         )}
       </h1>
     </div>
@@ -363,7 +371,7 @@ export default function ChapterOverlay({
 },
 'braga-after-dark': {
   watermark: 'https://i.imgur.com/mgdxHtt.jpeg',
-  tag: t('Curadoria & Eventos // 2024 — 2025', 'Curatorship & Events // 2024 — 2025'),
+  tag: t('Curadoria & Eventos // 2024 - 2025', 'Curatorship & Events // 2024 - 2025'),
   headerTitle: t('Braga After Dark: Economia Noturna', 'Braga After Dark: Night-time Economy'),
   
   // Chaves para o Footer Dinâmico
@@ -384,12 +392,12 @@ export default function ChapterOverlay({
 
   hero: (
     <div className="space-y-4">
-      <span className="text-indigo-400 font-black tracking-[0.5em] uppercase text-[10px] bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">
+      <span className="text-[var(--sky)] font-black tracking-[0.5em] uppercase text-[10px] bg-[var(--sky)]/10 px-3 py-1 rounded-full border border-[var(--sky)]/20">
         {t('Cidades Europeias', 'European Cities')}
       </span>
       <h1 className="text-4xl md:text-[58px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
         After <br />
-        <span className="text-blue-600">Dark.</span>
+        <span className="text-[var(--primary)]">Dark.</span>
       </h1>
     </div>
   ),
@@ -461,7 +469,7 @@ export default function ChapterOverlay({
 },
 'roteiro-3-dias': {
   watermark: 'https://i.imgur.com/yWtlcEL.png',
-  tag: t('Coordenação Editorial // 2024 — 2025', 'Editorial Coordination // 2024 — 2025'),
+  tag: t('Coordenação Editorial // 2024 - 2025', 'Editorial Coordination // 2024 - 2025'),
   headerTitle: t('Roteiro Oficial: Descobrir Braga', 'Official Guide: Discover Braga'),
   
   // Chaves para o Footer Dinâmico
@@ -491,13 +499,13 @@ export default function ChapterOverlay({
 
   hero: (
     <div className="space-y-4">
-      <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+      <span className="text-[var(--sky)] font-black tracking-[0.5em] uppercase text-[10px] bg-[var(--sky)]/10 px-3 py-1 rounded-full border border-[var(--sky)]/20">
         {t('Guia de Referência', 'Reference Guide')}
       </span>
       <h1 className="text-4xl md:text-[58px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
         {t(
-          <>Braga em <br /><span className="text-blue-600">3 Dias.</span></>,
-          <>Braga in <br /><span className="text-blue-600">3 Days.</span></>
+          <>Braga em <br /><span className="text-[var(--primary)]">3 Dias.</span></>,
+          <>Braga in <br /><span className="text-[var(--primary)]">3 Days.</span></>
         )}
       </h1>
     </div>
@@ -577,7 +585,7 @@ export default function ChapterOverlay({
 },
 'mapa-turistico-braga': {
   watermark: 'https://i.imgur.com/P54M1Ko.png',
-  tag: t('Cartografia & Design // 2024 — 2025', 'Cartography & Design // 2024 — 2025'),
+  tag: t('Cartografia & Design // 2024 - 2025', 'Cartography & Design // 2024 - 2025'),
   headerTitle: t('Novo Mapa Turístico Oficial de Braga', 'Braga’s New Official Tourist Map'),
   
   officialNetwork: t('Município de Braga // Divisão de Turismo', 'Municipality of Braga // Tourism Department'),
@@ -608,12 +616,12 @@ export default function ChapterOverlay({
 
   hero: (
     <div className="space-y-4">
-      <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+      <span className="text-[var(--sky)] font-black tracking-[0.5em] uppercase text-[10px] bg-[var(--sky)]/10 px-3 py-1 rounded-full border border-[var(--sky)]/20">
         {t('Infraestrutura de Informação', 'Information Infrastructure')}
       </span>
       <h1 className="text-4xl md:text-[58px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
         City <br />
-        <span className="text-blue-600">Mapping.</span>
+        <span className="text-[var(--primary)]">Mapping.</span>
       </h1>
     </div>
   ),
@@ -680,7 +688,7 @@ export default function ChapterOverlay({
 'fiets-wandelbeurs-gante': {
   watermark: 'https://i.imgur.com/tg4YOqy.png',
   tag: t('Missão Internacional // 2025', 'International Mission // 2025'),
-  headerTitle: t('Braga na Fiets en Wandelbeurs — Bélgica', 'Braga at Fiets en Wandelbeurs — Belgium'),
+  headerTitle: t('Braga na Fiets en Wandelbeurs - Bélgica', 'Braga at Fiets en Wandelbeurs - Belgium'),
   
   // Chaves para o Footer Dinâmico
   officialNetwork: t('Visit Braga // Mercado Benelux', 'Visit Braga // Benelux Market'),
@@ -700,12 +708,12 @@ export default function ChapterOverlay({
 
   hero: (
     <div className="space-y-4">
-      <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+      <span className="text-[var(--sky)] font-black tracking-[0.5em] uppercase text-[10px] bg-[var(--sky)]/10 px-3 py-1 rounded-full border border-[var(--sky)]/20">
         {t('Promoção Global', 'Global Promotion')}
       </span>
       <h1 className="text-4xl md:text-[58px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
         Global <br />
-        <span className="text-blue-600">Promotion.</span>
+        <span className="text-[var(--primary)]">Promotion.</span>
       </h1>
     </div>
   ),
@@ -771,8 +779,8 @@ export default function ChapterOverlay({
 },
 'expovacaciones-bilbao': {
   watermark: 'https://i.imgur.com/JL0PcZe.png',
-  tag: t('Missão Estratégica // 2024 — 2025', 'Strategic Mission // 2024 — 2025'),
-  headerTitle: t('Braga na ExpoVacaciones — Bilbao', 'Braga at ExpoVacaciones — Bilbao'),
+  tag: t('Missão Estratégica // 2024 - 2025', 'Strategic Mission // 2024 - 2025'),
+  headerTitle: t('Braga na ExpoVacaciones - Bilbao', 'Braga at ExpoVacaciones - Bilbao'),
   
   // Chaves para o Footer Dinâmico
   officialNetwork: t('Visit Braga // Porto e Norte de Portugal', 'Visit Braga // Porto and North of Portugal'),
@@ -792,12 +800,12 @@ export default function ChapterOverlay({
 
   hero: (
     <div className="space-y-4">
-      <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+      <span className="text-[var(--sky)] font-black tracking-[0.5em] uppercase text-[10px] bg-[var(--sky)]/10 px-3 py-1 rounded-full border border-[var(--sky)]/20">
         {t('Mercado de Proximidade', 'Proximity Market')}
       </span>
       <h1 className="text-4xl md:text-[58px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
         Strategic <br />
-        <span className="text-blue-600">Market.</span>
+        <span className="text-[var(--primary)]">Market.</span>
       </h1>
     </div>
   ),
@@ -864,7 +872,7 @@ export default function ChapterOverlay({
 },
     'experiencias-sustentaveis': {
       watermark: 'https://www.cm-braga.pt/archive/cache/img/sz800x600/CMB17012025SERGIOFREITAS3022624430274.jpg',
-      tag: t('Gestão de Produto // 2024 — 2025', 'Product Management // 2024 — 2025'),
+      tag: t('Gestão de Produto // 2024 - 2025', 'Product Management // 2024 - 2025'),
       headerTitle: t('Experiências Turísticas Sustentáveis', 'Sustainable Tourism Experiences'),
       
       // Chaves para o Footer Dinâmico
@@ -885,13 +893,13 @@ export default function ChapterOverlay({
     
       hero: (
         <div className="space-y-4">
-          <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+          <span className="text-[var(--sky)] font-black tracking-[0.5em] uppercase text-[10px] bg-[var(--sky)]/10 px-3 py-1 rounded-full border border-[var(--sky)]/20">
             {t('Desenvolvimento de Produto', 'Product Development')}
           </span>
           <h1 className="text-4xl md:text-[58px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
             {t(
-              <>Experiências <br /><span className="text-blue-600 font-serif">Turísticas.</span></>,
-              <>Touristic <br /><span className="text-blue-600 font-serif">Experiences.</span></>
+              <>Experiências <br /><span className="text-[var(--primary)] font-serif">Turísticas.</span></>,
+              <>Touristic <br /><span className="text-[var(--primary)] font-serif">Experiences.</span></>
             )}
           </h1>
         </div>
@@ -959,7 +967,7 @@ export default function ChapterOverlay({
     },
     'small-retail-braga': {
       watermark: 'https://transition-pathways.europa.eu/sites/default/files/styles/time_dependent_full/public/discussion_form_post/2025-12/ECOSR%20-%20Thumbnail_0.jpg?itok=1-QARVo7',
-      tag: t('Estratégia Europeia // 2025 — 2026', 'European Strategy // 2025 — 2026'),
+      tag: t('Estratégia Europeia // 2025 - 2026', 'European Strategy // 2025 - 2026'),
       headerTitle: t('European Capital of Small Retail', 'European Capital of Small Retail'),
       
       // Chaves para o Footer Dinâmico
@@ -980,12 +988,12 @@ export default function ChapterOverlay({
     
       hero: (
         <div className="space-y-4">
-          <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+          <span className="text-[var(--sky)] font-black tracking-[0.5em] uppercase text-[10px] bg-[var(--sky)]/10 px-3 py-1 rounded-full border border-[var(--sky)]/20">
             {t('Candidatura Europeia', 'European Candidacy')}
           </span>
           <h1 className="text-4xl md:text-[58px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
             Small <br />
-            <span className="text-blue-600">Retail.</span>
+            <span className="text-[var(--primary)]">Retail.</span>
           </h1>
         </div>
       ),
@@ -1137,7 +1145,7 @@ export default function ChapterOverlay({
     },
     'systemeu-salamanca': {
       watermark: 'https://i.imgur.com/SeyCGBk.png',
-      tag: t('Missão Tecnológica // Salamanca 2024 — 2025', 'Tech Mission // Salamanca 2024 — 2025'),
+      tag: t('Missão Tecnológica // Salamanca 2024 - 2025', 'Tech Mission // Salamanca 2024 - 2025'),
       headerTitle: t('Startup OLÉ & SystemEU Summit', 'Startup OLÉ & SystemEU Summit'),
       
       // Chaves para o Footer Dinâmico
@@ -1158,12 +1166,12 @@ export default function ChapterOverlay({
     
       hero: (
         <div className="space-y-4">
-          <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+          <span className="text-[var(--sky)] font-black tracking-[0.5em] uppercase text-[10px] bg-[var(--sky)]/10 px-3 py-1 rounded-full border border-[var(--sky)]/20">
             {t('Inovação Europeia', 'European Innovation')}
           </span>
           <h1 className="text-4xl md:text-[58px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
             SystemEU <br />
-            <span className="text-blue-600 font-serif">Summit.</span>
+            <span className="text-[var(--primary)] font-serif">Summit.</span>
           </h1>
         </div>
       ),
@@ -1252,7 +1260,7 @@ export default function ChapterOverlay({
     if (isValidElement(heroContent)) return heroContent;
     if (typeof heroContent === 'string') {
       return heroContent.split(" ").map((word: string, i: number) => (
-        <span key={i} className={i % 2 !== 0 ? "text-blue-500 block" : "block text-white"}>
+        <span key={i} className={i % 2 !== 0 ? "text-[var(--sky)] block" : "block text-white"}>
           {word}
         </span>
       ));
@@ -1283,12 +1291,52 @@ export default function ChapterOverlay({
         </div>
       )}
 
-      {/* MODAL — Dossier Reader */}
+      {/* MODAL - Dossier Reader */}
       <div className="fixed inset-0 z-[600] flex flex-col bg-[var(--ink)] text-white animate-in fade-in duration-400 font-sans">
         {/* Textura de fundo */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_-10%,rgba(10,92,255,0.14),transparent_55%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_-10%,rgba(176, 138, 69,0.14),transparent_55%)]" />
         </div>
+
+        {/* NAVEGAÇÃO ENTRE DOSSIERS (‹ ›) */}
+        {onPrev && (
+          <button
+            onClick={onPrev}
+            aria-label={prevTitle ? `${t('Anterior', 'Previous')}: ${prevTitle}` : t('Anterior', 'Previous')}
+            className="group absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-30 flex items-center"
+          >
+            <span className="w-9 h-9 md:w-12 md:h-12 rounded-full bg-[var(--ink)]/60 border border-white/15 backdrop-blur-md flex items-center justify-center text-white/70 hover:bg-white hover:text-[var(--ink)] hover:border-white transition-all shadow-lg">
+              <ChevronLeft className="w-5 h-5" />
+            </span>
+            {prevTitle && (
+              <span className="hidden lg:flex flex-col ml-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none">
+                <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-white/40">
+                  {t('Anterior', 'Previous')}
+                </span>
+                <span className="text-xs font-bold text-white whitespace-nowrap">{prevTitle}</span>
+              </span>
+            )}
+          </button>
+        )}
+        {onNext && (
+          <button
+            onClick={onNext}
+            aria-label={nextTitle ? `${t('Próximo', 'Next')}: ${nextTitle}` : t('Próximo', 'Next')}
+            className="group absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-30 flex items-center"
+          >
+            {nextTitle && (
+              <span className="hidden lg:flex flex-col items-end mr-3 opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none">
+                <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-white/40">
+                  {t('Próximo', 'Next')}
+                </span>
+                <span className="text-xs font-bold text-white whitespace-nowrap">{nextTitle}</span>
+              </span>
+            )}
+            <span className="w-9 h-9 md:w-12 md:h-12 rounded-full bg-[var(--ink)]/60 border border-white/15 backdrop-blur-md flex items-center justify-center text-white/70 hover:bg-white hover:text-[var(--ink)] hover:border-white transition-all shadow-lg">
+              <ChevronRight className="w-5 h-5" />
+            </span>
+          </button>
+        )}
 
         {/* HEADER */}
         <header className="relative z-20 shrink-0 border-b border-white/10 bg-[var(--ink)]/70 backdrop-blur-xl px-5 md:px-10 lg:px-14">
@@ -1612,10 +1660,10 @@ export default function ChapterOverlay({
             {(current.externalLink || current.link) && (
               <button
                 onClick={() => window.open(current.externalLink || current.link, '_blank')}
-                className="group flex items-center gap-2.5 md:gap-3 h-9 md:h-10 pl-4 md:pl-5 pr-1.5 rounded-full bg-[var(--primary)] hover:shadow-[0_0_24px_rgba(10,92,255,0.5)] transition-all"
+                className="group flex items-center gap-2.5 md:gap-3 h-9 md:h-10 pl-4 md:pl-5 pr-1.5 rounded-full bg-[var(--primary)] hover:shadow-[0_0_24px_rgba(176, 138, 69,0.5)] transition-all"
               >
                 <span className="flex flex-col items-start leading-none">
-                  <span className="font-mono text-[7px] font-bold uppercase tracking-[0.2em] text-blue-100/80 hidden sm:block">
+                  <span className="font-mono text-[7px] font-bold uppercase tracking-[0.2em] text-[var(--accent)]/80 hidden sm:block">
                     {current.externalLinkLabel || t('Explorar', 'Explore')}
                   </span>
                   <span className="text-[10px] font-bold uppercase tracking-wide text-white">

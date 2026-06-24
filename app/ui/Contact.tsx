@@ -29,13 +29,13 @@ export default function Contact() {
             backgroundSize: '50px 50px',
           }}
         />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-50/50 via-transparent to-transparent" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[var(--primary)]/10 via-transparent to-transparent" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Título Minimalista e Posicionado no Topo */}
         <div className="mb-12 flex items-center gap-4">
-          <h3 className="text-sm uppercase tracking-[0.3em] font-black text-slate-900">
+          <h3 className="text-sm uppercase tracking-[0.3em] font-black text-[var(--ink)]">
             {t('Contacto', 'Contact')}
           </h3>
           <div className="h-[1px] flex-1 bg-slate-100" />
@@ -47,7 +47,7 @@ export default function Contact() {
             <div className="flex flex-col md:flex-row gap-10 items-start md:items-end">
               {/* Fotografia de Grande Destaque */}
               <div className="relative shrink-0">
-                <div className="absolute -inset-4 bg-blue-50 rounded-[2rem] -z-10 blur-xl opacity-60" />
+                <div className="absolute -inset-4 bg-[var(--primary)]/10 rounded-[2rem] -z-10 blur-xl opacity-60" />
 
                 <div className="relative w-48 h-64 md:w-64 md:h-80 rounded-[2rem] overflow-hidden border-[6px] border-white shadow-2xl transition-transform duration-500 hover:scale-[1.02]">
                   <img
@@ -60,7 +60,7 @@ export default function Contact() {
 
                 {/* Badge Flutuante na Foto */}
                 <div className="absolute -bottom-4 -right-4 bg-slate-900 text-white p-4 rounded-2xl shadow-xl flex items-center gap-3 border border-slate-800">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
+                  <div className="w-2 h-2 bg-[var(--primary)] rounded-full animate-pulse" />
                   <span className="text-[10px] font-black uppercase tracking-widest">
                     Online
                   </span>
@@ -69,13 +69,13 @@ export default function Contact() {
 
               {/* Título ao lado da foto no Desktop */}
               <div className="space-y-6 pb-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 rounded-full border border-blue-100">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[var(--primary)]/10 rounded-full border border-[var(--primary)]/20">
                   <MessagesSquare className="w-3.5 h-3.5 text-[var(--primary)]" />
-                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-700">
+                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--primary)]">
                     {t('Novos Pontos de Contacto', 'New Contact Points')}
                   </span>
                 </div>
-                <h2 className="text-4xl md:text-5xl font-playfair font-black text-slate-900 leading-[0.9] tracking-tighter">
+                <h2 className="text-4xl md:text-5xl font-playfair font-black text-[var(--ink)] leading-[0.9] tracking-tighter">
                   {t('Expandir', 'Expanding')} <br />
                   <span className="text-[var(--primary)] italic font-light">
                     {t('perspetivas.', 'perspectives.')}
@@ -84,7 +84,7 @@ export default function Contact() {
               </div>
             </div>
 
-            <p className="text-lg md:text-xl text-slate-500 font-light leading-relaxed max-w-xl border-l-2 border-blue-100 pl-6">
+            <p className="text-lg md:text-xl text-slate-500 font-light leading-relaxed max-w-xl border-l-2 border-[var(--primary)]/20 pl-6">
               {t(
                 'Acredito que o valor real nasce da interseção entre visão territorial e execução estratégica. Mantenho-me atento a projetos que desafiem o status quo e promovam impacto sustentável.',
                 'I believe true value is born from the intersection of territorial vision and strategic execution. I stay attentive to projects that challenge the status quo and promote sustainable impact.'
@@ -120,13 +120,13 @@ export default function Contact() {
 
           {/* Coluna 02: Interface de Contacto (5 Colunas) */}
           <div className="lg:col-span-5 relative lg:mt-24">
-            <div className="absolute -inset-4 bg-gradient-to-tr from-blue-50 to-indigo-50/30 rounded-[3rem] -z-10 blur-2xl opacity-60" />
+            <div className="absolute -inset-4 bg-gradient-to-tr from-[var(--primary)]/10 to-[var(--primary)]/10 rounded-[3rem] -z-10 blur-2xl opacity-60" />
 
             <div className="space-y-4">
               {/* Card de Email */}
               <a
                 href="mailto:hugo.barros@cm-braga.pt"
-                className="group block p-[1px] rounded-[2rem] bg-gradient-to-b from-slate-200 to-transparent hover:from-blue-400 transition-all duration-500 shadow-sm"
+                className="group block p-[1px] rounded-[2rem] bg-gradient-to-b from-slate-200 to-transparent hover:from-[var(--sky)] transition-all duration-500 shadow-sm"
               >
                 <div className="bg-white rounded-[1.9rem] p-6 flex items-center justify-between group-hover:bg-slate-50/50 transition-colors">
                   <div className="flex items-center gap-5">
@@ -137,7 +137,7 @@ export default function Contact() {
                       <p className="text-[9px] font-black text-[var(--primary)] uppercase tracking-widest mb-0.5">
                         {t('Ligar Visões', 'Connecting Visions')}
                       </p>
-                      <p className="text-base md:text-lg font-bold text-slate-900 lowercase">
+                      <p className="text-base md:text-lg font-bold text-[var(--ink)] lowercase">
                         hugo.barros@cm-braga.pt
                       </p>
                     </div>
@@ -151,9 +151,9 @@ export default function Contact() {
                 href="https://www.linkedin.com/in/hugo-abreu-barros/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block p-[1px] rounded-[2rem] bg-gradient-to-b from-slate-200 to-transparent hover:from-blue-600 transition-all duration-500 shadow-sm"
+                className="group block p-[1px] rounded-[2rem] bg-gradient-to-b from-slate-200 to-transparent hover:from-[var(--primary)] transition-all duration-500 shadow-sm"
               >
-                <div className="bg-white rounded-[1.9rem] p-6 flex items-center justify-between group-hover:bg-blue-50/30 transition-colors">
+                <div className="bg-white rounded-[1.9rem] p-6 flex items-center justify-between group-hover:bg-[var(--primary)]/[0.06] transition-colors">
                   <div className="flex items-center gap-5">
                     <div className="w-12 h-12 bg-[var(--primary)] rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform duration-500">
                       <Linkedin className="w-5 h-5 text-white fill-current" />
@@ -162,12 +162,12 @@ export default function Contact() {
                       <p className="text-[9px] font-black text-[var(--primary)] uppercase tracking-widest mb-0.5">
                         Networking
                       </p>
-                      <p className="text-base md:text-lg font-bold text-slate-900">
+                      <p className="text-base md:text-lg font-bold text-[var(--ink)]">
                         Hugo Abreu Barros
                       </p>
                     </div>
                   </div>
-                  <div className="px-3 py-1 rounded-full bg-blue-50 text-[10px] font-bold text-[var(--primary)] group-hover:bg-[var(--primary)] group-hover:text-white transition-colors">
+                  <div className="px-3 py-1 rounded-full bg-[var(--primary)]/10 text-[10px] font-bold text-[var(--primary)] group-hover:bg-[var(--primary)] group-hover:text-white transition-colors">
                     {t('Conectar', 'Connect')}
                   </div>
                 </div>
@@ -181,7 +181,7 @@ export default function Contact() {
                     {t('Localização', 'Location')}
                   </p>
                   <p className="text-sm font-medium text-slate-600">
-                    {t('Braga, Portugal — Disponibilidade Global', 'Braga, Portugal — Global Availability')}
+                    {t('Braga, Portugal - Disponibilidade Global', 'Braga, Portugal - Global Availability')}
                   </p>
                 </div>
                 <div className="flex gap-1">
@@ -189,7 +189,7 @@ export default function Contact() {
                     <Circle
                       key={i}
                       className={`w-1.5 h-1.5 fill-current ${
-                        i === 3 ? 'text-blue-400' : 'text-slate-200'
+                        i === 3 ? 'text-[var(--sky)]' : 'text-slate-200'
                       }`}
                     />
                   ))}
@@ -202,7 +202,7 @@ export default function Contact() {
         {/* Rodapé Integrado */}
         <div className="mt-24 pt-12 border-t border-slate-100 flex flex-col md:flex-row justify-between items-end gap-8">
           <div className="space-y-4">
-            <h4 className="font-playfair text-2xl font-black text-slate-900 tracking-tighter">
+            <h4 className="font-playfair text-2xl font-black text-[var(--ink)] tracking-tighter">
               Hugo Barros
             </h4>
             <p className="text-[10px] uppercase tracking-[0.4em] text-slate-400 font-bold">
@@ -219,7 +219,7 @@ export default function Contact() {
               </span>
             </div>
             <p className="text-[10px] font-mono text-slate-300">
-              © 2026 — STRATEGIC PORTFOLIO
+              © 2026 - STRATEGIC PORTFOLIO
             </p>
           </div>
         </div>

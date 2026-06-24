@@ -72,7 +72,7 @@ export default function ProgressRail() {
                 <span
                   className={`relative z-10 w-[11px] h-[11px] rounded-full border backdrop-blur-md transition-all duration-500 ${
                     isActive
-                      ? 'bg-[var(--primary)] border-[var(--primary)] scale-110 shadow-[0_0_14px_rgba(10,92,255,0.7)]'
+                      ? 'bg-[var(--primary)] border-[var(--primary)] scale-110 shadow-[0_0_14px_rgba(176, 138, 69,0.7)]'
                       : 'bg-white/40 border-slate-400/50 group-hover:border-[var(--primary)]'
                   }`}
                 />

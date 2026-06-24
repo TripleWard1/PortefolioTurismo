@@ -6,13 +6,12 @@ import { useLang } from './LanguageContext';
 
 // Mapa real das secções (ids existentes em page.tsx)
 const SECTIONS = [
-  { id: 'arquivo', pt: 'Portefólio', en: 'Portfolio' },
-  { id: 'capitulo-02', pt: 'Ecossistema', en: 'Ecosystem' },
-  { id: 'estratégia', pt: 'Estratégia', en: 'Strategy' },
+  { id: 'portfolio', pt: 'Portefólio', en: 'Portfolio' },
+  { id: 'impacto', pt: 'Impacto', en: 'Impact' },
   { id: 'contacto', pt: 'Contacto', en: 'Contact' },
 ];
 
-export default function Navbar() {
+export default function Navbar({ onOpenPalette }: { onOpenPalette?: () => void }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState<string>('');
@@ -95,7 +94,7 @@ export default function Navbar() {
                   className={`text-[10px] uppercase tracking-[0.3em] font-black transition-all relative group ${
                     isActive
                       ? 'text-[var(--primary)]'
-                      : 'text-slate-900 hover:text-[var(--primary)]'
+                      : 'text-[var(--ink)] hover:text-[var(--primary)]'
                   }`}
                 >
                   {lang === 'pt' ? item.pt : item.en}
@@ -111,11 +110,24 @@ export default function Navbar() {
 
           {/* Ações */}
           <div className="flex items-center gap-3 sm:gap-5">
+            {/* Pesquisa / Command Palette */}
+            <button
+              onClick={onOpenPalette}
+              aria-label={lang === 'pt' ? 'Pesquisar' : 'Search'}
+              className="group flex items-center gap-2 h-8 pl-2.5 pr-2 rounded-full bg-slate-100 border border-slate-200 hover:border-[var(--primary)]/40 hover:bg-white transition-all"
+            >
+              <svg className="w-3.5 h-3.5 text-slate-400 group-hover:text-[var(--primary)]" fill="none" viewBox="0 0 24 24" strokeWidth={2.2} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-4.34-4.34M17 11a6 6 0 1 1-12 0 6 6 0 0 1 12 0Z" />
+              </svg>
+              <kbd className="hidden sm:inline font-mono text-[9px] font-bold text-slate-400 group-hover:text-slate-600">
+                ⌘K
+              </kbd>
+            </button>
             {/* Toggle PT/EN */}
             <button
               onClick={toggleLang}
               aria-label={lang === 'pt' ? 'Mudar para inglês' : 'Switch to Portuguese'}
-              className="relative flex items-center p-1 rounded-full bg-slate-100 border border-slate-200 w-[70px] h-[32px] transition-all hover:border-blue-300"
+              className="relative flex items-center p-1 rounded-full bg-slate-100 border border-slate-200 w-[70px] h-[32px] transition-all hover:border-[var(--primary)]/40"
             >
               <div
                 className={`absolute top-1 bottom-1 w-[30px] rounded-full bg-white shadow-sm border border-slate-200/50 transition-all duration-300 ease-out ${
@@ -141,12 +153,12 @@ export default function Navbar() {
             </button>
 
             {/* Badge live */}
-            <div className="hidden lg:flex items-center gap-3 px-5 py-2 rounded-xl border border-blue-200/50 bg-blue-50/80 shadow-sm">
+            <div className="hidden lg:flex items-center gap-3 px-5 py-2 rounded-xl border border-[var(--primary)]/30 bg-[var(--primary)]/10 shadow-sm">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--primary)] opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--primary)]" />
               </span>
-              <span className="font-mono text-[9px] uppercase tracking-widest text-blue-900 font-[900]">
+              <span className="font-mono text-[9px] uppercase tracking-widest text-[var(--primary)] font-[900]">
                 Braga Strategic Hub
               </span>
             </div>
@@ -207,7 +219,7 @@ export default function Navbar() {
                   <span className="font-mono text-[10px] text-[var(--primary)] font-bold">
                     0{i + 1}
                   </span>
-                  <span className="font-playfair text-2xl text-slate-900 group-hover:text-[var(--primary)] transition-colors">
+                  <span className="font-playfair text-2xl text-[var(--ink)] group-hover:text-[var(--primary)] transition-colors">
                     {lang === 'pt' ? item.pt : item.en}
                   </span>
                 </span>
@@ -219,10 +231,10 @@ export default function Navbar() {
           </nav>
           <div className="mt-6 pt-5 border-t border-slate-100 flex items-center gap-3">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--primary)] opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--primary)]" />
             </span>
-            <span className="font-mono text-[9px] uppercase tracking-widest text-blue-900 font-[900]">
+            <span className="font-mono text-[9px] uppercase tracking-widest text-[var(--primary)] font-[900]">
               Braga Strategic Hub
             </span>
           </div>

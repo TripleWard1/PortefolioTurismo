@@ -6,7 +6,7 @@ import { useEffect } from 'react';
  * ScrollReveal
  * ------------
  * Observer global e único. Revela qualquer elemento com [data-reveal] quando
- * entra no viewport. Não é preciso importar nada nos componentes — basta
+ * entra no viewport. Não é preciso importar nada nos componentes - basta
  * adicionar o atributo no JSX.
  *
  *   <section data-reveal>…</section>

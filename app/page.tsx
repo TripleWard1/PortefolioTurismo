@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowRight, ArrowUpRight, MapPin, Plus, Globe } from 'lucide-react';
 
 import Hero from './ui/Hero';
@@ -8,15 +8,73 @@ import Navbar from './ui/Navbar';
 import ChapterOverlay from './ui/ChapterOverlay';
 import ProgressRail from './ui/ProgressRail';
 import Contact from './ui/Contact';
+import CommandPalette from './ui/CommandPalette';
+import ProjectIndex from './ui/ProjectIndex';
+import { neighbours, getProject } from './ui/projects';
 import { useLang } from './ui/LanguageContext';
 
 export default function Page() {
-  const { t } = useLang();
-  const [overlayData, setOverlayData] = useState<any>({
-    isOpen: false,
-    projectType: 'smart-tourism',
-  });
-  const open = (projectType: string) => setOverlayData({ isOpen: true, projectType });
+  const { t, lang } = useLang();
+  const [overlay, setOverlay] = useState({ isOpen: false, projectType: 'smart-tourism' });
+  const [paletteOpen, setPaletteOpen] = useState(false);
+
+  // Abrir/fechar dossier com deep-link partilhável (#projeto/<id>)
+  const openProject = (id: string, push = true) => {
+    setOverlay({ isOpen: true, projectType: id });
+    const hash = '#projeto/' + id;
+    if (push) window.history.pushState({ id }, '', hash);
+    else window.history.replaceState({ id }, '', hash);
+  };
+  const open = (id: string) => openProject(id, true);
+  const closeOverlay = () => {
+    setOverlay((o) => ({ ...o, isOpen: false }));
+    if (window.location.hash.startsWith('#projeto/')) {
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  };
+  const navProject = (id: string) => openProject(id, false);
+  const goToSection = (id: string) =>
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+
+  // Sincroniza estado <-> URL (links partilhados + botão voltar)
+  useEffect(() => {
+    const sync = () => {
+      const h = window.location.hash;
+      const id = h.startsWith('#projeto/') ? decodeURIComponent(h.slice('#projeto/'.length)) : '';
+      if (id && getProject(id)) setOverlay({ isOpen: true, projectType: id });
+      else setOverlay((o) => ({ ...o, isOpen: false }));
+    };
+    sync();
+    window.addEventListener('popstate', sync);
+    return () => window.removeEventListener('popstate', sync);
+  }, []);
+
+  // Bloqueia scroll de fundo com o dossier aberto
+  useEffect(() => {
+    if (overlay.isOpen) document.body.style.overflow = 'hidden';
+    else if (!paletteOpen) document.body.style.overflow = '';
+  }, [overlay.isOpen, paletteOpen]);
+
+  // Atalhos globais: ⌘K palette · ‹ › navegar dossiers · Esc fechar
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setPaletteOpen((o) => !o);
+        return;
+      }
+      if (paletteOpen) return;
+      if (overlay.isOpen) {
+        if (e.key === 'Escape') closeOverlay();
+        else if (e.key === 'ArrowRight') navProject(neighbours(overlay.projectType).next.id);
+        else if (e.key === 'ArrowLeft') navProject(neighbours(overlay.projectType).prev.id);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [overlay.isOpen, overlay.projectType, paletteOpen]);
+
+  const nb = neighbours(overlay.projectType);
 
   /* ---- Dados ---- */
   const positioning = [
@@ -165,7 +223,7 @@ export default function Page() {
     { v: '12', label: t('Dossiers estratégicos', 'Strategic dossiers') },
     { v: '04', label: t('Candidaturas europeias', 'European candidacies') },
     { v: '29', label: t('Experiências sustentáveis', 'Sustainable experiences') },
-    { v: '2024—26', label: t('Horizonte de mandato', 'Mandate horizon') },
+    { v: '2024-26', label: t('Horizonte de mandato', 'Mandate horizon') },
   ];
 
   return (
@@ -185,7 +243,7 @@ export default function Page() {
       `}</style>
 
       <div className="relative z-10">
-        <Navbar />
+        <Navbar onOpenPalette={() => setPaletteOpen(true)} />
         <ProgressRail />
         <Hero />
 
@@ -216,9 +274,9 @@ export default function Page() {
         </section>
 
         {/* ============================================================ */}
-        {/* CAPÍTULO 01 — POSICIONAMENTO GLOBAL                         */}
+        {/* CAPÍTULO 01 - POSICIONAMENTO GLOBAL                         */}
         {/* ============================================================ */}
-        <section id="arquivo" className="relative py-24 md:py-28 overflow-hidden bg-[#f8fafc]">
+        <section id="arquivo" className="relative py-24 md:py-28 overflow-hidden bg-[var(--paper)]">
           <div className="absolute inset-0 grid-dots text-slate-900/[0.05]" />
           <div className="max-w-[1320px] mx-auto px-6 relative z-10">
             <header data-reveal className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16 items-end">
@@ -226,10 +284,10 @@ export default function Page() {
                 <div className="flex items-center gap-3 mb-5">
                   <span className="h-px w-7 bg-[var(--primary)]" />
                   <span className="eyebrow text-[var(--primary)]">
-                    {t('Capítulo 01 — Posicionamento', 'Chapter 01 — Positioning')}
+                    {t('Capítulo 01 - Posicionamento', 'Chapter 01 - Positioning')}
                   </span>
                 </div>
-                <h2 className="display font-playfair font-black text-slate-900 text-balance">
+                <h2 className="display font-playfair font-black text-[var(--ink)] text-balance">
                   {t('Posicionamento', 'Global')}{' '}
                   <span className="italic font-light text-[var(--primary)]">
                     {t('Global.', 'Positioning.')}
@@ -239,8 +297,8 @@ export default function Page() {
               <div className="lg:col-span-5">
                 <p className="text-slate-500 leading-relaxed border-l-2 border-slate-200 pl-5">
                   {t(
-                    'Reforçar a presença de Braga no mapa das decisões europeias — transformando potencial em influência direta.',
-                    'Strengthening Braga’s presence on the European decision-making map — turning potential into direct influence.'
+                    'Reforçar a presença de Braga no mapa das decisões europeias - transformando potencial em influência direta.',
+                    'Strengthening Braga’s presence on the European decision-making map - turning potential into direct influence.'
                   )}
                 </p>
               </div>
@@ -283,7 +341,7 @@ export default function Page() {
                       <p className="text-[15px] text-slate-500 leading-relaxed flex-1">
                         {p.description}
                       </p>
-                      <span className="shrink-0 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 font-mono text-[9px] font-bold uppercase tracking-wider text-[var(--primary)]">
+                      <span className="shrink-0 px-3 py-1 rounded-full bg-[var(--primary)]/10 border border-[var(--primary)]/20 font-mono text-[9px] font-bold uppercase tracking-wider text-[var(--primary)]">
                         {p.status}
                       </span>
                     </div>
@@ -343,7 +401,7 @@ export default function Page() {
         </section>
 
         {/* ============================================================ */}
-        {/* CAPÍTULO 02 — ECOSSISTEMA DIGITAL                           */}
+        {/* CAPÍTULO 02 - ECOSSISTEMA DIGITAL                           */}
         {/* ============================================================ */}
         <section id="capitulo-02" className="relative py-24 md:py-28 overflow-hidden bg-[var(--ink)]">
           <div className="absolute inset-0 grid-dots text-[var(--sky)]/[0.06]" />
@@ -353,7 +411,7 @@ export default function Page() {
                 <div className="flex items-center gap-3 mb-5">
                   <span className="h-px w-7 bg-[var(--sky)]" />
                   <span className="eyebrow text-[var(--sky)]">
-                    {t('Capítulo 02 — Digital', 'Chapter 02 — Digital')}
+                    {t('Capítulo 02 - Digital', 'Chapter 02 - Digital')}
                   </span>
                 </div>
                 <h2 className="display font-playfair font-black text-white text-balance">
@@ -423,19 +481,19 @@ export default function Page() {
         </section>
 
         {/* ============================================================ */}
-        {/* CAPÍTULO 03 — HERANÇA & FUTURO                              */}
+        {/* CAPÍTULO 03 - HERANÇA & FUTURO                              */}
         {/* ============================================================ */}
-        <section id="estratégia" className="relative py-24 md:py-32 overflow-hidden bg-[#fcfcf9]">
+        <section id="estratégia" className="relative py-24 md:py-32 overflow-hidden bg-[var(--paper-warm)]">
           <div className="absolute inset-0 grid-dots text-slate-900/[0.05]" />
           <div className="max-w-[1320px] mx-auto px-6 relative z-10">
             <header data-reveal className="mb-20 max-w-2xl">
               <div className="flex items-center gap-3 mb-5">
                 <span className="h-px w-7 bg-[var(--primary)]" />
                 <span className="eyebrow text-[var(--primary)]">
-                  {t('Capítulo 03 — Produto & Identidade', 'Chapter 03 — Product & Identity')}
+                  {t('Capítulo 03 - Produto & Identidade', 'Chapter 03 - Product & Identity')}
                 </span>
               </div>
-              <h2 className="display font-playfair font-black text-slate-900 text-balance">
+              <h2 className="display font-playfair font-black text-[var(--ink)] text-balance">
                 {t('Herança &', 'Heritage &')}{' '}
                 <span className="italic font-light text-[var(--primary)]">
                   {t('Futuro.', 'Future.')}
@@ -483,7 +541,7 @@ export default function Page() {
                       <span className="h-px flex-1 bg-slate-200" />
                       <span className="eyebrow text-slate-400">{p.tag}</span>
                     </div>
-                    <h3 className="h1 font-playfair font-bold text-slate-900 text-balance">
+                    <h3 className="h1 font-playfair font-bold text-[var(--ink)] text-balance">
                       {p.title}
                     </h3>
                     <p className="text-slate-500 leading-relaxed">{p.desc}</p>
@@ -530,7 +588,7 @@ export default function Page() {
                     (tag) => (
                       <span
                         key={tag}
-                        className="font-mono px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-widest text-blue-200"
+                        className="font-mono px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-widest text-[var(--accent)]"
                       >
                         {tag}
                       </span>
@@ -542,13 +600,26 @@ export default function Page() {
           </div>
         </section>
 
+        <ProjectIndex onOpenProject={open} />
+
         <Contact />
       </div>
 
       <ChapterOverlay
-        isOpen={overlayData.isOpen}
-        projectType={overlayData.projectType}
-        onClose={() => setOverlayData({ ...overlayData, isOpen: false })}
+        isOpen={overlay.isOpen}
+        projectType={overlay.projectType}
+        onClose={closeOverlay}
+        onPrev={() => navProject(nb.prev.id)}
+        onNext={() => navProject(nb.next.id)}
+        prevTitle={lang === 'pt' ? nb.prev.pt : nb.prev.en}
+        nextTitle={lang === 'pt' ? nb.next.pt : nb.next.en}
+      />
+
+      <CommandPalette
+        open={paletteOpen}
+        onClose={() => setPaletteOpen(false)}
+        onOpenProject={open}
+        onGoSection={goToSection}
       />
     </main>
   );

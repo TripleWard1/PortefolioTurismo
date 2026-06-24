@@ -3,53 +3,55 @@
 @tailwind utilities;
 
 /* ========================================================================== */
-/*  SISTEMA DE DESIGN — "ATLAS ESTRATÉGICO"                                    */
-/*  Dossier territorial. Azul de governação, Playfair em display (contido),   */
-/*  Inter no corpo, mono nos dados técnicos. Escala DISCIPLINADA.             */
+/*  ATLAS - MONOGRAFIA EM TINTA & LATÃO                                        */
+/*  Base grafite · papel osso · sinal em latão/ouro velho.                     */
+/*  Display: Fraunces (carregada na variável --font-playfair).                 */
 /* ========================================================================== */
 
 :root {
-  /* Paleta */
-  --ink: #0a1424;
-  --ink-soft: #111d33;
-  --ink-deep: #070d18;
-  --paper: #f5f6f8;
-  --paper-warm: #fbfcfd;
-  --primary: #0a5cff;
-  --sky: #2f80ff;
-  --accent: #00c3ff;
+  /* Base */
+  --ink: #121317;        /* grafite (secções escuras / overlay) */
+  --ink-soft: #1b1e24;   /* superfície escura elevada */
+  --ink-deep: #0c0d10;   /* tinta mais profunda */
 
-  /* Derivados */
-  --text-main: #0b1220;
-  --text-muted: #5b6b82;
-  --line: rgba(10, 20, 36, 0.08);
-  --line-strong: rgba(10, 20, 36, 0.14);
-  --glass-bg: rgba(255, 255, 255, 0.66);
-  --shadow-soft: 0 1px 2px rgba(10, 20, 36, 0.04),
-    0 12px 32px -14px rgba(10, 20, 36, 0.12);
-  --shadow-lift: 0 28px 64px -28px rgba(10, 92, 255, 0.26),
-    0 10px 28px -16px rgba(10, 20, 36, 0.16);
+  /* Papel */
+  --paper: #f2eee5;      /* osso quente */
+  --paper-warm: #f8f5ee; /* osso claro elevado */
+
+  /* Sinal - latão / ouro velho */
+  --primary: #b08a45;    /* ouro velho - acento legível em papel */
+  --sky: #d4b572;        /* latão claro - acento sobre tinta */
+  --accent: #e6d0a0;     /* realce */
+
+  /* Texto */
+  --text-main: #1a1c20;
+  --text-muted: #6f675b;
+
+  --line: rgba(20, 22, 26, 0.10);
+  --line-strong: rgba(20, 22, 26, 0.16);
+  --glass-bg: rgba(248, 245, 238, 0.72);
+  --shadow-soft: 0 1px 2px rgba(20, 18, 12, 0.05),
+    0 14px 36px -16px rgba(20, 18, 12, 0.16);
+  --shadow-lift: 0 30px 70px -30px rgba(40, 30, 12, 0.30),
+    0 10px 28px -16px rgba(20, 18, 12, 0.18);
 
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* ESCALA TIPOGRÁFICA FLUIDA (o fim do "tudo gigante") */
-  --fs-display: clamp(2.4rem, 1.4rem + 3.4vw, 3.9rem); /* títulos de capítulo */
-  --fs-h1: clamp(2rem, 1.4rem + 2.4vw, 3.1rem);
-  --fs-h2: clamp(1.6rem, 1.2rem + 1.6vw, 2.25rem);
+  /* Escala tipográfica fluida */
+  --fs-display: clamp(2.6rem, 1.4rem + 4vw, 4.4rem);
+  --fs-h1: clamp(2rem, 1.4rem + 2.4vw, 3.2rem);
+  --fs-h2: clamp(1.6rem, 1.2rem + 1.6vw, 2.3rem);
   --fs-h3: clamp(1.25rem, 1.05rem + 0.8vw, 1.6rem);
 }
 
 @layer base {
   body {
     @apply bg-[var(--paper)] text-[var(--text-main)] antialiased;
-    font-feature-settings: 'cv11', 'ss01', 'ss03';
+    font-feature-settings: 'cv11', 'ss01';
     text-rendering: optimizeLegibility;
   }
-  ::selection {
-    background: var(--primary);
-    color: #fff;
-  }
+  ::selection { background: var(--primary); color: #fff; }
   :focus-visible {
     outline: 2px solid var(--primary);
     outline-offset: 3px;
@@ -61,49 +63,56 @@
     overflow-x: hidden;
   }
   .font-mono {
-    font-family: var(--font-mono), ui-monospace, 'SF Mono', 'JetBrains Mono',
-      Menlo, monospace;
+    font-family: var(--font-mono), ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, monospace;
   }
 }
 
-/* Utilitárias de escala — usar em vez de text-[100px] & companhia */
-.display { font-size: var(--fs-display); line-height: 0.95; letter-spacing: -0.03em; }
-.h1 { font-size: var(--fs-h1); line-height: 1.0; letter-spacing: -0.025em; }
-.h2 { font-size: var(--fs-h2); line-height: 1.05; letter-spacing: -0.02em; }
-.h3 { font-size: var(--fs-h3); line-height: 1.1; letter-spacing: -0.015em; }
+/* Escala - usar em vez de tamanhos arbitrários gigantes */
+.display { font-size: var(--fs-display); line-height: 0.94; letter-spacing: -0.025em; }
+.h1 { font-size: var(--fs-h1); line-height: 1.0; letter-spacing: -0.02em; }
+.h2 { font-size: var(--fs-h2); line-height: 1.05; letter-spacing: -0.018em; }
+.h3 { font-size: var(--fs-h3); line-height: 1.1; letter-spacing: -0.012em; }
 .text-balance { text-wrap: balance; }
 .eyebrow {
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.6875rem;
   text-transform: uppercase;
-  letter-spacing: 0.35em;
+  letter-spacing: 0.34em;
   font-weight: 700;
 }
 
-/* 1. GRAIN */
+/* Numerais de fólio (estilo monografia) */
+.folio {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 0.8;
+}
+
+/* 1. GRÃO de papel (textura quente) */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   z-index: 9999;
   pointer-events: none;
-  opacity: 0.02;
+  opacity: 0.035;
   mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* 2. GLASS */
+/* 2. Vidro */
 .glass-panel {
   background: var(--glass-bg);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
   box-shadow: var(--shadow-soft);
 }
 
-/* 3. Gradiente de título */
+/* 3. Gradiente de título (tinta -> latão) */
 .title-gradient {
-  background: linear-gradient(135deg, var(--ink) 8%, var(--primary) 48%, var(--accent) 92%);
+  background: linear-gradient(135deg, var(--ink) 6%, var(--primary) 52%, var(--accent) 94%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
@@ -112,28 +121,34 @@ body::before {
 }
 @keyframes shine-gradient { to { background-position: 200% center; } }
 
-/* 4. MESH */
+/* 4. Aura de fundo */
 .mesh-bg { position: relative; background-color: var(--paper); }
 .mesh-bg::after {
   content: '';
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: radial-gradient(at 0% 0%, rgba(10, 92, 255, 0.06) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(0, 195, 255, 0.05) 0px, transparent 50%),
-    radial-gradient(at 50% 100%, rgba(255, 255, 255, 1) 0px, transparent 50%);
+  background: radial-gradient(at 0% 0%, rgba(176, 138, 69, 0.07) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(212, 181, 114, 0.05) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(248, 245, 238, 1) 0px, transparent 50%);
   filter: blur(80px);
 }
 
 /* 5. Interação */
 .hover-lift { transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease); }
 .hover-lift:hover { transform: translateY(-6px); box-shadow: var(--shadow-lift); }
-.glow-blue { box-shadow: 0 0 24px rgba(10, 92, 255, 0.22); }
+.glow-blue { box-shadow: 0 0 24px rgba(176, 138, 69, 0.25); }
 
-/* Grelha cartográfica reutilizável */
+/* Grelha de pontos */
 .grid-dots {
   background-image: radial-gradient(currentColor 1.2px, transparent 1.2px);
   background-size: 30px 30px;
+}
+
+/* Régua fina de latão */
+.rule-brass {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--primary), transparent);
 }
 
 /* 6. Animações custom referenciadas no projeto */
@@ -149,7 +164,7 @@ body::before {
 .animate-scan { animation: scan 2.4s var(--ease) infinite; }
 
 /* 7. Scrollbars */
-.custom-scrollbar-dark { scrollbar-width: thin; scrollbar-color: rgba(47,128,255,0.5) transparent; }
+.custom-scrollbar-dark { scrollbar-width: thin; scrollbar-color: rgba(212,181,114,0.5) transparent; }
 .custom-scrollbar-dark::-webkit-scrollbar { width: 8px; height: 8px; }
 .custom-scrollbar-dark::-webkit-scrollbar-track { background: transparent; }
 .custom-scrollbar-dark::-webkit-scrollbar-thumb {
@@ -159,14 +174,36 @@ body::before {
 .custom-scrollbar-dark::-webkit-scrollbar-thumb:hover { background: var(--sky); background-clip: padding-box; }
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 99px; border: 3px solid var(--paper); }
-::-webkit-scrollbar-thumb:hover { background: rgba(10,92,255,0.4); }
+::-webkit-scrollbar-thumb:hover { background: rgba(176,138,69,0.45); }
 
-/* 8. Responsivo — base limpa. Componentes tratam o resto via Tailwind. */
+/* 8. Responsivo base */
 @media (max-width: 768px) {
-  h1 { line-height: 1.05; letter-spacing: -0.035em; word-break: break-word; }
+  h1 { line-height: 1.05; letter-spacing: -0.03em; word-break: break-word; }
 }
 
-/* 9. Movimento reduzido */
+/* 9. SCROLL-REVEAL (sem dependências) */
+html.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(6px);
+  transition: opacity 0.85s var(--ease-out), transform 0.85s var(--ease-out), filter 0.85s var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform, filter;
+}
+html.reveal-ready [data-reveal='fade'] { transform: none; filter: none; }
+html.reveal-ready [data-reveal='scale'] { transform: scale(0.94); filter: none; }
+html.reveal-ready [data-reveal].is-revealed { opacity: 1; transform: none; filter: none; }
+html.reveal-ready [data-reveal='stagger'] { opacity: 1; transform: none; filter: none; transition: none; }
+html.reveal-ready [data-reveal='stagger'] > * {
+  opacity: 0; transform: translateY(24px); filter: blur(5px);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out), filter 0.8s var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+html.reveal-ready [data-reveal='stagger'].is-revealed > * { opacity: 1; transform: none; filter: none; }
+
+@keyframes rise-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.rise-in { animation: rise-in 0.9s var(--ease-out) both; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
@@ -174,50 +211,6 @@ body::before {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-/* -------------------------------------------------------------------------- */
-/* 10. SCROLL-REVEAL (sem dependências — ativado por ScrollReveal.tsx)        */
-/*     Uso: data-reveal | data-reveal="fade|scale|stagger" | data-reveal-delay*/
-/*     O estado escondido só ativa com html.reveal-ready (blindagem).         */
-/* -------------------------------------------------------------------------- */
-html.reveal-ready [data-reveal] {
-  opacity: 0;
-  transform: translateY(28px);
-  filter: blur(6px);
-  transition: opacity 0.85s var(--ease-out), transform 0.85s var(--ease-out),
-    filter 0.85s var(--ease-out);
-  transition-delay: var(--reveal-delay, 0ms);
-  will-change: opacity, transform, filter;
-}
-html.reveal-ready [data-reveal='fade'] { transform: none; filter: none; }
-html.reveal-ready [data-reveal='scale'] { transform: scale(0.94); filter: none; }
-html.reveal-ready [data-reveal].is-revealed {
-  opacity: 1; transform: none; filter: none;
-}
-html.reveal-ready [data-reveal='stagger'] {
-  opacity: 1; transform: none; filter: none; transition: none;
-}
-html.reveal-ready [data-reveal='stagger'] > * {
-  opacity: 0;
-  transform: translateY(24px);
-  filter: blur(5px);
-  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out),
-    filter 0.8s var(--ease-out);
-  transition-delay: var(--reveal-delay, 0ms);
-}
-html.reveal-ready [data-reveal='stagger'].is-revealed > * {
-  opacity: 1; transform: none; filter: none;
-}
-
-/* Entrada na capa (acima da dobra, via CSS) */
-@keyframes rise-in {
-  from { opacity: 0; transform: translateY(18px); }
-  to { opacity: 1; transform: none; }
-}
-.rise-in { animation: rise-in 0.9s var(--ease-out) both; }
-
-@media (prefers-reduced-motion: reduce) {
   html.reveal-ready [data-reveal],
   html.reveal-ready [data-reveal] > *,
   html.reveal-ready [data-reveal='stagger'] > * {

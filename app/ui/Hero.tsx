@@ -21,19 +21,19 @@ export default function Hero() {
       {/* Fundo */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 grid-dots text-slate-900/[0.05]" />
-        <div className="absolute top-[-15%] right-[-5%] w-[65vw] h-[65vw] bg-blue-300/20 blur-[150px] rounded-full" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[45vw] h-[45vw] bg-cyan-200/20 blur-[120px] rounded-full" />
+        <div className="absolute top-[-15%] right-[-5%] w-[65vw] h-[65vw] bg-[var(--primary)]/15 blur-[150px] rounded-full" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[45vw] h-[45vw] bg-[var(--accent)]/20 blur-[120px] rounded-full" />
       </div>
 
       <div className="relative z-10 max-w-[1280px] mx-auto w-full">
         {/* MASTHEAD */}
         <div className="rise-in flex items-center justify-between gap-4 border-b border-slate-200 pb-4 mb-8 sm:mb-12">
           <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.25em] text-slate-500 font-bold truncate">
-            Hugo Barros — {t('Portefólio Estratégico', 'Strategic Portfolio')}
+            Hugo Barros - {t('Portefólio Estratégico', 'Strategic Portfolio')}
           </span>
           <div className="flex items-center gap-2 shrink-0">
             <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--primary)] opacity-75" />
               <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[var(--primary)]" />
             </span>
             <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-slate-400 whitespace-nowrap">
@@ -55,7 +55,7 @@ export default function Hero() {
             </div>
 
             <h1
-              className="rise-in display font-playfair font-black text-slate-900 text-balance"
+              className="rise-in display font-playfair font-black text-[var(--ink)] text-balance"
               style={{ animationDelay: '0.13s' }}
             >
               {t('Estratégia em Ação.', 'Strategy in Action.')}
@@ -69,8 +69,8 @@ export default function Hero() {
               style={{ animationDelay: '0.21s' }}
             >
               {t(
-                'Portefólio de projetos e governação de destino — as estratégias que consolidam Braga como referência europeia de turismo inteligente e território.',
-                'A portfolio of projects and destination governance — strategies consolidating Braga as a European reference in smart tourism and territory.'
+                'Portefólio de projetos e governação de destino - as estratégias que consolidam Braga como referência europeia de turismo inteligente e território.',
+                'A portfolio of projects and destination governance - strategies consolidating Braga as a European reference in smart tourism and territory.'
               )}
             </p>
 
@@ -133,7 +133,7 @@ export default function Hero() {
 
                   <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-md shadow-sm">
                     <span className="relative flex h-1.5 w-1.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--primary)] opacity-75" />
                       <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[var(--primary)]" />
                     </span>
                     <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-slate-700 font-bold">
@@ -173,7 +173,7 @@ export default function Hero() {
               className="group flex items-center gap-4 p-3 sm:p-4 rounded-xl hover:bg-white/70 transition-colors text-left"
             >
               <span className="font-mono text-[11px] font-bold text-[var(--primary)]">{c.n}</span>
-              <span className="flex-1 text-[12px] sm:text-[13px] font-bold uppercase tracking-wider text-slate-700 group-hover:text-slate-900">
+              <span className="flex-1 text-[12px] sm:text-[13px] font-bold uppercase tracking-wider text-slate-700 group-hover:text-[var(--ink)]">
                 {t(c.pt, c.en)}
               </span>
               <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-[var(--primary)] group-hover:translate-x-1 transition-all" />
