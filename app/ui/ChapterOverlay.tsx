@@ -870,6 +870,72 @@ export default function ChapterOverlay({
     'https://i.imgur.com/FexeN3Z.png',
   ],
 },
+    'b-travel-barcelona': {
+      watermark: 'https://i.imgur.com/09Tm1r9.png',
+      tag: t('Representação Internacional // 2026', 'International Representation // 2026'),
+      headerTitle: t('Braga na B-Travel - Barcelona', 'Braga at B-Travel - Barcelona'),
+      officialNetwork: t('Turismo do Porto e Norte de Portugal', 'Porto and North of Portugal Tourism'),
+      externalLink: 'https://www.b-travel.com/',
+      externalSource: 'B-Travel Barcelona',
+      externalLinkLabel: t('Feira Oficial', 'Official Fair'),
+      acreditacao: t('Divisão de Economia e Turismo - Município de Braga / TPNP', 'Economy and Tourism Department - Municipality of Braga / TPNP'),
+      link: '',
+      stats: [
+        { label: t('Mercado-Alvo', 'Target Market'), value: t('Catalunha', 'Catalonia') },
+        { label: t('Datas', 'Dates'), value: '20-22 Mar 2026' },
+        { label: t('Presença', 'Presence'), value: t('Stand TPNP', 'TPNP Stand') },
+      ],
+      hero: (
+        <div className="space-y-4">
+          <span className="text-[var(--sky)] font-black tracking-[0.5em] uppercase text-[10px] bg-[var(--sky)]/10 px-3 py-1 rounded-full border border-[var(--sky)]/20">
+            {t('Sul da Europa', 'Southern Europe')}
+          </span>
+          <h1 className="text-4xl md:text-[58px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
+            B-Travel <br />
+            <span className="text-[var(--primary)]">Barcelona.</span>
+          </h1>
+        </div>
+      ),
+      description: (
+        <div className="space-y-6">
+          <p>
+            {t(
+              <>Representei o Município de Braga na B-Travel, uma das feiras de turismo de maior relevância do <span className="text-white font-bold italic underline decoration-[var(--sky)] underline-offset-8 text-2xl">Sul da Europa</span>, com forte expressão junto do público catalão.</>,
+              <>I represented the Municipality of Braga at B-Travel, one of the most relevant tourism fairs in <span className="text-white font-bold italic underline decoration-[var(--sky)] underline-offset-8 text-2xl">Southern Europe</span>, with strong reach among the Catalan public.</>
+            )}
+          </p>
+          <p className="text-white/40 text-lg leading-relaxed">
+            {t(
+              'Braga esteve presente no stand do Turismo do Porto e Norte de Portugal, reafirmando o seu lugar de destaque numa região de oferta única. Durante os três dias, o contacto direto com visitantes e profissionais foi uma oportunidade privilegiada para dar a conhecer uma cidade milenar, de identidade forte, que acolhe e fica na memória - afirmando Braga, de forma contínua e consistente, nas rotas turísticas internacionais.',
+              'Braga was present at the Porto and North of Portugal Tourism stand, reaffirming its prominent place in a region with a unique offer. Over the three days, direct contact with visitors and professionals was a privileged opportunity to showcase a millennial city of strong identity that welcomes and stays in the memory, consistently affirming Braga on international tourism routes.'
+            )}
+          </p>
+        </div>
+      ),
+      pillarTabLabel: t('Eixos Estratégicos', 'Strategic Pillars'),
+      pillarTitle: t('Presença em Barcelona', 'Presence in Barcelona'),
+      pillarDesc: t(
+        'Promoção ativa do território e afirmação de Braga nas rotas internacionais, junto de um mercado catalão qualificado e atento a destinos autênticos.',
+        'Active promotion of the territory and affirmation of Braga on international routes, before a qualified Catalan market attentive to authentic destinations.'
+      ),
+      pillars: [
+        { title: t('Promoção do Território', 'Territory Promotion'), desc: t('Divulgação ativa da identidade milenar de Braga e da sua oferta cultural consolidada junto do público e do trade catalão.', 'Active promotion of the millennial identity of Braga and its consolidated cultural offer to the Catalan public and trade.'), icon: Globe },
+        { title: t('Contacto com o Trade', 'Trade Engagement'), desc: t('Networking com profissionais do setor e operadores no stand do Turismo do Porto e Norte de Portugal.', 'Networking with sector professionals and operators at the Porto and North of Portugal Tourism stand.'), icon: Briefcase },
+        { title: t('Mercado Catalão', 'Catalan Market'), desc: t('Leitura de um mercado emissor cada vez mais atento a destinos autênticos, ricos em história e cultura.', 'Reading a source market increasingly attentive to authentic destinations, rich in history and culture.'), icon: BarChart3 },
+        { title: t('Narrativa do Destino', 'Destination Narrative'), desc: t('Comunicação de uma narrativa forte e consistente que afirma Braga como destino de referência internacional.', 'Communicating a strong and consistent narrative that affirms Braga as an international reference destination.'), icon: Map },
+      ],
+      quote: t(
+        'Uma cidade milenar, de identidade forte, que surpreende, acolhe e fica na memória de quem a visita.',
+        'A millennial city of strong identity that surprises, welcomes and stays in the memory of those who visit.'
+      ),
+      gallery: [
+        'https://i.imgur.com/09Tm1r9.png',
+        'https://i.imgur.com/9gPeKCr.png',
+        'https://i.imgur.com/u8hgUWi.png',
+        'https://i.imgur.com/dYaYXb9.png',
+        'https://i.imgur.com/NQnBWix.png',
+      ],
+    },
     'experiencias-sustentaveis': {
       watermark: 'https://www.cm-braga.pt/archive/cache/img/sz800x600/CMB17012025SERGIOFREITAS3022624430274.jpg',
       tag: t('Gestão de Produto // 2024 - 2025', 'Product Management // 2024 - 2025'),

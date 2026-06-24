@@ -144,6 +144,13 @@ export default function Page() {
       image: 'https://i.imgur.com/JL0PcZe.png',
       tag: t('Estratégia Ibérica', 'Iberian Strategy'),
     },
+    {
+      id: 'b-travel-barcelona',
+      title: 'B-Travel Barcelona',
+      location: t('Barcelona, Espanha', 'Barcelona, Spain'),
+      image: 'https://i.imgur.com/09Tm1r9.png',
+      tag: t('Sul da Europa', 'Southern Europe'),
+    },
   ];
 
   const digital = [
@@ -366,7 +373,7 @@ export default function Page() {
                 </span>
                 <span className="h-px flex-1 bg-slate-200" />
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {fairs.map((f) => (
                   <article
                     key={f.id}

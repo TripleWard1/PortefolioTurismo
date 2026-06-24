@@ -80,6 +80,14 @@ export const PROJECTS: ProjectMeta[] = [
     image: 'https://i.imgur.com/JL0PcZe.png',
   },
   {
+    id: 'b-travel-barcelona',
+    pt: 'B-Travel Barcelona',
+    en: 'B-Travel Barcelona',
+    theme: 'internacional',
+    sectionId: 'arquivo',
+    image: 'https://i.imgur.com/09Tm1r9.png',
+  },
+  {
     id: 'visit-braga',
     pt: 'Portal Visit Braga',
     en: 'Visit Braga Portal',
