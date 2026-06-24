@@ -3,35 +3,41 @@
 @tailwind utilities;
 
 /* ========================================================================== */
-/*  SISTEMA DE DESIGN — "ATLAS"                                                */
-/*  Direção: dossier institucional / cartográfico. Azul de governação,        */
-/*  Playfair em display, Inter no corpo, mono nos dados técnicos.             */
+/*  SISTEMA DE DESIGN — "ATLAS ESTRATÉGICO"                                    */
+/*  Dossier territorial. Azul de governação, Playfair em display (contido),   */
+/*  Inter no corpo, mono nos dados técnicos. Escala DISCIPLINADA.             */
 /* ========================================================================== */
 
 :root {
-  /* — Paleta (6 valores nomeados) — */
-  --ink: #0a1424;          /* navy-tinta para secções escuras */
-  --ink-soft: #111d33;     /* superfícies escuras elevadas */
-  --paper: #f6f7f9;        /* papel claro, ligeiramente frio */
-  --paper-warm: #fbfcfd;   /* superfície clara elevada */
-  --primary: #0a5cff;      /* azul institucional */
-  --sky: #2f80ff;          /* azul claro (hover / brilho) */
-  --accent: #00c3ff;       /* ciano (toque) */
+  /* Paleta */
+  --ink: #0a1424;
+  --ink-soft: #111d33;
+  --ink-deep: #070d18;
+  --paper: #f5f6f8;
+  --paper-warm: #fbfcfd;
+  --primary: #0a5cff;
+  --sky: #2f80ff;
+  --accent: #00c3ff;
 
-  /* — Derivados — */
+  /* Derivados */
   --text-main: #0b1220;
   --text-muted: #5b6b82;
   --line: rgba(10, 20, 36, 0.08);
   --line-strong: rgba(10, 20, 36, 0.14);
   --glass-bg: rgba(255, 255, 255, 0.66);
   --shadow-soft: 0 1px 2px rgba(10, 20, 36, 0.04),
-    0 12px 32px -12px rgba(10, 20, 36, 0.10);
-  --shadow-lift: 0 24px 60px -24px rgba(10, 92, 255, 0.28),
-    0 8px 24px -12px rgba(10, 20, 36, 0.12);
+    0 12px 32px -14px rgba(10, 20, 36, 0.12);
+  --shadow-lift: 0 28px 64px -28px rgba(10, 92, 255, 0.26),
+    0 10px 28px -16px rgba(10, 20, 36, 0.16);
 
-  /* — Timing — */
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ESCALA TIPOGRÁFICA FLUIDA (o fim do "tudo gigante") */
+  --fs-display: clamp(2.4rem, 1.4rem + 3.4vw, 3.9rem); /* títulos de capítulo */
+  --fs-h1: clamp(2rem, 1.4rem + 2.4vw, 3.1rem);
+  --fs-h2: clamp(1.6rem, 1.2rem + 1.6vw, 2.25rem);
+  --fs-h3: clamp(1.25rem, 1.05rem + 0.8vw, 1.6rem);
 }
 
 @layer base {
@@ -40,36 +46,41 @@
     font-feature-settings: 'cv11', 'ss01', 'ss03';
     text-rendering: optimizeLegibility;
   }
-
-  /* Seleção mais refinada */
   ::selection {
     background: var(--primary);
     color: #fff;
   }
-
-  /* Foco visível e consistente (acessibilidade) */
   :focus-visible {
     outline: 2px solid var(--primary);
     outline-offset: 3px;
     border-radius: 4px;
   }
-
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 96px;
+    scroll-padding-top: 88px;
     overflow-x: hidden;
   }
-
-  /* Utilitária mono para captions / coordenadas / eyebrows técnicos */
   .font-mono {
     font-family: var(--font-mono), ui-monospace, 'SF Mono', 'JetBrains Mono',
-      'Menlo', monospace;
+      Menlo, monospace;
   }
 }
 
-/* -------------------------------------------------------------------------- */
-/*  1. GRAIN — textura de filme (muito subtil)                                */
-/* -------------------------------------------------------------------------- */
+/* Utilitárias de escala — usar em vez de text-[100px] & companhia */
+.display { font-size: var(--fs-display); line-height: 0.95; letter-spacing: -0.03em; }
+.h1 { font-size: var(--fs-h1); line-height: 1.0; letter-spacing: -0.025em; }
+.h2 { font-size: var(--fs-h2); line-height: 1.05; letter-spacing: -0.02em; }
+.h3 { font-size: var(--fs-h3); line-height: 1.1; letter-spacing: -0.015em; }
+.text-balance { text-wrap: balance; }
+.eyebrow {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+  font-weight: 700;
+}
+
+/* 1. GRAIN */
 body::before {
   content: '';
   position: fixed;
@@ -81,144 +92,116 @@ body::before {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* -------------------------------------------------------------------------- */
-/*  2. GLASS — painéis de vidro                                               */
-/* -------------------------------------------------------------------------- */
+/* 2. GLASS */
 .glass-panel {
   background: var(--glass-bg);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.8);
   box-shadow: var(--shadow-soft);
-  transition: all 0.5s var(--ease);
 }
 
-/* -------------------------------------------------------------------------- */
-/*  3. TIPOGRAFIA — gradiente animado de título                              */
-/* -------------------------------------------------------------------------- */
+/* 3. Gradiente de título */
 .title-gradient {
-  background: linear-gradient(
-    135deg,
-    var(--ink) 8%,
-    var(--primary) 48%,
-    var(--accent) 92%
-  );
+  background: linear-gradient(135deg, var(--ink) 8%, var(--primary) 48%, var(--accent) 92%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: shine-gradient 8s linear infinite;
 }
+@keyframes shine-gradient { to { background-position: 200% center; } }
 
-@keyframes shine-gradient {
-  to {
-    background-position: 200% center;
-  }
-}
-
-.text-balance {
-  text-wrap: balance;
-}
-
-/* -------------------------------------------------------------------------- */
-/*  4. MESH — aura de luz de fundo                                            */
-/* -------------------------------------------------------------------------- */
-.mesh-bg {
-  position: relative;
-  background-color: var(--paper);
-}
+/* 4. MESH */
+.mesh-bg { position: relative; background-color: var(--paper); }
 .mesh-bg::after {
   content: '';
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: radial-gradient(
-      at 0% 0%,
-      rgba(10, 92, 255, 0.06) 0px,
-      transparent 50%
-    ),
+  background: radial-gradient(at 0% 0%, rgba(10, 92, 255, 0.06) 0px, transparent 50%),
     radial-gradient(at 100% 0%, rgba(0, 195, 255, 0.05) 0px, transparent 50%),
     radial-gradient(at 50% 100%, rgba(255, 255, 255, 1) 0px, transparent 50%);
   filter: blur(80px);
 }
 
-/* -------------------------------------------------------------------------- */
-/*  5. UTILITÁRIAS DE INTERAÇÃO                                               */
-/* -------------------------------------------------------------------------- */
-.hover-lift {
-  transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
-}
-.hover-lift:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lift);
+/* 5. Interação */
+.hover-lift { transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease); }
+.hover-lift:hover { transform: translateY(-6px); box-shadow: var(--shadow-lift); }
+.glow-blue { box-shadow: 0 0 24px rgba(10, 92, 255, 0.22); }
+
+/* Grelha cartográfica reutilizável */
+.grid-dots {
+  background-image: radial-gradient(currentColor 1.2px, transparent 1.2px);
+  background-size: 30px 30px;
 }
 
-.glow-blue {
-  box-shadow: 0 0 24px rgba(10, 92, 255, 0.22);
+/* 6. Animações custom referenciadas no projeto */
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+.animate-spin-slow { animation: spin-slow 22s linear infinite; }
+@keyframes pulse-slow { 0%,100% { opacity: 1; } 50% { opacity: 0.55; } }
+.animate-pulse-slow { animation: pulse-slow 3.2s var(--ease) infinite; }
+@keyframes scan {
+  0% { transform: translateY(-100%); opacity: 0; }
+  40% { opacity: 1; }
+  100% { transform: translateY(900%); opacity: 0; }
+}
+.animate-scan { animation: scan 2.4s var(--ease) infinite; }
+
+/* 7. Scrollbars */
+.custom-scrollbar-dark { scrollbar-width: thin; scrollbar-color: rgba(47,128,255,0.5) transparent; }
+.custom-scrollbar-dark::-webkit-scrollbar { width: 8px; height: 8px; }
+.custom-scrollbar-dark::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar-dark::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--primary), var(--ink-soft));
+  border-radius: 99px; border: 2px solid transparent; background-clip: padding-box;
+}
+.custom-scrollbar-dark::-webkit-scrollbar-thumb:hover { background: var(--sky); background-clip: padding-box; }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 99px; border: 3px solid var(--paper); }
+::-webkit-scrollbar-thumb:hover { background: rgba(10,92,255,0.4); }
+
+/* 8. Responsivo — leve, sem !important war */
+@media (max-width: 768px) {
+  h1 { line-height: 1.04; letter-spacing: -0.04em; word-break: break-word; }
+  .fixed.inset-0.z-\[600\] { overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  .fixed.inset-0.z-\[600\] header { flex-wrap: wrap; gap: 1rem; padding: 1rem; }
+  .fixed.inset-0.z-\[600\] main { padding: 1.5rem 1.25rem; }
+  .fixed.inset-0.z-\[600\] nav.flex.items-center.gap-2 { flex-wrap: wrap; width: 100%; }
+  .fixed.inset-0.z-\[600\] footer { flex-direction: column; align-items: flex-start; gap: 1.25rem; text-align: left; padding: 1.5rem; }
 }
 
-.profile-frame {
-  @apply relative p-1 rounded-full;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  box-shadow: 0 0 24px rgba(10, 92, 255, 0.22);
-}
-
-/* Costuras suaves entre secções de cores diferentes (claro<->escuro).
-   Aplicar .seam-to-dark numa secção clara que precede uma escura, etc. */
-.seam-fade-bottom::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 140px;
-  pointer-events: none;
-  background: linear-gradient(to bottom, transparent, var(--ink));
-  opacity: 0.0;
+/* 9. Movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* -------------------------------------------------------------------------- */
-/*  6. SCROLL-REVEAL  (ativado por ScrollReveal.tsx via IntersectionObserver) */
-/*     Uso: <div data-reveal>…</div>  ·  data-reveal="up|fade|blur|scale"     */
-/*          data-reveal-delay="120"  (ms)                                     */
-/*          num contentor:  data-reveal="stagger"  → filhos entram em cascata */
+/* 10. SCROLL-REVEAL (sem dependências — ativado por ScrollReveal.tsx)        */
+/*     Uso: data-reveal | data-reveal="fade|scale|stagger" | data-reveal-delay*/
+/*     O estado escondido só ativa com html.reveal-ready (blindagem).         */
 /* -------------------------------------------------------------------------- */
-/* IMPORTANTE: o estado "escondido" só é aplicado quando o ScrollReveal.tsx
-   já montou e adicionou a classe .reveal-ready ao <html>. Assim, se por
-   qualquer razão o observer não correr, o conteúdo NUNCA fica invisível —
-   apenas não anima. (Blindagem contra aplicação parcial dos ficheiros.) */
 html.reveal-ready [data-reveal] {
   opacity: 0;
   transform: translateY(28px);
   filter: blur(6px);
-  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out),
-    filter 0.9s var(--ease-out);
+  transition: opacity 0.85s var(--ease-out), transform 0.85s var(--ease-out),
+    filter 0.85s var(--ease-out);
   transition-delay: var(--reveal-delay, 0ms);
   will-change: opacity, transform, filter;
 }
-html.reveal-ready [data-reveal='fade'] {
-  transform: none;
-  filter: none;
-}
-html.reveal-ready [data-reveal='blur'] {
-  transform: none;
-}
-html.reveal-ready [data-reveal='scale'] {
-  transform: scale(0.94);
-  filter: none;
-}
+html.reveal-ready [data-reveal='fade'] { transform: none; filter: none; }
+html.reveal-ready [data-reveal='scale'] { transform: scale(0.94); filter: none; }
 html.reveal-ready [data-reveal].is-revealed {
-  opacity: 1;
-  transform: none;
-  filter: none;
+  opacity: 1; transform: none; filter: none;
 }
-
-/* Cascata: o observer põe --reveal-delay incremental nos filhos diretos */
 html.reveal-ready [data-reveal='stagger'] {
-  opacity: 1;
-  transform: none;
-  filter: none;
-  transition: none;
+  opacity: 1; transform: none; filter: none; transition: none;
 }
 html.reveal-ready [data-reveal='stagger'] > * {
   opacity: 0;
@@ -229,183 +212,21 @@ html.reveal-ready [data-reveal='stagger'] > * {
   transition-delay: var(--reveal-delay, 0ms);
 }
 html.reveal-ready [data-reveal='stagger'].is-revealed > * {
-  opacity: 1;
-  transform: none;
-  filter: none;
+  opacity: 1; transform: none; filter: none;
 }
 
-/* -------------------------------------------------------------------------- */
-/*  7. ENTRADA (page-load) — usada pelo Hero / Navbar                         */
-/* -------------------------------------------------------------------------- */
-@keyframes reveal-up {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.animate-reveal {
-  animation: reveal-up 1s var(--ease-out) both;
-}
-
+/* Entrada na capa (acima da dobra, via CSS) */
 @keyframes rise-in {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
 }
-.rise-in {
-  animation: rise-in 0.9s var(--ease-out) both;
-}
+.rise-in { animation: rise-in 0.9s var(--ease-out) both; }
 
-/* -------------------------------------------------------------------------- */
-/*  8. ANIMAÇÕES CUSTOM referenciadas no projeto (auto-suficientes)          */
-/*     (garante que nada parte se não estiverem no tailwind.config)           */
-/* -------------------------------------------------------------------------- */
-@keyframes spin-slow {
-  to {
-    transform: rotate(360deg);
-  }
-}
-.animate-spin-slow {
-  animation: spin-slow 22s linear infinite;
-}
-
-@keyframes pulse-slow {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.55;
-  }
-}
-.animate-pulse-slow {
-  animation: pulse-slow 3.2s var(--ease) infinite;
-}
-
-@keyframes scan {
-  0% {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  40% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(900%);
-    opacity: 0;
-  }
-}
-.animate-scan {
-  animation: scan 2.4s var(--ease) infinite;
-}
-
-/* -------------------------------------------------------------------------- */
-/*  9. SCROLLBARS                                                             */
-/* -------------------------------------------------------------------------- */
-/* Barra do overlay (fundo escuro) — invocada como .custom-scrollbar-dark */
-.custom-scrollbar-dark {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(47, 128, 255, 0.5) transparent;
-}
-.custom-scrollbar-dark::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-.custom-scrollbar-dark::-webkit-scrollbar-track {
-  background: transparent;
-}
-.custom-scrollbar-dark::-webkit-scrollbar-thumb {
-  background: linear-gradient(var(--primary), var(--ink-soft));
-  border-radius: 99px;
-  border: 2px solid transparent;
-  background-clip: padding-box;
-}
-.custom-scrollbar-dark::-webkit-scrollbar-thumb:hover {
-  background: var(--sky);
-  background-clip: padding-box;
-}
-
-/* Scrollbar global discreta (tema claro) */
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-thumb {
-  background: var(--line-strong);
-  border-radius: 99px;
-  border: 3px solid var(--paper);
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(10, 92, 255, 0.4);
-}
-
-/* -------------------------------------------------------------------------- */
-/* 10. RESPONSIVO — leve e sem guerra de !important                          */
-/*     (o Tailwind já reflui as grelhas via prefixos lg:; só ajustamos       */
-/*      tipografia fluida e o overlay, que precisa de scroll em mobile)       */
-/* -------------------------------------------------------------------------- */
-@media (max-width: 768px) {
-  h1 {
-    line-height: 1.04;
-    letter-spacing: -0.04em;
-    word-break: break-word;
-  }
-
-  /* Overlay (ChapterOverlay) precisa de scroll vertical fluido em mobile */
-  .fixed.inset-0.z-\[600\] {
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  .fixed.inset-0.z-\[600\] header {
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding: 1rem;
-  }
-  .fixed.inset-0.z-\[600\] main {
-    padding: 1.5rem 1.25rem;
-  }
-  .fixed.inset-0.z-\[600\] nav.flex.items-center.gap-2 {
-    flex-wrap: wrap;
-    width: 100%;
-  }
-  .fixed.inset-0.z-\[600\] nav.flex.items-center.gap-2 button {
-    padding: 8px 14px;
-    font-size: 10px;
-  }
-  .fixed.inset-0.z-\[600\] footer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.25rem;
-    text-align: left;
-    padding: 1.5rem;
-  }
-}
-
-/* -------------------------------------------------------------------------- */
-/* 11. MOVIMENTO REDUZIDO (acessibilidade)                                   */
-/* -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
+  html.reveal-ready [data-reveal],
+  html.reveal-ready [data-reveal] > *,
+  html.reveal-ready [data-reveal='stagger'] > * {
+    opacity: 1 !important; transform: none !important; filter: none !important;
   }
-  [data-reveal],
-  [data-reveal] > *,
-  [data-reveal='stagger'] > * {
-    opacity: 1 !important;
-    transform: none !important;
-    filter: none !important;
-  }
+  .rise-in { animation: none !important; }
 }

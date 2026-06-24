@@ -19,7 +19,6 @@ const playfair = Playfair_Display({
   weight: ['400', '700', '900'],
 });
 
-// Face mono para captions técnicos, coordenadas e eyebrows de "dossier"
 const mono = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-mono',
@@ -31,9 +30,7 @@ export const metadata: Metadata = {
   title: 'Hugo Barros | Portfolio Estratégico',
   description:
     'Estratégia de destino, inovação territorial e desenvolvimento turístico — Município de Braga.',
-  icons: {
-    icon: 'https://imgur.com/Dx42oze.png',
-  },
+  icons: { icon: 'https://imgur.com/Dx42oze.png' },
   openGraph: {
     title: 'Hugo Barros | Território & Inovação',
     description: 'Arquitetura de estratégia urbana e turismo inteligente.',
@@ -42,38 +39,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt" className="scroll-smooth">
       <body
-        className={`
-          ${inter.variable}
-          ${playfair.variable}
-          ${mono.variable}
-          font-sans
-          antialiased
-          bg-[var(--paper)]
-          text-slate-900
-        `}
+        className={`${inter.variable} ${playfair.variable} ${mono.variable} font-sans antialiased bg-[var(--paper)] text-slate-900`}
       >
         <LanguageProvider>
-          {/* Camada de fundo dinâmica */}
-          <div
-            className="mesh-bg fixed inset-0 z-0 pointer-events-none"
-            aria-hidden="true"
-          />
-
-          {/* Conteúdo principal */}
+          <div className="mesh-bg fixed inset-0 z-0 pointer-events-none" aria-hidden="true" />
           <div className="relative z-10">{children}</div>
-
-          {/* Observer global de scroll-reveal */}
           <ScrollReveal />
         </LanguageProvider>
-
         <GoogleAnalytics gaId="G-C9ZYJ5XB1E" />
       </body>
     </html>

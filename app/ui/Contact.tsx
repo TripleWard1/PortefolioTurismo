@@ -70,14 +70,14 @@ export default function Contact() {
               {/* Título ao lado da foto no Desktop */}
               <div className="space-y-6 pb-4">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 rounded-full border border-blue-100">
-                  <MessagesSquare className="w-3.5 h-3.5 text-blue-600" />
+                  <MessagesSquare className="w-3.5 h-3.5 text-[var(--primary)]" />
                   <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-700">
                     {t('Novos Pontos de Contacto', 'New Contact Points')}
                   </span>
                 </div>
-                <h2 className="text-5xl md:text-7xl font-playfair font-black text-slate-900 leading-[0.9] tracking-tighter">
+                <h2 className="text-4xl md:text-5xl font-playfair font-black text-slate-900 leading-[0.9] tracking-tighter">
                   {t('Expandir', 'Expanding')} <br />
-                  <span className="text-blue-600 italic font-light">
+                  <span className="text-[var(--primary)] italic font-light">
                     {t('perspetivas.', 'perspectives.')}
                   </span>
                 </h2>
@@ -94,7 +94,7 @@ export default function Contact() {
             {/* Badges de Credibilidade */}
             <div className="flex flex-wrap gap-4">
               <div className="flex items-center gap-3 px-6 py-4 bg-slate-50 rounded-2xl border border-slate-100 group hover:bg-white hover:shadow-md transition-all duration-500">
-                <Briefcase className="w-5 h-5 text-blue-600" />
+                <Briefcase className="w-5 h-5 text-[var(--primary)]" />
                 <div className="flex flex-col">
                   <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest">
                     {t('Vínculo', 'Affiliation')}
@@ -134,7 +134,7 @@ export default function Contact() {
                       <Mail className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <p className="text-[9px] font-black text-blue-600 uppercase tracking-widest mb-0.5">
+                      <p className="text-[9px] font-black text-[var(--primary)] uppercase tracking-widest mb-0.5">
                         {t('Ligar Visões', 'Connecting Visions')}
                       </p>
                       <p className="text-base md:text-lg font-bold text-slate-900 lowercase">
@@ -142,7 +142,7 @@ export default function Contact() {
                       </p>
                     </div>
                   </div>
-                  <ArrowUpRight className="w-5 h-5 text-slate-300 group-hover:text-blue-600 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+                  <ArrowUpRight className="w-5 h-5 text-slate-300 group-hover:text-[var(--primary)] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
                 </div>
               </a>
 
@@ -155,11 +155,11 @@ export default function Contact() {
               >
                 <div className="bg-white rounded-[1.9rem] p-6 flex items-center justify-between group-hover:bg-blue-50/30 transition-colors">
                   <div className="flex items-center gap-5">
-                    <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform duration-500">
+                    <div className="w-12 h-12 bg-[var(--primary)] rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform duration-500">
                       <Linkedin className="w-5 h-5 text-white fill-current" />
                     </div>
                     <div>
-                      <p className="text-[9px] font-black text-blue-600 uppercase tracking-widest mb-0.5">
+                      <p className="text-[9px] font-black text-[var(--primary)] uppercase tracking-widest mb-0.5">
                         Networking
                       </p>
                       <p className="text-base md:text-lg font-bold text-slate-900">
@@ -167,7 +167,7 @@ export default function Contact() {
                       </p>
                     </div>
                   </div>
-                  <div className="px-3 py-1 rounded-full bg-blue-50 text-[10px] font-bold text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                  <div className="px-3 py-1 rounded-full bg-blue-50 text-[10px] font-bold text-[var(--primary)] group-hover:bg-[var(--primary)] group-hover:text-white transition-colors">
                     {t('Conectar', 'Connect')}
                   </div>
                 </div>
@@ -202,7 +202,7 @@ export default function Contact() {
         {/* Rodapé Integrado */}
         <div className="mt-24 pt-12 border-t border-slate-100 flex flex-col md:flex-row justify-between items-end gap-8">
           <div className="space-y-4">
-            <h4 className="font-playfair text-3xl font-black text-slate-900 tracking-tighter">
+            <h4 className="font-playfair text-2xl font-black text-slate-900 tracking-tighter">
               Hugo Barros
             </h4>
             <p className="text-[10px] uppercase tracking-[0.4em] text-slate-400 font-bold">
@@ -211,10 +211,10 @@ export default function Contact() {
           </div>
           <div className="flex flex-col items-end gap-3 text-right">
             <div className="flex gap-6 text-[10px] font-bold uppercase tracking-widest text-slate-400">
-              <span className="hover:text-blue-600 cursor-pointer transition-colors">
+              <span className="hover:text-[var(--primary)] cursor-pointer transition-colors">
                 {t('Curadoria', 'Curation')}
               </span>
-              <span className="hover:text-blue-600 cursor-pointer transition-colors">
+              <span className="hover:text-[var(--primary)] cursor-pointer transition-colors">
                 {t('Inovação', 'Innovation')}
               </span>
             </div>

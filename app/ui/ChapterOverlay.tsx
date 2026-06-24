@@ -104,7 +104,7 @@ export default function ChapterOverlay({
       <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
         {t('Lançamento 2025', '2025 Launch')}
       </span>
-      <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
+      <h1 className="text-4xl md:text-[58px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
         Visit <br />
         <span className="text-blue-600 font-serif">Braga.</span>
       </h1>
@@ -203,7 +203,7 @@ export default function ChapterOverlay({
       <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
         {t('Finalista Europeu', 'European Finalist')}
       </span>
-      <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
+      <h1 className="text-4xl md:text-[58px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
         Shortlisted <br />
         <span className="text-blue-600">Smart Tourism</span>
       </h1>
@@ -294,7 +294,7 @@ export default function ChapterOverlay({
       <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
         {t('Publicação Editorial', 'Editorial Publication')}
       </span>
-      <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
+      <h1 className="text-4xl md:text-[58px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
         {t(
           <>Cidade do <br /><span className="text-blue-600">Bracvs.</span></>,
           <>The City of <br /><span className="text-blue-600">Bracvs.</span></>
@@ -387,7 +387,7 @@ export default function ChapterOverlay({
       <span className="text-indigo-400 font-black tracking-[0.5em] uppercase text-[10px] bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">
         {t('Cidades Europeias', 'European Cities')}
       </span>
-      <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
+      <h1 className="text-4xl md:text-[58px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
         After <br />
         <span className="text-blue-600">Dark.</span>
       </h1>
@@ -494,7 +494,7 @@ export default function ChapterOverlay({
       <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
         {t('Guia de Referência', 'Reference Guide')}
       </span>
-      <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
+      <h1 className="text-4xl md:text-[58px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
         {t(
           <>Braga em <br /><span className="text-blue-600">3 Dias.</span></>,
           <>Braga in <br /><span className="text-blue-600">3 Days.</span></>
@@ -611,7 +611,7 @@ export default function ChapterOverlay({
       <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
         {t('Infraestrutura de Informação', 'Information Infrastructure')}
       </span>
-      <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
+      <h1 className="text-4xl md:text-[58px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
         City <br />
         <span className="text-blue-600">Mapping.</span>
       </h1>
@@ -703,7 +703,7 @@ export default function ChapterOverlay({
       <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
         {t('Promoção Global', 'Global Promotion')}
       </span>
-      <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
+      <h1 className="text-4xl md:text-[58px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
         Global <br />
         <span className="text-blue-600">Promotion.</span>
       </h1>
@@ -795,7 +795,7 @@ export default function ChapterOverlay({
       <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
         {t('Mercado de Proximidade', 'Proximity Market')}
       </span>
-      <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
+      <h1 className="text-4xl md:text-[58px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
         Strategic <br />
         <span className="text-blue-600">Market.</span>
       </h1>
@@ -888,7 +888,7 @@ export default function ChapterOverlay({
           <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
             {t('Desenvolvimento de Produto', 'Product Development')}
           </span>
-          <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
+          <h1 className="text-4xl md:text-[58px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
             {t(
               <>Experiências <br /><span className="text-blue-600 font-serif">Turísticas.</span></>,
               <>Touristic <br /><span className="text-blue-600 font-serif">Experiences.</span></>
@@ -983,7 +983,7 @@ export default function ChapterOverlay({
           <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
             {t('Candidatura Europeia', 'European Candidacy')}
           </span>
-          <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
+          <h1 className="text-4xl md:text-[58px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
             Small <br />
             <span className="text-blue-600">Retail.</span>
           </h1>
@@ -1072,7 +1072,7 @@ export default function ChapterOverlay({
           <span className="text-purple-400 font-black tracking-[0.5em] uppercase text-[10px] bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">
             {t('Reconhecimento Global', 'Global Recognition')}
           </span>
-          <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
+          <h1 className="text-4xl md:text-[58px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
             Music <br />
             <span className="text-purple-600 font-serif">Cities.</span>
           </h1>
@@ -1161,7 +1161,7 @@ export default function ChapterOverlay({
           <span className="text-blue-500 font-black tracking-[0.5em] uppercase text-[10px] bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
             {t('Inovação Europeia', 'European Innovation')}
           </span>
-          <h1 className="text-6xl md:text-[96px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
+          <h1 className="text-4xl md:text-[58px] font-black tracking-tighter text-white uppercase italic leading-[0.85]">
             SystemEU <br />
             <span className="text-blue-600 font-serif">Summit.</span>
           </h1>
@@ -1262,9 +1262,7 @@ export default function ChapterOverlay({
 
   return (
     <>
-      {/* ---------------------------------------------------------------- */}
-      {/* LIGHTBOX                                                          */}
-      {/* ---------------------------------------------------------------- */}
+      {/* LIGHTBOX */}
       {selectedImage && (
         <div
           className="fixed inset-0 z-[2000] flex items-center justify-center bg-black/95 backdrop-blur-md animate-in fade-in duration-300 p-4 cursor-zoom-out"
@@ -1274,7 +1272,7 @@ export default function ChapterOverlay({
             aria-label="Fechar imagem"
             className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors z-[2001]"
           >
-            <X size={40} strokeWidth={1} />
+            <X size={36} strokeWidth={1} />
           </button>
           <img
             src={selectedImage}
@@ -1285,162 +1283,171 @@ export default function ChapterOverlay({
         </div>
       )}
 
-      {/* ---------------------------------------------------------------- */}
-      {/* MODAL PRINCIPAL                                                   */}
-      {/* ---------------------------------------------------------------- */}
-      <div className="fixed inset-0 z-[600] flex items-center justify-center overflow-hidden animate-in fade-in duration-500 font-sans">
-        {/* Fundo — tinta + grelha cartográfica + watermark */}
-        <div className="absolute inset-0 bg-[var(--ink)] z-0" />
-        <div
-          className="absolute inset-0 z-[1] opacity-[0.06] pointer-events-none"
-          style={{
-            backgroundImage:
-              'radial-gradient(rgba(47,128,255,0.9) 1px, transparent 1px)',
-            backgroundSize: '34px 34px',
-          }}
-        />
-        <div className="absolute inset-0 z-[1] bg-[radial-gradient(circle_at_75%_30%,rgba(10,92,255,0.18),transparent_55%)]" />
-        <div className="absolute inset-0 z-[2] overflow-hidden pointer-events-none opacity-[0.18]">
-          <img
-            src={current.watermark || current.gallery?.[0]}
-            className="w-full h-full object-cover blur-[12px] scale-110"
-            alt=""
-          />
-          <div className="absolute inset-0 bg-[var(--ink)]/50" />
+      {/* MODAL — Dossier Reader */}
+      <div className="fixed inset-0 z-[600] flex flex-col bg-[var(--ink)] text-white animate-in fade-in duration-400 font-sans">
+        {/* Textura de fundo subtil */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          {current.watermark && (
+            <img
+              src={current.watermark}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover opacity-[0.06] blur-[6px] scale-110"
+            />
+          )}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_-10%,rgba(10,92,255,0.16),transparent_55%)]" />
         </div>
 
-        <div className="relative w-full h-full flex flex-col z-10 text-white overflow-hidden">
-          {/* HEADER */}
-          <header className="flex items-center justify-between px-6 md:px-12 py-6 z-[100] border-b border-white/10 backdrop-blur-xl bg-white/[0.02]">
-            <div className="flex items-center gap-4 min-w-0">
-              <div className="flex flex-col min-w-0">
-                <span className="font-mono text-[var(--sky)] font-bold text-[9px] tracking-[0.45em] uppercase mb-1.5 flex items-center gap-2">
-                  <span className="w-4 h-[1px] bg-[var(--sky)]/60" />
-                  {t('Dossier Estratégico', 'Strategic Dossier')}
-                </span>
-                <h2 className="text-base md:text-xl font-black uppercase tracking-tight text-white italic truncate">
-                  {current.headerTitle}
-                </h2>
-              </div>
-            </div>
+        {/* HEADER */}
+        <header className="relative z-20 flex items-center justify-between gap-4 px-6 md:px-10 lg:px-14 h-20 border-b border-white/10 bg-[var(--ink)]/70 backdrop-blur-xl shrink-0">
+          <div className="flex items-center gap-4 min-w-0">
+            <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-[var(--sky)] hidden sm:inline">
+              {t('Dossier', 'Dossier')}
+            </span>
+            <span className="hidden sm:block h-4 w-px bg-white/15" />
+            <h2 className="text-sm md:text-base font-bold uppercase tracking-wide text-white truncate">
+              {current.headerTitle}
+            </h2>
+          </div>
 
-            <div className="flex items-center gap-4 md:gap-6 shrink-0">
-              <nav className="flex items-center gap-1 bg-white/5 p-1.5 rounded-2xl border border-white/10">
-                {(['overview', 'pillars', 'media'] as const).map((tab) => (
-                  <button
-                    key={tab}
-                    onClick={() => setActiveTab(tab)}
-                    className={`px-4 md:px-7 py-2.5 text-[10px] font-black uppercase tracking-widest transition-all duration-300 rounded-xl ${
-                      activeTab === tab
-                        ? 'bg-white text-slate-900 shadow-xl'
-                        : 'text-white/45 hover:text-white'
-                    }`}
-                  >
-                    {tab === 'overview'
-                      ? t('Visão Geral', 'Overview')
-                      : tab === 'pillars'
-                      ? t('Eixos', 'Pillars')
-                      : 'Media'}
-                  </button>
-                ))}
-              </nav>
-              <button
-                onClick={onClose}
-                aria-label="Fechar"
-                className="w-11 h-11 rounded-2xl border border-white/10 flex items-center justify-center hover:bg-white hover:text-slate-900 transition-all"
-              >
-                <X size={20} />
-              </button>
-            </div>
-          </header>
+          <div className="flex items-center gap-3 md:gap-6 shrink-0">
+            <nav className="flex items-center gap-1">
+              {(['overview', 'pillars', 'media'] as const).map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`relative px-3 md:px-4 py-2 text-[11px] font-bold uppercase tracking-widest transition-colors ${
+                    activeTab === tab ? 'text-white' : 'text-white/35 hover:text-white/70'
+                  }`}
+                >
+                  {tab === 'overview'
+                    ? t('Visão Geral', 'Overview')
+                    : tab === 'pillars'
+                    ? t('Eixos', 'Pillars')
+                    : 'Media'}
+                  {activeTab === tab && (
+                    <span className="absolute -bottom-[1px] left-3 right-3 h-[2px] bg-[var(--primary)] rounded-full" />
+                  )}
+                </button>
+              ))}
+            </nav>
+            <button
+              onClick={onClose}
+              aria-label="Fechar"
+              className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-[var(--ink)] transition-all"
+            >
+              <X size={18} />
+            </button>
+          </div>
+        </header>
 
-          {/* CONTEÚDO */}
-          <main className="flex-1 overflow-y-auto px-6 md:px-12 py-12 md:py-16 custom-scrollbar-dark">
+        {/* CONTEÚDO */}
+        <main className="relative z-10 flex-1 overflow-y-auto custom-scrollbar-dark">
+          <div className="max-w-6xl mx-auto px-6 md:px-10 lg:px-14 py-12 md:py-16">
             {/* ---------------- VISÃO GERAL ---------------- */}
             {activeTab === 'overview' && (
-              <div className="max-w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-                {/* Esquerda */}
-                <div className="lg:col-span-8 space-y-14">
-                  <div className="animate-in slide-in-from-left-4 fade-in duration-700">
-                    {current.tag && (
-                      <span className="font-mono inline-block text-[9px] uppercase tracking-[0.35em] text-[var(--sky)] bg-[var(--sky)]/10 border border-[var(--sky)]/20 rounded-full px-4 py-1.5 mb-8">
-                        {current.tag}
-                      </span>
-                    )}
-                    {renderHero()}
-                  </div>
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 animate-in fade-in slide-in-from-bottom-3 duration-500">
+                {/* Principal */}
+                <div className="lg:col-span-7 space-y-10">
+                  {current.tag && (
+                    <span className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--sky)] bg-[var(--sky)]/10 border border-[var(--sky)]/20 rounded-full px-4 py-1.5">
+                      {current.tag}
+                    </span>
+                  )}
 
-                  <div className="flex gap-8 animate-in fade-in duration-1000 delay-150">
-                    <div className="w-1.5 bg-gradient-to-b from-[var(--primary)] to-[var(--accent)] rounded-full shrink-0" />
-                    <div className="text-lg md:text-2xl text-white/75 font-light leading-relaxed max-w-4xl">
+                  <div className="font-playfair">{renderHero()}</div>
+
+                  <div className="flex gap-6">
+                    <div className="w-1 rounded-full bg-gradient-to-b from-[var(--primary)] to-[var(--accent)] shrink-0" />
+                    <div className="text-lg md:text-xl text-white/70 font-light leading-relaxed">
                       {current.description}
                     </div>
                   </div>
 
-                  {metrics.length > 0 && (
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
-                      {metrics.map((m: any, i: number) => (
-                        <div
-                          key={i}
-                          className="relative p-8 bg-white/[0.03] border border-white/10 rounded-[2rem] hover:bg-white/[0.06] hover:border-[var(--sky)]/30 transition-all duration-500 group overflow-hidden"
-                        >
-                          <span className="font-mono absolute top-5 right-6 text-[10px] text-white/15 font-bold">
-                            0{i + 1}
-                          </span>
-                          <span className="font-mono text-[9px] font-black text-[var(--sky)] uppercase tracking-[0.2em] block mb-4">
-                            {m.label}
-                          </span>
-                          <div className="text-3xl font-black tracking-tighter text-white">
-                            {m.value}
-                          </div>
-                          <div className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] transition-all duration-700" />
+                  {current.quote && (
+                    <figure className="relative mt-4 rounded-2xl border border-white/10 bg-white/[0.03] p-8">
+                      <Quote className="text-[var(--primary)]/40 w-8 h-8 mb-5" />
+                      <blockquote className="font-playfair text-xl md:text-2xl italic font-medium text-white/90 leading-snug">
+                        {current.quote}
+                      </blockquote>
+                      <figcaption className="flex items-center gap-4 mt-7 pt-6 border-t border-white/10">
+                        <div className="w-11 h-11 rounded-xl bg-[var(--primary)] flex items-center justify-center font-black italic text-white text-sm shrink-0">
+                          HB
                         </div>
-                      ))}
-                    </div>
+                        <div className="flex flex-col">
+                          <span className="text-xs font-bold uppercase tracking-wider text-white">
+                            {current.authorTitle || t('Unidade de Missão', 'Mission Unit')}
+                          </span>
+                          <span className="font-mono text-[9px] uppercase tracking-wider text-white/40">
+                            {current.authorSub || t('Estratégia Territorial', 'Territorial Strategy')}
+                          </span>
+                        </div>
+                      </figcaption>
+                    </figure>
                   )}
                 </div>
 
-                {/* Direita — citação */}
-                <div className="lg:col-span-4 space-y-8">
-                  <div className="relative p-10 md:p-12 bg-gradient-to-br from-white/[0.06] to-transparent border border-white/10 rounded-[3rem] overflow-hidden animate-in slide-in-from-right-4 fade-in duration-700">
-                    <div className="absolute -top-8 -right-8 w-40 h-40 rounded-full border border-[var(--sky)]/10" />
-                    <Quote className="text-[var(--primary)]/30 w-12 h-12 mb-8" />
-                    <p className="text-2xl md:text-3xl font-bold italic text-white/90 mb-12 leading-snug relative z-10">
-                      “{current.quote}”
-                    </p>
-                    <div className="flex items-center gap-5 pt-8 border-t border-white/10">
-                      <div className="w-14 h-14 rounded-2xl bg-[var(--primary)] flex items-center justify-center font-black italic shadow-lg shadow-blue-500/20 text-white shrink-0">
-                        HB
-                      </div>
-                      <div className="flex flex-col">
-                        <span className="text-xs font-black uppercase tracking-wider text-white">
-                          {(current as any).authorTitle ||
-                            t('Unidade de Missão', 'Mission Unit')}
+                {/* Ficha técnica */}
+                <aside className="lg:col-span-5">
+                  <div className="lg:sticky lg:top-6 rounded-2xl border border-white/10 bg-white/[0.03] p-8">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">
+                      {t('Ficha técnica', 'Project facts')}
+                    </span>
+
+                    {metrics.length > 0 && (
+                      <dl className="mt-6">
+                        {metrics.map((m: any, i: number) => (
+                          <div
+                            key={i}
+                            className="flex items-baseline justify-between gap-4 py-3.5 border-b border-white/10 first:pt-0"
+                          >
+                            <dt className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/40">
+                              {m.label}
+                            </dt>
+                            <dd className="text-sm font-bold text-white text-right">{m.value}</dd>
+                          </div>
+                        ))}
+                      </dl>
+                    )}
+
+                    {current.officialNetwork && (
+                      <div className="mt-6">
+                        <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--sky)]">
+                          {t('Rede', 'Network')}
                         </span>
-                        <span className="font-mono text-[9px] text-white/35 uppercase font-bold tracking-wider">
-                          {(current as any).authorSub ||
-                            t('Estratégia Territorial', 'Territorial Strategy')}
-                        </span>
+                        <p className="text-sm text-white/70 mt-1.5 leading-relaxed">
+                          {current.officialNetwork}
+                        </p>
                       </div>
-                    </div>
+                    )}
+
+                    {current.acreditacao && (
+                      <div className="mt-5">
+                        <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--sky)]">
+                          {t('Acreditação', 'Accreditation')}
+                        </span>
+                        <p className="text-sm text-white/70 mt-1.5 leading-relaxed italic">
+                          {current.acreditacao}
+                        </p>
+                      </div>
+                    )}
                   </div>
-                </div>
+                </aside>
               </div>
             )}
 
-            {/* ---------------- EIXOS / PILARES ---------------- */}
+            {/* ---------------- EIXOS ---------------- */}
             {activeTab === 'pillars' && (
-              <div className="max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-700">
+              <div className="animate-in fade-in slide-in-from-bottom-3 duration-500">
                 {(current.pillarTitle || current.pillarDesc) && (
-                  <div className="max-w-3xl mb-14">
+                  <div className="max-w-3xl mb-12">
                     {current.pillarTabLabel && (
-                      <span className="font-mono text-[9px] uppercase tracking-[0.4em] text-[var(--sky)] flex items-center gap-3 mb-5">
-                        <span className="w-8 h-[1px] bg-[var(--sky)]/50" />
+                      <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--sky)] flex items-center gap-3 mb-4">
+                        <span className="w-8 h-px bg-[var(--sky)]/50" />
                         {current.pillarTabLabel}
                       </span>
                     )}
                     {current.pillarTitle && (
-                      <h3 className="text-3xl md:text-5xl font-playfair font-bold text-white tracking-tight leading-tight mb-5">
+                      <h3 className="font-playfair text-3xl md:text-4xl font-bold text-white tracking-tight leading-tight mb-4">
                         {current.pillarTitle}
                       </h3>
                     )}
@@ -1452,23 +1459,24 @@ export default function ChapterOverlay({
                   </div>
                 )}
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-2">
                   {current.pillars?.map((pillar: any, idx: number) => (
                     <div
                       key={idx}
-                      className="relative p-10 bg-white/[0.03] border border-white/10 rounded-[2.5rem] group hover:bg-[var(--primary)]/[0.08] hover:border-[var(--sky)]/30 transition-all duration-500 overflow-hidden"
+                      className="group flex gap-6 py-8 border-t border-white/10 hover:border-[var(--sky)]/30 transition-colors"
                     >
-                      <span className="font-mono absolute top-8 right-10 text-5xl font-black text-white/[0.05] group-hover:text-[var(--sky)]/15 transition-colors">
+                      <span className="font-mono text-sm font-bold text-[var(--sky)] pt-1 w-8 shrink-0">
                         0{idx + 1}
                       </span>
-                      <div className="w-14 h-14 rounded-2xl bg-[var(--primary)]/20 flex items-center justify-center mb-8 group-hover:bg-[var(--primary)]/30 group-hover:scale-105 transition-all duration-500">
-                        <pillar.icon className="text-[var(--sky)]" size={26} />
+                      <div>
+                        <div className="flex items-center gap-3 mb-3">
+                          {pillar.icon && (
+                            <pillar.icon className="text-[var(--sky)] w-5 h-5 shrink-0" />
+                          )}
+                          <h4 className="text-lg font-bold text-white">{pillar.title}</h4>
+                        </div>
+                        <p className="text-white/50 leading-relaxed">{pillar.desc}</p>
                       </div>
-                      <h4 className="text-xl font-bold mb-4 text-white">
-                        {pillar.title}
-                      </h4>
-                      <p className="text-white/45 leading-relaxed">{pillar.desc}</p>
-                      <div className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] transition-all duration-700" />
                     </div>
                   ))}
                 </div>
@@ -1477,196 +1485,121 @@ export default function ChapterOverlay({
 
             {/* ---------------- MEDIA ---------------- */}
             {activeTab === 'media' && (
-              <div className="max-w-7xl mx-auto animate-in fade-in duration-700">
-                <div className="flex flex-col gap-12">
-                  {current.videoEmbed && <div className="w-full">{current.videoEmbed}</div>}
+              <div className="animate-in fade-in duration-500 flex flex-col gap-10">
+                {current.videoEmbed && <div className="w-full">{current.videoEmbed}</div>}
 
-                  {current.gallery && current.gallery.length > 0 && (
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                      {current.gallery.map((img, idx) => (
-                        <div
-                          key={idx}
-                          onClick={() => setSelectedImage(img)}
-                          className="group relative aspect-video rounded-[2rem] overflow-hidden border border-white/10 bg-white/5 cursor-zoom-in"
-                        >
-                          <div className="absolute top-4 left-4 z-20 font-mono text-[9px] text-white/60 bg-black/30 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10">
-                            {String(idx + 1).padStart(2, '0')}
+                {current.gallery && current.gallery.length > 0 && (
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    {current.gallery.map((img: string, idx: number) => (
+                      <div
+                        key={idx}
+                        onClick={() => setSelectedImage(img)}
+                        className="group relative aspect-video rounded-2xl overflow-hidden border border-white/10 bg-white/5 cursor-zoom-in"
+                      >
+                        <span className="absolute top-3 left-3 z-20 font-mono text-[9px] text-white/70 bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-full">
+                          {String(idx + 1).padStart(2, '0')}
+                        </span>
+                        <div className="absolute inset-0 z-10 flex items-center justify-center bg-[var(--primary)]/0 group-hover:bg-[var(--primary)]/20 transition-colors">
+                          <div className="opacity-0 group-hover:opacity-100 transition-opacity bg-white/20 backdrop-blur-md p-3 rounded-full border border-white/30">
+                            <Maximize2 size={18} className="text-white" />
                           </div>
-                          <div className="absolute inset-0 bg-[var(--primary)]/0 group-hover:bg-[var(--primary)]/20 z-10 transition-colors flex items-center justify-center">
-                            <div className="opacity-0 group-hover:opacity-100 transition-opacity bg-white/20 backdrop-blur-md p-3 rounded-full border border-white/30">
-                              <Maximize2 size={20} className="text-white" />
-                            </div>
-                          </div>
-                          <img
-                            src={img}
-                            alt=""
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                          />
                         </div>
-                      ))}
-                    </div>
-                  )}
-
-                  {!current.videoEmbed &&
-                    (!current.gallery || current.gallery.length === 0) && (
-                      <div className="flex flex-col items-center justify-center py-32 text-center">
-                        <PlayCircle className="w-12 h-12 text-white/15 mb-6" />
-                        <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-white/30">
-                          {t('Sem media disponível', 'No media available')}
-                        </p>
+                        <img
+                          src={img}
+                          alt=""
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
                       </div>
-                    )}
-                </div>
+                    ))}
+                  </div>
+                )}
+
+                {!current.videoEmbed && (!current.gallery || current.gallery.length === 0) && (
+                  <div className="flex flex-col items-center justify-center py-28 text-center">
+                    <PlayCircle className="w-10 h-10 text-white/15 mb-5" />
+                    <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-white/30">
+                      {t('Sem media disponível', 'No media available')}
+                    </p>
+                  </div>
+                )}
               </div>
             )}
-          </main>
+          </div>
+        </main>
 
-          {/* FOOTER */}
-          <footer className="px-6 md:px-12 py-4 relative mt-16 overflow-visible">
-            <div className="absolute inset-0 bg-[#070d18] z-0" />
-            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--sky)]/40 to-transparent z-20" />
-            <div className="absolute top-0 left-0 w-full h-full border-t border-white/[0.05] pointer-events-none z-10" />
+        {/* FOOTER SLIM */}
+        <footer className="relative z-20 shrink-0 flex items-center justify-between gap-4 px-6 md:px-10 lg:px-14 h-16 border-t border-white/10 bg-[var(--ink-deep)]">
+          <div className="flex items-center gap-3 min-w-0">
+            <span className="text-base font-black italic text-white tracking-tighter">
+              HB<span className="text-[var(--sky)]">.</span>
+            </span>
+            <span className="hidden sm:block h-4 w-px bg-white/15" />
+            <span className="hidden sm:inline font-mono text-[9px] uppercase tracking-[0.3em] text-white/35">
+              {t('Portfólio Estratégico', 'Strategic Portfolio')}
+            </span>
+          </div>
 
-            <div className="relative z-30 flex items-center justify-between gap-4">
-              <div className="flex items-center gap-6 flex-1 min-w-0">
-                <div className="flex flex-col leading-none">
-                  <span className="text-xl font-black italic text-white tracking-tighter">
-                    HB<span className="text-[var(--sky)]">.</span>
-                  </span>
-                  <span className="font-mono text-[7px] text-white/30 uppercase tracking-[0.4em] mt-1 font-bold whitespace-nowrap">
-                    Portfolio Estratégico
-                  </span>
-                </div>
-                {current.officialNetwork && (
-                  <div className="hidden xl:flex items-center border-l border-white/10 ml-2 pl-6">
-                    <span className="font-mono text-[10px] text-slate-500 font-medium uppercase tracking-[0.1em] italic leading-none">
-                      {current.officialNetwork}
-                    </span>
-                  </div>
-                )}
-              </div>
-
-              <div className="hidden lg:flex flex-1 justify-center items-center relative">
-                <div className="flex items-center gap-8 cursor-default absolute -top-16">
-                  <span className="text-[15px] font-black uppercase tracking-[0.6em] bg-gradient-to-r from-[var(--primary)] via-white to-[var(--primary)] bg-clip-text text-transparent drop-shadow-[0_0_10px_rgba(10,92,255,0.3)]">
-                    Hugo
-                  </span>
-                  <div className="relative">
-                    <div className="absolute -inset-1 rounded-full bg-gradient-to-b from-[var(--sky)] to-blue-900 opacity-75 blur-[2px]" />
-                    <div className="relative w-24 h-24 rounded-full border-[4px] border-[#070d18] overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.9)] bg-[#070d18] transition-transform duration-700 hover:scale-105">
-                      <img
-                        src="https://i.imgur.com/Dx42oze.jpeg"
-                        alt="Hugo Barros"
-                        className="w-full h-full object-cover object-top scale-110"
-                      />
-                    </div>
-                    <div className="absolute bottom-3 right-3 w-4 h-4 bg-[var(--sky)] border-4 border-[#070d18] rounded-full shadow-[0_0_15px_rgba(47,128,255,0.8)] z-20" />
-                  </div>
-                  <span className="text-[15px] font-black uppercase tracking-[0.6em] bg-gradient-to-l from-[var(--primary)] via-white to-[var(--primary)] bg-clip-text text-transparent drop-shadow-[0_0_10px_rgba(10,92,255,0.3)]">
-                    Barros
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex items-center justify-end gap-3 flex-1">
-                {current.acreditacao && (
-                  <div className="hidden xl:flex flex-col items-end leading-none border-r border-slate-700/50 pr-4">
-                    <span className="font-mono text-[7px] text-slate-500 uppercase font-black tracking-[0.3em] mb-1">
-                      Acreditação
-                    </span>
-                    <span className="text-[9px] text-slate-400 font-light italic leading-none max-w-[220px] text-right">
-                      {current.acreditacao}
-                    </span>
-                  </div>
-                )}
-
-                {/* Cápsula de versões disponíveis */}
-                {(current.linkFR || current.linkES || current.linkEN || current.linkLowCost) && (
-                  <div className="flex items-center gap-3 bg-white/[0.03] p-1.5 pl-4 rounded-full border border-white/10 backdrop-blur-md min-w-fit">
-                    <div className="flex flex-col items-start leading-none pr-3 border-r border-white/10">
-                      <span className="font-mono text-[6px] font-black text-[var(--sky)] uppercase tracking-widest">
-                        Available
-                      </span>
-                      <span className="font-mono text-[8px] font-bold text-white/40 uppercase">
-                        Versions
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      {current.linkFR && (
-                        <button
-                          onClick={() => window.open(current.linkFR, '_blank')}
-                          className="group flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-white/5 border border-white/5 hover:bg-[var(--primary)] transition-all duration-300"
-                        >
-                          <span className="font-mono text-[9px] font-black text-white/70 group-hover:text-white">
-                            FR
-                          </span>
-                        </button>
-                      )}
-                      {current.linkES && (
-                        <button
-                          onClick={() => window.open(current.linkES, '_blank')}
-                          className="group flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-white/5 border border-white/5 hover:bg-[var(--primary)] transition-all duration-300"
-                        >
-                          <span className="font-mono text-[9px] font-black text-white/70 group-hover:text-white">
-                            ES
-                          </span>
-                        </button>
-                      )}
-                      {current.linkEN && (
-                        <button
-                          onClick={() => window.open(current.linkEN, '_blank')}
-                          className="group flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-white/5 border border-white/5 hover:bg-[var(--primary)] transition-all duration-300"
-                        >
-                          <span className="font-mono text-[9px] font-black text-white/70 group-hover:text-white">
-                            EN
-                          </span>
-                        </button>
-                      )}
-                    </div>
-                    {current.linkLowCost && (
-                      <button
-                        onClick={() => window.open(current.linkLowCost, '_blank')}
-                        className="group flex flex-shrink-0 items-center gap-2 h-8 px-3 rounded-full bg-[var(--sky)]/10 border border-[var(--sky)]/20 hover:bg-[var(--primary)] transition-all duration-300"
-                      >
-                        <span className="font-mono text-[8px] font-black text-[var(--sky)] group-hover:text-white uppercase">
-                          Simplificado
-                        </span>
-                        <ArrowUpRight size={10} className="text-[var(--sky)] group-hover:text-white" />
-                      </button>
-                    )}
-                  </div>
-                )}
-
-                {/* Botão principal */}
-                {(current.externalLink || current.link) && (
+          <div className="flex items-center gap-2 md:gap-3">
+            {(current.linkFR || current.linkES || current.linkEN || current.linkLowCost) && (
+              <div className="hidden md:flex items-center gap-1.5">
+                {current.linkFR && (
                   <button
-                    onClick={() =>
-                      window.open(current.externalLink || current.link, '_blank')
-                    }
-                    className="group relative h-12 pl-6 pr-1 flex flex-shrink-0 items-center gap-4 overflow-hidden rounded-full bg-[var(--primary)] transition-all duration-500 hover:scale-105 hover:shadow-[0_0_30px_rgba(10,92,255,0.6)] active:scale-95"
+                    onClick={() => window.open(current.linkFR, '_blank')}
+                    className="h-8 w-8 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:bg-[var(--primary)] transition-all font-mono text-[9px] font-bold text-white/70 hover:text-white"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                    <div className="absolute inset-0 rounded-full bg-[var(--sky)] opacity-20 animate-pulse group-hover:hidden" />
-                    <div className="flex flex-col items-start leading-none relative z-10">
-                      <span className="font-mono text-[8px] font-black text-blue-100 uppercase tracking-[0.25em] mb-0.5 opacity-80">
-                        {current.externalLinkLabel || t('Explorar', 'Explore')}
-                      </span>
-                      <span className="text-[11px] text-white font-black tracking-wider uppercase">
-                        {current.externalSource || t('Aceder Agora', 'Access Now')}
-                      </span>
-                    </div>
-                    <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center relative z-10 shadow-xl group-hover:bg-slate-900 transition-colors duration-300">
-                      <ArrowUpRight
-                        size={18}
-                        className="text-[var(--primary)] group-hover:text-white group-hover:rotate-45 transition-all duration-500"
-                      />
-                    </div>
+                    FR
+                  </button>
+                )}
+                {current.linkES && (
+                  <button
+                    onClick={() => window.open(current.linkES, '_blank')}
+                    className="h-8 w-8 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:bg-[var(--primary)] transition-all font-mono text-[9px] font-bold text-white/70 hover:text-white"
+                  >
+                    ES
+                  </button>
+                )}
+                {current.linkEN && (
+                  <button
+                    onClick={() => window.open(current.linkEN, '_blank')}
+                    className="h-8 w-8 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:bg-[var(--primary)] transition-all font-mono text-[9px] font-bold text-white/70 hover:text-white"
+                  >
+                    EN
+                  </button>
+                )}
+                {current.linkLowCost && (
+                  <button
+                    onClick={() => window.open(current.linkLowCost, '_blank')}
+                    className="h-8 px-3 flex items-center gap-1.5 rounded-full bg-[var(--sky)]/10 border border-[var(--sky)]/20 hover:bg-[var(--primary)] transition-all font-mono text-[8px] font-bold uppercase text-[var(--sky)] hover:text-white"
+                  >
+                    Simplificado
                   </button>
                 )}
               </div>
-            </div>
-          </footer>
-        </div>
+            )}
+
+            {(current.externalLink || current.link) && (
+              <button
+                onClick={() => window.open(current.externalLink || current.link, '_blank')}
+                className="group flex items-center gap-3 h-10 pl-5 pr-1.5 rounded-full bg-[var(--primary)] hover:shadow-[0_0_24px_rgba(10,92,255,0.5)] transition-all"
+              >
+                <span className="flex flex-col items-start leading-none">
+                  <span className="font-mono text-[7px] font-bold uppercase tracking-[0.2em] text-blue-100/80">
+                    {current.externalLinkLabel || t('Explorar', 'Explore')}
+                  </span>
+                  <span className="text-[10px] font-bold uppercase tracking-wide text-white">
+                    {current.externalSource || t('Aceder', 'Access')}
+                  </span>
+                </span>
+                <span className="w-8 h-8 rounded-full bg-white flex items-center justify-center">
+                  <ArrowUpRight
+                    size={15}
+                    className="text-[var(--primary)] group-hover:rotate-45 transition-transform duration-500"
+                  />
+                </span>
+              </button>
+            )}
+          </div>
+        </footer>
       </div>
     </>
   );
