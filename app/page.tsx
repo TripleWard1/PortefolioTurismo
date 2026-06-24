@@ -148,7 +148,7 @@ export default function Page() {
       id: 'b-travel-barcelona',
       title: 'B-Travel Barcelona',
       location: t('Barcelona, Espanha', 'Barcelona, Spain'),
-      image: 'https://i.imgur.com/09Tm1r9.png',
+      image: 'https://i.imgur.com/u8hgUWi.png',
       tag: t('Sul da Europa', 'Southern Europe'),
     },
   ];

@@ -871,7 +871,7 @@ export default function ChapterOverlay({
   ],
 },
     'b-travel-barcelona': {
-      watermark: 'https://i.imgur.com/09Tm1r9.png',
+      watermark: 'https://i.imgur.com/u8hgUWi.png',
       tag: t('Representação Internacional // 2026', 'International Representation // 2026'),
       headerTitle: t('Braga na B-Travel - Barcelona', 'Braga at B-Travel - Barcelona'),
       officialNetwork: t('Turismo do Porto e Norte de Portugal', 'Porto and North of Portugal Tourism'),
