@@ -85,7 +85,7 @@ export default function ChapterOverlay({
   tag: t('Gestão de Destino // 2024 — 2025', 'Destination Management // 2024 — 2025'),
   headerTitle: t('Portal Visit Braga: Estratégia Digital', 'Visit Braga Portal: Digital Strategy'),
   
-  officialNetwork: 'Município de Braga / Ivity',
+  officialNetwork: 'Município de Braga / InvestBraga',
   externalLink: 'https://visitbraga.travel',
   externalSource: 'VisitBraga.travel',
   externalLinkLabel: t('Explorar Portal', 'Explore Portal'),
@@ -1365,7 +1365,7 @@ export default function ChapterOverlay({
                 <div className="relative h-52 sm:h-64 md:h-80 rounded-2xl overflow-hidden mb-10 border border-white/10 bg-[var(--ink-deep)]">
                   {(current.watermark || current.gallery?.[0]) && (
                     <img
-                      src={current.watermark || current.gallery[0]}
+                      src={current.watermark || current.gallery?.[0]}
                       alt=""
                       className="absolute inset-0 w-full h-full object-cover opacity-60"
                     />
