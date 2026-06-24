@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* ========================================================================== */
-/*  ATLAS - MONOGRAFIA EM TINTA & LATÃO                                        */
+/*  ATLAS — MONOGRAFIA EM TINTA & LATÃO                                        */
 /*  Base grafite · papel osso · sinal em latão/ouro velho.                     */
 /*  Display: Fraunces (carregada na variável --font-playfair).                 */
 /* ========================================================================== */
@@ -18,9 +18,9 @@
   --paper: #f2eee5;      /* osso quente */
   --paper-warm: #f8f5ee; /* osso claro elevado */
 
-  /* Sinal - latão / ouro velho */
-  --primary: #b08a45;    /* ouro velho - acento legível em papel */
-  --sky: #d4b572;        /* latão claro - acento sobre tinta */
+  /* Sinal — latão / ouro velho */
+  --primary: #b08a45;    /* ouro velho — acento legível em papel */
+  --sky: #d4b572;        /* latão claro — acento sobre tinta */
   --accent: #e6d0a0;     /* realce */
 
   /* Texto */
@@ -67,7 +67,7 @@
   }
 }
 
-/* Escala - usar em vez de tamanhos arbitrários gigantes */
+/* Escala — usar em vez de tamanhos arbitrários gigantes */
 .display { font-size: var(--fs-display); line-height: 0.94; letter-spacing: -0.025em; }
 .h1 { font-size: var(--fs-h1); line-height: 1.0; letter-spacing: -0.02em; }
 .h2 { font-size: var(--fs-h2); line-height: 1.05; letter-spacing: -0.018em; }

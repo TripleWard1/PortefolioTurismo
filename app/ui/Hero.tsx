@@ -1,195 +1,159 @@
 'use client';
 
-import { ArrowRight, ArrowUpRight, ArrowDown, ShieldCheck } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { useLang } from './LanguageContext';
 
-const CHAPTERS = [
-  { n: '01', id: 'arquivo', pt: 'Posicionamento', en: 'Positioning' },
-  { n: '02', id: 'capitulo-02', pt: 'Ecossistema', en: 'Ecosystem' },
-  { n: '03', id: 'estratégia', pt: 'Herança & Futuro', en: 'Heritage & Future' },
+const CREDENTIALS = [
+  'European Capital of Smart Tourism',
+  'Green Destinations · Platinum',
+  'URBACT · Braga After Dark',
+  'Visit Braga',
 ];
-
-const DOMAINS = ['Braga', 'Smart Tourism', 'URBACT', 'Music Cities', 'Small Retail'];
 
 export default function Hero() {
   const { t } = useLang();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const go = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
+  const show = (delay: string) =>
+    `transition-all duration-[900ms] ${delay} ${
+      mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+    }`;
+
   return (
-    <section className="relative min-h-screen w-full flex flex-col justify-center overflow-hidden pt-24 pb-10 px-5 sm:px-6">
-      {/* Fundo */}
+    <section className="relative min-h-screen w-full overflow-hidden flex flex-col bg-[var(--paper)]">
+      {/* FUNDO — foto institucional como atmosfera calma no topo */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 grid-dots text-slate-900/[0.05]" />
-        <div className="absolute top-[-15%] right-[-5%] w-[65vw] h-[65vw] bg-[var(--primary)]/15 blur-[150px] rounded-full" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[45vw] h-[45vw] bg-[var(--accent)]/20 blur-[120px] rounded-full" />
+        <div className="absolute inset-x-0 top-0 h-[58%] overflow-hidden">
+          <img
+            src="https://i.imgur.com/SvJ4bdR.jpeg"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover opacity-[0.22] grayscale-[55%] contrast-[0.96]"
+          />
+          <div className="absolute inset-0 bg-[var(--primary)]/[0.05] mix-blend-multiply" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[var(--paper)]/45 via-[var(--paper)]/72 to-[var(--paper)]" />
+        </div>
+        {/* clareira radial atrás do emblema */}
+        <div className="absolute left-1/2 top-[40%] -translate-x-1/2 -translate-y-1/2 w-[72vw] max-w-[760px] aspect-square rounded-full bg-[radial-gradient(circle,var(--paper)_32%,transparent_72%)]" />
       </div>
 
-      <div className="relative z-10 max-w-[1280px] mx-auto w-full">
-        {/* MASTHEAD */}
-        <div className="rise-in flex items-center justify-between gap-4 border-b border-slate-200 pb-4 mb-8 sm:mb-12">
-          <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.25em] text-slate-500 font-bold truncate">
-            Hugo Barros - {t('Portefólio Estratégico', 'Strategic Portfolio')}
-          </span>
-          <div className="flex items-center gap-2 shrink-0">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--primary)] opacity-75" />
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[var(--primary)]" />
+      {/* LETTERHEAD */}
+      <div className={`relative z-10 pt-24 sm:pt-28 px-5 sm:px-8 ${show('delay-0')}`}>
+        <div className="max-w-4xl mx-auto text-center">
+          <p className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.42em] text-[var(--ink)]/45">
+            {t('Município de Braga', 'Municipality of Braga')}
+          </p>
+          <div className="flex items-center justify-center gap-3 mt-3">
+            <span className="h-px w-10 sm:w-16 bg-[var(--primary)]/40" />
+            <span className="font-mono text-[8px] sm:text-[9px] uppercase tracking-[0.36em] text-[var(--primary)]">
+              {t('Atividades Económicas & Turismo', 'Economy & Tourism')}
             </span>
-            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-slate-400 whitespace-nowrap">
-              Ed. 2026 · Braga
-            </span>
+            <span className="h-px w-10 sm:w-16 bg-[var(--primary)]/40" />
           </div>
         </div>
+      </div>
 
-        {/* GRELHA PRINCIPAL */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-          {/* TEXTO */}
-          <div className="lg:col-span-7 space-y-7">
-            <div className="rise-in flex items-center gap-3" style={{ animationDelay: '0.06s' }}>
-              <span className="font-mono text-[11px] font-bold text-[var(--primary)]">№ 01</span>
-              <span className="h-px w-6 bg-slate-300" />
-              <span className="eyebrow text-slate-400">
-                {t('Estratégia de Destino', 'Destination Strategy')}
-              </span>
-            </div>
-
-            <h1
-              className="rise-in display font-playfair font-black text-[var(--ink)] text-balance"
-              style={{ animationDelay: '0.13s' }}
-            >
-              {t('Estratégia em Ação.', 'Strategy in Action.')}
-              <span className="block italic font-light text-[var(--primary)] mt-1">
-                {t('O impacto no território.', 'Impact on the territory.')}
-              </span>
-            </h1>
-
-            <p
-              className="rise-in text-base sm:text-lg text-slate-600 font-light leading-relaxed max-w-xl"
-              style={{ animationDelay: '0.21s' }}
-            >
-              {t(
-                'Portefólio de projetos e governação de destino - as estratégias que consolidam Braga como referência europeia de turismo inteligente e território.',
-                'A portfolio of projects and destination governance - strategies consolidating Braga as a European reference in smart tourism and territory.'
-              )}
-            </p>
-
-            <div
-              className="rise-in flex flex-col sm:flex-row sm:items-center gap-4"
-              style={{ animationDelay: '0.29s' }}
-            >
-              <button
-                onClick={() => go('arquivo')}
-                className="group relative px-7 py-4 bg-slate-900 text-white rounded-xl font-bold flex items-center justify-center gap-3 transition-all duration-500 hover:bg-[var(--primary)] sm:hover:-translate-y-0.5 shadow-lg overflow-hidden"
-              >
-                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                <span className="relative z-10 text-[12px] tracking-wide uppercase">
-                  {t('Consultar portefólio', 'View portfolio')}
-                </span>
-                <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button
-                onClick={() => go('contacto')}
-                className="px-7 py-4 rounded-xl font-bold flex items-center justify-center gap-3 text-slate-700 border border-slate-200 bg-white/60 backdrop-blur-sm hover:border-[var(--primary)]/40 hover:text-[var(--primary)] transition-all duration-500 text-[12px] tracking-wide uppercase"
-              >
-                {t('Falar comigo', 'Get in touch')}
-                <ArrowUpRight className="w-4 h-4" />
-              </button>
-            </div>
-
-            {/* Domínios */}
-            <div
-              className="rise-in flex flex-wrap gap-2 pt-2"
-              style={{ animationDelay: '0.37s' }}
-            >
-              {DOMAINS.map((d) => (
-                <span
-                  key={d}
-                  className="font-mono text-[10px] uppercase tracking-wider text-slate-500 bg-white/70 border border-slate-200 rounded-full px-3 py-1.5"
-                >
-                  {d}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* RETRATO */}
+      {/* ROSTO */}
+      <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-5 sm:px-6 py-12">
+        <div className="w-full max-w-3xl mx-auto flex flex-col items-center text-center">
+          {/* Emblema */}
           <div
-            className="rise-in lg:col-span-5 flex justify-center lg:justify-end"
-            style={{ animationDelay: '0.2s' }}
+            className={`relative mb-10 transition-all duration-[1100ms] ${
+              mounted ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+            }`}
           >
-            <div className="relative w-full max-w-[300px] sm:max-w-[340px]">
-              <div className="absolute -top-3 -left-3 w-7 h-7 border-l-2 border-t-2 border-[var(--primary)]/40 z-20" />
-              <div className="absolute -bottom-3 -right-3 w-7 h-7 border-r-2 border-b-2 border-[var(--primary)]/40 z-20" />
-
-              <div className="relative rounded-[1.75rem] overflow-hidden border border-slate-200 shadow-[0_30px_70px_-30px_rgba(10,20,36,0.4)] bg-white">
-                <div className="relative aspect-[4/5] overflow-hidden">
-                  <img
-                    src="https://i.imgur.com/Dx42oze.jpeg"
-                    alt="Hugo Barros"
-                    className="w-full h-full object-cover object-top scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/65 via-slate-900/5 to-transparent" />
-
-                  <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-md shadow-sm">
-                    <span className="relative flex h-1.5 w-1.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--primary)] opacity-75" />
-                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[var(--primary)]" />
-                    </span>
-                    <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-slate-700 font-bold">
-                      {t('Disponível', 'Available')}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Credencial sobreposta */}
-              <div className="absolute -bottom-5 left-4 right-4 bg-[var(--ink)] rounded-2xl p-4 shadow-xl border border-white/10 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-[var(--primary)] flex items-center justify-center shrink-0">
-                  <ShieldCheck className="w-5 h-5 text-white" />
-                </div>
-                <div className="min-w-0">
-                  <p className="font-playfair text-lg font-bold text-white leading-none">
-                    Hugo <span className="italic font-light text-[var(--sky)]">Barros</span>
-                  </p>
-                  <p className="font-mono text-[8px] uppercase tracking-[0.2em] text-white/50 mt-1 truncate">
-                    {t('Município de Braga · Turismo', 'Braga Municipality · Tourism')}
-                  </p>
-                </div>
-              </div>
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[160%] h-[160%] rounded-full bg-[radial-gradient(circle,rgba(176,138,69,0.12),transparent_68%)]" />
+            <div className="absolute inset-0 -m-7 sm:-m-9 rounded-full border border-[var(--primary)]/15" />
+            <div className="absolute inset-0 -m-4 sm:-m-5 rounded-full border border-dashed border-[var(--primary)]/20 animate-spin-slow" />
+            {[0, 90, 180, 270].map((deg) => (
+              <span
+                key={deg}
+                className="absolute left-1/2 top-1/2 w-1.5 h-1.5 rounded-full bg-[var(--primary)]/55"
+                style={{
+                  transform: `translate(-50%,-50%) rotate(${deg}deg) translateY(calc(-50% - 1.25rem)) translateY(-50%)`,
+                }}
+              />
+            ))}
+            <div className="relative w-44 h-44 sm:w-56 sm:h-56 rounded-full overflow-hidden border-4 border-[var(--paper-warm)] shadow-[0_25px_60px_-22px_rgba(40,30,12,0.45)] ring-1 ring-[var(--primary)]/30">
+              <img
+                src="https://i.imgur.com/Dx42oze.jpeg"
+                alt="Hugo Barros"
+                className="w-full h-full object-cover object-top scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink)]/12 to-transparent" />
+            </div>
+            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 h-7 rounded-full bg-[var(--ink)] border-2 border-[var(--paper-warm)] flex items-center justify-center shadow-lg">
+              <span className="font-mono text-[8px] font-bold uppercase tracking-[0.2em] text-[var(--sky)]">
+                {t('Disponível', 'Available')}
+              </span>
             </div>
           </div>
-        </div>
 
-        {/* ÍNDICE */}
-        <div
-          className="rise-in mt-16 sm:mt-20 pt-6 border-t border-slate-200 grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4"
-          style={{ animationDelay: '0.5s' }}
-        >
-          {CHAPTERS.map((c) => (
+          {/* Nome */}
+          <h1
+            className={`font-sans font-black tracking-[-0.045em] text-[var(--ink)] leading-[0.95] transition-all duration-1000 delay-100 ${
+              mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
+            }`}
+            style={{ fontSize: 'clamp(2.7rem, 1.7rem + 4vw, 4.6rem)' }}
+          >
+            Hugo <span className="text-[var(--primary)]">Barros</span>
+          </h1>
+
+          <div className={`mt-5 flex items-center justify-center gap-3 ${show('delay-200')}`}>
+            <span className="h-px w-5 bg-[var(--ink)]/20" />
+            <p className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.28em] text-[var(--ink)]/55">
+              {t('Técnico Superior de Turismo', 'Senior Tourism Officer')}
+            </p>
+            <span className="h-px w-5 bg-[var(--ink)]/20" />
+          </div>
+
+          <p className={`mt-7 max-w-xl text-base sm:text-lg text-[var(--ink)]/70 font-light leading-relaxed ${show('delay-300')}`}>
+            {t(
+              'Governação de destino, inovação e projetos europeus que consolidam Braga como referência de turismo inteligente e território.',
+              'Destination governance, innovation and European projects consolidating Braga as a reference in smart tourism and territory.'
+            )}
+          </p>
+
+          <div className={`mt-9 flex flex-col sm:flex-row items-center gap-4 ${show('delay-[450ms]')}`}>
             <button
-              key={c.id}
-              onClick={() => go(c.id)}
-              className="group flex items-center gap-4 p-3 sm:p-4 rounded-xl hover:bg-white/70 transition-colors text-left"
+              onClick={() => go('arquivo')}
+              className="group px-8 py-4 bg-[var(--ink)] text-white rounded-xl font-bold flex items-center justify-center gap-3 transition-all duration-500 hover:bg-[var(--primary)] shadow-[0_20px_50px_-22px_rgba(40,30,12,0.6)]"
             >
-              <span className="font-mono text-[11px] font-bold text-[var(--primary)]">{c.n}</span>
-              <span className="flex-1 text-[12px] sm:text-[13px] font-bold uppercase tracking-wider text-slate-700 group-hover:text-[var(--ink)]">
-                {t(c.pt, c.en)}
+              <span className="text-[12px] tracking-wide uppercase">
+                {t('Consultar portefólio', 'View portfolio')}
               </span>
-              <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-[var(--primary)] group-hover:translate-x-1 transition-all" />
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
+            <button
+              onClick={() => go('contacto')}
+              className="px-8 py-4 rounded-xl font-bold flex items-center justify-center gap-3 text-[var(--ink)]/80 border border-[var(--ink)]/15 bg-white/60 backdrop-blur-sm hover:border-[var(--primary)]/40 hover:text-[var(--primary)] transition-all duration-500 text-[12px] tracking-wide uppercase"
+            >
+              {t('Falar comigo', 'Get in touch')}
+              <ArrowUpRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* CREDENCIAIS */}
+      <div className={`relative z-10 border-t border-[var(--ink)]/10 bg-[var(--paper-warm)]/70 backdrop-blur-sm ${show('delay-[600ms]')}`}>
+        <div className="max-w-5xl mx-auto px-5 sm:px-8 py-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+          <span className="font-mono text-[8px] uppercase tracking-[0.3em] text-[var(--ink)]/35 hidden sm:inline">
+            {t('Reconhecimentos', 'Recognitions')}
+          </span>
+          {CREDENTIALS.map((c, i) => (
+            <div key={c} className="flex items-center gap-6">
+              {i > 0 && <span className="hidden sm:block w-1 h-1 rounded-full bg-[var(--primary)]/40" />}
+              <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.18em] text-[var(--ink)]/55">
+                {c}
+              </span>
+            </div>
           ))}
         </div>
       </div>
-
-      {/* Scroll cue */}
-      <button
-        onClick={() => go('arquivo')}
-        aria-label={t('Descer', 'Scroll down')}
-        className="hidden sm:flex absolute bottom-5 left-1/2 -translate-x-1/2 w-9 h-9 rounded-full border border-slate-300 items-center justify-center hover:border-[var(--primary)] hover:bg-[var(--primary)] transition-all duration-500 group"
-      >
-        <ArrowDown className="w-4 h-4 text-slate-400 group-hover:text-white animate-bounce" />
-      </button>
     </section>
   );
 }

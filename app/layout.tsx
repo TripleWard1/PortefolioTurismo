@@ -12,7 +12,7 @@ const inter = Inter({
   weight: ['300', '400', '500', '700', '900'],
 });
 
-// Display editorial - Fraunces servida na variável --font-playfair,
+// Display editorial — Fraunces servida na variável --font-playfair,
 // para que todas as classes `font-playfair` existentes a adotem.
 const fraunces = Fraunces({
   subsets: ['latin'],
@@ -32,7 +32,7 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: 'Hugo Barros | Portfolio Estratégico',
   description:
-    'Estratégia de destino, inovação territorial e desenvolvimento turístico - Município de Braga.',
+    'Estratégia de destino, inovação territorial e desenvolvimento turístico — Município de Braga.',
   icons: { icon: 'https://imgur.com/Dx42oze.png' },
   openGraph: {
     title: 'Hugo Barros | Território & Inovação',
