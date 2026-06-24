@@ -161,14 +161,9 @@ body::before {
 ::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 99px; border: 3px solid var(--paper); }
 ::-webkit-scrollbar-thumb:hover { background: rgba(10,92,255,0.4); }
 
-/* 8. Responsivo — leve, sem !important war */
+/* 8. Responsivo — base limpa. Componentes tratam o resto via Tailwind. */
 @media (max-width: 768px) {
-  h1 { line-height: 1.04; letter-spacing: -0.04em; word-break: break-word; }
-  .fixed.inset-0.z-\[600\] { overflow-y: auto; -webkit-overflow-scrolling: touch; }
-  .fixed.inset-0.z-\[600\] header { flex-wrap: wrap; gap: 1rem; padding: 1rem; }
-  .fixed.inset-0.z-\[600\] main { padding: 1.5rem 1.25rem; }
-  .fixed.inset-0.z-\[600\] nav.flex.items-center.gap-2 { flex-wrap: wrap; width: 100%; }
-  .fixed.inset-0.z-\[600\] footer { flex-direction: column; align-items: flex-start; gap: 1.25rem; text-align: left; padding: 1.5rem; }
+  h1 { line-height: 1.05; letter-spacing: -0.035em; word-break: break-word; }
 }
 
 /* 9. Movimento reduzido */

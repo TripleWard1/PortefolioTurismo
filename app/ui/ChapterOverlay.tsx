@@ -85,7 +85,7 @@ export default function ChapterOverlay({
   tag: t('Gestão de Destino // 2024 — 2025', 'Destination Management // 2024 — 2025'),
   headerTitle: t('Portal Visit Braga: Estratégia Digital', 'Visit Braga Portal: Digital Strategy'),
   
-  officialNetwork: 'Município de Braga / InvestBraga',
+  officialNetwork: 'Município de Braga / Ivity',
   externalLink: 'https://visitbraga.travel',
   externalSource: 'VisitBraga.travel',
   externalLinkLabel: t('Explorar Portal', 'Explore Portal'),
@@ -1270,13 +1270,13 @@ export default function ChapterOverlay({
         >
           <button
             aria-label="Fechar imagem"
-            className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors z-[2001]"
+            className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors z-[2001]"
           >
-            <X size={36} strokeWidth={1} />
+            <X size={32} strokeWidth={1} />
           </button>
           <img
             src={selectedImage}
-            className="max-w-full max-h-[90vh] rounded-lg shadow-2xl animate-in zoom-in-95 duration-300 object-contain border border-white/10"
+            className="max-w-full max-h-[88vh] rounded-lg shadow-2xl animate-in zoom-in-95 duration-300 object-contain border border-white/10"
             alt="Project view"
             onClick={(e) => e.stopPropagation()}
           />
@@ -1285,153 +1285,185 @@ export default function ChapterOverlay({
 
       {/* MODAL — Dossier Reader */}
       <div className="fixed inset-0 z-[600] flex flex-col bg-[var(--ink)] text-white animate-in fade-in duration-400 font-sans">
-        {/* Textura de fundo subtil */}
+        {/* Textura de fundo */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          {current.watermark && (
-            <img
-              src={current.watermark}
-              alt=""
-              className="absolute inset-0 w-full h-full object-cover opacity-[0.06] blur-[6px] scale-110"
-            />
-          )}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_-10%,rgba(10,92,255,0.16),transparent_55%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_-10%,rgba(10,92,255,0.14),transparent_55%)]" />
         </div>
 
         {/* HEADER */}
-        <header className="relative z-20 flex items-center justify-between gap-4 px-6 md:px-10 lg:px-14 h-20 border-b border-white/10 bg-[var(--ink)]/70 backdrop-blur-xl shrink-0">
-          <div className="flex items-center gap-4 min-w-0">
-            <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-[var(--sky)] hidden sm:inline">
-              {t('Dossier', 'Dossier')}
-            </span>
-            <span className="hidden sm:block h-4 w-px bg-white/15" />
-            <h2 className="text-sm md:text-base font-bold uppercase tracking-wide text-white truncate">
-              {current.headerTitle}
-            </h2>
+        <header className="relative z-20 shrink-0 border-b border-white/10 bg-[var(--ink)]/70 backdrop-blur-xl px-5 md:px-10 lg:px-14">
+          <div className="flex items-center justify-between gap-3 h-16 md:h-20">
+            <div className="flex items-center gap-3 min-w-0">
+              <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-[var(--sky)] hidden md:inline">
+                {t('Dossier', 'Dossier')}
+              </span>
+              <span className="hidden md:block h-4 w-px bg-white/15" />
+              <h2 className="text-sm md:text-base font-bold uppercase tracking-wide text-white truncate">
+                {current.headerTitle}
+              </h2>
+            </div>
+
+            <div className="flex items-center gap-2 md:gap-5 shrink-0">
+              {/* Tabs desktop */}
+              <nav className="hidden sm:flex items-center gap-1">
+                {(['overview', 'pillars', 'media'] as const).map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setActiveTab(tab)}
+                    className={`relative px-3 md:px-4 py-2 text-[11px] font-bold uppercase tracking-widest transition-colors ${
+                      activeTab === tab ? 'text-white' : 'text-white/35 hover:text-white/70'
+                    }`}
+                  >
+                    {tab === 'overview'
+                      ? t('Visão Geral', 'Overview')
+                      : tab === 'pillars'
+                      ? t('Eixos', 'Pillars')
+                      : 'Media'}
+                    {activeTab === tab && (
+                      <span className="absolute -bottom-[1px] left-3 right-3 h-[2px] bg-[var(--primary)] rounded-full" />
+                    )}
+                  </button>
+                ))}
+              </nav>
+              <button
+                onClick={onClose}
+                aria-label="Fechar"
+                className="w-9 h-9 md:w-10 md:h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-[var(--ink)] transition-all"
+              >
+                <X size={18} />
+              </button>
+            </div>
           </div>
 
-          <div className="flex items-center gap-3 md:gap-6 shrink-0">
-            <nav className="flex items-center gap-1">
-              {(['overview', 'pillars', 'media'] as const).map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`relative px-3 md:px-4 py-2 text-[11px] font-bold uppercase tracking-widest transition-colors ${
-                    activeTab === tab ? 'text-white' : 'text-white/35 hover:text-white/70'
-                  }`}
-                >
-                  {tab === 'overview'
-                    ? t('Visão Geral', 'Overview')
-                    : tab === 'pillars'
-                    ? t('Eixos', 'Pillars')
-                    : 'Media'}
-                  {activeTab === tab && (
-                    <span className="absolute -bottom-[1px] left-3 right-3 h-[2px] bg-[var(--primary)] rounded-full" />
-                  )}
-                </button>
-              ))}
-            </nav>
-            <button
-              onClick={onClose}
-              aria-label="Fechar"
-              className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-[var(--ink)] transition-all"
-            >
-              <X size={18} />
-            </button>
-          </div>
+          {/* Tabs mobile (segunda linha) */}
+          <nav className="flex sm:hidden items-center gap-1 pb-2.5">
+            {(['overview', 'pillars', 'media'] as const).map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`flex-1 relative px-2 py-2 text-[10px] font-bold uppercase tracking-widest transition-colors rounded-lg ${
+                  activeTab === tab ? 'bg-white/10 text-white' : 'text-white/35'
+                }`}
+              >
+                {tab === 'overview'
+                  ? t('Visão', 'Overview')
+                  : tab === 'pillars'
+                  ? t('Eixos', 'Pillars')
+                  : 'Media'}
+              </button>
+            ))}
+          </nav>
         </header>
 
         {/* CONTEÚDO */}
         <main className="relative z-10 flex-1 overflow-y-auto custom-scrollbar-dark">
-          <div className="max-w-6xl mx-auto px-6 md:px-10 lg:px-14 py-12 md:py-16">
+          <div className="max-w-6xl mx-auto px-5 md:px-10 lg:px-14 py-8 md:py-14">
             {/* ---------------- VISÃO GERAL ---------------- */}
             {activeTab === 'overview' && (
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 animate-in fade-in slide-in-from-bottom-3 duration-500">
-                {/* Principal */}
-                <div className="lg:col-span-7 space-y-10">
+              <div className="animate-in fade-in slide-in-from-bottom-3 duration-500">
+                {/* BANNER DE CAPA */}
+                <div className="relative h-52 sm:h-64 md:h-80 rounded-2xl overflow-hidden mb-10 border border-white/10 bg-[var(--ink-deep)]">
+                  {(current.watermark || current.gallery?.[0]) && (
+                    <img
+                      src={current.watermark || current.gallery[0]}
+                      alt=""
+                      className="absolute inset-0 w-full h-full object-cover opacity-60"
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink)] via-[var(--ink)]/50 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[var(--ink)]/60 to-transparent" />
+
                   {current.tag && (
-                    <span className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--sky)] bg-[var(--sky)]/10 border border-[var(--sky)]/20 rounded-full px-4 py-1.5">
+                    <span className="absolute top-5 left-5 md:top-6 md:left-6 inline-flex items-center font-mono text-[9px] md:text-[10px] uppercase tracking-[0.25em] text-[var(--sky)] bg-[var(--ink)]/60 border border-[var(--sky)]/20 rounded-full px-3 py-1.5 backdrop-blur-md">
                       {current.tag}
                     </span>
                   )}
 
-                  <div className="font-playfair">{renderHero()}</div>
-
-                  <div className="flex gap-6">
-                    <div className="w-1 rounded-full bg-gradient-to-b from-[var(--primary)] to-[var(--accent)] shrink-0" />
-                    <div className="text-lg md:text-xl text-white/70 font-light leading-relaxed">
-                      {current.description}
-                    </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8">
+                    <div className="font-playfair">{renderHero()}</div>
                   </div>
-
-                  {current.quote && (
-                    <figure className="relative mt-4 rounded-2xl border border-white/10 bg-white/[0.03] p-8">
-                      <Quote className="text-[var(--primary)]/40 w-8 h-8 mb-5" />
-                      <blockquote className="font-playfair text-xl md:text-2xl italic font-medium text-white/90 leading-snug">
-                        {current.quote}
-                      </blockquote>
-                      <figcaption className="flex items-center gap-4 mt-7 pt-6 border-t border-white/10">
-                        <div className="w-11 h-11 rounded-xl bg-[var(--primary)] flex items-center justify-center font-black italic text-white text-sm shrink-0">
-                          HB
-                        </div>
-                        <div className="flex flex-col">
-                          <span className="text-xs font-bold uppercase tracking-wider text-white">
-                            {current.authorTitle || t('Unidade de Missão', 'Mission Unit')}
-                          </span>
-                          <span className="font-mono text-[9px] uppercase tracking-wider text-white/40">
-                            {current.authorSub || t('Estratégia Territorial', 'Territorial Strategy')}
-                          </span>
-                        </div>
-                      </figcaption>
-                    </figure>
-                  )}
                 </div>
 
-                {/* Ficha técnica */}
-                <aside className="lg:col-span-5">
-                  <div className="lg:sticky lg:top-6 rounded-2xl border border-white/10 bg-white/[0.03] p-8">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">
-                      {t('Ficha técnica', 'Project facts')}
-                    </span>
+                {/* CORPO */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+                  <div className="lg:col-span-7 space-y-8">
+                    <div className="flex gap-5 md:gap-6">
+                      <div className="w-1 rounded-full bg-gradient-to-b from-[var(--primary)] to-[var(--accent)] shrink-0" />
+                      <div className="text-base md:text-xl text-white/70 font-light leading-relaxed">
+                        {current.description}
+                      </div>
+                    </div>
 
-                    {metrics.length > 0 && (
-                      <dl className="mt-6">
-                        {metrics.map((m: any, i: number) => (
-                          <div
-                            key={i}
-                            className="flex items-baseline justify-between gap-4 py-3.5 border-b border-white/10 first:pt-0"
-                          >
-                            <dt className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/40">
-                              {m.label}
-                            </dt>
-                            <dd className="text-sm font-bold text-white text-right">{m.value}</dd>
+                    {current.quote && (
+                      <figure className="relative rounded-2xl border border-white/10 bg-white/[0.03] p-6 md:p-8">
+                        <Quote className="text-[var(--primary)]/40 w-7 h-7 md:w-8 md:h-8 mb-4" />
+                        <blockquote className="font-playfair text-lg md:text-2xl italic font-medium text-white/90 leading-snug">
+                          {current.quote}
+                        </blockquote>
+                        <figcaption className="flex items-center gap-4 mt-6 pt-5 border-t border-white/10">
+                          <div className="w-10 h-10 rounded-xl bg-[var(--primary)] flex items-center justify-center font-black italic text-white text-sm shrink-0">
+                            HB
                           </div>
-                        ))}
-                      </dl>
-                    )}
-
-                    {current.officialNetwork && (
-                      <div className="mt-6">
-                        <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--sky)]">
-                          {t('Rede', 'Network')}
-                        </span>
-                        <p className="text-sm text-white/70 mt-1.5 leading-relaxed">
-                          {current.officialNetwork}
-                        </p>
-                      </div>
-                    )}
-
-                    {current.acreditacao && (
-                      <div className="mt-5">
-                        <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--sky)]">
-                          {t('Acreditação', 'Accreditation')}
-                        </span>
-                        <p className="text-sm text-white/70 mt-1.5 leading-relaxed italic">
-                          {current.acreditacao}
-                        </p>
-                      </div>
+                          <div className="flex flex-col">
+                            <span className="text-xs font-bold uppercase tracking-wider text-white">
+                              {current.authorTitle || t('Unidade de Missão', 'Mission Unit')}
+                            </span>
+                            <span className="font-mono text-[9px] uppercase tracking-wider text-white/40">
+                              {current.authorSub || t('Estratégia Territorial', 'Territorial Strategy')}
+                            </span>
+                          </div>
+                        </figcaption>
+                      </figure>
                     )}
                   </div>
-                </aside>
+
+                  {/* Ficha técnica */}
+                  <aside className="lg:col-span-5">
+                    <div className="lg:sticky lg:top-6 rounded-2xl border border-white/10 bg-white/[0.03] p-6 md:p-8">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">
+                        {t('Ficha técnica', 'Project facts')}
+                      </span>
+
+                      {metrics.length > 0 && (
+                        <dl className="mt-5">
+                          {metrics.map((m: any, i: number) => (
+                            <div
+                              key={i}
+                              className="flex items-baseline justify-between gap-4 py-3.5 border-b border-white/10 first:pt-0"
+                            >
+                              <dt className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/40">
+                                {m.label}
+                              </dt>
+                              <dd className="text-sm font-bold text-white text-right">{m.value}</dd>
+                            </div>
+                          ))}
+                        </dl>
+                      )}
+
+                      {current.officialNetwork && (
+                        <div className="mt-6">
+                          <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--sky)]">
+                            {t('Rede', 'Network')}
+                          </span>
+                          <p className="text-sm text-white/70 mt-1.5 leading-relaxed">
+                            {current.officialNetwork}
+                          </p>
+                        </div>
+                      )}
+
+                      {current.acreditacao && (
+                        <div className="mt-5">
+                          <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--sky)]">
+                            {t('Acreditação', 'Accreditation')}
+                          </span>
+                          <p className="text-sm text-white/70 mt-1.5 leading-relaxed italic">
+                            {current.acreditacao}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </aside>
+                </div>
               </div>
             )}
 
@@ -1439,7 +1471,7 @@ export default function ChapterOverlay({
             {activeTab === 'pillars' && (
               <div className="animate-in fade-in slide-in-from-bottom-3 duration-500">
                 {(current.pillarTitle || current.pillarDesc) && (
-                  <div className="max-w-3xl mb-12">
+                  <div className="max-w-3xl mb-10 md:mb-12">
                     {current.pillarTabLabel && (
                       <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--sky)] flex items-center gap-3 mb-4">
                         <span className="w-8 h-px bg-[var(--sky)]/50" />
@@ -1447,25 +1479,25 @@ export default function ChapterOverlay({
                       </span>
                     )}
                     {current.pillarTitle && (
-                      <h3 className="font-playfair text-3xl md:text-4xl font-bold text-white tracking-tight leading-tight mb-4">
+                      <h3 className="font-playfair text-2xl md:text-4xl font-bold text-white tracking-tight leading-tight mb-4">
                         {current.pillarTitle}
                       </h3>
                     )}
                     {current.pillarDesc && (
-                      <p className="text-white/50 text-lg font-light leading-relaxed">
+                      <p className="text-white/50 text-base md:text-lg font-light leading-relaxed">
                         {current.pillarDesc}
                       </p>
                     )}
                   </div>
                 )}
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-2">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-0">
                   {current.pillars?.map((pillar: any, idx: number) => (
                     <div
                       key={idx}
-                      className="group flex gap-6 py-8 border-t border-white/10 hover:border-[var(--sky)]/30 transition-colors"
+                      className="group flex gap-5 md:gap-6 py-7 md:py-8 border-t border-white/10 hover:border-[var(--sky)]/30 transition-colors"
                     >
-                      <span className="font-mono text-sm font-bold text-[var(--sky)] pt-1 w-8 shrink-0">
+                      <span className="font-mono text-sm font-bold text-[var(--sky)] pt-1 w-7 shrink-0">
                         0{idx + 1}
                       </span>
                       <div>
@@ -1485,11 +1517,11 @@ export default function ChapterOverlay({
 
             {/* ---------------- MEDIA ---------------- */}
             {activeTab === 'media' && (
-              <div className="animate-in fade-in duration-500 flex flex-col gap-10">
+              <div className="animate-in fade-in duration-500 flex flex-col gap-8 md:gap-10">
                 {current.videoEmbed && <div className="w-full">{current.videoEmbed}</div>}
 
                 {current.gallery && current.gallery.length > 0 && (
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
                     {current.gallery.map((img: string, idx: number) => (
                       <div
                         key={idx}
@@ -1515,7 +1547,7 @@ export default function ChapterOverlay({
                 )}
 
                 {!current.videoEmbed && (!current.gallery || current.gallery.length === 0) && (
-                  <div className="flex flex-col items-center justify-center py-28 text-center">
+                  <div className="flex flex-col items-center justify-center py-24 md:py-28 text-center">
                     <PlayCircle className="w-10 h-10 text-white/15 mb-5" />
                     <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-white/30">
                       {t('Sem media disponível', 'No media available')}
@@ -1528,14 +1560,14 @@ export default function ChapterOverlay({
         </main>
 
         {/* FOOTER SLIM */}
-        <footer className="relative z-20 shrink-0 flex items-center justify-between gap-4 px-6 md:px-10 lg:px-14 h-16 border-t border-white/10 bg-[var(--ink-deep)]">
+        <footer className="relative z-20 shrink-0 flex items-center justify-between gap-3 px-5 md:px-10 lg:px-14 h-14 md:h-16 border-t border-white/10 bg-[var(--ink-deep)]">
           <div className="flex items-center gap-3 min-w-0">
             <span className="text-base font-black italic text-white tracking-tighter">
               HB<span className="text-[var(--sky)]">.</span>
             </span>
-            <span className="hidden sm:block h-4 w-px bg-white/15" />
-            <span className="hidden sm:inline font-mono text-[9px] uppercase tracking-[0.3em] text-white/35">
-              {t('Portfólio Estratégico', 'Strategic Portfolio')}
+            <span className="hidden md:block h-4 w-px bg-white/15" />
+            <span className="hidden md:inline font-mono text-[9px] uppercase tracking-[0.3em] text-white/35">
+              {t('Portefólio Estratégico', 'Strategic Portfolio')}
             </span>
           </div>
 
@@ -1569,7 +1601,7 @@ export default function ChapterOverlay({
                 {current.linkLowCost && (
                   <button
                     onClick={() => window.open(current.linkLowCost, '_blank')}
-                    className="h-8 px-3 flex items-center gap-1.5 rounded-full bg-[var(--sky)]/10 border border-[var(--sky)]/20 hover:bg-[var(--primary)] transition-all font-mono text-[8px] font-bold uppercase text-[var(--sky)] hover:text-white"
+                    className="h-8 px-3 flex items-center rounded-full bg-[var(--sky)]/10 border border-[var(--sky)]/20 hover:bg-[var(--primary)] transition-all font-mono text-[8px] font-bold uppercase text-[var(--sky)] hover:text-white"
                   >
                     Simplificado
                   </button>
@@ -1580,17 +1612,17 @@ export default function ChapterOverlay({
             {(current.externalLink || current.link) && (
               <button
                 onClick={() => window.open(current.externalLink || current.link, '_blank')}
-                className="group flex items-center gap-3 h-10 pl-5 pr-1.5 rounded-full bg-[var(--primary)] hover:shadow-[0_0_24px_rgba(10,92,255,0.5)] transition-all"
+                className="group flex items-center gap-2.5 md:gap-3 h-9 md:h-10 pl-4 md:pl-5 pr-1.5 rounded-full bg-[var(--primary)] hover:shadow-[0_0_24px_rgba(10,92,255,0.5)] transition-all"
               >
                 <span className="flex flex-col items-start leading-none">
-                  <span className="font-mono text-[7px] font-bold uppercase tracking-[0.2em] text-blue-100/80">
+                  <span className="font-mono text-[7px] font-bold uppercase tracking-[0.2em] text-blue-100/80 hidden sm:block">
                     {current.externalLinkLabel || t('Explorar', 'Explore')}
                   </span>
                   <span className="text-[10px] font-bold uppercase tracking-wide text-white">
                     {current.externalSource || t('Aceder', 'Access')}
                   </span>
                 </span>
-                <span className="w-8 h-8 rounded-full bg-white flex items-center justify-center">
+                <span className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-white flex items-center justify-center">
                   <ArrowUpRight
                     size={15}
                     className="text-[var(--primary)] group-hover:rotate-45 transition-transform duration-500"
