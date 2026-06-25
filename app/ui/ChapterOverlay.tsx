@@ -4,7 +4,7 @@ import {
   LineChart, Compass, Globe, Sparkles, Activity, ChevronRight, QrCode, ShieldCheck, FileText, PlayCircle, Layers, Zap,
   Cpu, BarChart3, Monitor, Maximize2, Hexagon, Fingerprint, TrendingUp, Award, Search, Map, Quote, Calendar, ArrowUpRight, Users, ArrowRight, ChevronLeft, Languages, FileDown
 } from 'lucide-react';
-import React, { useEffect, useState, isValidElement, ReactNode } from 'react';
+import React, { useEffect, useState, ReactNode } from 'react';
 import { useLang } from './LanguageContext'; // Adicionado para ouvir o botão da Navbar
 
 // --- ESTE BLOCO ABAIXO É O QUE CORRIGE O ERRO ---
@@ -74,7 +74,6 @@ export default function ChapterOverlay({
   prevTitle,
   nextTitle,
 }: OverlayProps) {
-  const [activeTab, setActiveTab] = useState<'overview' | 'pillars' | 'media'>('overview');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   // --- LÓGICA DE IDIOMA INTEGRADA ---
@@ -90,7 +89,7 @@ export default function ChapterOverlay({
 // --- FIM DO BLOCO DE CORREÇÃO ---
 'visit-braga': {
   watermark: 'https://i.imgur.com/e0wCEWM.jpeg',
-  tag: t('Gestão de Destino // 2024 - 2025', 'Destination Management // 2024 - 2025'),
+  tag: t('Gestão de Destino // 2024 — 2025', 'Destination Management // 2024 — 2025'),
   headerTitle: t('Portal Visit Braga: Estratégia Digital', 'Visit Braga Portal: Digital Strategy'),
   
   officialNetwork: 'Município de Braga / InvestBraga',
@@ -189,7 +188,7 @@ export default function ChapterOverlay({
 },
 'smart-tourism': {
   watermark: 'https://i.imgur.com/GBs8DY7.jpeg',
-  tag: t('European Shortlisted City // 2024 - 2026', 'European Shortlisted City // 2024 - 2026'),
+  tag: t('European Shortlisted City // 2024 — 2026', 'European Shortlisted City // 2024 — 2026'),
   headerTitle: t('European Capital of Smart Tourism', 'European Capital of Smart Tourism'),
   
   // Chaves para o Footer Dinâmico
@@ -278,7 +277,7 @@ export default function ChapterOverlay({
 },
 'cidade-bracvs': {
   watermark: 'https://i.imgur.com/NRTWHRW.png',
-  tag: t('Educação & Património // 2024 - 2025', 'Education & Heritage // 2024 - 2025'),
+  tag: t('Educação & Património // 2024 — 2025', 'Education & Heritage // 2024 — 2025'),
   headerTitle: t('A Cidade do Bracvs: Roteiro Educativo', 'The City of Bracvs: Educational Itinerary'),
   
   // Chaves para o Footer Dinâmico
@@ -371,7 +370,7 @@ export default function ChapterOverlay({
 },
 'braga-after-dark': {
   watermark: 'https://i.imgur.com/mgdxHtt.jpeg',
-  tag: t('Curadoria & Eventos // 2024 - 2025', 'Curatorship & Events // 2024 - 2025'),
+  tag: t('Curadoria & Eventos // 2024 — 2025', 'Curatorship & Events // 2024 — 2025'),
   headerTitle: t('Braga After Dark: Economia Noturna', 'Braga After Dark: Night-time Economy'),
   
   // Chaves para o Footer Dinâmico
@@ -469,7 +468,7 @@ export default function ChapterOverlay({
 },
 'roteiro-3-dias': {
   watermark: 'https://i.imgur.com/yWtlcEL.png',
-  tag: t('Coordenação Editorial // 2024 - 2025', 'Editorial Coordination // 2024 - 2025'),
+  tag: t('Coordenação Editorial // 2024 — 2025', 'Editorial Coordination // 2024 — 2025'),
   headerTitle: t('Roteiro Oficial: Descobrir Braga', 'Official Guide: Discover Braga'),
   
   // Chaves para o Footer Dinâmico
@@ -585,7 +584,7 @@ export default function ChapterOverlay({
 },
 'mapa-turistico-braga': {
   watermark: 'https://i.imgur.com/P54M1Ko.png',
-  tag: t('Cartografia & Design // 2024 - 2025', 'Cartography & Design // 2024 - 2025'),
+  tag: t('Cartografia & Design // 2024 — 2025', 'Cartography & Design // 2024 — 2025'),
   headerTitle: t('Novo Mapa Turístico Oficial de Braga', 'Braga’s New Official Tourist Map'),
   
   officialNetwork: t('Município de Braga // Divisão de Turismo', 'Municipality of Braga // Tourism Department'),
@@ -688,7 +687,7 @@ export default function ChapterOverlay({
 'fiets-wandelbeurs-gante': {
   watermark: 'https://i.imgur.com/tg4YOqy.png',
   tag: t('Missão Internacional // 2025', 'International Mission // 2025'),
-  headerTitle: t('Braga na Fiets en Wandelbeurs - Bélgica', 'Braga at Fiets en Wandelbeurs - Belgium'),
+  headerTitle: t('Braga na Fiets en Wandelbeurs — Bélgica', 'Braga at Fiets en Wandelbeurs — Belgium'),
   
   // Chaves para o Footer Dinâmico
   officialNetwork: t('Visit Braga // Mercado Benelux', 'Visit Braga // Benelux Market'),
@@ -779,8 +778,8 @@ export default function ChapterOverlay({
 },
 'expovacaciones-bilbao': {
   watermark: 'https://i.imgur.com/JL0PcZe.png',
-  tag: t('Missão Estratégica // 2024 - 2025', 'Strategic Mission // 2024 - 2025'),
-  headerTitle: t('Braga na ExpoVacaciones - Bilbao', 'Braga at ExpoVacaciones - Bilbao'),
+  tag: t('Missão Estratégica // 2024 — 2025', 'Strategic Mission // 2024 — 2025'),
+  headerTitle: t('Braga na ExpoVacaciones — Bilbao', 'Braga at ExpoVacaciones — Bilbao'),
   
   // Chaves para o Footer Dinâmico
   officialNetwork: t('Visit Braga // Porto e Norte de Portugal', 'Visit Braga // Porto and North of Portugal'),
@@ -871,9 +870,9 @@ export default function ChapterOverlay({
   ],
 },
     'b-travel-barcelona': {
-      watermark: 'https://i.imgur.com/u8hgUWi.png',
+      watermark: 'https://i.imgur.com/09Tm1r9.png',
       tag: t('Representação Internacional // 2026', 'International Representation // 2026'),
-      headerTitle: t('Braga na B-Travel - Barcelona', 'Braga at B-Travel - Barcelona'),
+      headerTitle: t('Braga na B-Travel — Barcelona', 'Braga at B-Travel — Barcelona'),
       officialNetwork: t('Turismo do Porto e Norte de Portugal', 'Porto and North of Portugal Tourism'),
       externalLink: 'https://www.b-travel.com/',
       externalSource: 'B-Travel Barcelona',
@@ -882,7 +881,7 @@ export default function ChapterOverlay({
       link: '',
       stats: [
         { label: t('Mercado-Alvo', 'Target Market'), value: t('Catalunha', 'Catalonia') },
-        { label: t('Datas', 'Dates'), value: '20-22 Mar 2026' },
+        { label: t('Datas', 'Dates'), value: '20—22 Mar 2026' },
         { label: t('Presença', 'Presence'), value: t('Stand TPNP', 'TPNP Stand') },
       ],
       hero: (
@@ -906,7 +905,7 @@ export default function ChapterOverlay({
           </p>
           <p className="text-white/40 text-lg leading-relaxed">
             {t(
-              'Braga esteve presente no stand do Turismo do Porto e Norte de Portugal, reafirmando o seu lugar de destaque numa região de oferta única. Durante os três dias, o contacto direto com visitantes e profissionais foi uma oportunidade privilegiada para dar a conhecer uma cidade milenar, de identidade forte, que acolhe e fica na memória - afirmando Braga, de forma contínua e consistente, nas rotas turísticas internacionais.',
+              'Braga esteve presente no stand do Turismo do Porto e Norte de Portugal, reafirmando o seu lugar de destaque numa região de oferta única. Durante os três dias, o contacto direto com visitantes e profissionais foi uma oportunidade privilegiada para dar a conhecer uma cidade milenar, de identidade forte, que acolhe e fica na memória — afirmando Braga, de forma contínua e consistente, nas rotas turísticas internacionais.',
               'Braga was present at the Porto and North of Portugal Tourism stand, reaffirming its prominent place in a region with a unique offer. Over the three days, direct contact with visitors and professionals was a privileged opportunity to showcase a millennial city of strong identity that welcomes and stays in the memory, consistently affirming Braga on international tourism routes.'
             )}
           </p>
@@ -938,7 +937,7 @@ export default function ChapterOverlay({
     },
     'experiencias-sustentaveis': {
       watermark: 'https://www.cm-braga.pt/archive/cache/img/sz800x600/CMB17012025SERGIOFREITAS3022624430274.jpg',
-      tag: t('Gestão de Produto // 2024 - 2025', 'Product Management // 2024 - 2025'),
+      tag: t('Gestão de Produto // 2024 — 2025', 'Product Management // 2024 — 2025'),
       headerTitle: t('Experiências Turísticas Sustentáveis', 'Sustainable Tourism Experiences'),
       
       // Chaves para o Footer Dinâmico
@@ -1033,7 +1032,7 @@ export default function ChapterOverlay({
     },
     'small-retail-braga': {
       watermark: 'https://transition-pathways.europa.eu/sites/default/files/styles/time_dependent_full/public/discussion_form_post/2025-12/ECOSR%20-%20Thumbnail_0.jpg?itok=1-QARVo7',
-      tag: t('Estratégia Europeia // 2025 - 2026', 'European Strategy // 2025 - 2026'),
+      tag: t('Estratégia Europeia // 2025 — 2026', 'European Strategy // 2025 — 2026'),
       headerTitle: t('European Capital of Small Retail', 'European Capital of Small Retail'),
       
       // Chaves para o Footer Dinâmico
@@ -1211,7 +1210,7 @@ export default function ChapterOverlay({
     },
     'systemeu-salamanca': {
       watermark: 'https://i.imgur.com/SeyCGBk.png',
-      tag: t('Missão Tecnológica // Salamanca 2024 - 2025', 'Tech Mission // Salamanca 2024 - 2025'),
+      tag: t('Missão Tecnológica // Salamanca 2024 — 2025', 'Tech Mission // Salamanca 2024 — 2025'),
       headerTitle: t('Startup OLÉ & SystemEU Summit', 'Startup OLÉ & SystemEU Summit'),
       
       // Chaves para o Footer Dinâmico
@@ -1313,7 +1312,6 @@ export default function ChapterOverlay({
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
-      setActiveTab('overview');
     } else {
       document.body.style.overflow = 'unset';
     }
@@ -1321,431 +1319,261 @@ export default function ChapterOverlay({
 
   if (!isOpen || !current) return null;
 
-  const renderHero = () => {
-    const heroContent = current.hero || "Project Overview";
-    if (isValidElement(heroContent)) return heroContent;
-    if (typeof heroContent === 'string') {
-      return heroContent.split(" ").map((word: string, i: number) => (
-        <span key={i} className={i % 2 !== 0 ? "text-[var(--sky)] block" : "block text-white"}>
-          {word}
-        </span>
-      ));
-    }
-    return <span className="text-white">{String(heroContent)}</span>;
-  };
+  const coverImg = current.watermark || (current.gallery && current.gallery[0]) || '';
+  const gal: string[] = current.gallery || [];
+  const hasLinks =
+    current.externalLink || current.link || current.linkFR || current.linkES || current.linkEN || current.linkLowCost;
+  const pill =
+    'inline-flex items-center px-4 py-2.5 rounded-lg bg-white border border-[var(--ink)]/15 hover:border-[var(--primary)] hover:text-[var(--primary)] transition-all font-mono text-[10px] font-bold uppercase tracking-wider text-[var(--ink)]/70 shadow-sm';
+
+  const SectionHead = ({ n, label }: { n: string; label: string }) => (
+    <div className="flex items-baseline gap-5 border-t-2 border-[var(--ink)] pt-5 mb-10">
+      <span className="font-playfair text-4xl md:text-5xl font-black text-[var(--primary)] leading-none">{n}</span>
+      <span className="font-mono text-[11px] md:text-xs uppercase tracking-[0.35em] text-[var(--ink)]/50">{label}</span>
+    </div>
+  );
+
+  let sec = 0;
+  const num = () => String(++sec).padStart(2, '0');
 
   return (
     <>
       {/* LIGHTBOX */}
       {selectedImage && (
-        <div
-          className="fixed inset-0 z-[2000] flex items-center justify-center bg-black/95 backdrop-blur-md animate-in fade-in duration-300 p-4 cursor-zoom-out"
-          onClick={() => setSelectedImage(null)}
-        >
-          <button
-            aria-label="Fechar imagem"
-            className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors z-[2001]"
-          >
+        <div className="fixed inset-0 z-[2000] flex items-center justify-center bg-[var(--ink)]/95 backdrop-blur-md animate-in fade-in duration-300 p-4 cursor-zoom-out" onClick={() => setSelectedImage(null)}>
+          <button aria-label="Fechar imagem" className="absolute top-6 right-6 text-white/60 hover:text-white transition-colors z-[2001]">
             <X size={32} strokeWidth={1} />
           </button>
-          <img
-            src={selectedImage}
-            className="max-w-full max-h-[88vh] rounded-lg shadow-2xl animate-in zoom-in-95 duration-300 object-contain border border-white/10"
-            alt="Project view"
-            onClick={(e) => e.stopPropagation()}
-          />
+          <img src={selectedImage} className="max-w-full max-h-[88vh] rounded-lg shadow-2xl animate-in zoom-in-95 duration-300 object-contain" alt="Project view" onClick={(e) => e.stopPropagation()} />
         </div>
       )}
 
-      {/* MODAL - Dossier Reader */}
-      <div className="fixed inset-0 z-[600] flex flex-col bg-[var(--ink)] text-white animate-in fade-in duration-400 font-sans">
-        {/* Textura de fundo */}
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_-10%,rgba(176, 138, 69,0.14),transparent_55%)]" />
+      {/* DOSSIER — claro, editorial, scroll com separadores numerados */}
+      <div className="fixed inset-0 z-[600] bg-[var(--paper)] text-[var(--ink)] flex flex-col font-sans animate-in fade-in duration-300">
+        <style>{`.dossier-lead > div > p:first-of-type::first-letter, .dossier-lead > p:first-of-type::first-letter { font-family: var(--font-playfair), Georgia, serif; font-weight: 900; font-size: 4.4rem; line-height: 0.66; float: left; margin: 0.3rem 0.7rem 0 0; color: var(--primary); }`}</style>
+
+        {/* TOPO */}
+        <div className="relative z-40 shrink-0 border-b border-[var(--ink)]/10 bg-[var(--paper)]/85 backdrop-blur-xl">
+          <div className="max-w-5xl mx-auto px-5 md:px-10 h-16 flex items-center justify-between gap-4">
+            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--ink)]/45 truncate">{t('Dossier de Projeto', 'Project Dossier')}</span>
+            <div className="flex items-center gap-2 shrink-0">
+              {onPrev && (
+                <button onClick={onPrev} aria-label={t('Projeto anterior', 'Previous project')} title={prevTitle} className="hidden sm:flex w-9 h-9 rounded-full border border-[var(--ink)]/15 items-center justify-center text-[var(--ink)]/50 hover:bg-[var(--ink)] hover:text-white transition-all">
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+              )}
+              {onNext && (
+                <button onClick={onNext} aria-label={t('Projeto seguinte', 'Next project')} title={nextTitle} className="hidden sm:flex w-9 h-9 rounded-full border border-[var(--ink)]/15 items-center justify-center text-[var(--ink)]/50 hover:bg-[var(--ink)] hover:text-white transition-all">
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              )}
+              <button onClick={onClose} aria-label={t('Fechar', 'Close')} className="w-9 h-9 rounded-full border border-[var(--ink)]/15 flex items-center justify-center text-[var(--ink)]/50 hover:bg-[var(--ink)] hover:text-white transition-all">
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
         </div>
 
-        {/* NAVEGAÇÃO ENTRE DOSSIERS (‹ ›) */}
-        {onPrev && (
-          <button
-            onClick={onPrev}
-            aria-label={prevTitle ? `${t('Anterior', 'Previous')}: ${prevTitle}` : t('Anterior', 'Previous')}
-            className="group absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-30 flex items-center"
-          >
-            <span className="w-9 h-9 md:w-12 md:h-12 rounded-full bg-[var(--ink)]/60 border border-white/15 backdrop-blur-md flex items-center justify-center text-white/70 hover:bg-white hover:text-[var(--ink)] hover:border-white transition-all shadow-lg">
-              <ChevronLeft className="w-5 h-5" />
-            </span>
-            {prevTitle && (
-              <span className="hidden lg:flex flex-col ml-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none">
-                <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-white/40">
-                  {t('Anterior', 'Previous')}
-                </span>
-                <span className="text-xs font-bold text-white whitespace-nowrap">{prevTitle}</span>
+        {/* SCROLL */}
+        <div className="flex-1 overflow-y-auto">
+          {/* ABERTURA */}
+          <header className="max-w-5xl mx-auto px-5 md:px-10 pt-12 md:pt-16">
+            {current.tag && (
+              <span className="inline-flex items-center font-mono text-[9px] md:text-[10px] uppercase tracking-[0.32em] text-[var(--primary)] border border-[var(--primary)]/30 rounded-full px-4 py-2 mb-7">
+                {current.tag}
               </span>
             )}
-          </button>
-        )}
-        {onNext && (
-          <button
-            onClick={onNext}
-            aria-label={nextTitle ? `${t('Próximo', 'Next')}: ${nextTitle}` : t('Próximo', 'Next')}
-            className="group absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-30 flex items-center"
-          >
-            {nextTitle && (
-              <span className="hidden lg:flex flex-col items-end mr-3 opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none">
-                <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-white/40">
-                  {t('Próximo', 'Next')}
-                </span>
-                <span className="text-xs font-bold text-white whitespace-nowrap">{nextTitle}</span>
-              </span>
-            )}
-            <span className="w-9 h-9 md:w-12 md:h-12 rounded-full bg-[var(--ink)]/60 border border-white/15 backdrop-blur-md flex items-center justify-center text-white/70 hover:bg-white hover:text-[var(--ink)] hover:border-white transition-all shadow-lg">
-              <ChevronRight className="w-5 h-5" />
-            </span>
-          </button>
-        )}
-
-        {/* HEADER */}
-        <header className="relative z-20 shrink-0 border-b border-white/10 bg-[var(--ink)]/70 backdrop-blur-xl px-5 md:px-10 lg:px-14">
-          <div className="flex items-center justify-between gap-3 h-16 md:h-20">
-            <div className="flex items-center gap-3 min-w-0">
-              <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-[var(--sky)] hidden md:inline">
-                {t('Dossier', 'Dossier')}
-              </span>
-              <span className="hidden md:block h-4 w-px bg-white/15" />
-              <h2 className="text-sm md:text-base font-bold uppercase tracking-wide text-white truncate">
-                {current.headerTitle}
-              </h2>
-            </div>
-
-            <div className="flex items-center gap-2 md:gap-5 shrink-0">
-              {/* Tabs desktop */}
-              <nav className="hidden sm:flex items-center gap-1">
-                {(['overview', 'pillars', 'media'] as const).map((tab) => (
-                  <button
-                    key={tab}
-                    onClick={() => setActiveTab(tab)}
-                    className={`relative px-3 md:px-4 py-2 text-[11px] font-bold uppercase tracking-widest transition-colors ${
-                      activeTab === tab ? 'text-white' : 'text-white/35 hover:text-white/70'
-                    }`}
-                  >
-                    {tab === 'overview'
-                      ? t('Visão Geral', 'Overview')
-                      : tab === 'pillars'
-                      ? t('Eixos', 'Pillars')
-                      : 'Media'}
-                    {activeTab === tab && (
-                      <span className="absolute -bottom-[1px] left-3 right-3 h-[2px] bg-[var(--primary)] rounded-full" />
-                    )}
-                  </button>
+            <h1 className="font-playfair font-black tracking-[-0.025em] leading-[0.95] text-[var(--ink)] max-w-4xl" style={{ fontSize: 'clamp(2.4rem, 1.4rem + 4vw, 4.8rem)' }}>
+              {current.headerTitle}
+            </h1>
+            {metrics.length > 0 && (
+              <div className="mt-10 flex flex-wrap gap-x-12 gap-y-5 border-t border-[var(--ink)]/10 pt-7">
+                {metrics.map((m: any, i: number) => (
+                  <div key={i}>
+                    <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--ink)]/40">{m.label}</div>
+                    <div className="font-playfair text-xl md:text-2xl font-bold text-[var(--ink)] mt-1">{m.value}</div>
+                  </div>
                 ))}
-              </nav>
-              <button
-                onClick={onClose}
-                aria-label="Fechar"
-                className="w-9 h-9 md:w-10 md:h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-[var(--ink)] transition-all"
-              >
-                <X size={18} />
+              </div>
+            )}
+          </header>
+
+          {/* IMAGEM DE CAPA grande */}
+          {coverImg && (
+            <div className="max-w-6xl mx-auto px-5 md:px-10 mt-12 md:mt-14">
+              <div className="relative overflow-hidden rounded-2xl md:rounded-3xl border border-[var(--ink)]/10 shadow-[0_40px_80px_-40px_rgba(40,30,12,0.35)]">
+                <div className="aspect-[16/9] w-full">
+                  <img src={coverImg} alt="" className="w-full h-full object-cover" />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* 01 — SÍNTESE */}
+          {(current.description || current.quote) && (
+            <section className="max-w-5xl mx-auto px-5 md:px-10 pt-16 md:pt-24">
+              <SectionHead n={num()} label={t('Síntese', 'Synopsis')} />
+              <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+                <div className="lg:col-span-7">
+                  <div className="dossier-lead text-lg md:text-[1.4rem] font-light leading-relaxed [&_p]:!text-[var(--ink)]/75 [&_strong]:!text-[var(--ink)] [&_span]:!text-[var(--ink)]">
+                    {current.description}
+                  </div>
+                </div>
+                <div className="lg:col-span-5 space-y-6">
+                  {current.quote && (
+                    <figure className="rounded-3xl bg-white border border-[var(--ink)]/10 p-8 md:p-10 shadow-[0_30px_60px_-35px_rgba(40,30,12,0.3)]">
+                      <Quote className="w-9 h-9 text-[var(--primary)] mb-5" />
+                      <blockquote className="font-playfair text-xl md:text-2xl italic text-[var(--ink)] leading-[1.3]">{current.quote}</blockquote>
+                      <figcaption className="mt-6 pt-5 border-t border-[var(--ink)]/10 flex items-center gap-3">
+                        <span className="w-9 h-9 rounded-xl bg-[var(--primary)] flex items-center justify-center font-black italic text-white text-sm shrink-0">HB</span>
+                        <span className="flex flex-col">
+                          <span className="text-xs font-bold uppercase tracking-wider text-[var(--ink)]">{current.authorTitle || t('Unidade de Missão', 'Mission Unit')}</span>
+                          <span className="font-mono text-[9px] uppercase tracking-wider text-[var(--ink)]/40">{current.authorSub || t('Estratégia Territorial', 'Territorial Strategy')}</span>
+                        </span>
+                      </figcaption>
+                    </figure>
+                  )}
+                  {(current.officialNetwork || current.acreditacao) && (
+                    <div className="space-y-4">
+                      {current.officialNetwork && (
+                        <div>
+                          <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--primary)]">{t('Rede', 'Network')}</span>
+                          <p className="text-sm text-[var(--ink)]/70 mt-1.5 leading-relaxed">{current.officialNetwork}</p>
+                        </div>
+                      )}
+                      {current.acreditacao && (
+                        <div>
+                          <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--primary)]">{t('Acreditação', 'Accreditation')}</span>
+                          <p className="text-sm text-[var(--ink)]/70 mt-1.5 leading-relaxed italic">{current.acreditacao}</p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* 02 — EIXOS */}
+          {current.pillars && current.pillars.length > 0 && (
+            <section className="max-w-5xl mx-auto px-5 md:px-10 pt-16 md:pt-24">
+              <SectionHead n={num()} label={current.pillarTabLabel || t('Eixos', 'Pillars')} />
+              {(current.pillarTitle || current.pillarDesc) && (
+                <div className="max-w-2xl mb-10">
+                  {current.pillarTitle && <h3 className="font-playfair text-2xl md:text-3xl font-bold text-[var(--ink)] tracking-tight leading-tight mb-3">{current.pillarTitle}</h3>}
+                  {current.pillarDesc && <p className="text-[var(--ink)]/55 text-base md:text-lg font-light leading-relaxed">{current.pillarDesc}</p>}
+                </div>
+              )}
+              <div className="grid md:grid-cols-2 gap-4 md:gap-5">
+                {current.pillars.map((p: any, i: number) => {
+                  const Icon = p.icon;
+                  return (
+                    <div key={i} className="group rounded-2xl bg-white border border-[var(--ink)]/10 p-7 hover:shadow-[0_30px_60px_-35px_rgba(40,30,12,0.4)] hover:-translate-y-1 transition-all duration-400">
+                      <div className="flex items-center gap-4 mb-4">
+                        {Icon && (
+                          <div className="w-12 h-12 rounded-xl bg-[var(--primary)]/10 border border-[var(--primary)]/20 flex items-center justify-center">
+                            <Icon className="w-5 h-5 text-[var(--primary)]" />
+                          </div>
+                        )}
+                        <span className="font-playfair text-2xl font-black text-[var(--ink)]/15">{String(i + 1).padStart(2, '0')}</span>
+                      </div>
+                      <h4 className="text-xl font-bold text-[var(--ink)] mb-2">{p.title}</h4>
+                      <p className="text-[var(--ink)]/60 leading-relaxed">{p.desc}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+          )}
+
+          {/* 03 — O TRABALHO */}
+          {(current.videoEmbed || gal.length > 0) && (
+            <section className="max-w-6xl mx-auto px-5 md:px-10 pt-16 md:pt-24">
+              <div className="max-w-5xl mx-auto"><SectionHead n={num()} label={t('O Trabalho', 'The Work')} /></div>
+              {current.videoEmbed && <div className="mb-6">{current.videoEmbed}</div>}
+              {gal.length > 0 && (
+                <div className="space-y-4 md:space-y-5">
+                  <button onClick={() => setSelectedImage(gal[0])} className="group relative w-full overflow-hidden rounded-3xl border border-[var(--ink)]/10 bg-white cursor-zoom-in block shadow-[0_30px_60px_-40px_rgba(40,30,12,0.3)]">
+                    <div className="aspect-[16/9] w-full">
+                      <img src={gal[0]} alt="" className="w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-105" />
+                    </div>
+                    <span className="absolute bottom-4 right-4 w-11 h-11 rounded-full bg-white/90 backdrop-blur-md border border-[var(--ink)]/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-md">
+                      <Maximize2 className="w-4 h-4 text-[var(--ink)]" />
+                    </span>
+                  </button>
+                  {gal.length > 1 && (
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                      {gal.slice(1).map((img: string, idx: number) => (
+                        <button key={idx} onClick={() => setSelectedImage(img)} className="group relative overflow-hidden rounded-2xl border border-[var(--ink)]/10 bg-white cursor-zoom-in shadow-sm">
+                          <div className="aspect-[4/3] w-full">
+                            <img src={img} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                          </div>
+                          <div className="absolute inset-0 flex items-center justify-center bg-[var(--ink)]/0 group-hover:bg-[var(--ink)]/10 transition-colors">
+                            <Maximize2 className="w-5 h-5 text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow" />
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </section>
+          )}
+
+          {/* 04 — RECURSOS */}
+          {hasLinks && (
+            <section className="max-w-5xl mx-auto px-5 md:px-10 pt-16 md:pt-24">
+              <SectionHead n={num()} label={t('Recursos', 'Resources')} />
+              <div className="flex flex-col md:flex-row md:items-stretch gap-5">
+                {(current.externalLink || current.link) && (
+                  <a href={current.externalLink || current.link} target="_blank" rel="noreferrer" className="group flex-1 flex items-center justify-between gap-6 p-7 rounded-2xl bg-white border border-[var(--ink)]/10 hover:border-[var(--primary)]/40 hover:shadow-[0_30px_60px_-40px_rgba(40,30,12,0.4)] transition-all">
+                    <div className="min-w-0">
+                      <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-[var(--primary)]">{current.externalLinkLabel || t('Explorar', 'Explore')}</span>
+                      <p className="font-playfair text-xl md:text-2xl text-[var(--ink)] mt-1.5 truncate">{current.externalSource || t('Aceder ao recurso oficial', 'Access the official resource')}</p>
+                    </div>
+                    <span className="shrink-0 w-12 h-12 rounded-full bg-[var(--primary)] flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <ArrowUpRight className="w-5 h-5 text-white group-hover:rotate-45 transition-transform" />
+                    </span>
+                  </a>
+                )}
+                {(current.linkFR || current.linkES || current.linkEN || current.linkLowCost) && (
+                  <div className="flex flex-wrap gap-2.5 md:flex-col md:justify-center">
+                    {current.linkFR && <a href={current.linkFR} target="_blank" rel="noreferrer" className={pill}>FR</a>}
+                    {current.linkES && <a href={current.linkES} target="_blank" rel="noreferrer" className={pill}>ES</a>}
+                    {current.linkEN && <a href={current.linkEN} target="_blank" rel="noreferrer" className={pill}>EN</a>}
+                    {current.linkLowCost && <a href={current.linkLowCost} target="_blank" rel="noreferrer" className={pill}>{t('Simplificado', 'Simplified')}</a>}
+                  </div>
+                )}
+              </div>
+            </section>
+          )}
+
+          {/* FECHO */}
+          <footer className="max-w-5xl mx-auto px-5 md:px-10 pt-16 md:pt-24 pb-16">
+            {(onPrev || onNext) && (
+              <div className="grid sm:grid-cols-2 gap-4 border-t-2 border-[var(--ink)] pt-8">
+                {onPrev ? (
+                  <button onClick={onPrev} className="group text-left p-6 rounded-2xl bg-white border border-[var(--ink)]/10 hover:border-[var(--primary)]/40 hover:shadow-lg transition-all">
+                    <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-[var(--ink)]/40 flex items-center gap-2"><ChevronLeft className="w-3 h-3" />{t('Anterior', 'Previous')}</span>
+                    <p className="mt-3 font-playfair text-lg text-[var(--ink)] group-hover:text-[var(--primary)] transition-colors">{prevTitle}</p>
+                  </button>
+                ) : (<div />)}
+                {onNext ? (
+                  <button onClick={onNext} className="group p-6 rounded-2xl bg-white border border-[var(--ink)]/10 hover:border-[var(--primary)]/40 hover:shadow-lg transition-all text-right">
+                    <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-[var(--ink)]/40 flex items-center justify-end gap-2">{t('Seguinte', 'Next')}<ChevronRight className="w-3 h-3" /></span>
+                    <p className="mt-3 font-playfair text-lg text-[var(--ink)] group-hover:text-[var(--primary)] transition-colors">{nextTitle}</p>
+                  </button>
+                ) : (<div />)}
+              </div>
+            )}
+            <div className="mt-10 flex items-center justify-between">
+              <span className="text-base font-black italic text-[var(--ink)] tracking-tighter">HB<span className="text-[var(--primary)]">.</span></span>
+              <button onClick={onClose} className="font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--ink)]/40 hover:text-[var(--ink)] transition-colors flex items-center gap-2">
+                <X className="w-3.5 h-3.5" />{t('Fechar dossier', 'Close dossier')}
               </button>
             </div>
-          </div>
-
-          {/* Tabs mobile (segunda linha) */}
-          <nav className="flex sm:hidden items-center gap-1 pb-2.5">
-            {(['overview', 'pillars', 'media'] as const).map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`flex-1 relative px-2 py-2 text-[10px] font-bold uppercase tracking-widest transition-colors rounded-lg ${
-                  activeTab === tab ? 'bg-white/10 text-white' : 'text-white/35'
-                }`}
-              >
-                {tab === 'overview'
-                  ? t('Visão', 'Overview')
-                  : tab === 'pillars'
-                  ? t('Eixos', 'Pillars')
-                  : 'Media'}
-              </button>
-            ))}
-          </nav>
-        </header>
-
-        {/* CONTEÚDO */}
-        <main className="relative z-10 flex-1 overflow-y-auto custom-scrollbar-dark">
-          <div className="max-w-6xl mx-auto px-5 md:px-10 lg:px-14 py-8 md:py-14">
-            {/* ---------------- VISÃO GERAL ---------------- */}
-            {activeTab === 'overview' && (
-              <div className="animate-in fade-in slide-in-from-bottom-3 duration-500">
-                {/* BANNER DE CAPA */}
-                <div className="relative h-52 sm:h-64 md:h-80 rounded-2xl overflow-hidden mb-10 border border-white/10 bg-[var(--ink-deep)]">
-                  {(current.watermark || current.gallery?.[0]) && (
-                    <img
-                      src={current.watermark || current.gallery?.[0]}
-                      alt=""
-                      className="absolute inset-0 w-full h-full object-cover opacity-60"
-                    />
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink)] via-[var(--ink)]/50 to-transparent" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-[var(--ink)]/60 to-transparent" />
-
-                  {current.tag && (
-                    <span className="absolute top-5 left-5 md:top-6 md:left-6 inline-flex items-center font-mono text-[9px] md:text-[10px] uppercase tracking-[0.25em] text-[var(--sky)] bg-[var(--ink)]/60 border border-[var(--sky)]/20 rounded-full px-3 py-1.5 backdrop-blur-md">
-                      {current.tag}
-                    </span>
-                  )}
-
-                  <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8">
-                    <div className="font-playfair">{renderHero()}</div>
-                  </div>
-                </div>
-
-                {/* CORPO */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
-                  <div className="lg:col-span-7 space-y-8">
-                    <div className="flex gap-5 md:gap-6">
-                      <div className="w-1 rounded-full bg-gradient-to-b from-[var(--primary)] to-[var(--accent)] shrink-0" />
-                      <div className="text-base md:text-xl text-white/70 font-light leading-relaxed">
-                        {current.description}
-                      </div>
-                    </div>
-
-                    {current.quote && (
-                      <figure className="relative rounded-2xl border border-white/10 bg-white/[0.03] p-6 md:p-8">
-                        <Quote className="text-[var(--primary)]/40 w-7 h-7 md:w-8 md:h-8 mb-4" />
-                        <blockquote className="font-playfair text-lg md:text-2xl italic font-medium text-white/90 leading-snug">
-                          {current.quote}
-                        </blockquote>
-                        <figcaption className="flex items-center gap-4 mt-6 pt-5 border-t border-white/10">
-                          <div className="w-10 h-10 rounded-xl bg-[var(--primary)] flex items-center justify-center font-black italic text-white text-sm shrink-0">
-                            HB
-                          </div>
-                          <div className="flex flex-col">
-                            <span className="text-xs font-bold uppercase tracking-wider text-white">
-                              {current.authorTitle || t('Unidade de Missão', 'Mission Unit')}
-                            </span>
-                            <span className="font-mono text-[9px] uppercase tracking-wider text-white/40">
-                              {current.authorSub || t('Estratégia Territorial', 'Territorial Strategy')}
-                            </span>
-                          </div>
-                        </figcaption>
-                      </figure>
-                    )}
-                  </div>
-
-                  {/* Ficha técnica */}
-                  <aside className="lg:col-span-5">
-                    <div className="lg:sticky lg:top-6 rounded-2xl border border-white/10 bg-white/[0.03] p-6 md:p-8">
-                      <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">
-                        {t('Ficha técnica', 'Project facts')}
-                      </span>
-
-                      {metrics.length > 0 && (
-                        <dl className="mt-5">
-                          {metrics.map((m: any, i: number) => (
-                            <div
-                              key={i}
-                              className="flex items-baseline justify-between gap-4 py-3.5 border-b border-white/10 first:pt-0"
-                            >
-                              <dt className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/40">
-                                {m.label}
-                              </dt>
-                              <dd className="text-sm font-bold text-white text-right">{m.value}</dd>
-                            </div>
-                          ))}
-                        </dl>
-                      )}
-
-                      {current.officialNetwork && (
-                        <div className="mt-6">
-                          <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--sky)]">
-                            {t('Rede', 'Network')}
-                          </span>
-                          <p className="text-sm text-white/70 mt-1.5 leading-relaxed">
-                            {current.officialNetwork}
-                          </p>
-                        </div>
-                      )}
-
-                      {current.acreditacao && (
-                        <div className="mt-5">
-                          <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--sky)]">
-                            {t('Acreditação', 'Accreditation')}
-                          </span>
-                          <p className="text-sm text-white/70 mt-1.5 leading-relaxed italic">
-                            {current.acreditacao}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  </aside>
-                </div>
-              </div>
-            )}
-
-            {/* ---------------- EIXOS ---------------- */}
-            {activeTab === 'pillars' && (
-              <div className="animate-in fade-in slide-in-from-bottom-3 duration-500">
-                {(current.pillarTitle || current.pillarDesc) && (
-                  <div className="max-w-3xl mb-10 md:mb-12">
-                    {current.pillarTabLabel && (
-                      <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--sky)] flex items-center gap-3 mb-4">
-                        <span className="w-8 h-px bg-[var(--sky)]/50" />
-                        {current.pillarTabLabel}
-                      </span>
-                    )}
-                    {current.pillarTitle && (
-                      <h3 className="font-playfair text-2xl md:text-4xl font-bold text-white tracking-tight leading-tight mb-4">
-                        {current.pillarTitle}
-                      </h3>
-                    )}
-                    {current.pillarDesc && (
-                      <p className="text-white/50 text-base md:text-lg font-light leading-relaxed">
-                        {current.pillarDesc}
-                      </p>
-                    )}
-                  </div>
-                )}
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-0">
-                  {current.pillars?.map((pillar: any, idx: number) => (
-                    <div
-                      key={idx}
-                      className="group flex gap-5 md:gap-6 py-7 md:py-8 border-t border-white/10 hover:border-[var(--sky)]/30 transition-colors"
-                    >
-                      <span className="font-mono text-sm font-bold text-[var(--sky)] pt-1 w-7 shrink-0">
-                        0{idx + 1}
-                      </span>
-                      <div>
-                        <div className="flex items-center gap-3 mb-3">
-                          {pillar.icon && (
-                            <pillar.icon className="text-[var(--sky)] w-5 h-5 shrink-0" />
-                          )}
-                          <h4 className="text-lg font-bold text-white">{pillar.title}</h4>
-                        </div>
-                        <p className="text-white/50 leading-relaxed">{pillar.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* ---------------- MEDIA ---------------- */}
-            {activeTab === 'media' && (
-              <div className="animate-in fade-in duration-500 flex flex-col gap-8 md:gap-10">
-                {current.videoEmbed && <div className="w-full">{current.videoEmbed}</div>}
-
-                {current.gallery && current.gallery.length > 0 && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
-                    {current.gallery.map((img: string, idx: number) => (
-                      <div
-                        key={idx}
-                        onClick={() => setSelectedImage(img)}
-                        className="group relative aspect-video rounded-2xl overflow-hidden border border-white/10 bg-white/5 cursor-zoom-in"
-                      >
-                        <span className="absolute top-3 left-3 z-20 font-mono text-[9px] text-white/70 bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-full">
-                          {String(idx + 1).padStart(2, '0')}
-                        </span>
-                        <div className="absolute inset-0 z-10 flex items-center justify-center bg-[var(--primary)]/0 group-hover:bg-[var(--primary)]/20 transition-colors">
-                          <div className="opacity-0 group-hover:opacity-100 transition-opacity bg-white/20 backdrop-blur-md p-3 rounded-full border border-white/30">
-                            <Maximize2 size={18} className="text-white" />
-                          </div>
-                        </div>
-                        <img
-                          src={img}
-                          alt=""
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {!current.videoEmbed && (!current.gallery || current.gallery.length === 0) && (
-                  <div className="flex flex-col items-center justify-center py-24 md:py-28 text-center">
-                    <PlayCircle className="w-10 h-10 text-white/15 mb-5" />
-                    <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-white/30">
-                      {t('Sem media disponível', 'No media available')}
-                    </p>
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        </main>
-
-        {/* FOOTER SLIM */}
-        <footer className="relative z-20 shrink-0 flex items-center justify-between gap-3 px-5 md:px-10 lg:px-14 h-14 md:h-16 border-t border-white/10 bg-[var(--ink-deep)]">
-          <div className="flex items-center gap-3 min-w-0">
-            <span className="text-base font-black italic text-white tracking-tighter">
-              HB<span className="text-[var(--sky)]">.</span>
-            </span>
-            <span className="hidden md:block h-4 w-px bg-white/15" />
-            <span className="hidden md:inline font-mono text-[9px] uppercase tracking-[0.3em] text-white/35">
-              {t('Portefólio Estratégico', 'Strategic Portfolio')}
-            </span>
-          </div>
-
-          <div className="flex items-center gap-2 md:gap-3">
-            {(current.linkFR || current.linkES || current.linkEN || current.linkLowCost) && (
-              <div className="hidden md:flex items-center gap-1.5">
-                {current.linkFR && (
-                  <button
-                    onClick={() => window.open(current.linkFR, '_blank')}
-                    className="h-8 w-8 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:bg-[var(--primary)] transition-all font-mono text-[9px] font-bold text-white/70 hover:text-white"
-                  >
-                    FR
-                  </button>
-                )}
-                {current.linkES && (
-                  <button
-                    onClick={() => window.open(current.linkES, '_blank')}
-                    className="h-8 w-8 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:bg-[var(--primary)] transition-all font-mono text-[9px] font-bold text-white/70 hover:text-white"
-                  >
-                    ES
-                  </button>
-                )}
-                {current.linkEN && (
-                  <button
-                    onClick={() => window.open(current.linkEN, '_blank')}
-                    className="h-8 w-8 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:bg-[var(--primary)] transition-all font-mono text-[9px] font-bold text-white/70 hover:text-white"
-                  >
-                    EN
-                  </button>
-                )}
-                {current.linkLowCost && (
-                  <button
-                    onClick={() => window.open(current.linkLowCost, '_blank')}
-                    className="h-8 px-3 flex items-center rounded-full bg-[var(--sky)]/10 border border-[var(--sky)]/20 hover:bg-[var(--primary)] transition-all font-mono text-[8px] font-bold uppercase text-[var(--sky)] hover:text-white"
-                  >
-                    Simplificado
-                  </button>
-                )}
-              </div>
-            )}
-
-            {(current.externalLink || current.link) && (
-              <button
-                onClick={() => window.open(current.externalLink || current.link, '_blank')}
-                className="group flex items-center gap-2.5 md:gap-3 h-9 md:h-10 pl-4 md:pl-5 pr-1.5 rounded-full bg-[var(--primary)] hover:shadow-[0_0_24px_rgba(176, 138, 69,0.5)] transition-all"
-              >
-                <span className="flex flex-col items-start leading-none">
-                  <span className="font-mono text-[7px] font-bold uppercase tracking-[0.2em] text-[var(--accent)]/80 hidden sm:block">
-                    {current.externalLinkLabel || t('Explorar', 'Explore')}
-                  </span>
-                  <span className="text-[10px] font-bold uppercase tracking-wide text-white">
-                    {current.externalSource || t('Aceder', 'Access')}
-                  </span>
-                </span>
-                <span className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-white flex items-center justify-center">
-                  <ArrowUpRight
-                    size={15}
-                    className="text-[var(--primary)] group-hover:rotate-45 transition-transform duration-500"
-                  />
-                </span>
-              </button>
-            )}
-          </div>
-        </footer>
+          </footer>
+        </div>
       </div>
     </>
   );

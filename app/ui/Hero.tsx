@@ -25,20 +25,24 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden flex flex-col bg-[var(--paper)]">
-      {/* FUNDO — foto institucional como atmosfera calma no topo */}
+      {/* FUNDO — foto institucional, atmosfera calma e sem costura */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-x-0 top-0 h-[58%] overflow-hidden">
-          <img
-            src="https://i.imgur.com/SvJ4bdR.jpeg"
-            alt=""
-            className="absolute inset-0 w-full h-full object-cover opacity-[0.22] grayscale-[55%] contrast-[0.96]"
-          />
-          <div className="absolute inset-0 bg-[var(--primary)]/[0.05] mix-blend-multiply" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[var(--paper)]/45 via-[var(--paper)]/72 to-[var(--paper)]" />
-        </div>
-        {/* clareira radial atrás do emblema */}
-        <div className="absolute left-1/2 top-[40%] -translate-x-1/2 -translate-y-1/2 w-[72vw] max-w-[760px] aspect-square rounded-full bg-[radial-gradient(circle,var(--paper)_32%,transparent_72%)]" />
+        <img
+          src="https://i.imgur.com/SvJ4bdR.jpeg"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover opacity-[0.32] grayscale-[42%] contrast-[0.97]"
+        />
+        <div className="absolute inset-0 bg-[var(--primary)]/[0.04] mix-blend-multiply" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--paper)]/20 via-[var(--paper)]/55 to-[var(--paper)]" />
+        <div className="absolute left-1/2 top-[40%] -translate-x-1/2 -translate-y-1/2 w-[72vw] max-w-[780px] aspect-square rounded-full bg-[radial-gradient(circle,var(--paper)_30%,transparent_72%)]" />
       </div>
+
+      {/* Moldura institucional + marcas de registo */}
+      <div className="pointer-events-none absolute z-[5] top-[92px] bottom-[96px] left-4 right-4 sm:left-8 sm:right-8 border border-[var(--ink)]/[0.07] rounded-2xl" />
+      <div className="pointer-events-none absolute z-[6] top-[92px] left-4 sm:left-8 w-4 h-4 border-l-2 border-t-2 border-[var(--primary)]/40 -translate-x-px -translate-y-px" />
+      <div className="pointer-events-none absolute z-[6] top-[92px] right-4 sm:right-8 w-4 h-4 border-r-2 border-t-2 border-[var(--primary)]/40 translate-x-px -translate-y-px" />
+      <div className="pointer-events-none absolute z-[6] bottom-[96px] left-4 sm:left-8 w-4 h-4 border-l-2 border-b-2 border-[var(--primary)]/40 -translate-x-px translate-y-px" />
+      <div className="pointer-events-none absolute z-[6] bottom-[96px] right-4 sm:right-8 w-4 h-4 border-r-2 border-b-2 border-[var(--primary)]/40 translate-x-px translate-y-px" />
 
       {/* LETTERHEAD */}
       <div className={`relative z-10 pt-24 sm:pt-28 px-5 sm:px-8 ${show('delay-0')}`}>
