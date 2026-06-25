@@ -6,7 +6,6 @@ import { ArrowRight, ArrowUpRight, MapPin, Plus, Globe } from 'lucide-react';
 import Hero from './ui/Hero';
 import Navbar from './ui/Navbar';
 import ChapterOverlay from './ui/ChapterOverlay';
-import ProgressRail from './ui/ProgressRail';
 import Contact from './ui/Contact';
 import CommandPalette from './ui/CommandPalette';
 import ProjectIndex from './ui/ProjectIndex';
@@ -148,7 +147,7 @@ export default function Page() {
       id: 'b-travel-barcelona',
       title: 'B-Travel Barcelona',
       location: t('Barcelona, Espanha', 'Barcelona, Spain'),
-      image: 'https://i.imgur.com/u8hgUWi.png',
+      image: 'https://i.imgur.com/09Tm1r9.png',
       tag: t('Sul da Europa', 'Southern Europe'),
     },
   ];
@@ -238,26 +237,25 @@ export default function Page() {
       {/* REDE DE SEGURANÇA: variáveis de cor garantidas mesmo sem globals.css */}
       <style jsx global>{`
         :root {
-          --ink: #0a1424;
-          --ink-soft: #111d33;
-          --ink-deep: #070d18;
-          --paper: #f5f6f8;
-          --paper-warm: #fbfcfd;
-          --primary: #0a5cff;
-          --sky: #2f80ff;
-          --accent: #00c3ff;
+          --ink: #1d2226;
+          --ink-soft: #2c343b;
+          --ink-deep: #14181b;
+          --paper: #f4f2ee;
+          --paper-warm: #ffffff;
+          --primary: #0a66c2;
+          --sky: #378fe9;
+          --accent: #70b5f9;
         }
       `}</style>
 
       <div className="relative z-10">
         <Navbar onOpenPalette={() => setPaletteOpen(true)} />
-        <ProgressRail />
         <Hero />
 
         {/* ============================================================ */}
         {/* FAIXA DE IMPACTO                                            */}
         {/* ============================================================ */}
-        <section className="relative bg-[var(--ink)] text-white overflow-hidden">
+        <section id="impacto" data-nav-theme="dark" className="relative bg-[var(--ink)] text-white overflow-hidden">
           <div className="absolute inset-0 grid-dots text-white/[0.04]" />
           <div
             data-reveal="stagger"
@@ -366,34 +364,47 @@ export default function Page() {
             </div>
 
             {/* Representação internacional (feiras) */}
-            <div data-reveal className="mt-20">
-              <div className="flex items-center gap-3 mb-6">
-                <span className="eyebrow text-slate-400">
-                  {t('Representação Internacional', 'International Representation')}
+            <div data-reveal className="mt-24">
+              <div className="flex items-end justify-between gap-6 mb-8">
+                <div>
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="h-px w-7 bg-[var(--primary)]" />
+                    <span className="eyebrow text-[var(--primary)]">
+                      {t('Representação Internacional', 'International Representation')}
+                    </span>
+                  </div>
+                  <h3 className="font-playfair text-3xl md:text-4xl font-black text-[var(--ink)] tracking-tight leading-none">
+                    {t('Braga no mapa global', 'Braga on the global map')}
+                  </h3>
+                </div>
+                <span className="hidden md:block font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--ink)]/40 pb-2">
+                  {t('Feiras & Missões', 'Fairs & Missions')}
                 </span>
-                <span className="h-px flex-1 bg-slate-200" />
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
                 {fairs.map((f) => (
                   <article
                     key={f.id}
                     onClick={() => open(f.id)}
-                    className="group relative h-44 rounded-2xl overflow-hidden cursor-pointer border border-slate-200"
+                    className="group relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer border border-[var(--ink)]/10 bg-[var(--ink)] shadow-sm hover:shadow-[0_28px_55px_-30px_rgba(20,22,28,0.5)] hover:-translate-y-1 transition-all duration-500"
                   >
                     <img
                       src={f.image}
                       alt={f.title}
-                      className="absolute inset-0 w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[1.2s]"
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.4s] ease-out"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[var(--ink)]/90 via-[var(--ink)]/40 to-transparent" />
-                    <div className="relative h-full p-6 flex flex-col justify-center">
-                      <span className="font-mono text-[9px] font-bold uppercase tracking-[0.3em] text-[var(--sky)] mb-2">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink)] via-[var(--ink)]/35 to-transparent" />
+                    <span className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/12 border border-white/20 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <ArrowUpRight className="w-4 h-4 text-white group-hover:rotate-45 transition-transform" />
+                    </span>
+                    <div className="absolute inset-x-0 bottom-0 p-5">
+                      <span className="font-mono text-[9px] font-bold uppercase tracking-[0.28em] text-[var(--sky)] mb-2 block">
                         {f.tag}
                       </span>
                       <h4 className="font-playfair text-2xl font-bold text-white leading-tight">
                         {f.title}
                       </h4>
-                      <div className="flex items-center gap-2 mt-2 text-white/60">
+                      <div className="flex items-center gap-2 mt-2 text-white/65">
                         <MapPin className="w-3.5 h-3.5" />
                         <span className="font-mono text-[10px] uppercase tracking-widest">
                           {f.location}
@@ -410,7 +421,7 @@ export default function Page() {
         {/* ============================================================ */}
         {/* CAPÍTULO 02 - ECOSSISTEMA DIGITAL                           */}
         {/* ============================================================ */}
-        <section id="capitulo-02" className="relative py-24 md:py-28 overflow-hidden bg-[var(--ink)]">
+        <section id="capitulo-02" data-nav-theme="dark" className="relative py-24 md:py-28 overflow-hidden bg-[var(--ink)]">
           <div className="absolute inset-0 grid-dots text-[var(--sky)]/[0.06]" />
           <div className="max-w-[1320px] mx-auto px-6 relative z-10">
             <header data-reveal className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16 items-end">
@@ -428,8 +439,8 @@ export default function Page() {
                   </span>
                 </h2>
               </div>
-              <div className="lg:col-span-5">
-                <p className="text-white/45 leading-relaxed border-l-2 border-white/15 pl-5">
+              <div className="lg:col-span-5 lg:pb-2">
+                <p className="text-white/65 text-[15px] md:text-base leading-relaxed border-l-2 border-[var(--sky)]/45 pl-5">
                   {t(
                     'Infraestrutura tecnológica e governação de dados para suportar a nova economia urbana.',
                     'Technological infrastructure and data governance to support the new urban economy.'
@@ -447,19 +458,20 @@ export default function Page() {
                 <article
                   key={p.id}
                   onClick={() => open(p.id)}
-                  className="group relative h-[420px] rounded-2xl overflow-hidden cursor-pointer border border-white/10 bg-[var(--ink-deep)] transition-all duration-500 hover:-translate-y-1.5"
+                  className="group relative h-[420px] rounded-2xl overflow-hidden cursor-pointer border border-white/10 bg-[var(--ink-soft)] transition-all duration-500 hover:-translate-y-1.5 hover:border-[var(--sky)]/30"
                 >
                   <img
                     src={p.image}
                     alt={p.title}
-                    className="absolute inset-0 w-full h-full object-cover opacity-25 group-hover:opacity-40 group-hover:scale-105 transition-all duration-[1.4s]"
+                    className="absolute inset-0 w-full h-full object-cover opacity-[0.45] group-hover:opacity-[0.62] group-hover:scale-105 transition-all duration-[1.4s]"
                   />
-                  {/* Scrim uniforme: garante leitura mesmo com imagens claras */}
-                  <div className="absolute inset-0 bg-[var(--ink-deep)]/70" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink-deep)] via-[var(--ink-deep)]/30 to-transparent" />
+                  {/* Scrim de leitura, mais leve para deixar respirar a imagem */}
+                  <div className="absolute inset-0 bg-[var(--ink-soft)]/45" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink-soft)] via-[var(--ink-soft)]/15 to-transparent" />
                   <div className="relative h-full p-8 flex flex-col justify-between">
                     <div className="flex justify-between items-start">
-                      <span className="font-mono text-[9px] font-bold uppercase tracking-widest text-[var(--sky)] bg-white/5 border border-white/10 px-3 py-1 rounded-full backdrop-blur-md">
+                      <span className="inline-flex items-center gap-1.5 font-mono text-[9px] font-bold uppercase tracking-widest text-[var(--sky)] bg-white/[0.06] border border-white/[0.12] pl-2 pr-3 py-1 rounded-full backdrop-blur-md">
+                        <span className="w-1 h-1 rounded-full bg-[var(--sky)]" />
                         {p.location}
                       </span>
                       <span className="w-10 h-10 rounded-full bg-white/5 border border-white/10 backdrop-blur-md flex items-center justify-center group-hover:bg-[var(--primary)] transition-all duration-500">

@@ -2,35 +2,23 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { Search } from 'lucide-react';
 import { useLang } from './LanguageContext';
 
-// Mapa real das secções (ids existentes em page.tsx)
 const SECTIONS = [
-  { id: 'portfolio', pt: 'Portefólio', en: 'Portfolio' },
+  { id: 'arquivo', pt: 'Portefólio', en: 'Portfolio' },
   { id: 'impacto', pt: 'Impacto', en: 'Impact' },
   { id: 'contacto', pt: 'Contacto', en: 'Contact' },
 ];
 
 export default function Navbar({ onOpenPalette }: { onOpenPalette?: () => void }) {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState<string>('');
+  const [menuOpen, setMenuOpen] = useState(false);
   const { lang, toggleLang } = useLang();
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Destaca a secção ativa enquanto se scrolla
-  useEffect(() => {
     const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActive(e.target.id);
-        });
-      },
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) setActive(e.target.id); }),
       { rootMargin: '-45% 0px -45% 0px' }
     );
     SECTIONS.forEach(({ id }) => {
@@ -40,204 +28,135 @@ export default function Navbar({ onOpenPalette }: { onOpenPalette?: () => void }
     return () => obs.disconnect();
   }, []);
 
-  // Bloqueia scroll do body quando o menu mobile está aberto
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
-    };
+    return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
+
+  const go = (id: string) => {
+    setMenuOpen(false);
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <>
-      <nav
-        className={`fixed top-0 w-full z-[100] transition-all duration-500 px-4 sm:px-6 md:px-12 ${
-          isScrolled ? 'py-3' : 'py-5'
-        }`}
-      >
-        <div
-          className={`max-w-7xl mx-auto flex justify-between items-center transition-all duration-700 px-5 sm:px-8 py-2.5 rounded-2xl border ${
-            isScrolled
-              ? 'bg-white/90 backdrop-blur-xl border-slate-200/70 shadow-[0_8px_30px_-12px_rgba(10,20,36,0.18)]'
-              : 'bg-white/65 backdrop-blur-md border-white/60 shadow-none'
-          }`}
-        >
-          {/* Identidade */}
-          <Link href="/" className="group flex items-center gap-4 shrink-0">
-            <div className="relative">
-              <h1 className="font-playfair text-2xl md:text-3xl tracking-tighter leading-none flex items-center">
-                <span className="text-slate-950 font-[900] transition-transform duration-500 group-hover:-translate-y-px">
-                  Hugo
-                </span>
-                <span className="text-[var(--primary)] italic font-light ml-1.5 relative transition-transform duration-500 group-hover:translate-y-px">
-                  Barros
-                  <span className="absolute -bottom-1 left-0 w-full h-[1px] bg-[var(--primary)]/10" />
-                </span>
-              </h1>
-              <div className="hidden sm:flex items-center gap-2 mt-1.5">
-                <div className="h-[1px] w-3 bg-[var(--primary)]/40 transition-all duration-500 group-hover:w-6" />
-                <span className="font-mono text-[7px] uppercase tracking-[0.55em] text-slate-500 font-bold">
-                  {lang === 'pt' ? 'Portefólio Estratégico' : 'Strategic Portfolio'}
-                </span>
-              </div>
-            </div>
+      <header className="fixed top-0 inset-x-0 z-[100] bg-white border-b border-black/[0.08] border-t-[3px] border-t-[var(--primary)] shadow-[0_1px_2px_rgba(0,0,0,0.06)]">
+        <div className="max-w-[1340px] mx-auto pl-3 pr-3 sm:pl-4 sm:pr-4 h-[56px] flex items-center gap-2.5">
+          {/* Logo + identidade */}
+          <Link href="/" className="shrink-0 flex items-center gap-2.5 group">
+            <span className="relative w-9 h-9 rounded-[11px] bg-[var(--primary)] grid place-items-center text-white font-black italic text-[13px] tracking-tight shadow-sm overflow-hidden">
+              <span className="absolute inset-x-0 top-0 h-1/2 bg-white/10" />
+              <span className="relative">HB</span>
+            </span>
+            <span className="hidden lg:flex flex-col leading-none">
+              <span className="font-sans font-bold text-[14px] text-[var(--ink)] tracking-[-0.01em]">Hugo Barros</span>
+              <span className="font-mono text-[7px] uppercase tracking-[0.16em] text-[var(--ink)]/45 mt-1">
+                {lang === 'pt' ? 'Atividades Económicas & Turismo' : 'Economic Activities & Tourism'}
+              </span>
+            </span>
           </Link>
 
-          {/* Links desktop */}
-          <div className="hidden md:flex items-center gap-9">
+          {/* Pesquisa - estilo LinkedIn */}
+          <button
+            onClick={onOpenPalette}
+            className="hidden sm:flex items-center gap-2 h-9 px-3.5 rounded-full bg-[var(--ink)]/[0.05] hover:bg-[var(--ink)]/[0.08] transition-colors w-full max-w-[260px] text-left"
+            aria-label={lang === 'pt' ? 'Pesquisar' : 'Search'}
+          >
+            <Search className="w-4 h-4 text-[var(--ink)]/55 shrink-0" />
+            <span className="text-[13px] text-[var(--ink)]/55 flex-1 truncate">
+              {lang === 'pt' ? 'Pesquisar projetos…' : 'Search projects…'}
+            </span>
+            <kbd className="font-mono text-[9px] font-semibold text-[var(--ink)]/40 bg-white/70 rounded px-1 py-0.5">⌘K</kbd>
+          </button>
+
+          <div className="flex-1" />
+
+          {/* Navegação */}
+          <nav className="hidden md:flex items-stretch h-[56px]">
             {SECTIONS.map((item) => {
               const isActive = active === item.id;
               return (
-                <Link
+                <button
                   key={item.id}
-                  href={`#${item.id}`}
-                  className={`text-[10px] uppercase tracking-[0.3em] font-black transition-all relative group ${
-                    isActive
-                      ? 'text-[var(--primary)]'
-                      : 'text-[var(--ink)] hover:text-[var(--primary)]'
+                  onClick={() => go(item.id)}
+                  className={`group relative flex items-center px-4 text-[13px] font-semibold transition-colors ${
+                    isActive ? 'text-[var(--ink)]' : 'text-[var(--ink)]/55 hover:text-[var(--ink)]'
                   }`}
                 >
                   {lang === 'pt' ? item.pt : item.en}
                   <span
-                    className={`absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] bg-[var(--primary)] transition-all duration-300 ${
-                      isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                    className={`absolute bottom-0 left-3 right-3 h-[2.5px] rounded-full bg-[var(--primary)] transition-opacity duration-200 ${
+                      isActive ? 'opacity-100' : 'opacity-0'
                     }`}
                   />
-                </Link>
+                </button>
               );
             })}
-          </div>
+          </nav>
 
-          {/* Ações */}
-          <div className="flex items-center gap-3 sm:gap-5">
-            {/* Pesquisa / Command Palette */}
-            <button
-              onClick={onOpenPalette}
-              aria-label={lang === 'pt' ? 'Pesquisar' : 'Search'}
-              className="group flex items-center gap-2 h-8 pl-2.5 pr-2 rounded-full bg-slate-100 border border-slate-200 hover:border-[var(--primary)]/40 hover:bg-white transition-all"
-            >
-              <svg className="w-3.5 h-3.5 text-slate-400 group-hover:text-[var(--primary)]" fill="none" viewBox="0 0 24 24" strokeWidth={2.2} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-4.34-4.34M17 11a6 6 0 1 1-12 0 6 6 0 0 1 12 0Z" />
-              </svg>
-              <kbd className="hidden sm:inline font-mono text-[9px] font-bold text-slate-400 group-hover:text-slate-600">
-                ⌘K
-              </kbd>
-            </button>
-            {/* Toggle PT/EN */}
-            <button
-              onClick={toggleLang}
-              aria-label={lang === 'pt' ? 'Mudar para inglês' : 'Switch to Portuguese'}
-              className="relative flex items-center p-1 rounded-full bg-slate-100 border border-slate-200 w-[70px] h-[32px] transition-all hover:border-[var(--primary)]/40"
-            >
-              <div
-                className={`absolute top-1 bottom-1 w-[30px] rounded-full bg-white shadow-sm border border-slate-200/50 transition-all duration-300 ease-out ${
-                  lang === 'en' ? 'translate-x-[30px]' : 'translate-x-0'
-                }`}
-              />
-              <div className="relative z-10 flex justify-between w-full px-2">
-                <span
-                  className={`text-[9px] font-black transition-colors duration-300 ${
-                    lang === 'pt' ? 'text-[var(--primary)]' : 'text-slate-400'
-                  }`}
-                >
-                  PT
-                </span>
-                <span
-                  className={`text-[9px] font-black transition-colors duration-300 ${
-                    lang === 'en' ? 'text-[var(--primary)]' : 'text-slate-400'
-                  }`}
-                >
-                  EN
-                </span>
-              </div>
-            </button>
+          <span className="hidden md:block h-6 w-px bg-black/10 mx-1.5" />
 
-            {/* Badge live */}
-            <div className="hidden lg:flex items-center gap-3 px-5 py-2 rounded-xl border border-[var(--primary)]/30 bg-[var(--primary)]/10 shadow-sm">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--primary)] opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--primary)]" />
-              </span>
-              <span className="font-mono text-[9px] uppercase tracking-widest text-[var(--primary)] font-[900]">
-                Braga Strategic Hub
-              </span>
+          {/* Idioma */}
+          <button onClick={toggleLang} aria-label="PT / EN" className="hidden sm:flex items-center gap-1 font-mono text-[10px] font-black px-1.5">
+            <span className={lang === 'pt' ? 'text-[var(--primary)]' : 'text-[var(--ink)]/35'}>PT</span>
+            <span className="text-[var(--ink)]/20">/</span>
+            <span className={lang === 'en' ? 'text-[var(--primary)]' : 'text-[var(--ink)]/35'}>EN</span>
+          </button>
+
+          {/* CTA */}
+          <button
+            onClick={() => go('contacto')}
+            className="hidden md:inline-flex items-center h-9 px-5 rounded-full bg-[var(--primary)] hover:bg-[#004182] text-white font-bold text-[13px] transition-colors"
+          >
+            {lang === 'pt' ? 'Contacto' : 'Contact'}
+          </button>
+
+          {/* Mobile */}
+          <button
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label="Menu"
+            aria-expanded={menuOpen}
+            className="md:hidden w-9 h-9 flex items-center justify-center text-[var(--ink)] ml-auto"
+          >
+            <div className="relative w-5 h-4">
+              <span className={`absolute left-0 h-[2.5px] w-5 bg-current rounded-full transition-all duration-300 ${menuOpen ? 'top-1.5 rotate-45' : 'top-0'}`} />
+              <span className={`absolute left-0 top-1.5 h-[2.5px] w-5 bg-current rounded-full transition-all duration-300 ${menuOpen ? 'opacity-0' : 'opacity-100'}`} />
+              <span className={`absolute left-0 h-[2.5px] w-5 bg-current rounded-full transition-all duration-300 ${menuOpen ? 'top-1.5 -rotate-45' : 'top-3'}`} />
             </div>
-
-            {/* Botão mobile */}
-            <button
-              onClick={() => setMenuOpen((v) => !v)}
-              aria-label="Abrir menu"
-              aria-expanded={menuOpen}
-              className="md:hidden text-slate-950 w-9 h-9 flex items-center justify-center"
-            >
-              <div className="relative w-5 h-4">
-                <span
-                  className={`absolute left-0 h-[2.5px] w-5 bg-current rounded-full transition-all duration-300 ${
-                    menuOpen ? 'top-1.5 rotate-45' : 'top-0'
-                  }`}
-                />
-                <span
-                  className={`absolute left-0 top-1.5 h-[2.5px] w-5 bg-current rounded-full transition-all duration-300 ${
-                    menuOpen ? 'opacity-0' : 'opacity-100'
-                  }`}
-                />
-                <span
-                  className={`absolute left-0 h-[2.5px] w-5 bg-current rounded-full transition-all duration-300 ${
-                    menuOpen ? 'top-1.5 -rotate-45' : 'top-3'
-                  }`}
-                />
-              </div>
-            </button>
-          </div>
+          </button>
         </div>
-      </nav>
+      </header>
 
       {/* Drawer mobile */}
-      <div
-        className={`fixed inset-0 z-[99] md:hidden transition-all duration-500 ${
-          menuOpen ? 'visible opacity-100' : 'invisible opacity-0'
-        }`}
-      >
-        <div
-          className="absolute inset-0 bg-[var(--ink)]/40 backdrop-blur-sm"
-          onClick={() => setMenuOpen(false)}
-        />
-        <div
-          className={`absolute top-24 left-4 right-4 rounded-3xl bg-white border border-slate-200 shadow-2xl p-6 transition-all duration-500 ${
-            menuOpen ? 'translate-y-0' : '-translate-y-6'
-          }`}
-        >
-          <nav className="flex flex-col divide-y divide-slate-100">
+      <div className={`fixed inset-0 z-[99] md:hidden transition-all duration-500 ${menuOpen ? 'visible opacity-100' : 'invisible opacity-0'}`}>
+        <div className="absolute inset-0 bg-[var(--ink)]/50 backdrop-blur-sm" onClick={() => setMenuOpen(false)} />
+        <div className={`absolute top-[68px] left-3 right-3 rounded-xl bg-white border border-black/10 shadow-2xl p-5 transition-all duration-500 ${menuOpen ? 'translate-y-0' : '-translate-y-6'}`}>
+          <button
+            onClick={onOpenPalette}
+            className="w-full flex items-center gap-2 h-10 px-3.5 rounded-full bg-[var(--ink)]/[0.05] mb-4"
+          >
+            <Search className="w-4 h-4 text-[var(--ink)]/55" />
+            <span className="text-[13px] text-[var(--ink)]/55">{lang === 'pt' ? 'Pesquisar projetos…' : 'Search projects…'}</span>
+          </button>
+          <nav className="flex flex-col divide-y divide-black/[0.06]">
             {SECTIONS.map((item, i) => (
-              <Link
-                key={item.id}
-                href={`#${item.id}`}
-                onClick={() => setMenuOpen(false)}
-                className="flex items-center justify-between py-4 group"
-              >
-                <span className="flex items-center gap-4">
-                  <span className="font-mono text-[10px] text-[var(--primary)] font-bold">
-                    0{i + 1}
-                  </span>
-                  <span className="font-playfair text-2xl text-[var(--ink)] group-hover:text-[var(--primary)] transition-colors">
+              <button key={item.id} onClick={() => go(item.id)} className="flex items-center justify-between py-3.5 group text-left">
+                <span className="flex items-center gap-3">
+                  <span className="font-mono text-[10px] text-[var(--primary)] font-bold">0{i + 1}</span>
+                  <span className="font-sans font-bold text-lg text-[var(--ink)] group-hover:text-[var(--primary)] transition-colors">
                     {lang === 'pt' ? item.pt : item.en}
                   </span>
                 </span>
-                <span className="text-slate-300 group-hover:text-[var(--primary)] group-hover:translate-x-1 transition-all">
-                  →
-                </span>
-              </Link>
+                <span className="text-[var(--ink)]/30 group-hover:text-[var(--primary)] group-hover:translate-x-1 transition-all">→</span>
+              </button>
             ))}
           </nav>
-          <div className="mt-6 pt-5 border-t border-slate-100 flex items-center gap-3">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--primary)] opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--primary)]" />
-            </span>
-            <span className="font-mono text-[9px] uppercase tracking-widest text-[var(--primary)] font-[900]">
-              Braga Strategic Hub
-            </span>
-          </div>
+          <button
+            onClick={() => go('contacto')}
+            className="mt-5 w-full inline-flex items-center justify-center py-3 rounded-full bg-[var(--primary)] hover:bg-[#004182] text-white font-bold text-[14px] transition-colors"
+          >
+            {lang === 'pt' ? 'Contacto' : 'Contact'}
+          </button>
         </div>
       </div>
     </>

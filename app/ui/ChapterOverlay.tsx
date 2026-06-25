@@ -89,7 +89,7 @@ export default function ChapterOverlay({
 // --- FIM DO BLOCO DE CORREÇÃO ---
 'visit-braga': {
   watermark: 'https://i.imgur.com/e0wCEWM.jpeg',
-  tag: t('Gestão de Destino // 2024 — 2025', 'Destination Management // 2024 — 2025'),
+  tag: t('Gestão de Destino // 2024 - 2025', 'Destination Management // 2024 - 2025'),
   headerTitle: t('Portal Visit Braga: Estratégia Digital', 'Visit Braga Portal: Digital Strategy'),
   
   officialNetwork: 'Município de Braga / InvestBraga',
@@ -188,7 +188,7 @@ export default function ChapterOverlay({
 },
 'smart-tourism': {
   watermark: 'https://i.imgur.com/GBs8DY7.jpeg',
-  tag: t('European Shortlisted City // 2024 — 2026', 'European Shortlisted City // 2024 — 2026'),
+  tag: t('European Shortlisted City // 2024 - 2026', 'European Shortlisted City // 2024 - 2026'),
   headerTitle: t('European Capital of Smart Tourism', 'European Capital of Smart Tourism'),
   
   // Chaves para o Footer Dinâmico
@@ -277,7 +277,7 @@ export default function ChapterOverlay({
 },
 'cidade-bracvs': {
   watermark: 'https://i.imgur.com/NRTWHRW.png',
-  tag: t('Educação & Património // 2024 — 2025', 'Education & Heritage // 2024 — 2025'),
+  tag: t('Educação & Património // 2024 - 2025', 'Education & Heritage // 2024 - 2025'),
   headerTitle: t('A Cidade do Bracvs: Roteiro Educativo', 'The City of Bracvs: Educational Itinerary'),
   
   // Chaves para o Footer Dinâmico
@@ -370,7 +370,7 @@ export default function ChapterOverlay({
 },
 'braga-after-dark': {
   watermark: 'https://i.imgur.com/mgdxHtt.jpeg',
-  tag: t('Curadoria & Eventos // 2024 — 2025', 'Curatorship & Events // 2024 — 2025'),
+  tag: t('Curadoria & Eventos // 2024 - 2025', 'Curatorship & Events // 2024 - 2025'),
   headerTitle: t('Braga After Dark: Economia Noturna', 'Braga After Dark: Night-time Economy'),
   
   // Chaves para o Footer Dinâmico
@@ -468,7 +468,7 @@ export default function ChapterOverlay({
 },
 'roteiro-3-dias': {
   watermark: 'https://i.imgur.com/yWtlcEL.png',
-  tag: t('Coordenação Editorial // 2024 — 2025', 'Editorial Coordination // 2024 — 2025'),
+  tag: t('Coordenação Editorial // 2024 - 2025', 'Editorial Coordination // 2024 - 2025'),
   headerTitle: t('Roteiro Oficial: Descobrir Braga', 'Official Guide: Discover Braga'),
   
   // Chaves para o Footer Dinâmico
@@ -584,7 +584,7 @@ export default function ChapterOverlay({
 },
 'mapa-turistico-braga': {
   watermark: 'https://i.imgur.com/P54M1Ko.png',
-  tag: t('Cartografia & Design // 2024 — 2025', 'Cartography & Design // 2024 — 2025'),
+  tag: t('Cartografia & Design // 2024 - 2025', 'Cartography & Design // 2024 - 2025'),
   headerTitle: t('Novo Mapa Turístico Oficial de Braga', 'Braga’s New Official Tourist Map'),
   
   officialNetwork: t('Município de Braga // Divisão de Turismo', 'Municipality of Braga // Tourism Department'),
@@ -687,7 +687,7 @@ export default function ChapterOverlay({
 'fiets-wandelbeurs-gante': {
   watermark: 'https://i.imgur.com/tg4YOqy.png',
   tag: t('Missão Internacional // 2025', 'International Mission // 2025'),
-  headerTitle: t('Braga na Fiets en Wandelbeurs — Bélgica', 'Braga at Fiets en Wandelbeurs — Belgium'),
+  headerTitle: t('Braga na Fiets en Wandelbeurs - Bélgica', 'Braga at Fiets en Wandelbeurs - Belgium'),
   
   // Chaves para o Footer Dinâmico
   officialNetwork: t('Visit Braga // Mercado Benelux', 'Visit Braga // Benelux Market'),
@@ -778,8 +778,8 @@ export default function ChapterOverlay({
 },
 'expovacaciones-bilbao': {
   watermark: 'https://i.imgur.com/JL0PcZe.png',
-  tag: t('Missão Estratégica // 2024 — 2025', 'Strategic Mission // 2024 — 2025'),
-  headerTitle: t('Braga na ExpoVacaciones — Bilbao', 'Braga at ExpoVacaciones — Bilbao'),
+  tag: t('Missão Estratégica // 2024 - 2025', 'Strategic Mission // 2024 - 2025'),
+  headerTitle: t('Braga na ExpoVacaciones - Bilbao', 'Braga at ExpoVacaciones - Bilbao'),
   
   // Chaves para o Footer Dinâmico
   officialNetwork: t('Visit Braga // Porto e Norte de Portugal', 'Visit Braga // Porto and North of Portugal'),
@@ -872,7 +872,7 @@ export default function ChapterOverlay({
     'b-travel-barcelona': {
       watermark: 'https://i.imgur.com/09Tm1r9.png',
       tag: t('Representação Internacional // 2026', 'International Representation // 2026'),
-      headerTitle: t('Braga na B-Travel — Barcelona', 'Braga at B-Travel — Barcelona'),
+      headerTitle: t('Braga na B-Travel - Barcelona', 'Braga at B-Travel - Barcelona'),
       officialNetwork: t('Turismo do Porto e Norte de Portugal', 'Porto and North of Portugal Tourism'),
       externalLink: 'https://www.b-travel.com/',
       externalSource: 'B-Travel Barcelona',
@@ -881,7 +881,7 @@ export default function ChapterOverlay({
       link: '',
       stats: [
         { label: t('Mercado-Alvo', 'Target Market'), value: t('Catalunha', 'Catalonia') },
-        { label: t('Datas', 'Dates'), value: '20—22 Mar 2026' },
+        { label: t('Datas', 'Dates'), value: '20-22 Mar 2026' },
         { label: t('Presença', 'Presence'), value: t('Stand TPNP', 'TPNP Stand') },
       ],
       hero: (
@@ -905,7 +905,7 @@ export default function ChapterOverlay({
           </p>
           <p className="text-white/40 text-lg leading-relaxed">
             {t(
-              'Braga esteve presente no stand do Turismo do Porto e Norte de Portugal, reafirmando o seu lugar de destaque numa região de oferta única. Durante os três dias, o contacto direto com visitantes e profissionais foi uma oportunidade privilegiada para dar a conhecer uma cidade milenar, de identidade forte, que acolhe e fica na memória — afirmando Braga, de forma contínua e consistente, nas rotas turísticas internacionais.',
+              'Braga esteve presente no stand do Turismo do Porto e Norte de Portugal, reafirmando o seu lugar de destaque numa região de oferta única. Durante os três dias, o contacto direto com visitantes e profissionais foi uma oportunidade privilegiada para dar a conhecer uma cidade milenar, de identidade forte, que acolhe e fica na memória - afirmando Braga, de forma contínua e consistente, nas rotas turísticas internacionais.',
               'Braga was present at the Porto and North of Portugal Tourism stand, reaffirming its prominent place in a region with a unique offer. Over the three days, direct contact with visitors and professionals was a privileged opportunity to showcase a millennial city of strong identity that welcomes and stays in the memory, consistently affirming Braga on international tourism routes.'
             )}
           </p>
@@ -937,7 +937,7 @@ export default function ChapterOverlay({
     },
     'experiencias-sustentaveis': {
       watermark: 'https://www.cm-braga.pt/archive/cache/img/sz800x600/CMB17012025SERGIOFREITAS3022624430274.jpg',
-      tag: t('Gestão de Produto // 2024 — 2025', 'Product Management // 2024 — 2025'),
+      tag: t('Gestão de Produto // 2024 - 2025', 'Product Management // 2024 - 2025'),
       headerTitle: t('Experiências Turísticas Sustentáveis', 'Sustainable Tourism Experiences'),
       
       // Chaves para o Footer Dinâmico
@@ -1032,7 +1032,7 @@ export default function ChapterOverlay({
     },
     'small-retail-braga': {
       watermark: 'https://transition-pathways.europa.eu/sites/default/files/styles/time_dependent_full/public/discussion_form_post/2025-12/ECOSR%20-%20Thumbnail_0.jpg?itok=1-QARVo7',
-      tag: t('Estratégia Europeia // 2025 — 2026', 'European Strategy // 2025 — 2026'),
+      tag: t('Estratégia Europeia // 2025 - 2026', 'European Strategy // 2025 - 2026'),
       headerTitle: t('European Capital of Small Retail', 'European Capital of Small Retail'),
       
       // Chaves para o Footer Dinâmico
@@ -1210,7 +1210,7 @@ export default function ChapterOverlay({
     },
     'systemeu-salamanca': {
       watermark: 'https://i.imgur.com/SeyCGBk.png',
-      tag: t('Missão Tecnológica // Salamanca 2024 — 2025', 'Tech Mission // Salamanca 2024 — 2025'),
+      tag: t('Missão Tecnológica // Salamanca 2024 - 2025', 'Tech Mission // Salamanca 2024 - 2025'),
       headerTitle: t('Startup OLÉ & SystemEU Summit', 'Startup OLÉ & SystemEU Summit'),
       
       // Chaves para o Footer Dinâmico
@@ -1327,9 +1327,9 @@ export default function ChapterOverlay({
     'inline-flex items-center px-4 py-2.5 rounded-lg bg-white border border-[var(--ink)]/15 hover:border-[var(--primary)] hover:text-[var(--primary)] transition-all font-mono text-[10px] font-bold uppercase tracking-wider text-[var(--ink)]/70 shadow-sm';
 
   const SectionHead = ({ n, label }: { n: string; label: string }) => (
-    <div className="flex items-baseline gap-5 border-t-2 border-[var(--ink)] pt-5 mb-10">
-      <span className="font-playfair text-4xl md:text-5xl font-black text-[var(--primary)] leading-none">{n}</span>
-      <span className="font-mono text-[11px] md:text-xs uppercase tracking-[0.35em] text-[var(--ink)]/50">{label}</span>
+    <div className="flex items-baseline gap-4 border-t-2 border-[var(--ink)] pt-4 mb-8">
+      <span className="font-playfair text-3xl md:text-4xl font-black text-[var(--primary)] leading-none">{n}</span>
+      <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-[var(--ink)]/50">{label}</span>
     </div>
   );
 
@@ -1348,14 +1348,22 @@ export default function ChapterOverlay({
         </div>
       )}
 
-      {/* DOSSIER — claro, editorial, scroll com separadores numerados */}
+      {/* DOSSIER - claro, denso, editorial */}
       <div className="fixed inset-0 z-[600] bg-[var(--paper)] text-[var(--ink)] flex flex-col font-sans animate-in fade-in duration-300">
-        <style>{`.dossier-lead > div > p:first-of-type::first-letter, .dossier-lead > p:first-of-type::first-letter { font-family: var(--font-playfair), Georgia, serif; font-weight: 900; font-size: 4.4rem; line-height: 0.66; float: left; margin: 0.3rem 0.7rem 0 0; color: var(--primary); }`}</style>
+        <style>{`.dossier-lead > div > p:first-of-type::first-letter, .dossier-lead > p:first-of-type::first-letter { font-family: var(--font-playfair), Georgia, serif; font-weight: 900; font-size: 4rem; line-height: 0.64; float: left; margin: 0.25rem 0.6rem 0 0; color: var(--primary); }`}</style>
 
         {/* TOPO */}
         <div className="relative z-40 shrink-0 border-b border-[var(--ink)]/10 bg-[var(--paper)]/85 backdrop-blur-xl">
-          <div className="max-w-5xl mx-auto px-5 md:px-10 h-16 flex items-center justify-between gap-4">
-            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--ink)]/45 truncate">{t('Dossier de Projeto', 'Project Dossier')}</span>
+          <div className="max-w-6xl mx-auto px-5 md:px-10 h-14 flex items-center justify-between gap-4">
+            <span className="flex items-center gap-3 min-w-0">
+              <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--ink)]/45 shrink-0">{t('Dossier', 'Dossier')}</span>
+              {current.tag && (
+                <>
+                  <span className="w-1 h-1 rounded-full bg-[var(--primary)] shrink-0" />
+                  <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--ink)]/70 truncate">{current.tag}</span>
+                </>
+              )}
+            </span>
             <div className="flex items-center gap-2 shrink-0">
               {onPrev && (
                 <button onClick={onPrev} aria-label={t('Projeto anterior', 'Previous project')} title={prevTitle} className="hidden sm:flex w-9 h-9 rounded-full border border-[var(--ink)]/15 items-center justify-center text-[var(--ink)]/50 hover:bg-[var(--ink)] hover:text-white transition-all">
@@ -1376,75 +1384,78 @@ export default function ChapterOverlay({
 
         {/* SCROLL */}
         <div className="flex-1 overflow-y-auto">
-          {/* ABERTURA */}
-          <header className="max-w-5xl mx-auto px-5 md:px-10 pt-12 md:pt-16">
-            {current.tag && (
-              <span className="inline-flex items-center font-mono text-[9px] md:text-[10px] uppercase tracking-[0.32em] text-[var(--primary)] border border-[var(--primary)]/30 rounded-full px-4 py-2 mb-7">
-                {current.tag}
-              </span>
-            )}
-            <h1 className="font-playfair font-black tracking-[-0.025em] leading-[0.95] text-[var(--ink)] max-w-4xl" style={{ fontSize: 'clamp(2.4rem, 1.4rem + 4vw, 4.8rem)' }}>
-              {current.headerTitle}
-            </h1>
-            {metrics.length > 0 && (
-              <div className="mt-10 flex flex-wrap gap-x-12 gap-y-5 border-t border-[var(--ink)]/10 pt-7">
-                {metrics.map((m: any, i: number) => (
-                  <div key={i}>
-                    <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--ink)]/40">{m.label}</div>
-                    <div className="font-playfair text-xl md:text-2xl font-bold text-[var(--ink)] mt-1">{m.value}</div>
+          {/* ABERTURA - título + imagem lado a lado */}
+          <header className="max-w-6xl mx-auto px-5 md:px-10 pt-10 md:pt-12">
+            <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              <div className="lg:col-span-6">
+                {current.tag && (
+                  <span className="inline-flex items-center gap-2 font-mono text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-[var(--primary)] bg-[var(--primary)]/[0.06] border border-[var(--primary)]/25 rounded-full pl-2.5 pr-4 py-2 mb-6">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--primary)]" />
+                    {current.tag}
+                  </span>
+                )}
+                <h1 className="font-playfair font-black tracking-[-0.025em] leading-[0.92] text-[var(--ink)]" style={{ fontSize: 'clamp(2.2rem, 1.3rem + 3.4vw, 4rem)' }}>
+                  {current.headerTitle}
+                </h1>
+                {metrics.length > 0 && (
+                  <div className="mt-8 flex flex-wrap gap-x-9 gap-y-4 border-t border-[var(--ink)]/10 pt-6">
+                    {metrics.slice(0, 4).map((m: any, i: number) => (
+                      <div key={i}>
+                        <div className="font-playfair text-2xl md:text-3xl font-black text-[var(--ink)] leading-none">{m.value}</div>
+                        <div className="font-mono text-[8px] uppercase tracking-[0.2em] text-[var(--ink)]/45 mt-1.5">{m.label}</div>
+                      </div>
+                    ))}
                   </div>
-                ))}
+                )}
               </div>
-            )}
-          </header>
-
-          {/* IMAGEM DE CAPA grande */}
-          {coverImg && (
-            <div className="max-w-6xl mx-auto px-5 md:px-10 mt-12 md:mt-14">
-              <div className="relative overflow-hidden rounded-2xl md:rounded-3xl border border-[var(--ink)]/10 shadow-[0_40px_80px_-40px_rgba(40,30,12,0.35)]">
-                <div className="aspect-[16/9] w-full">
-                  <img src={coverImg} alt="" className="w-full h-full object-cover" />
-                </div>
+              <div className="lg:col-span-6">
+                {coverImg && (
+                  <div className="relative overflow-hidden rounded-2xl border border-[var(--ink)]/10 shadow-[0_30px_70px_-35px_rgba(40,30,12,0.4)]">
+                    <div className="aspect-[5/4] w-full">
+                      <img src={coverImg} alt="" className="w-full h-full object-cover" />
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
-          )}
+          </header>
 
-          {/* 01 — SÍNTESE */}
+          {/* 01 - SÍNTESE */}
           {(current.description || current.quote) && (
-            <section className="max-w-5xl mx-auto px-5 md:px-10 pt-16 md:pt-24">
+            <section className="max-w-6xl mx-auto px-5 md:px-10 pt-12 md:pt-16">
               <SectionHead n={num()} label={t('Síntese', 'Synopsis')} />
-              <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+              <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
                 <div className="lg:col-span-7">
-                  <div className="dossier-lead text-lg md:text-[1.4rem] font-light leading-relaxed [&_p]:!text-[var(--ink)]/75 [&_strong]:!text-[var(--ink)] [&_span]:!text-[var(--ink)]">
+                  <div className="dossier-lead text-lg md:text-[1.3rem] leading-relaxed text-[var(--ink)] [&_*]:!text-[var(--ink)] [&_*]:!bg-transparent [&_*]:!font-normal [&_*]:!not-italic [&_*]:!no-underline [&_*]:!shadow-none [&_*]:!decoration-transparent [&_span]:!text-[length:inherit] [&_p+p]:!mt-5">
                     {current.description}
                   </div>
                 </div>
-                <div className="lg:col-span-5 space-y-6">
+                <div className="lg:col-span-5 space-y-4">
                   {current.quote && (
-                    <figure className="rounded-3xl bg-white border border-[var(--ink)]/10 p-8 md:p-10 shadow-[0_30px_60px_-35px_rgba(40,30,12,0.3)]">
-                      <Quote className="w-9 h-9 text-[var(--primary)] mb-5" />
-                      <blockquote className="font-playfair text-xl md:text-2xl italic text-[var(--ink)] leading-[1.3]">{current.quote}</blockquote>
-                      <figcaption className="mt-6 pt-5 border-t border-[var(--ink)]/10 flex items-center gap-3">
-                        <span className="w-9 h-9 rounded-xl bg-[var(--primary)] flex items-center justify-center font-black italic text-white text-sm shrink-0">HB</span>
+                    <figure className="rounded-2xl bg-white border border-[var(--ink)]/10 p-7 shadow-[0_24px_50px_-35px_rgba(40,30,12,0.35)]">
+                      <Quote className="w-8 h-8 text-[var(--primary)] mb-4" />
+                      <blockquote className="font-playfair text-xl md:text-[1.45rem] italic text-[var(--ink)] leading-[1.3]">{current.quote}</blockquote>
+                      <figcaption className="mt-5 pt-4 border-t border-[var(--ink)]/10 flex items-center gap-3">
+                        <span className="w-8 h-8 rounded-lg bg-[var(--primary)] flex items-center justify-center font-black italic text-white text-xs shrink-0">HB</span>
                         <span className="flex flex-col">
-                          <span className="text-xs font-bold uppercase tracking-wider text-[var(--ink)]">{current.authorTitle || t('Unidade de Missão', 'Mission Unit')}</span>
-                          <span className="font-mono text-[9px] uppercase tracking-wider text-[var(--ink)]/40">{current.authorSub || t('Estratégia Territorial', 'Territorial Strategy')}</span>
+                          <span className="text-[11px] font-bold uppercase tracking-wider text-[var(--ink)]">{current.authorTitle || t('Unidade de Missão', 'Mission Unit')}</span>
+                          <span className="font-mono text-[8px] uppercase tracking-wider text-[var(--ink)]/40">{current.authorSub || t('Estratégia Territorial', 'Territorial Strategy')}</span>
                         </span>
                       </figcaption>
                     </figure>
                   )}
                   {(current.officialNetwork || current.acreditacao) && (
-                    <div className="space-y-4">
+                    <div className="rounded-2xl bg-white border border-[var(--ink)]/10 p-6 shadow-sm space-y-4">
                       {current.officialNetwork && (
                         <div>
-                          <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--primary)]">{t('Rede', 'Network')}</span>
-                          <p className="text-sm text-[var(--ink)]/70 mt-1.5 leading-relaxed">{current.officialNetwork}</p>
+                          <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-[var(--primary)]">{t('Rede', 'Network')}</span>
+                          <p className="text-sm text-[var(--ink)]/70 mt-1 leading-relaxed">{current.officialNetwork}</p>
                         </div>
                       )}
                       {current.acreditacao && (
-                        <div>
-                          <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--primary)]">{t('Acreditação', 'Accreditation')}</span>
-                          <p className="text-sm text-[var(--ink)]/70 mt-1.5 leading-relaxed italic">{current.acreditacao}</p>
+                        <div className={current.officialNetwork ? 'pt-4 border-t border-[var(--ink)]/10' : ''}>
+                          <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-[var(--primary)]">{t('Acreditação', 'Accreditation')}</span>
+                          <p className="text-sm text-[var(--ink)]/70 mt-1 leading-relaxed italic">{current.acreditacao}</p>
                         </div>
                       )}
                     </div>
@@ -1454,31 +1465,33 @@ export default function ChapterOverlay({
             </section>
           )}
 
-          {/* 02 — EIXOS */}
+          {/* 02 - EIXOS (cartões horizontais densos) */}
           {current.pillars && current.pillars.length > 0 && (
-            <section className="max-w-5xl mx-auto px-5 md:px-10 pt-16 md:pt-24">
+            <section className="max-w-6xl mx-auto px-5 md:px-10 pt-12 md:pt-16">
               <SectionHead n={num()} label={current.pillarTabLabel || t('Eixos', 'Pillars')} />
               {(current.pillarTitle || current.pillarDesc) && (
-                <div className="max-w-2xl mb-10">
-                  {current.pillarTitle && <h3 className="font-playfair text-2xl md:text-3xl font-bold text-[var(--ink)] tracking-tight leading-tight mb-3">{current.pillarTitle}</h3>}
-                  {current.pillarDesc && <p className="text-[var(--ink)]/55 text-base md:text-lg font-light leading-relaxed">{current.pillarDesc}</p>}
+                <div className="max-w-3xl mb-8">
+                  {current.pillarTitle && <h3 className="font-playfair text-2xl md:text-3xl font-bold text-[var(--ink)] tracking-tight leading-tight mb-2">{current.pillarTitle}</h3>}
+                  {current.pillarDesc && <p className="text-[var(--ink)]/55 text-base font-light leading-relaxed">{current.pillarDesc}</p>}
                 </div>
               )}
-              <div className="grid md:grid-cols-2 gap-4 md:gap-5">
+              <div className="grid md:grid-cols-2 gap-3 md:gap-4">
                 {current.pillars.map((p: any, i: number) => {
                   const Icon = p.icon;
                   return (
-                    <div key={i} className="group rounded-2xl bg-white border border-[var(--ink)]/10 p-7 hover:shadow-[0_30px_60px_-35px_rgba(40,30,12,0.4)] hover:-translate-y-1 transition-all duration-400">
-                      <div className="flex items-center gap-4 mb-4">
+                    <div key={i} className="group flex gap-5 rounded-2xl bg-white border border-[var(--ink)]/10 p-5 md:p-6 hover:border-[var(--primary)]/30 hover:shadow-[0_24px_50px_-35px_rgba(40,30,12,0.4)] transition-all duration-300">
+                      <div className="shrink-0 flex flex-col items-center gap-2">
                         {Icon && (
-                          <div className="w-12 h-12 rounded-xl bg-[var(--primary)]/10 border border-[var(--primary)]/20 flex items-center justify-center">
+                          <div className="w-11 h-11 rounded-xl bg-[var(--primary)]/10 border border-[var(--primary)]/20 flex items-center justify-center">
                             <Icon className="w-5 h-5 text-[var(--primary)]" />
                           </div>
                         )}
-                        <span className="font-playfair text-2xl font-black text-[var(--ink)]/15">{String(i + 1).padStart(2, '0')}</span>
+                        <span className="font-playfair text-2xl font-black text-[var(--ink)]/12 leading-none">{String(i + 1).padStart(2, '0')}</span>
                       </div>
-                      <h4 className="text-xl font-bold text-[var(--ink)] mb-2">{p.title}</h4>
-                      <p className="text-[var(--ink)]/60 leading-relaxed">{p.desc}</p>
+                      <div className="min-w-0">
+                        <h4 className="text-lg font-bold text-[var(--ink)] mb-1.5">{p.title}</h4>
+                        <p className="text-[var(--ink)]/60 leading-relaxed text-sm md:text-[15px]">{p.desc}</p>
+                      </div>
                     </div>
                   );
                 })}
@@ -1486,52 +1499,45 @@ export default function ChapterOverlay({
             </section>
           )}
 
-          {/* 03 — O TRABALHO */}
+          {/* 03 - O TRABALHO (mosaico masonry) */}
           {(current.videoEmbed || gal.length > 0) && (
-            <section className="max-w-6xl mx-auto px-5 md:px-10 pt-16 md:pt-24">
-              <div className="max-w-5xl mx-auto"><SectionHead n={num()} label={t('O Trabalho', 'The Work')} /></div>
-              {current.videoEmbed && <div className="mb-6">{current.videoEmbed}</div>}
+            <section className="max-w-6xl mx-auto px-5 md:px-10 pt-12 md:pt-16">
+              <SectionHead n={num()} label={t('O Trabalho', 'The Work')} />
+              {current.videoEmbed && <div className="mb-5">{current.videoEmbed}</div>}
               {gal.length > 0 && (
-                <div className="space-y-4 md:space-y-5">
-                  <button onClick={() => setSelectedImage(gal[0])} className="group relative w-full overflow-hidden rounded-3xl border border-[var(--ink)]/10 bg-white cursor-zoom-in block shadow-[0_30px_60px_-40px_rgba(40,30,12,0.3)]">
-                    <div className="aspect-[16/9] w-full">
-                      <img src={gal[0]} alt="" className="w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-105" />
-                    </div>
-                    <span className="absolute bottom-4 right-4 w-11 h-11 rounded-full bg-white/90 backdrop-blur-md border border-[var(--ink)]/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-md">
-                      <Maximize2 className="w-4 h-4 text-[var(--ink)]" />
-                    </span>
-                  </button>
-                  {gal.length > 1 && (
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                      {gal.slice(1).map((img: string, idx: number) => (
-                        <button key={idx} onClick={() => setSelectedImage(img)} className="group relative overflow-hidden rounded-2xl border border-[var(--ink)]/10 bg-white cursor-zoom-in shadow-sm">
-                          <div className="aspect-[4/3] w-full">
-                            <img src={img} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                          </div>
-                          <div className="absolute inset-0 flex items-center justify-center bg-[var(--ink)]/0 group-hover:bg-[var(--ink)]/10 transition-colors">
-                            <Maximize2 className="w-5 h-5 text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow" />
-                          </div>
-                        </button>
-                      ))}
-                    </div>
-                  )}
+                <div className="columns-1 sm:columns-2 lg:columns-3 gap-3 md:gap-4">
+                  {gal.map((img: string, idx: number) => (
+                    <button
+                      key={idx}
+                      onClick={() => setSelectedImage(img)}
+                      className="group relative w-full mb-3 md:mb-4 overflow-hidden rounded-xl border border-[var(--ink)]/10 bg-white cursor-zoom-in block break-inside-avoid shadow-sm hover:shadow-[0_24px_50px_-35px_rgba(40,30,12,0.45)] transition-shadow"
+                    >
+                      <img src={img} alt="" className="w-full h-auto block transition-transform duration-700 group-hover:scale-[1.04]" />
+                      <span className="absolute top-3 left-3 font-mono text-[8px] text-white bg-[var(--ink)]/60 px-2 py-1 rounded-full backdrop-blur-md">{String(idx + 1).padStart(2, '0')}</span>
+                      <div className="absolute inset-0 flex items-center justify-center bg-[var(--ink)]/0 group-hover:bg-[var(--ink)]/15 transition-colors">
+                        <span className="w-10 h-10 rounded-full bg-white/90 backdrop-blur flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow">
+                          <Maximize2 className="w-4 h-4 text-[var(--ink)]" />
+                        </span>
+                      </div>
+                    </button>
+                  ))}
                 </div>
               )}
             </section>
           )}
 
-          {/* 04 — RECURSOS */}
+          {/* 04 - RECURSOS */}
           {hasLinks && (
-            <section className="max-w-5xl mx-auto px-5 md:px-10 pt-16 md:pt-24">
+            <section className="max-w-6xl mx-auto px-5 md:px-10 pt-12 md:pt-16">
               <SectionHead n={num()} label={t('Recursos', 'Resources')} />
-              <div className="flex flex-col md:flex-row md:items-stretch gap-5">
+              <div className="flex flex-col md:flex-row md:items-stretch gap-4">
                 {(current.externalLink || current.link) && (
-                  <a href={current.externalLink || current.link} target="_blank" rel="noreferrer" className="group flex-1 flex items-center justify-between gap-6 p-7 rounded-2xl bg-white border border-[var(--ink)]/10 hover:border-[var(--primary)]/40 hover:shadow-[0_30px_60px_-40px_rgba(40,30,12,0.4)] transition-all">
+                  <a href={current.externalLink || current.link} target="_blank" rel="noreferrer" className="group flex-1 flex items-center justify-between gap-6 p-6 rounded-2xl bg-white border border-[var(--ink)]/10 hover:border-[var(--primary)]/40 hover:shadow-[0_24px_50px_-35px_rgba(40,30,12,0.4)] transition-all">
                     <div className="min-w-0">
                       <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-[var(--primary)]">{current.externalLinkLabel || t('Explorar', 'Explore')}</span>
-                      <p className="font-playfair text-xl md:text-2xl text-[var(--ink)] mt-1.5 truncate">{current.externalSource || t('Aceder ao recurso oficial', 'Access the official resource')}</p>
+                      <p className="font-playfair text-xl md:text-2xl text-[var(--ink)] mt-1 truncate">{current.externalSource || t('Aceder ao recurso oficial', 'Access the official resource')}</p>
                     </div>
-                    <span className="shrink-0 w-12 h-12 rounded-full bg-[var(--primary)] flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <span className="shrink-0 w-11 h-11 rounded-full bg-[var(--primary)] flex items-center justify-center group-hover:scale-110 transition-transform">
                       <ArrowUpRight className="w-5 h-5 text-white group-hover:rotate-45 transition-transform" />
                     </span>
                   </a>
@@ -1549,24 +1555,24 @@ export default function ChapterOverlay({
           )}
 
           {/* FECHO */}
-          <footer className="max-w-5xl mx-auto px-5 md:px-10 pt-16 md:pt-24 pb-16">
+          <footer className="max-w-6xl mx-auto px-5 md:px-10 pt-12 md:pt-16 pb-14">
             {(onPrev || onNext) && (
-              <div className="grid sm:grid-cols-2 gap-4 border-t-2 border-[var(--ink)] pt-8">
+              <div className="grid sm:grid-cols-2 gap-3 border-t-2 border-[var(--ink)] pt-6">
                 {onPrev ? (
-                  <button onClick={onPrev} className="group text-left p-6 rounded-2xl bg-white border border-[var(--ink)]/10 hover:border-[var(--primary)]/40 hover:shadow-lg transition-all">
+                  <button onClick={onPrev} className="group text-left p-5 rounded-2xl bg-white border border-[var(--ink)]/10 hover:border-[var(--primary)]/40 hover:shadow-lg transition-all">
                     <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-[var(--ink)]/40 flex items-center gap-2"><ChevronLeft className="w-3 h-3" />{t('Anterior', 'Previous')}</span>
-                    <p className="mt-3 font-playfair text-lg text-[var(--ink)] group-hover:text-[var(--primary)] transition-colors">{prevTitle}</p>
+                    <p className="mt-2 font-playfair text-lg text-[var(--ink)] group-hover:text-[var(--primary)] transition-colors">{prevTitle}</p>
                   </button>
                 ) : (<div />)}
                 {onNext ? (
-                  <button onClick={onNext} className="group p-6 rounded-2xl bg-white border border-[var(--ink)]/10 hover:border-[var(--primary)]/40 hover:shadow-lg transition-all text-right">
+                  <button onClick={onNext} className="group p-5 rounded-2xl bg-white border border-[var(--ink)]/10 hover:border-[var(--primary)]/40 hover:shadow-lg transition-all text-right">
                     <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-[var(--ink)]/40 flex items-center justify-end gap-2">{t('Seguinte', 'Next')}<ChevronRight className="w-3 h-3" /></span>
-                    <p className="mt-3 font-playfair text-lg text-[var(--ink)] group-hover:text-[var(--primary)] transition-colors">{nextTitle}</p>
+                    <p className="mt-2 font-playfair text-lg text-[var(--ink)] group-hover:text-[var(--primary)] transition-colors">{nextTitle}</p>
                   </button>
                 ) : (<div />)}
               </div>
             )}
-            <div className="mt-10 flex items-center justify-between">
+            <div className="mt-8 flex items-center justify-between">
               <span className="text-base font-black italic text-[var(--ink)] tracking-tighter">HB<span className="text-[var(--primary)]">.</span></span>
               <button onClick={onClose} className="font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--ink)]/40 hover:text-[var(--ink)] transition-colors flex items-center gap-2">
                 <X className="w-3.5 h-3.5" />{t('Fechar dossier', 'Close dossier')}
