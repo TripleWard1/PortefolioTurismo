@@ -15,7 +15,7 @@ interface Props {
 }
 
 function H2({ children }: { children: React.ReactNode }) {
-  return <h2 className="font-serif font-semibold text-[1.6rem] leading-tight text-ink pb-3 mb-6 border-b border-line">{children}</h2>;
+  return <h2 className="font-serif font-medium text-[1.8rem] leading-tight text-ink pb-3 mb-7 border-b border-ink/80">{children}</h2>;
 }
 
 export default function Dossier({ projectType, onClose, onPrev, onNext }: Props) {
@@ -80,10 +80,14 @@ export default function Dossier({ projectType, onClose, onPrev, onNext }: Props)
         role="dialog"
         aria-modal="true"
         aria-label={data.headerTitle}
-        className="fixed inset-0 z-[600] bg-white flex flex-col outline-none"
+        className="dossier-in fixed inset-0 z-[600] bg-paper flex flex-col outline-none"
       >
+        <style>{`
+          @keyframes dossier-in { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+          .dossier-in { animation: dossier-in 0.6s cubic-bezier(.22,1,.36,1) both; }
+        `}</style>
         {/* Barra superior */}
-        <div className="shrink-0 border-b border-line bg-white">
+        <div className="shrink-0 border-b border-line bg-paper">
           <div className="wrap h-16 flex items-center justify-between gap-4">
             <nav aria-label={t('Localização', 'Breadcrumb')} className="min-w-0 flex items-center gap-2 text-[14px] text-muted">
               <button onClick={onClose} className="hover:text-navy shrink-0">
@@ -98,13 +102,13 @@ export default function Dossier({ projectType, onClose, onPrev, onNext }: Props)
               <span className="hidden md:inline text-[13px] text-muted mr-2">
                 {index + 1} {t('de', 'of')} {PROJECTS.length}
               </span>
-              <button onClick={onPrev} aria-label={t('Projeto anterior', 'Previous project')} className="w-10 h-10 rounded border border-line grid place-items-center text-ink hover:border-navy hover:text-navy">
+              <button onClick={onPrev} aria-label={t('Projeto anterior', 'Previous project')} className="w-10 h-10 border border-line grid place-items-center text-ink hover:border-navy hover:text-navy">
                 <ChevronLeft className="w-4 h-4" />
               </button>
-              <button onClick={onNext} aria-label={t('Projeto seguinte', 'Next project')} className="w-10 h-10 rounded border border-line grid place-items-center text-ink hover:border-navy hover:text-navy">
+              <button onClick={onNext} aria-label={t('Projeto seguinte', 'Next project')} className="w-10 h-10 border border-line grid place-items-center text-ink hover:border-navy hover:text-navy">
                 <ChevronRight className="w-4 h-4" />
               </button>
-              <button onClick={onClose} className="h-10 px-4 rounded bg-navy text-white text-[14px] font-semibold inline-flex items-center gap-2 hover:bg-navy-dark">
+              <button onClick={onClose} className="h-10 px-4 bg-navy text-white text-[14px] font-semibold inline-flex items-center gap-2 hover:bg-navy-2">
                 <X className="w-4 h-4" />
                 <span className="hidden sm:inline">{t('Fechar', 'Close')}</span>
               </button>
@@ -113,17 +117,24 @@ export default function Dossier({ projectType, onClose, onPrev, onNext }: Props)
         </div>
 
         <div ref={scroller} className="flex-1 overflow-y-auto overscroll-contain">
-          {/* Cabeçalho do dossier */}
-          <header className="wrap pt-10 md:pt-14">
-            <p className="eyebrow text-accent">
-              {THEME_LABEL[meta.theme][lang]} · {meta.year}
-            </p>
-            <h1 className="mt-3 font-serif font-semibold text-ink text-[clamp(2rem,1.4rem+2.4vw,3.2rem)] leading-[1.1] max-w-4xl text-balance">
-              {data.headerTitle}
-            </h1>
-            <p className="mt-3 text-[16px] text-muted">{data.tag}</p>
-            <div className="mt-8 rounded-lg overflow-hidden bg-surface-2 aspect-[16/9] md:aspect-[21/9]">
-              <img src={data.watermark || meta.image} alt="" className="w-full h-full object-cover" />
+          {/* Capa */}
+          <header className="relative bg-navy text-white overflow-hidden">
+            <img key={projectType} src={data.watermark || meta.image} alt="" className="slow-zoom absolute inset-0 w-full h-full object-cover opacity-40" />
+            <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/40" />
+            <div key={`h-${projectType}`} className="relative wrap py-16 md:py-24">
+              <p className="rise eyebrow text-gold-soft flex items-center gap-3" style={{ ['--d' as any]: '100ms' }}>
+                <span className="rule" />
+                {THEME_LABEL[meta.theme][lang]} · {meta.year}
+              </p>
+              <h1
+                className="rise mt-5 font-serif font-medium text-[clamp(2.2rem,1.4rem+3vw,3.8rem)] leading-[1.05] tracking-[-0.015em] max-w-4xl text-balance"
+                style={{ ['--d' as any]: '200ms' }}
+              >
+                {data.headerTitle}
+              </h1>
+              <p className="rise mt-4 text-[16px] text-white/70" style={{ ['--d' as any]: '300ms' }}>
+                {data.tag}
+              </p>
             </div>
           </header>
 
@@ -134,7 +145,7 @@ export default function Dossier({ projectType, onClose, onPrev, onNext }: Props)
                 <H2>{t('Enquadramento', 'Context')}</H2>
                 <div className="dossier-body text-[18px] leading-[1.7] [&_p+p]:mt-5">{data.description}</div>
                 {data.quote && (
-                  <blockquote className="mt-10 border-l-4 border-navy bg-surface rounded-r-lg px-6 py-5">
+                  <blockquote className="mt-10 border-l-4 border-navy bg-paper px-6 py-5">
                     <p className="font-serif text-[1.3rem] leading-snug text-ink italic">“{data.quote}”</p>
                   </blockquote>
                 )}
@@ -149,9 +160,9 @@ export default function Dossier({ projectType, onClose, onPrev, onNext }: Props)
                     {data.pillars.map((p, i) => {
                       const Icon = p.icon;
                       return (
-                        <div key={i} className="rounded-lg border border-line p-5">
+                        <div key={i} className="bg-white border border-line p-5">
                           <div className="flex items-center gap-3">
-                            <span className="w-9 h-9 rounded bg-surface text-navy grid place-items-center shrink-0">
+                            <span className="w-9 h-9 bg-paper text-navy grid place-items-center shrink-0">
                               {Icon && <Icon className="w-[18px] h-[18px]" strokeWidth={1.75} />}
                             </span>
                             <h4 className="font-semibold text-[16px] text-ink leading-snug">{p.title}</h4>
@@ -182,7 +193,7 @@ export default function Dossier({ projectType, onClose, onPrev, onNext }: Props)
                           key={img + i}
                           onClick={() => setLightbox(i)}
                           aria-label={`${t('Ampliar imagem', 'Enlarge image')} ${i + 1}`}
-                          className="aspect-[4/3] rounded overflow-hidden bg-surface-2 border border-line hover:border-navy"
+                          className="aspect-[4/3] overflow-hidden bg-paper-2 border border-line hover:border-navy"
                         >
                           <img src={img} alt="" loading="lazy" className="w-full h-full object-cover" />
                         </button>
@@ -196,8 +207,8 @@ export default function Dossier({ projectType, onClose, onPrev, onNext }: Props)
             {/* Ficha lateral */}
             <aside className="lg:col-span-4">
               <div className="lg:sticky lg:top-6 space-y-6">
-                <div className="rounded-lg border border-line">
-                  <h2 className="px-5 py-3.5 border-b border-line bg-surface text-[13px] font-semibold uppercase tracking-[0.06em] text-muted rounded-t-lg">
+                <div className="bg-white border border-line">
+                  <h2 className="px-5 py-3.5 border-b border-line bg-paper text-[13px] font-semibold uppercase tracking-[0.06em] text-muted">
                     {t('Ficha do projeto', 'Project sheet')}
                   </h2>
                   <dl className="divide-y divide-line">
@@ -217,8 +228,8 @@ export default function Dossier({ projectType, onClose, onPrev, onNext }: Props)
                 </div>
 
                 {(mainLink || langLinks.length > 0) && (
-                  <div className="rounded-lg border border-line">
-                    <h2 className="px-5 py-3.5 border-b border-line bg-surface text-[13px] font-semibold uppercase tracking-[0.06em] text-muted rounded-t-lg">
+                  <div className="bg-white border border-line">
+                    <h2 className="px-5 py-3.5 border-b border-line bg-paper text-[13px] font-semibold uppercase tracking-[0.06em] text-muted">
                       {t('Documentos e ligações', 'Documents & links')}
                     </h2>
                     <div className="p-5 space-y-3">
@@ -227,7 +238,7 @@ export default function Dossier({ projectType, onClose, onPrev, onNext }: Props)
                           href={mainLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-start gap-3 rounded bg-navy text-white px-4 py-3 hover:bg-navy-dark"
+                          className="flex items-start gap-3 bg-navy text-white px-4 py-3 hover:bg-navy-2"
                         >
                           <FileText className="w-5 h-5 shrink-0 mt-0.5" />
                           <span className="min-w-0">
@@ -245,7 +256,7 @@ export default function Dossier({ projectType, onClose, onPrev, onNext }: Props)
                           href={l.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center justify-between rounded border border-line px-4 py-2.5 text-[14px] text-ink hover:border-navy hover:text-navy"
+                          className="flex items-center justify-between border border-line px-4 py-2.5 text-[14px] text-ink hover:border-navy hover:text-navy"
                         >
                           {l.label}
                           <ExternalLink className="w-4 h-4" />
@@ -259,16 +270,16 @@ export default function Dossier({ projectType, onClose, onPrev, onNext }: Props)
           </div>
 
           {/* Navegação entre dossiers */}
-          <nav className="border-t border-line bg-surface" aria-label={t('Outros projetos', 'Other projects')}>
+          <nav className="border-t border-line bg-paper" aria-label={t('Outros projetos', 'Other projects')}>
             <div className="wrap py-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <button onClick={onPrev} className="text-left rounded-lg border border-line bg-white p-5 hover:border-navy">
+              <button onClick={onPrev} className="text-left border border-line bg-white p-5 hover:border-navy">
                 <span className="text-[13px] text-muted inline-flex items-center gap-1.5">
                   <ArrowLeft className="w-4 h-4" />
                   {t('Projeto anterior', 'Previous project')}
                 </span>
                 <span className="block mt-1.5 font-serif font-semibold text-[1.15rem] text-ink">{prev.title[lang]}</span>
               </button>
-              <button onClick={onNext} className="text-right rounded-lg border border-line bg-white p-5 hover:border-navy">
+              <button onClick={onNext} className="text-right border border-line bg-white p-5 hover:border-navy">
                 <span className="text-[13px] text-muted inline-flex items-center gap-1.5">
                   {t('Projeto seguinte', 'Next project')}
                   <ArrowRight className="w-4 h-4" />
@@ -293,13 +304,13 @@ export default function Dossier({ projectType, onClose, onPrev, onNext }: Props)
             <span className="text-[14px]">
               {lightbox + 1} / {gal.length}
             </span>
-            <button onClick={() => setLightbox(null)} className="h-10 px-4 rounded border border-white/25 inline-flex items-center gap-2 text-[14px] hover:bg-white/10">
+            <button onClick={() => setLightbox(null)} className="h-10 px-4 border border-white/25 inline-flex items-center gap-2 text-[14px] hover:bg-white/10">
               <X className="w-4 h-4" />
               {t('Fechar', 'Close')}
             </button>
           </div>
           <div className="flex-1 min-h-0 relative flex items-center justify-center px-4 md:px-20 pb-8">
-            <img src={gal[lightbox]} alt="" onClick={(e) => e.stopPropagation()} className="max-w-full max-h-full object-contain rounded" />
+            <img src={gal[lightbox]} alt="" onClick={(e) => e.stopPropagation()} className="max-w-full max-h-full object-contain" />
             {gal.length > 1 && (
               <>
                 <button
@@ -308,7 +319,7 @@ export default function Dossier({ projectType, onClose, onPrev, onNext }: Props)
                     setLightbox((lightbox - 1 + gal.length) % gal.length);
                   }}
                   aria-label={t('Imagem anterior', 'Previous image')}
-                  className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded bg-white/10 text-white grid place-items-center hover:bg-white/20"
+                  className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 w-11 h-11 bg-white/10 text-white grid place-items-center hover:bg-white/20"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
@@ -318,7 +329,7 @@ export default function Dossier({ projectType, onClose, onPrev, onNext }: Props)
                     setLightbox((lightbox + 1) % gal.length);
                   }}
                   aria-label={t('Imagem seguinte', 'Next image')}
-                  className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded bg-white/10 text-white grid place-items-center hover:bg-white/20"
+                  className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 w-11 h-11 bg-white/10 text-white grid place-items-center hover:bg-white/20"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </button>

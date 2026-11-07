@@ -2,19 +2,20 @@
 
 import { useCallback, useEffect, useState } from 'react';
 
+import Intro from './ui/Intro';
 import Navbar from './ui/Navbar';
 import Hero from './ui/Hero';
-import { Areas, Missions, Projects, type Filter } from './ui/Portfolio';
+import About from './ui/About';
+import { Candidacies, Digital, Heritage, ProjectIndex, Promotion } from './ui/Chapters';
 import Contact from './ui/Contact';
 import Dossier from './ui/Dossier';
 import { getProject, neighbours } from './ui/projects';
-import { goTo } from './ui/hooks';
 
 const HASH = '#projeto/';
 
 export default function Page() {
+  const [ready, setReady] = useState(false);
   const [dossier, setDossier] = useState<string | null>(null);
-  const [filter, setFilter] = useState<Filter>('todos');
 
   // Dossier com link partilhável (#projeto/<id>)
   const openProject = useCallback((id: string, push = true) => {
@@ -65,20 +66,18 @@ export default function Page() {
     return () => window.removeEventListener('error', onErr, true);
   }, []);
 
-  const pickArea = (f: Filter) => {
-    setFilter(f);
-    goTo('projetos');
-  };
-
   return (
     <>
-      <div id="top" />
+      <Intro onDone={() => setReady(true)} />
       <Navbar />
       <main>
-        <Hero />
-        <Areas onPick={pickArea} />
-        <Projects filter={filter} setFilter={setFilter} onOpen={open} />
-        <Missions onOpen={open} />
+        <Hero ready={ready} />
+        <About />
+        <Candidacies onOpen={open} />
+        <Promotion onOpen={open} />
+        <Digital onOpen={open} />
+        <Heritage onOpen={open} />
+        <ProjectIndex onOpen={open} />
       </main>
       <Contact />
 
