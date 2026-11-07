@@ -36,7 +36,6 @@ tudo respeita "reduzir movimento".
 | `app/ui/viz/Gantt.tsx` | Cronologia 2024–2026 em Gantt, por área, com linha "hoje" |
 | `app/ui/viz/AreaBar.tsx` | Distribuição dos projetos pelas quatro áreas |
 | `app/ui/CommandK.tsx` | Pesquisa rápida (⌘K / Ctrl+K) por projetos e páginas |
-| `.duo` (globals.css) | Duotone petróleo/creme em todas as fotografias; ganham cor ao passar o rato |
 | `app/template.tsx` | Transição suave entre páginas (framer-motion) |
 
 ## Onde editar

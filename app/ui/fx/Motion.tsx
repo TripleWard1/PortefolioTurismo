@@ -61,7 +61,7 @@ export function PhotoRiver() {
         <Marquee key={r} speed={70 + r * 12} reverse={r === 1} gap={16}>
           {row.map((p) => (
             <Link key={p.id} href={`/projetos/${p.id}`} className="group relative block w-[300px] md:w-[360px] shrink-0">
-              <span className="photo duo block aspect-[16/10] rounded-xl">
+              <span className="photo block aspect-[16/10] rounded-xl">
                 <img src={p.image} alt="" loading="lazy" />
               </span>
               <span className="absolute left-3 bottom-3 rounded-full bg-cream/95 px-3 py-1 text-[12px] font-medium text-ink opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">

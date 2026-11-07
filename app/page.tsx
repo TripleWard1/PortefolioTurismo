@@ -137,7 +137,7 @@ export default function Home() {
             </Floating>
             <Floating className="absolute left-0 top-[12%] w-[46%]" delay={0.5}>
               <Link href={`/projetos/${st.id}`} className="group block">
-                <span className="photo duo block aspect-[4/3] rounded-2xl border-4 border-cream shadow-[0_24px_50px_-28px_rgba(26,29,33,0.6)]">
+                <span className="photo block aspect-[4/3] rounded-2xl border-4 border-cream shadow-[0_24px_50px_-28px_rgba(26,29,33,0.6)]">
                   <img src={st.image} alt="" />
                 </span>
                 <span className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-card/90 backdrop-blur border border-line px-3 py-1 text-[12px] font-medium text-ink">
@@ -147,7 +147,7 @@ export default function Home() {
             </Floating>
             <Floating className="absolute left-[14%] bottom-0 w-[44%]" delay={0.8}>
               <Link href={`/projetos/${ad.id}`} className="group block">
-                <span className="photo duo block aspect-[4/3] rounded-2xl border-4 border-cream shadow-[0_24px_50px_-28px_rgba(26,29,33,0.6)]">
+                <span className="photo block aspect-[4/3] rounded-2xl border-4 border-cream shadow-[0_24px_50px_-28px_rgba(26,29,33,0.6)]">
                   <img src={ad.image} alt="" />
                 </span>
                 <span className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-card/90 backdrop-blur border border-line px-3 py-1 text-[12px] font-medium text-ink">
@@ -205,7 +205,7 @@ export default function Home() {
           <PageHead
             kicker={t('Arquivo visual', 'Visual archive')}
             title={t('Treze projetos, num relance', 'Thirteen projects at a glance')}
-            intro={t('Passe o rato para ver cada fotografia a cores; clique para abrir o projeto.', 'Hover to see each photo in colour; click to open the project.')}
+            intro={t('Clique numa fotografia para abrir o projeto.', 'Click a photo to open the project.')}
           />
         </div>
         <PhotoRiver />
@@ -234,7 +234,7 @@ export default function Home() {
                   {/* miniaturas dos projetos da área */}
                   <span className="flex -space-x-3">
                     {items.slice(0, 4).map((p) => (
-                      <span key={p.id} className="photo duo w-11 h-11 rounded-full border-2 border-card">
+                      <span key={p.id} className="photo w-11 h-11 rounded-full border-2 border-card">
                         <img src={p.image} alt="" loading="lazy" />
                       </span>
                     ))}

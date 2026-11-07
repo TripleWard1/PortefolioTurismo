@@ -116,7 +116,7 @@ export default function CaseStudy({ id }: { id: string }) {
         </div>
       </header>
 
-      <div className="group photo duo mt-10 rounded-2xl aspect-[16/9] md:aspect-[21/9]" data-reveal>
+      <div className="photo mt-10 rounded-2xl aspect-[16/9] md:aspect-[21/9]" data-reveal>
         <img src={data.watermark || meta.image} alt="" />
       </div>
 
