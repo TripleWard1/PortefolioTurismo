@@ -5,22 +5,22 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['var(--font-serif)', 'Georgia', 'serif'],
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-serif)', 'Georgia', 'serif'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
       },
-      // Hex (e não CSS vars) para os modificadores de opacidade funcionarem: bg-navy/60
+      // Hex para os modificadores de opacidade funcionarem (bg-v/20)
       colors: {
-        paper: '#f5f3ee',
-        'paper-2': '#ebe7de',
-        ink: '#13202f',
-        muted: '#5d6875',
-        navy: '#0f2540',
-        'navy-2': '#173253',
-        gold: '#b8955a',
-        'gold-soft': '#d9c193',
-        line: 'rgba(19, 32, 47, 0.12)',
+        bg: '#0b0b0a',
+        sup: '#161513',
+        sup2: '#1e1c1a',
+        tx: '#f2eee7',
+        tx2: '#c9c3b8',
+        tx3: '#8e887e',
+        ln: 'rgba(242, 238, 231, 0.14)',
+        v: '#ff2a2a',
       },
-      transitionTimingFunction: { soft: 'cubic-bezier(0.22, 1, 0.36, 1)' },
+      transitionTimingFunction: { soft: 'cubic-bezier(0.2, 0.7, 0.2, 1)' },
     },
   },
   plugins: [],

@@ -1,4 +1,4 @@
-# Hugo Barros — Portefólio Profissional
+# Hugo Barros — Portefólio
 
 Portefólio de Hugo Barros, Técnico Superior de Inovação e Desenvolvimento Turístico no Município de Braga.
 Next.js 13 (App Router) · Tailwind CSS.
@@ -8,36 +8,29 @@ npm install
 npm run dev
 ```
 
-## Identidade
+## Conceito
 
-Registo institucional e editorial: papel quente, azul-marinho profundo e filete dourado.
-Títulos em Fraunces, texto em Inter. Tokens em `app/globals.css` e `tailwind.config.ts`.
+O portefólio é uma **apresentação em 10 capítulos de ecrã inteiro**, com a mesma linguagem visual do
+Observatório do Turismo de Braga (OBSERVA): preto quente, creme e um único vermelho, Instrument Sans,
+números grandes e fotografia em movimento lento.
 
-Efeitos (todos sóbrios e desativados com "reduzir movimento"):
-abertura com o nome e filete dourado (uma vez por sessão), zoom lento da fotografia do hero,
-contagem dos indicadores, conteúdo a surgir ao descer, scroll horizontal nas candidaturas
-europeias (desktop) e zoom lento das imagens ao passar.
+1. Início · 2. Perfil · 3. Em números · 4. Candidaturas europeias · 5. Missões internacionais (mapa)
+· 6. Promoção internacional · 7. Inovação digital · 8. Produto e património · 9. Índice · 10. Contacto
 
-## Estrutura da página
-
-1. **Hero** — apresentação, retrato e indicadores
-2. **Perfil** — citação, biografia e ficha profissional
-3. **01 · Candidaturas europeias** — galeria horizontal (carrossel com setas em mobile)
-4. **02 · Promoção internacional** — feiras e lista de presença internacional
-5. **03 · Inovação digital**
-6. **04 · Produto turístico e património** — linhas alternadas
-7. **05 · Índice** — todos os projetos, com filtro por área
-8. **Contacto** e rodapé
-
-Cada projeto abre um **dossier** (capa, enquadramento, eixos, registo fotográfico, ficha e documentos),
-com link partilhável `/#projeto/<id>` e navegação por teclado (`←` `→`, `Esc`).
+- **Desktop (modo apresentação):** roda do rato, `↓` `↑`, espaço, `PageUp`/`PageDown`, `1`–`9` e `0`,
+  `Home`/`End`, `F` para ecrã inteiro, gestos no tátil. O cursor esconde-se quando está parado.
+  Cada capítulo tem endereço próprio (`/#missoes`, `/#indice`, …).
+- **Mobile e ecrãs baixos:** os mesmos capítulos empilhados, com as mesmas entradas animadas.
+- **Dossiers:** cada projeto abre um dossier (`/#projeto/<id>`), com `←` `→` e `Esc`.
+- Abertura uma vez por sessão; tudo respeita "reduzir movimento".
 
 ## Onde editar
 
 | Ficheiro | Conteúdo |
 | --- | --- |
-| `app/ui/projects.ts` | Projetos, áreas e missões (título, ano, local, resumo, imagem) |
+| `app/ui/projects.ts` | Projetos, áreas e missões (com coordenadas) |
 | `app/ui/dossiers.tsx` | Texto completo de cada dossier, em PT e EN |
-| `app/ui/Hero.tsx` · `About.tsx` | Apresentação, indicadores e perfil |
-| `app/ui/Chapters.tsx` | Capítulos e índice |
-| `app/ui/Contact.tsx` | Contactos e rodapé |
+| `app/ui/slides.tsx` | Conteúdo e ordem dos capítulos |
+| `app/ui/Deck.tsx` | Motor da apresentação (navegação, barra de progresso, abertura) |
+| `app/ui/AtlasMap.tsx` | Mapa das missões |
+| `app/globals.css` | Tokens e animações |

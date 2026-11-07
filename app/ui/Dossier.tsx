@@ -15,7 +15,7 @@ interface Props {
 }
 
 function H2({ children }: { children: React.ReactNode }) {
-  return <h2 className="font-serif font-medium text-[1.8rem] leading-tight text-ink pb-3 mb-7 border-b border-ink/80">{children}</h2>;
+  return <h2 className="font-medium tracking-[-0.03em] text-[1.9rem] leading-tight text-tx pb-3 mb-7 border-b border-ln">{children}</h2>;
 }
 
 export default function Dossier({ projectType, onClose, onPrev, onNext }: Props) {
@@ -80,35 +80,35 @@ export default function Dossier({ projectType, onClose, onPrev, onNext }: Props)
         role="dialog"
         aria-modal="true"
         aria-label={data.headerTitle}
-        className="dossier-in fixed inset-0 z-[600] bg-paper flex flex-col outline-none"
+        className="dossier-in fixed inset-0 z-[600] bg-bg flex flex-col outline-none"
       >
         <style>{`
           @keyframes dossier-in { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
           .dossier-in { animation: dossier-in 0.6s cubic-bezier(.22,1,.36,1) both; }
         `}</style>
         {/* Barra superior */}
-        <div className="shrink-0 border-b border-line bg-paper">
+        <div className="shrink-0 border-b border-ln bg-bg">
           <div className="wrap h-16 flex items-center justify-between gap-4">
-            <nav aria-label={t('Localização', 'Breadcrumb')} className="min-w-0 flex items-center gap-2 text-[14px] text-muted">
-              <button onClick={onClose} className="hover:text-navy shrink-0">
+            <nav aria-label={t('Localização', 'Breadcrumb')} className="min-w-0 flex items-center gap-2 text-[14px] text-tx2">
+              <button onClick={onClose} className="hover:text-v shrink-0">
                 {t('Projetos', 'Projects')}
               </button>
               <ChevronRight className="w-4 h-4 shrink-0" />
               <span className="hidden sm:inline truncate">{THEME_LABEL[meta.theme][lang]}</span>
               <ChevronRight className="hidden sm:block w-4 h-4 shrink-0" />
-              <span className="text-ink font-medium truncate">{meta.title[lang]}</span>
+              <span className="text-tx font-medium truncate">{meta.title[lang]}</span>
             </nav>
             <div className="flex items-center gap-2 shrink-0">
-              <span className="hidden md:inline text-[13px] text-muted mr-2">
+              <span className="hidden md:inline text-[13px] text-tx2 mr-2">
                 {index + 1} {t('de', 'of')} {PROJECTS.length}
               </span>
-              <button onClick={onPrev} aria-label={t('Projeto anterior', 'Previous project')} className="w-10 h-10 border border-line grid place-items-center text-ink hover:border-navy hover:text-navy">
+              <button onClick={onPrev} aria-label={t('Projeto anterior', 'Previous project')} className="w-10 h-10 border border-ln grid place-items-center text-tx hover:border-v/60 hover:text-v">
                 <ChevronLeft className="w-4 h-4" />
               </button>
-              <button onClick={onNext} aria-label={t('Projeto seguinte', 'Next project')} className="w-10 h-10 border border-line grid place-items-center text-ink hover:border-navy hover:text-navy">
+              <button onClick={onNext} aria-label={t('Projeto seguinte', 'Next project')} className="w-10 h-10 border border-ln grid place-items-center text-tx hover:border-v/60 hover:text-v">
                 <ChevronRight className="w-4 h-4" />
               </button>
-              <button onClick={onClose} className="h-10 px-4 bg-navy text-white text-[14px] font-semibold inline-flex items-center gap-2 hover:bg-navy-2">
+              <button onClick={onClose} className="h-10 px-4 bg-v text-white text-[14px] font-semibold inline-flex items-center gap-2 hover:bg-[#e01e1e]">
                 <X className="w-4 h-4" />
                 <span className="hidden sm:inline">{t('Fechar', 'Close')}</span>
               </button>
@@ -118,21 +118,20 @@ export default function Dossier({ projectType, onClose, onPrev, onNext }: Props)
 
         <div ref={scroller} className="flex-1 overflow-y-auto overscroll-contain">
           {/* Capa */}
-          <header className="relative bg-navy text-white overflow-hidden">
+          <header className="relative bg-bg text-tx overflow-hidden">
             <img key={projectType} src={data.watermark || meta.image} alt="" className="slow-zoom absolute inset-0 w-full h-full object-cover opacity-40" />
-            <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/40" />
+            <div className="absolute inset-0 bg-gradient-to-r from-bg via-bg/85 to-bg/40" />
             <div key={`h-${projectType}`} className="relative wrap py-16 md:py-24">
-              <p className="rise eyebrow text-gold-soft flex items-center gap-3" style={{ ['--d' as any]: '100ms' }}>
-                <span className="rule" />
-                {THEME_LABEL[meta.theme][lang]} · {meta.year}
+              <p className="rise sobre text-v flex items-center gap-3" style={{ ['--d' as any]: '100ms' }}>
+                                {THEME_LABEL[meta.theme][lang]} · {meta.year}
               </p>
               <h1
-                className="rise mt-5 font-serif font-medium text-[clamp(2.2rem,1.4rem+3vw,3.8rem)] leading-[1.05] tracking-[-0.015em] max-w-4xl text-balance"
+                className="rise mt-5 font-medium text-[clamp(2.2rem,1.2rem+3.4vw,4.6rem)] leading-[1] tracking-[-0.045em] max-w-4xl text-balance"
                 style={{ ['--d' as any]: '200ms' }}
               >
                 {data.headerTitle}
               </h1>
-              <p className="rise mt-4 text-[16px] text-white/70" style={{ ['--d' as any]: '300ms' }}>
+              <p className="rise mt-4 text-[16px] text-tx2" style={{ ['--d' as any]: '300ms' }}>
                 {data.tag}
               </p>
             </div>
@@ -145,8 +144,8 @@ export default function Dossier({ projectType, onClose, onPrev, onNext }: Props)
                 <H2>{t('Enquadramento', 'Context')}</H2>
                 <div className="dossier-body text-[18px] leading-[1.7] [&_p+p]:mt-5">{data.description}</div>
                 {data.quote && (
-                  <blockquote className="mt-10 border-l-4 border-navy bg-paper px-6 py-5">
-                    <p className="font-serif text-[1.3rem] leading-snug text-ink italic">“{data.quote}”</p>
+                  <blockquote className="mt-10 border-l-4 border-v bg-bg px-6 py-5">
+                    <p className="font-serif text-[1.3rem] leading-snug text-tx italic">“{data.quote}”</p>
                   </blockquote>
                 )}
               </section>
@@ -154,22 +153,22 @@ export default function Dossier({ projectType, onClose, onPrev, onNext }: Props)
               {data.pillars?.length > 0 && (
                 <section>
                   <H2>{data.pillarTabLabel || t('Eixos de intervenção', 'Areas of intervention')}</H2>
-                  {data.pillarTitle && <h3 className="font-serif font-semibold text-[1.25rem] text-ink">{data.pillarTitle}</h3>}
-                  {data.pillarDesc && <p className="mt-2 text-[16px] leading-relaxed text-muted">{data.pillarDesc}</p>}
+                  {data.pillarTitle && <h3 className="font-medium tracking-[-0.02em] text-[1.3rem] text-tx">{data.pillarTitle}</h3>}
+                  {data.pillarDesc && <p className="mt-2 text-[16px] leading-relaxed text-tx2">{data.pillarDesc}</p>}
                   <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {data.pillars.map((p, i) => {
                       const Icon = p.icon;
                       return (
-                        <div key={i} className="bg-white border border-line p-5">
+                        <div key={i} className="bg-sup border border-ln p-5">
                           <div className="flex items-center gap-3">
-                            <span className="w-9 h-9 bg-paper text-navy grid place-items-center shrink-0">
+                            <span className="w-9 h-9 bg-bg text-v grid place-items-center shrink-0">
                               {Icon && <Icon className="w-[18px] h-[18px]" strokeWidth={1.75} />}
                             </span>
-                            <h4 className="font-semibold text-[16px] text-ink leading-snug">{p.title}</h4>
+                            <h4 className="font-semibold text-[16px] text-tx leading-snug">{p.title}</h4>
                           </div>
-                          {p.desc && <p className="mt-3 text-[15px] leading-relaxed text-muted">{p.desc}</p>}
+                          {p.desc && <p className="mt-3 text-[15px] leading-relaxed text-tx2">{p.desc}</p>}
                           {p.items && (
-                            <ul className="mt-3 space-y-1 text-[14px] text-muted list-disc pl-5">
+                            <ul className="mt-3 space-y-1 text-[14px] text-tx2 list-disc pl-5">
                               {p.items.map((it) => (
                                 <li key={it}>{it}</li>
                               ))}
@@ -193,7 +192,7 @@ export default function Dossier({ projectType, onClose, onPrev, onNext }: Props)
                           key={img + i}
                           onClick={() => setLightbox(i)}
                           aria-label={`${t('Ampliar imagem', 'Enlarge image')} ${i + 1}`}
-                          className="aspect-[4/3] overflow-hidden bg-paper-2 border border-line hover:border-navy"
+                          className="aspect-[4/3] overflow-hidden bg-sup border border-ln hover:border-v/60"
                         >
                           <img src={img} alt="" loading="lazy" className="w-full h-full object-cover" />
                         </button>
@@ -207,29 +206,29 @@ export default function Dossier({ projectType, onClose, onPrev, onNext }: Props)
             {/* Ficha lateral */}
             <aside className="lg:col-span-4">
               <div className="lg:sticky lg:top-6 space-y-6">
-                <div className="bg-white border border-line">
-                  <h2 className="px-5 py-3.5 border-b border-line bg-paper text-[13px] font-semibold uppercase tracking-[0.06em] text-muted">
+                <div className="bg-sup border border-ln">
+                  <h2 className="px-5 py-3.5 border-b border-ln bg-bg text-[13px] font-semibold uppercase tracking-[0.06em] text-tx2">
                     {t('Ficha do projeto', 'Project sheet')}
                   </h2>
-                  <dl className="divide-y divide-line">
+                  <dl className="divide-y divide-ln">
                     {facts.map((f) => (
                       <div key={f.k} className="px-5 py-3.5">
-                        <dt className="text-[13px] text-muted">{f.k}</dt>
-                        <dd className="mt-0.5 text-[15px] text-ink leading-snug">{f.v}</dd>
+                        <dt className="text-[13px] text-tx2">{f.k}</dt>
+                        <dd className="mt-0.5 text-[15px] text-tx leading-snug">{f.v}</dd>
                       </div>
                     ))}
                     {(data.stats || []).map((s) => (
                       <div key={s.label} className="px-5 py-3.5">
-                        <dt className="text-[13px] text-muted">{s.label}</dt>
-                        <dd className="mt-0.5 text-[15px] font-semibold text-navy">{s.value}</dd>
+                        <dt className="text-[13px] text-tx2">{s.label}</dt>
+                        <dd className="mt-0.5 text-[15px] font-medium text-tx">{s.value}</dd>
                       </div>
                     ))}
                   </dl>
                 </div>
 
                 {(mainLink || langLinks.length > 0) && (
-                  <div className="bg-white border border-line">
-                    <h2 className="px-5 py-3.5 border-b border-line bg-paper text-[13px] font-semibold uppercase tracking-[0.06em] text-muted">
+                  <div className="bg-sup border border-ln">
+                    <h2 className="px-5 py-3.5 border-b border-ln bg-bg text-[13px] font-semibold uppercase tracking-[0.06em] text-tx2">
                       {t('Documentos e ligações', 'Documents & links')}
                     </h2>
                     <div className="p-5 space-y-3">
@@ -238,7 +237,7 @@ export default function Dossier({ projectType, onClose, onPrev, onNext }: Props)
                           href={mainLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-start gap-3 bg-navy text-white px-4 py-3 hover:bg-navy-2"
+                          className="flex items-start gap-3 bg-v text-white px-4 py-3 hover:bg-[#e01e1e]"
                         >
                           <FileText className="w-5 h-5 shrink-0 mt-0.5" />
                           <span className="min-w-0">
@@ -256,7 +255,7 @@ export default function Dossier({ projectType, onClose, onPrev, onNext }: Props)
                           href={l.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center justify-between border border-line px-4 py-2.5 text-[14px] text-ink hover:border-navy hover:text-navy"
+                          className="flex items-center justify-between border border-ln px-4 py-2.5 text-[14px] text-tx hover:border-v/60 hover:text-v"
                         >
                           {l.label}
                           <ExternalLink className="w-4 h-4" />
@@ -270,21 +269,21 @@ export default function Dossier({ projectType, onClose, onPrev, onNext }: Props)
           </div>
 
           {/* Navegação entre dossiers */}
-          <nav className="border-t border-line bg-paper" aria-label={t('Outros projetos', 'Other projects')}>
+          <nav className="border-t border-ln bg-bg" aria-label={t('Outros projetos', 'Other projects')}>
             <div className="wrap py-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <button onClick={onPrev} className="text-left border border-line bg-white p-5 hover:border-navy">
-                <span className="text-[13px] text-muted inline-flex items-center gap-1.5">
+              <button onClick={onPrev} className="text-left border border-ln bg-sup p-5 hover:border-v/60">
+                <span className="text-[13px] text-tx2 inline-flex items-center gap-1.5">
                   <ArrowLeft className="w-4 h-4" />
                   {t('Projeto anterior', 'Previous project')}
                 </span>
-                <span className="block mt-1.5 font-serif font-semibold text-[1.15rem] text-ink">{prev.title[lang]}</span>
+                <span className="block mt-1.5 font-medium tracking-[-0.02em] text-[1.15rem] text-tx">{prev.title[lang]}</span>
               </button>
-              <button onClick={onNext} className="text-right border border-line bg-white p-5 hover:border-navy">
-                <span className="text-[13px] text-muted inline-flex items-center gap-1.5">
+              <button onClick={onNext} className="text-right border border-ln bg-sup p-5 hover:border-v/60">
+                <span className="text-[13px] text-tx2 inline-flex items-center gap-1.5">
                   {t('Projeto seguinte', 'Next project')}
                   <ArrowRight className="w-4 h-4" />
                 </span>
-                <span className="block mt-1.5 font-serif font-semibold text-[1.15rem] text-ink">{next.title[lang]}</span>
+                <span className="block mt-1.5 font-medium tracking-[-0.02em] text-[1.15rem] text-tx">{next.title[lang]}</span>
               </button>
             </div>
           </nav>
@@ -297,14 +296,14 @@ export default function Dossier({ projectType, onClose, onPrev, onNext }: Props)
           role="dialog"
           aria-modal="true"
           aria-label={t('Galeria', 'Gallery')}
-          className="fixed inset-0 z-[700] bg-[#0b1420]/95 flex flex-col"
+          className="fixed inset-0 z-[700] bg-black/95 flex flex-col"
           onClick={() => setLightbox(null)}
         >
           <div className="wrap h-16 flex items-center justify-between shrink-0 text-white">
             <span className="text-[14px]">
               {lightbox + 1} / {gal.length}
             </span>
-            <button onClick={() => setLightbox(null)} className="h-10 px-4 border border-white/25 inline-flex items-center gap-2 text-[14px] hover:bg-white/10">
+            <button onClick={() => setLightbox(null)} className="h-10 px-4 border border-white/25 inline-flex items-center gap-2 text-[14px] hover:bg-sup/10">
               <X className="w-4 h-4" />
               {t('Fechar', 'Close')}
             </button>
@@ -319,7 +318,7 @@ export default function Dossier({ projectType, onClose, onPrev, onNext }: Props)
                     setLightbox((lightbox - 1 + gal.length) % gal.length);
                   }}
                   aria-label={t('Imagem anterior', 'Previous image')}
-                  className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 w-11 h-11 bg-white/10 text-white grid place-items-center hover:bg-white/20"
+                  className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 w-11 h-11 bg-sup/10 text-white grid place-items-center hover:bg-sup/20"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
@@ -329,7 +328,7 @@ export default function Dossier({ projectType, onClose, onPrev, onNext }: Props)
                     setLightbox((lightbox + 1) % gal.length);
                   }}
                   aria-label={t('Imagem seguinte', 'Next image')}
-                  className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 w-11 h-11 bg-white/10 text-white grid place-items-center hover:bg-white/20"
+                  className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 w-11 h-11 bg-sup/10 text-white grid place-items-center hover:bg-sup/20"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </button>

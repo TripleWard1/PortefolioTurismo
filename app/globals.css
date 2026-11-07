@@ -3,99 +3,117 @@
 @tailwind utilities;
 
 /* ========================================================================== */
-/*  Identidade institucional editorial                                         */
-/*  Papel quente · azul-marinho profundo · filete dourado.                     */
-/*  Títulos: Fraunces · Texto: Inter                                           */
+/*  Linguagem visual do Observatório do Turismo de Braga                       */
+/*  Preto quente · creme · um único vermelho (o vermelho Braga).               */
+/*  Instrument Sans (display e texto) · Instrument Serif (lemas) · Mono        */
 /* ========================================================================== */
 
 :root {
-  --paper: #f5f3ee;
-  --paper-2: #ebe7de;
-  --ink: #13202f;
-  --muted: #5d6875;
-  --navy: #0f2540;
-  --navy-2: #173253;
-  --gold: #b8955a;
-  --gold-soft: #d9c193;
-  --line: rgba(19, 32, 47, 0.12);
-  --line-light: rgba(255, 255, 255, 0.14);
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --bg: #0b0b0a;
+  --sup: #161513;
+  --sup2: #1e1c1a;
+  --t: #f2eee7;
+  --t2: #c9c3b8;
+  --t3: #8e887e;
+  --l: rgba(242, 238, 231, 0.14);
+  --v: #ff2a2a;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --pad: clamp(1.25rem, 0.4rem + 4.6vw, 6.9rem);
+  color-scheme: dark;
 }
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 84px;
-    overflow-x: clip;
-  }
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    text-rendering: optimizeLegibility;
-  }
-  ::selection { background: var(--navy); color: #fff; }
-  :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
+  html { background: var(--bg); overflow-x: clip; scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--t); text-rendering: optimizeLegibility; }
+  ::selection { background: var(--v); color: #fff; }
+  :focus-visible { outline: 2px solid var(--v); outline-offset: 3px; border-radius: 3px; }
 }
 
-.wrap { max-width: 1280px; margin-inline: auto; padding-inline: clamp(1.25rem, 0.6rem + 2.4vw, 2.5rem); }
-
-.eyebrow {
-  font-size: 0.72rem;
-  line-height: 1.2;
-  font-weight: 600;
-  letter-spacing: 0.22em;
+/* --- Tipografia ---------------------------------------------------------- */
+.sobre {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-weight: 500;
+  font-size: clamp(11px, 0.85vw, 14px);
+  line-height: 1;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
+  color: var(--v);
 }
-.display { font-family: var(--font-serif); font-weight: 500; font-size: clamp(2.4rem, 1.3rem + 3.8vw, 4.6rem); line-height: 1.02; letter-spacing: -0.02em; }
-.title { font-family: var(--font-serif); font-weight: 500; font-size: clamp(1.9rem, 1.3rem + 2vw, 3rem); line-height: 1.08; letter-spacing: -0.015em; }
-.text-balance { text-wrap: balance; }
-.text-pretty { text-wrap: pretty; }
+.tit { font-weight: 500; font-size: clamp(34px, 1.6rem + 3.2vw, 76px); line-height: 1; letter-spacing: -0.045em; text-wrap: balance; }
+.marca { font-weight: 600; font-size: clamp(64px, 2rem + 10vw, 220px); line-height: 0.86; letter-spacing: -0.065em; }
+.lema { font-family: var(--font-serif), Georgia, serif; font-style: italic; color: var(--t2); line-height: 1.15; }
+.num { font-weight: 500; letter-spacing: -0.055em; line-height: 1; font-variant-numeric: tabular-nums; }
+.tnum { font-variant-numeric: tabular-nums; }
+.pad { padding-inline: var(--pad); }
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 
-/* Filete dourado */
-.rule { display: inline-block; width: 2.5rem; height: 1px; background: var(--gold); vertical-align: middle; }
+/* --- Diapositivos -------------------------------------------------------- */
+/* Modo apresentação (desktop): palco fixo, um capítulo de cada vez. */
+.deck { position: fixed; inset: 0; overflow: hidden; }
+.deck .d {
+  position: absolute; inset: 0; display: flex; align-items: center;
+  opacity: 0; visibility: hidden; transform: scale(1.02);
+  transition: opacity 0.7s var(--ease), transform 0.9s var(--ease), visibility 0s 0.7s;
+}
+.deck .d.antes { transform: scale(0.985); }
+.deck .d.on { opacity: 1; visibility: visible; transform: none; transition: opacity 0.7s var(--ease), transform 0.9s var(--ease), visibility 0s; }
+.deck .d-conteudo { max-height: 100%; overflow-y: auto; scrollbar-width: none; padding-top: 88px; padding-bottom: 96px; }
+.deck .d-conteudo::-webkit-scrollbar { display: none; }
 
-/* Zoom lento das fotografias */
-.zoom-img { transition: transform 1.6s var(--ease); }
-.group:hover .zoom-img { transform: scale(1.05); }
+/* Modo leitura (mobile / ecrãs baixos): capítulos empilhados. */
+.pilha .d { position: relative; padding: 96px 0 72px; border-top: 1px solid var(--l); }
+.pilha .d:first-child { border-top: 0; min-height: 100svh; display: flex; align-items: flex-end; padding-top: 120px; }
 
-/* Ken Burns do hero */
-@keyframes slow-zoom { from { transform: scale(1.12); } to { transform: scale(1); } }
-.slow-zoom { animation: slow-zoom 9s var(--ease) both; }
+.d-conteudo { position: relative; z-index: 2; width: 100%; max-width: 1480px; margin: 0 auto; padding-inline: var(--pad); }
+
+/* Fundo fotográfico em movimento lento */
+.d-fundo { position: absolute; inset: -4%; background-size: cover; background-position: center; filter: saturate(0.9); }
+.d.on .d-fundo { animation: ken 22s ease-out both; }
+.d.com-fundo::after {
+  content: ''; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(90deg, rgba(11, 11, 10, 0.94) 0%, rgba(11, 11, 10, 0.74) 45%, rgba(11, 11, 10, 0.38) 100%),
+    linear-gradient(0deg, rgba(11, 11, 10, 0.9), transparent 50%);
+}
+.pilha .d.com-fundo { overflow: hidden; }
+@keyframes ken { from { transform: scale(1.06); } to { transform: scale(1) translate3d(-1.2%, -0.8%, 0); } }
+
+/* Entradas escalonadas: .e1 … .e7 */
+.d .e1, .d .e2, .d .e3, .d .e4, .d .e5, .d .e6, .d .e7 { opacity: 0; transform: translateY(22px); }
+.d.on .e1, .d.on .e2, .d.on .e3, .d.on .e4, .d.on .e5, .d.on .e6, .d.on .e7 { animation: entra 0.9s var(--ease) both; }
+.d.on .e1 { animation-delay: 0.15s; } .d.on .e2 { animation-delay: 0.3s; } .d.on .e3 { animation-delay: 0.45s; }
+.d.on .e4 { animation-delay: 0.6s; } .d.on .e5 { animation-delay: 0.75s; } .d.on .e6 { animation-delay: 0.9s; }
+.d.on .e7 { animation-delay: 1.05s; }
+@keyframes entra { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+.d.on .linha { animation: entra 0.7s var(--ease) both; animation-delay: var(--d, 0s); }
+.d .linha { opacity: 0; }
+
+/* Cartões de projeto */
+.cartao-img { aspect-ratio: 16 / 10; border-radius: 6px; overflow: hidden; background: var(--sup);
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.9), 0 0 0 1px var(--l); transition: transform 0.6s var(--ease); }
+.cartao-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s var(--ease); }
+.cartao:hover .cartao-img { transform: translateY(-6px); }
+.cartao:hover .cartao-img img { transform: scale(1.04); }
+
+/* Abertura */
+@keyframes sobe { from { transform: translateY(105%); } to { transform: none; } }
+@keyframes enche { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
 /* Corpo editorial dos dossiers */
-.dossier-body p { color: var(--ink); }
-.dossier-body .hl { font-family: var(--font-serif); font-style: italic; color: var(--navy); }
-.dossier-body .sub { color: var(--muted); font-size: 1.02rem; line-height: 1.8; }
-.dossier-body > div > p:first-of-type::first-letter {
-  font-family: var(--font-serif); font-size: 3.6em; line-height: 0.8; float: left;
-  margin: 0.06em 0.12em 0 0; color: var(--gold);
-}
-
-/* --- Revelação ao scroll (ativada só depois de o JS correr) -------------- */
-html.reveal-ready [data-reveal] {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
-  transition-delay: var(--reveal-delay, 0ms);
-}
-html.reveal-ready [data-reveal='fade'] { transform: none; }
-html.reveal-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
-html.reveal-ready [data-reveal='stagger'] { opacity: 1; transform: none; transition: none; }
-html.reveal-ready [data-reveal='stagger'] > * {
-  opacity: 0; transform: translateY(24px);
-  transition: opacity 0.85s var(--ease), transform 0.85s var(--ease);
-  transition-delay: var(--reveal-delay, 0ms);
-}
-html.reveal-ready [data-reveal='stagger'].is-revealed > * { opacity: 1; transform: none; }
-
-@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
-.rise { animation: rise 1s var(--ease) both; animation-delay: var(--d, 0ms); }
-@keyframes draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.dossier-body p { color: var(--t); }
+.dossier-body .hl { font-family: var(--font-serif); font-style: italic; color: var(--t); font-size: 1.08em; }
+.dossier-body .sub { color: var(--t2); font-size: 1.02rem; line-height: 1.8; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
-  html.reveal-ready [data-reveal], html.reveal-ready [data-reveal='stagger'] > * { opacity: 1 !important; transform: none !important; }
+  .deck .d, .deck .d.on { transition: opacity 0.3s; transform: none; }
+  .d.on .d-fundo { animation: none; }
+  .d .e1, .d .e2, .d .e3, .d .e4, .d .e5, .d .e6, .d .e7, .d .linha { opacity: 1; transform: none; }
+  .d.on .e1, .d.on .e2, .d.on .e3, .d.on .e4, .d.on .e5, .d.on .e6, .d.on .e7, .d.on .linha { animation: none; }
 }
+
+/* Utilitários de entrada usados no dossier */
+@keyframes slow-zoom { from { transform: scale(1.1); } to { transform: scale(1); } }
+.slow-zoom { animation: slow-zoom 9s var(--ease) both; }
+.rise { animation: entra 0.9s var(--ease) both; animation-delay: var(--d, 0ms); }
+.wrap { max-width: 1480px; margin-inline: auto; padding-inline: var(--pad); }

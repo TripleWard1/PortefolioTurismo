@@ -241,15 +241,19 @@ export interface Mission {
   country: L;
   event: string;
   year: string;
+  lat: number;
+  lon: number;
 }
 
+export const BRAGA = { lat: 41.5454, lon: -8.4265 };
+
 export const MISSIONS: Mission[] = [
-  { id: 'smart-tourism', city: { pt: 'Bruxelas', en: 'Brussels' }, country: { pt: 'Bélgica', en: 'Belgium' }, event: 'European Capital of Smart Tourism', year: '2024—26' },
-  { id: 'fiets-wandelbeurs-gante', city: { pt: 'Gante', en: 'Ghent' }, country: { pt: 'Bélgica', en: 'Belgium' }, event: 'Fiets en Wandelbeurs', year: '2025' },
-  { id: 'expovacaciones-bilbao', city: { pt: 'Bilbao', en: 'Bilbao' }, country: { pt: 'Espanha', en: 'Spain' }, event: 'ExpoVacaciones', year: '2024—25' },
-  { id: 'b-travel-barcelona', city: { pt: 'Barcelona', en: 'Barcelona' }, country: { pt: 'Espanha', en: 'Spain' }, event: 'B-Travel', year: '2026' },
-  { id: 'systemeu-salamanca', city: { pt: 'Salamanca', en: 'Salamanca' }, country: { pt: 'Espanha', en: 'Spain' }, event: 'Startup OLÉ & SystemEU Summit', year: '2024—25' },
-  { id: 'music-cities-awards', city: { pt: 'Arkansas', en: 'Arkansas' }, country: { pt: 'EUA', en: 'USA' }, event: 'Music Cities Awards', year: '2025' },
+  { id: 'smart-tourism', city: { pt: 'Bruxelas', en: 'Brussels' }, country: { pt: 'Bélgica', en: 'Belgium' }, event: 'European Capital of Smart Tourism', year: '2024—26', lat: 50.8503, lon: 4.3517 },
+  { id: 'fiets-wandelbeurs-gante', city: { pt: 'Gante', en: 'Ghent' }, country: { pt: 'Bélgica', en: 'Belgium' }, event: 'Fiets en Wandelbeurs', year: '2025', lat: 51.0543, lon: 3.7174 },
+  { id: 'expovacaciones-bilbao', city: { pt: 'Bilbao', en: 'Bilbao' }, country: { pt: 'Espanha', en: 'Spain' }, event: 'ExpoVacaciones', year: '2024—25', lat: 43.263, lon: -2.935 },
+  { id: 'b-travel-barcelona', city: { pt: 'Barcelona', en: 'Barcelona' }, country: { pt: 'Espanha', en: 'Spain' }, event: 'B-Travel', year: '2026', lat: 41.3874, lon: 2.1686 },
+  { id: 'systemeu-salamanca', city: { pt: 'Salamanca', en: 'Salamanca' }, country: { pt: 'Espanha', en: 'Spain' }, event: 'Startup OLÉ & SystemEU Summit', year: '2024—25', lat: 40.9701, lon: -5.6635 },
+  { id: 'music-cities-awards', city: { pt: 'Arkansas', en: 'Arkansas' }, country: { pt: 'EUA', en: 'USA' }, event: 'Music Cities Awards', year: '2025', lat: 34.7465, lon: -92.2896 },
 ];
 
 export const byId = (id: string) => PROJECTS.find((p) => p.id === id);
@@ -263,4 +267,11 @@ export function neighbours(id: string): { prev: ProjectMeta; next: ProjectMeta }
     prev: PROJECTS[(safe - 1 + len) % len]!,
     next: PROJECTS[(safe + 1) % len]!,
   };
+}
+
+export function distanceKm(a: { lat: number; lon: number }, b: { lat: number; lon: number }) {
+  const R = 6371;
+  const r = (d: number) => (d * Math.PI) / 180;
+  const h = Math.sin(r(b.lat - a.lat) / 2) ** 2 + Math.cos(r(a.lat)) * Math.cos(r(b.lat)) * Math.sin(r(b.lon - a.lon) / 2) ** 2;
+  return Math.round(2 * R * Math.asin(Math.sqrt(h)));
 }

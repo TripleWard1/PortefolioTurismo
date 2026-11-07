@@ -1,20 +1,13 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-
-import Intro from './ui/Intro';
-import Navbar from './ui/Navbar';
-import Hero from './ui/Hero';
-import About from './ui/About';
-import { Candidacies, Digital, Heritage, ProjectIndex, Promotion } from './ui/Chapters';
-import Contact from './ui/Contact';
+import Deck from './ui/Deck';
 import Dossier from './ui/Dossier';
 import { getProject, neighbours } from './ui/projects';
 
 const HASH = '#projeto/';
 
 export default function Page() {
-  const [ready, setReady] = useState(false);
   const [dossier, setDossier] = useState<string | null>(null);
 
   // Dossier com link partilhável (#projeto/<id>)
@@ -68,19 +61,9 @@ export default function Page() {
 
   return (
     <>
-      <Intro onDone={() => setReady(true)} />
-      <Navbar />
       <main>
-        <Hero ready={ready} />
-        <About />
-        <Candidacies onOpen={open} />
-        <Promotion onOpen={open} />
-        <Digital onOpen={open} />
-        <Heritage onOpen={open} />
-        <ProjectIndex onOpen={open} />
+        <Deck onOpen={open} paused={!!dossier} />
       </main>
-      <Contact />
-
       {dossier && (
         <Dossier
           projectType={dossier}
