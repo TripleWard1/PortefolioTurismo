@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Hugo Barros — Portefólio Estratégico
 
-## Getting Started
-
-First, run the development server:
+Portefólio de estratégia de destino e inovação turística (Município de Braga).
+Next.js 13 (App Router) · Tailwind · sem bibliotecas de animação.
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Direção visual — "Granito & Brasa"
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Paleta:** noite de granito (`--night`, `--granite`, `--slab`), osso (`--bone`, `--paper`) e um único sinal, brasa (`--ember`). Tokens em `app/globals.css`.
+- **Tipografia:** Instrument Serif (display), Inter Tight (texto), JetBrains Mono (etiquetas e dados).
+- **Movimento:** ligado ao scroll e escrito diretamente no DOM via `requestAnimationFrame` (sem re-renders). Respeita `prefers-reduced-motion`.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Estrutura
 
-## Learn More
+| Ficheiro | Papel |
+| --- | --- |
+| `app/ui/projects.ts` | Fonte única: projetos, temas, missões (coordenadas reais) |
+| `app/ui/dossiers.tsx` | Conteúdo editorial PT/EN de cada dossier |
+| `app/ui/sections.ts` | Ordem dos capítulos (navbar, menu, palette) |
+| `app/ui/hooks.ts` | Scroll lock partilhado, progresso de scroll, in-view, hora de Braga |
+| `Preloader` · `Hero` · `Manifesto` | Abertura, hero com paralaxe, manifesto lido ao scroll, marquee e métricas |
+| `Positioning` | Cap. 01 — galeria horizontal fixada (carrossel em mobile) |
+| `Missions` | Cap. 02 — atlas SVG com arcos a partir de Braga e distâncias reais |
+| `Digital` · `Heritage` | Cap. 03 e 04 — cartões com spotlight/tilt e janela fixa com troca de imagem |
+| `ProjectIndex` | Índice filtrável com pré-visualização a seguir o cursor |
+| `Dossier` | Leitor de dossier em ecrã inteiro, índice lateral, lightbox, “próximo” |
+| `CommandPalette` | ⌘K / Ctrl+K — pesquisa tolerante a acentos |
+| `Cursor` | Cursor personalizado (apenas ponteiros finos) |
 
-To learn more about Next.js, take a look at the following resources:
+## Atalhos
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- `⌘K` / `Ctrl+K` — pesquisa
+- `←` `→` — dossier anterior / seguinte; `Esc` — fechar
+- Deep-link de dossier: `/#projeto/<id>` (ex.: `/#projeto/smart-tourism`)

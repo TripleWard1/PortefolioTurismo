@@ -1,58 +1,62 @@
 import type { Metadata } from 'next';
-import { Inter, Fraunces, JetBrains_Mono } from 'next/font/google';
+import { Instrument_Serif, Inter_Tight, JetBrains_Mono } from 'next/font/google';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import './globals.css';
 import { LanguageProvider } from './ui/LanguageContext';
 import ScrollReveal from './ui/ScrollReveal';
-import { GoogleAnalytics } from '@next/third-parties/google';
+import Cursor from './ui/Cursor';
 
-const inter = Inter({
+const display = Instrument_Serif({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-display',
   display: 'swap',
-  weight: ['300', '400', '500', '700', '900'],
+  weight: '400',
+  style: ['normal', 'italic'],
+  adjustFontFallback: false,
 });
 
-// Display editorial - Fraunces servida na variável --font-playfair,
-// para que todas as classes `font-playfair` existentes a adotem.
-const fraunces = Fraunces({
+const sans = Inter_Tight({
   subsets: ['latin'],
-  variable: '--font-playfair',
+  variable: '--font-sans',
   display: 'swap',
-  weight: ['400', '500', '700', '900'],
-  style: ['normal', 'italic'],
+  weight: ['300', '400', '500', '600'],
 });
 
 const mono = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-mono',
   display: 'swap',
-  weight: ['400', '500', '700'],
+  weight: ['400', '500'],
 });
 
 export const metadata: Metadata = {
-  title: 'Hugo Barros | Portfolio Estratégico',
+  title: 'Hugo Barros — Estratégia de Destino · Braga',
   description:
-    'Estratégia de destino, inovação territorial e desenvolvimento turístico - Município de Braga.',
-  icons: { icon: 'https://imgur.com/Dx42oze.png' },
+    'Portefólio de Hugo Barros: estratégia de destino, candidaturas europeias e inovação turística no Município de Braga.',
+  icons: { icon: 'https://i.imgur.com/Dx42oze.png' },
   openGraph: {
-    title: 'Hugo Barros | Território & Inovação',
-    description: 'Arquitetura de estratégia urbana e turismo inteligente.',
+    title: 'Hugo Barros — Território & Inovação',
+    description: 'Candidaturas europeias, missões internacionais e produto turístico para Braga.',
     images: ['https://i.imgur.com/SvJ4bdR.jpeg'],
     type: 'website',
+    locale: 'pt_PT',
   },
+  twitter: { card: 'summary_large_image' },
+  themeColor: '#0a0b0c',
+  colorScheme: 'dark',
 };
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt" className="scroll-smooth">
-      <body
-        className={`${inter.variable} ${fraunces.variable} ${mono.variable} font-sans antialiased bg-[var(--paper)] text-[var(--text-main)]`}
-      >
+    <html lang="pt">
+      <body className={`${display.variable} ${sans.variable} ${mono.variable} font-sans antialiased`}>
         <LanguageProvider>
-          <div className="mesh-bg fixed inset-0 z-0 pointer-events-none" aria-hidden="true" />
-          <div className="relative z-10">{children}</div>
+          {children}
           <ScrollReveal />
+          <Cursor />
         </LanguageProvider>
+        <div className="grain" aria-hidden="true" />
         <GoogleAnalytics gaId="G-C9ZYJ5XB1E" />
       </body>
     </html>
