@@ -20,16 +20,16 @@ export function PageHead({ kicker, title, intro, as = 'h2' }: { kicker: string; 
 }
 
 /* Cartão de projeto */
-export function ProjectCard({ p, size = 'md', delay = 0 }: { p: ProjectMeta; size?: 'md' | 'lg'; delay?: number }) {
+export function ProjectCard({ p, size = 'md', delay = 0, animate = true }: { p: ProjectMeta; size?: 'md' | 'lg'; delay?: number; animate?: boolean }) {
   const { lang, t } = useLang();
   return (
     <Link
       href={`/projetos/${p.id}`}
-      data-reveal
+      data-reveal={animate ? '' : undefined}
       style={{ ['--delay' as any]: `${delay}ms` }}
       className="group flex flex-col h-full rounded-xl bg-card border border-line overflow-hidden hover:border-petrol/40 hover:shadow-[0_18px_40px_-24px_rgba(14,90,107,0.45)] transition-[border-color,box-shadow] duration-300"
     >
-      <div className={`photo ${size === 'lg' ? 'aspect-[16/10] lg:aspect-auto lg:flex-1 lg:min-h-[320px]' : 'aspect-[16/10]'}`}>
+      <div className={`photo duo ${size === 'lg' ? 'aspect-[16/10] lg:aspect-auto lg:flex-1 lg:min-h-[320px]' : 'aspect-[16/10]'}`}>
         <img src={p.image} alt="" loading="lazy" />
       </div>
       <div className={size === 'lg' ? 'p-7' : 'p-6'}>

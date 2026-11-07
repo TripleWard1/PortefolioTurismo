@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, Search, X } from 'lucide-react';
 import { useLang } from './LanguageContext';
 import { useScrollLock } from './hooks';
 
@@ -62,12 +62,23 @@ export default function Header() {
               <span className={`absolute left-3.5 right-3.5 -bottom-0.5 h-[2px] bg-petrol transition-transform origin-left duration-300 ${isActive(n.href) ? 'scale-x-100' : 'scale-x-0'}`} />
             </Link>
           ))}
+          <button
+            onClick={() => window.dispatchEvent(new Event('open-search'))}
+            className="ml-3 h-9 pl-3 pr-2 rounded-full border border-line bg-card/70 text-[13px] text-muted inline-flex items-center gap-2 hover:border-petrol/40 hover:text-ink transition-colors"
+          >
+            <Search className="w-3.5 h-3.5" />
+            {t('Procurar', 'Search')}
+            <kbd className="text-[11px] border border-line rounded px-1.5 py-px">⌘K</kbd>
+          </button>
           <span className="w-px h-5 bg-line mx-3" />
           <LangSwitch />
         </nav>
 
-        <div className="lg:hidden flex items-center gap-4">
+        <div className="lg:hidden flex items-center gap-3">
           <LangSwitch />
+          <button onClick={() => window.dispatchEvent(new Event('open-search'))} aria-label={t('Procurar', 'Search')} className="w-10 h-10 grid place-items-center rounded-md border border-line">
+            <Search className="w-4 h-4" />
+          </button>
           <button onClick={() => setOpen((v) => !v)} aria-label="Menu" aria-expanded={open} className="w-10 h-10 grid place-items-center rounded-md border border-line">
             {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>

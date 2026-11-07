@@ -7,6 +7,19 @@ import { usePathname } from 'next/navigation';
    Volta a observar a cada mudança de página. */
 export default function Reveal() {
   const path = usePathname();
+
+  // Imagens externas que falhem ficam com o fundo neutro do cartão, sem ícone partido
+  useEffect(() => {
+    const onErr = (e: Event) => {
+      if (e.target instanceof HTMLImageElement) e.target.style.visibility = 'hidden';
+    };
+    window.addEventListener('error', onErr, true);
+    document.querySelectorAll('img').forEach((img) => {
+      if (img.complete && img.naturalWidth === 0 && img.src) img.style.visibility = 'hidden';
+    });
+    return () => window.removeEventListener('error', onErr, true);
+  }, [path]);
+
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
     document.documentElement.classList.add('js-reveal');

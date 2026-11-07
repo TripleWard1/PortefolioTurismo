@@ -7,6 +7,7 @@ import Header from './ui/Header';
 import Footer from './ui/Footer';
 import Opening from './ui/Opening';
 import Reveal from './ui/Reveal';
+import CommandK from './ui/CommandK';
 
 const serif = Newsreader({ subsets: ['latin'], variable: '--font-serif', display: 'swap', weight: ['400', '500', '600'], style: ['normal', 'italic'] });
 const sans = Schibsted_Grotesk({ subsets: ['latin'], variable: '--font-sans', display: 'swap', weight: ['400', '500', '600', '700'] });
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main>{children}</main>
           <Footer />
           <Reveal />
+          <CommandK />
         </LanguageProvider>
         <GoogleAnalytics gaId="G-C9ZYJ5XB1E" />
       </body>

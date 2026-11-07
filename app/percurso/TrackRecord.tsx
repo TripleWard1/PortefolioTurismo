@@ -2,19 +2,15 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { ArrowRight } from 'lucide-react';
 import { useLang } from '../ui/LanguageContext';
 import { PageHead } from '../ui/parts';
 import AtlasMap, { MISSION_POINTS } from '../ui/AtlasMap';
-import { PROJECTS, THEME_LABEL } from '../ui/projects';
+import Gantt from '../ui/viz/Gantt';
 
 export default function TrackRecord() {
   const { t, lang } = useLang();
   const [hot, setHot] = useState<string | null>(null);
 
-  // Cronologia: projetos agrupados pelo ano de início
-  const years = Array.from(new Set(PROJECTS.map((p) => p.year.slice(0, 4)))).sort();
-  const byYear = years.map((y) => ({ y, items: PROJECTS.filter((p) => p.year.startsWith(y)) }));
 
   return (
     <div className="wrap pt-12 md:pt-16">
@@ -62,36 +58,13 @@ export default function TrackRecord() {
 
       {/* Cronologia */}
       <section className="mt-24">
-        <PageHead kicker={t('Cronologia', 'Timeline')} title={t('Projetos por ano de início', 'Projects by start year')} />
-        <div className="mt-10 border-t border-line">
-          {byYear.map(({ y, items }) => (
-            <div key={y} className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-10 py-10 border-b border-line">
-              <div className="md:col-span-3" data-reveal>
-                <p className="font-serif text-[3.2rem] leading-none text-petrol">{y}</p>
-                <p className="mt-2 text-[14px] text-muted">
-                  {items.length} {items.length === 1 ? t('projeto', 'project') : t('projetos', 'projects')}
-                </p>
-              </div>
-              <ul className="md:col-span-9 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {items.map((p, i) => (
-                  <li key={p.id} data-reveal style={{ ['--delay' as any]: `${(i % 2) * 70}ms` }}>
-                    <Link href={`/projetos/${p.id}`} className="group flex items-center gap-4 rounded-xl bg-card border border-line p-3 pr-4 hover:border-petrol/40 transition-colors">
-                      <span className="photo w-20 h-14 rounded-lg shrink-0">
-                        <img src={p.image} alt="" loading="lazy" />
-                      </span>
-                      <span className="flex-1 min-w-0">
-                        <span className="block font-serif text-[1.15rem] leading-tight text-ink group-hover:text-petrol transition-colors truncate">{p.title[lang]}</span>
-                        <span className="block mt-0.5 text-[13px] text-muted truncate">
-                          {THEME_LABEL[p.theme][lang]} · {p.year}
-                        </span>
-                      </span>
-                      <ArrowRight className="w-4 h-4 text-petrol shrink-0 transition-transform group-hover:translate-x-1" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+        <PageHead
+          kicker={t('Cronologia', 'Timeline')}
+          title={t('2024 — 2026, projeto a projeto', '2024 — 2026, project by project')}
+          intro={t('Cada barra é um projeto, do ano em que começou ao ano em que terminou; a cor indica a área.', 'Each bar is a project, from the year it began to the year it ended; colour shows the area.')}
+        />
+        <div className="mt-10" data-reveal>
+          <Gantt />
         </div>
       </section>
     </div>

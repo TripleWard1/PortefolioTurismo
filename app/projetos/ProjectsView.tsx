@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Search, X } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useLang } from '../ui/LanguageContext';
 import { PageHead, ProjectCard } from '../ui/parts';
 import { AREAS, PROJECTS, THEME_LABEL, type Theme } from '../ui/projects';
@@ -94,11 +95,22 @@ export default function ProjectsView() {
       </p>
 
       {visible.length ? (
-        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {visible.map((p, i) => (
-            <ProjectCard key={`${filter}-${p.id}`} p={p} delay={(i % 3) * 80} />
-          ))}
-        </div>
+        <motion.div layout className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <AnimatePresence mode="popLayout">
+            {visible.map((p) => (
+              <motion.div
+                key={p.id}
+                layout
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <ProjectCard p={p} animate={false} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       ) : (
         <div className="mt-4 rounded-xl border border-dashed border-line bg-card py-16 text-center">
           <p className="font-serif text-2xl">{t('Nenhum projeto encontrado.', 'No projects found.')}</p>

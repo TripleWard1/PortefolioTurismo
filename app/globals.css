@@ -33,9 +33,20 @@
 .text-pretty { text-wrap: pretty; }
 
 /* Zoom suave nas fotografias */
-.photo { overflow: hidden; background: #e8e3d8; }
+.photo { position: relative; overflow: hidden; background: #e8e3d8; }
 .photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
 .group:hover .photo img, .photo:hover img { transform: scale(1.045); }
+
+/* Duotone clássico: sombras em azul-petróleo, luzes em creme.
+   Dá unidade às fotografias; ganham a cor original ao passar o rato. */
+.duo { background: #f4f1ea; isolation: isolate; }
+.duo img { filter: grayscale(1) contrast(1.08); mix-blend-mode: multiply; transition: filter 0.8s var(--ease), transform 1.2s var(--ease); }
+.duo::after { content: ''; position: absolute; inset: 0; background: #0e5a6b; mix-blend-mode: lighten; opacity: 1; transition: opacity 0.8s var(--ease); pointer-events: none; }
+.group:hover .duo img, .duo:hover img, .duo.is-on img { filter: none; }
+.group:hover .duo::after, .duo:hover::after, .duo.is-on::after { opacity: 0; }
+
+/* Faixa contínua */
+@keyframes marquee { to { transform: translateX(-50%); } }
 
 /* Entradas suaves ao descer (ativadas só com JS) */
 html.js-reveal [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); transition-delay: var(--delay, 0ms); }
@@ -55,4 +66,5 @@ html.js-reveal [data-reveal].in { opacity: 1; transform: none; }
   html { scroll-behavior: auto; }
   html.js-reveal [data-reveal] { opacity: 1; transform: none; transition: none; }
   .photo img { transition: none; }
+  [style*='marquee'] { animation: none !important; }
 }

@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Check, ChevronLeft, ChevronRight, ExternalLink, FileText, Link2, X } from 'lucide-react';
 import { useLang } from '../../ui/LanguageContext';
 import { getDossiers } from '../../ui/dossiers';
@@ -24,6 +25,15 @@ export default function CaseStudy({ id }: { id: string }) {
   const [lightbox, setLightbox] = useState<number | null>(null);
   const [copied, setCopied] = useState(false);
   useScrollLock(lightbox !== null);
+  const art = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: art, offset: ['start start', 'end end'] });
+  const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 30, restDelta: 0.001 });
+  const [active, setActive] = useState('contexto');
+  useEffect(() => {
+    const io = new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && setActive(e.target.id)), { rootMargin: '-35% 0px -60% 0px' });
+    document.querySelectorAll('[data-sec]').forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, [id, lang]);
 
   useEffect(() => {
     if (lightbox === null) return;
@@ -62,7 +72,8 @@ export default function CaseStudy({ id }: { id: string }) {
   };
 
   return (
-    <article className="wrap pt-8 md:pt-12">
+    <article ref={art} className="wrap pt-8 md:pt-12">
+      <motion.div className="fixed left-0 right-0 top-[72px] h-[3px] bg-petrol origin-left z-[390]" style={{ scaleX: progress }} aria-hidden="true" />
       {/* Navegação */}
       <nav className="flex flex-wrap items-center justify-between gap-4 text-[14px]" aria-label={t('Localização', 'Breadcrumb')}>
         <div className="flex items-center gap-2 text-muted min-w-0">
@@ -105,7 +116,7 @@ export default function CaseStudy({ id }: { id: string }) {
         </div>
       </header>
 
-      <div className="photo mt-10 rounded-2xl aspect-[16/9] md:aspect-[21/9]" data-reveal>
+      <div className="group photo duo mt-10 rounded-2xl aspect-[16/9] md:aspect-[21/9]" data-reveal>
         <img src={data.watermark || meta.image} alt="" />
       </div>
 
@@ -121,7 +132,7 @@ export default function CaseStudy({ id }: { id: string }) {
 
       <div className="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
         <div className="lg:col-span-8 space-y-16">
-          <section data-reveal>
+          <section id="contexto" data-sec data-reveal className="scroll-mt-28">
             <H2>{t('Contexto', 'Context')}</H2>
             <div className="case-body text-[18px] leading-[1.75]">{data.description}</div>
             {data.quote && (
@@ -132,7 +143,7 @@ export default function CaseStudy({ id }: { id: string }) {
           </section>
 
           {data.pillars?.length > 0 && (
-            <section data-reveal>
+            <section id="eixos" data-sec data-reveal className="scroll-mt-28">
               <H2>{data.pillarTabLabel || t('Eixos de intervenção', 'Areas of intervention')}</H2>
               {data.pillarTitle && <h3 className="text-[1.15rem] font-semibold text-ink">{data.pillarTitle}</h3>}
               {data.pillarDesc && <p className="mt-2 text-[16px] leading-relaxed text-muted">{data.pillarDesc}</p>}
@@ -164,7 +175,7 @@ export default function CaseStudy({ id }: { id: string }) {
           )}
 
           {(data.videoEmbed || gal.length > 0) && (
-            <section data-reveal>
+            <section id="registo" data-sec data-reveal className="scroll-mt-28">
               <H2>{t('Registo do trabalho', 'Record of the work')}</H2>
               {data.videoEmbed && <div className="mb-6">{data.videoEmbed}</div>}
               {gal.length > 0 && (
@@ -187,6 +198,27 @@ export default function CaseStudy({ id }: { id: string }) {
 
         <aside className="lg:col-span-4">
           <div className="lg:sticky lg:top-28 space-y-6">
+            <nav className="hidden lg:block" aria-label={t('Nesta página', 'On this page')}>
+              <p className="text-[12px] uppercase tracking-[0.1em] font-semibold text-muted mb-3">{t('Nesta página', 'On this page')}</p>
+              <ul className="border-l border-line">
+                {[
+                  { id: 'contexto', label: t('Contexto', 'Context'), show: true },
+                  { id: 'eixos', label: data.pillarTabLabel || t('Eixos', 'Pillars'), show: data.pillars?.length > 0 },
+                  { id: 'registo', label: t('Registo do trabalho', 'Record of the work'), show: !!(data.videoEmbed || gal.length) },
+                ]
+                  .filter((s) => s.show)
+                  .map((s) => (
+                    <li key={s.id}>
+                      <a
+                        href={`#${s.id}`}
+                        className={`-ml-px block border-l-2 pl-4 py-1.5 text-[14px] transition-colors ${active === s.id ? 'border-petrol text-petrol font-medium' : 'border-transparent text-muted hover:text-ink'}`}
+                      >
+                        {s.label}
+                      </a>
+                    </li>
+                  ))}
+              </ul>
+            </nav>
             {(data.stats || []).length > 0 && (
               <div className="rounded-xl bg-card border border-line p-6" data-reveal>
                 <h2 className="text-[12px] uppercase tracking-[0.1em] font-semibold text-muted">{t('Em síntese', 'At a glance')}</h2>
