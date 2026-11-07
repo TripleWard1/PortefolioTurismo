@@ -2,33 +2,21 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-/* Bloqueio de scroll com contador (intro, menu móvel, dossier, galeria) */
+/* Bloqueio de scroll com contador (menu móvel, galeria) */
 let locks = 0;
 export function useScrollLock(active: boolean) {
   useEffect(() => {
     if (!active) return;
     locks += 1;
-    if (locks === 1) {
-      const sb = window.innerWidth - document.documentElement.clientWidth;
-      document.body.style.overflow = 'hidden';
-      if (sb > 0) document.body.style.paddingRight = `${sb}px`;
-    }
+    if (locks === 1) document.body.style.overflow = 'hidden';
     return () => {
       locks = Math.max(0, locks - 1);
-      if (locks === 0) {
-        document.body.style.overflow = '';
-        document.body.style.paddingRight = '';
-      }
+      if (locks === 0) document.body.style.overflow = '';
     };
   }, [active]);
 }
 
-export const goTo = (id: string) => {
-  if (id === 'top') return window.scrollTo({ top: 0, behavior: 'smooth' });
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-};
-
-/* Dispara uma vez quando o elemento entra no viewport */
+/* Dispara uma vez quando o elemento entra no ecrã */
 export function useInView<T extends HTMLElement>(threshold = 0.3) {
   const ref = useRef<T>(null);
   const [inView, setInView] = useState(false);
@@ -51,8 +39,8 @@ export function useInView<T extends HTMLElement>(threshold = 0.3) {
   return [ref, inView] as const;
 }
 
-/* Contagem progressiva para os indicadores */
-export function useCountUp(to: number, run: boolean, ms = 1400) {
+/* Contagem até ao valor final */
+export function useCountUp(to: number, run: boolean, ms = 1300) {
   const [v, setV] = useState(0);
   useEffect(() => {
     if (!run) return;
