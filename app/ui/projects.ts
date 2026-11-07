@@ -1,5 +1,5 @@
-// Registo central - fonte única de verdade para cartões, mapa de missões,
-// índice, command palette e navegação ‹ › do dossier.
+// Registo central - fonte única de verdade para o portefólio, a tabela de
+// missões e a navegação entre dossiers.
 
 export type Theme = 'europeu' | 'digital' | 'produto' | 'internacional';
 export type L = { pt: string; en: string };
@@ -8,7 +8,6 @@ export interface ProjectMeta {
   id: string;
   title: L;
   theme: Theme;
-  sectionId: string;
   image: string;
   year: string;
   place: L;
@@ -16,27 +15,57 @@ export interface ProjectMeta {
   status: L;
 }
 
-export const THEMES: { id: Theme | 'todos'; pt: string; en: string }[] = [
-  { id: 'todos', pt: 'Todos', en: 'All' },
-  { id: 'europeu', pt: 'Europeu', en: 'European' },
-  { id: 'internacional', pt: 'Missões', en: 'Missions' },
-  { id: 'digital', pt: 'Digital', en: 'Digital' },
-  { id: 'produto', pt: 'Produto', en: 'Product' },
+export interface Area {
+  id: Theme;
+  label: L;
+  description: L;
+}
+
+/* Áreas de atuação - ordem de apresentação no site */
+export const AREAS: Area[] = [
+  {
+    id: 'europeu',
+    label: { pt: 'Candidaturas e Redes Europeias', en: 'European Candidacies & Networks' },
+    description: {
+      pt: 'Preparação e defesa de candidaturas a títulos europeus e participação em redes de cooperação urbana.',
+      en: 'Preparing and defending bids for European titles and taking part in urban cooperation networks.',
+    },
+  },
+  {
+    id: 'internacional',
+    label: { pt: 'Promoção Internacional', en: 'International Promotion' },
+    description: {
+      pt: 'Representação institucional do Município em feiras e mercados emissores estratégicos.',
+      en: 'Institutional representation of the Municipality at fairs and in strategic source markets.',
+    },
+  },
+  {
+    id: 'digital',
+    label: { pt: 'Inovação e Ecossistema Digital', en: 'Innovation & Digital Ecosystem' },
+    description: {
+      pt: 'Plataformas digitais de destino e redes de transferência de conhecimento e inovação.',
+      en: 'Digital destination platforms and knowledge-transfer and innovation networks.',
+    },
+  },
+  {
+    id: 'produto',
+    label: { pt: 'Produto Turístico e Património', en: 'Tourism Product & Heritage' },
+    description: {
+      pt: 'Roteiros, cartografia, publicações oficiais e experiências turísticas sustentáveis.',
+      en: 'Itineraries, cartography, official publications and sustainable tourism experiences.',
+    },
+  },
 ];
 
-export const THEME_LABEL: Record<Theme, L> = {
-  europeu: { pt: 'Europeu', en: 'European' },
-  digital: { pt: 'Digital', en: 'Digital' },
-  produto: { pt: 'Produto', en: 'Product' },
-  internacional: { pt: 'Missão', en: 'Mission' },
-};
+export const THEME_LABEL: Record<Theme, L> = Object.fromEntries(
+  AREAS.map((a) => [a.id, a.label])
+) as Record<Theme, L>;
 
 export const PROJECTS: ProjectMeta[] = [
   {
     id: 'smart-tourism',
     title: { pt: 'Smart Tourism', en: 'Smart Tourism' },
     theme: 'europeu',
-    sectionId: 'posicionamento',
     image: 'https://i.imgur.com/SvJ4bdR.jpeg',
     year: '2024—26',
     place: { pt: 'Bruxelas · Braga', en: 'Brussels · Braga' },
@@ -50,7 +79,6 @@ export const PROJECTS: ProjectMeta[] = [
     id: 'small-retail-braga',
     title: { pt: 'Small Retail', en: 'Small Retail' },
     theme: 'europeu',
-    sectionId: 'posicionamento',
     image:
       'https://transition-pathways.europa.eu/sites/default/files/styles/time_dependent_full/public/discussion_form_post/2025-12/ECOSR%20-%20Thumbnail_0.jpg?itok=1-QARVo7',
     year: '2025—26',
@@ -65,7 +93,6 @@ export const PROJECTS: ProjectMeta[] = [
     id: 'braga-after-dark',
     title: { pt: 'After Dark', en: 'After Dark' },
     theme: 'europeu',
-    sectionId: 'posicionamento',
     image: 'https://i.imgur.com/mgdxHtt.jpeg',
     year: '2024—25',
     place: { pt: 'Rede URBACT', en: 'URBACT Network' },
@@ -79,7 +106,6 @@ export const PROJECTS: ProjectMeta[] = [
     id: 'music-cities-awards',
     title: { pt: 'Music Cities', en: 'Music Cities' },
     theme: 'europeu',
-    sectionId: 'posicionamento',
     image: 'https://static.wixstatic.com/media/214dbc_25ced84144eb414c945f6072bd97b0c4~mv2.jpg',
     year: '2025',
     place: { pt: 'Arkansas, EUA', en: 'Arkansas, USA' },
@@ -93,7 +119,6 @@ export const PROJECTS: ProjectMeta[] = [
     id: 'fiets-wandelbeurs-gante',
     title: { pt: 'Fiets en Wandelbeurs', en: 'Fiets en Wandelbeurs' },
     theme: 'internacional',
-    sectionId: 'missoes',
     image: 'https://i.imgur.com/tg4YOqy.png',
     year: '2025',
     place: { pt: 'Gante, Bélgica', en: 'Ghent, Belgium' },
@@ -107,7 +132,6 @@ export const PROJECTS: ProjectMeta[] = [
     id: 'expovacaciones-bilbao',
     title: { pt: 'ExpoVacaciones', en: 'ExpoVacaciones' },
     theme: 'internacional',
-    sectionId: 'missoes',
     image: 'https://i.imgur.com/JL0PcZe.png',
     year: '2024—25',
     place: { pt: 'Bilbao, Espanha', en: 'Bilbao, Spain' },
@@ -121,7 +145,6 @@ export const PROJECTS: ProjectMeta[] = [
     id: 'b-travel-barcelona',
     title: { pt: 'B-Travel Barcelona', en: 'B-Travel Barcelona' },
     theme: 'internacional',
-    sectionId: 'missoes',
     image: 'https://i.imgur.com/09Tm1r9.png',
     year: '2026',
     place: { pt: 'Barcelona, Espanha', en: 'Barcelona, Spain' },
@@ -135,7 +158,6 @@ export const PROJECTS: ProjectMeta[] = [
     id: 'visit-braga',
     title: { pt: 'Portal Visit Braga', en: 'Visit Braga Portal' },
     theme: 'digital',
-    sectionId: 'digital',
     image: 'https://i.imgur.com/e0wCEWM.jpeg',
     year: '2024—25',
     place: { pt: 'Braga, Portugal', en: 'Braga, Portugal' },
@@ -149,7 +171,6 @@ export const PROJECTS: ProjectMeta[] = [
     id: 'systemeu-salamanca',
     title: { pt: 'SYSTEMEU', en: 'SYSTEMEU' },
     theme: 'digital',
-    sectionId: 'digital',
     image: 'https://i.imgur.com/SeyCGBk.jpg',
     year: '2024—25',
     place: { pt: 'Salamanca · Braga', en: 'Salamanca · Braga' },
@@ -163,7 +184,6 @@ export const PROJECTS: ProjectMeta[] = [
     id: 'cidade-bracvs',
     title: { pt: 'A Cidade do Bracvs', en: 'The City of Bracvs' },
     theme: 'produto',
-    sectionId: 'heranca',
     image: 'https://i.imgur.com/NRTWHRW.png',
     year: '2025',
     place: { pt: 'Educação & Família', en: 'Education & Family' },
@@ -177,7 +197,6 @@ export const PROJECTS: ProjectMeta[] = [
     id: 'roteiro-3-dias',
     title: { pt: 'Descobrir Braga em 3 Dias', en: 'Discover Braga in 3 Days' },
     theme: 'produto',
-    sectionId: 'heranca',
     image: 'https://i.imgur.com/yWtlcEL.png',
     year: '2025',
     place: { pt: 'Coordenação Editorial', en: 'Editorial Coordination' },
@@ -191,7 +210,6 @@ export const PROJECTS: ProjectMeta[] = [
     id: 'mapa-turistico-braga',
     title: { pt: 'Novo Mapa Territorial', en: 'New Territorial Map' },
     theme: 'produto',
-    sectionId: 'heranca',
     image: 'https://i.imgur.com/P54M1Ko.png',
     year: '2024',
     place: { pt: 'Cartografia Técnica', en: 'Technical Cartography' },
@@ -205,7 +223,6 @@ export const PROJECTS: ProjectMeta[] = [
     id: 'experiencias-sustentaveis',
     title: { pt: 'Experiências Sustentáveis', en: 'Sustainable Experiences' },
     theme: 'produto',
-    sectionId: 'heranca',
     image:
       'https://www.cm-braga.pt/archive/cache/img/sz800x600/CMB17012025SERGIOFREITAS3022624430274.jpg',
     year: '2025',
@@ -218,38 +235,25 @@ export const PROJECTS: ProjectMeta[] = [
   },
 ];
 
-/* Missões no mapa - coordenadas reais (lat, lon) */
-export const BRAGA = { lat: 41.5454, lon: -8.4265 };
-
 export interface Mission {
   id: string; // projeto associado
   city: L;
-  lat: number;
-  lon: number;
+  country: L;
+  event: string;
+  year: string;
 }
 
 export const MISSIONS: Mission[] = [
-  { id: 'smart-tourism', city: { pt: 'Bruxelas', en: 'Brussels' }, lat: 50.8503, lon: 4.3517 },
-  { id: 'fiets-wandelbeurs-gante', city: { pt: 'Gante', en: 'Ghent' }, lat: 51.0543, lon: 3.7174 },
-  { id: 'expovacaciones-bilbao', city: { pt: 'Bilbao', en: 'Bilbao' }, lat: 43.263, lon: -2.935 },
-  { id: 'b-travel-barcelona', city: { pt: 'Barcelona', en: 'Barcelona' }, lat: 41.3874, lon: 2.1686 },
-  { id: 'systemeu-salamanca', city: { pt: 'Salamanca', en: 'Salamanca' }, lat: 40.9701, lon: -5.6635 },
-  { id: 'music-cities-awards', city: { pt: 'Arkansas', en: 'Arkansas' }, lat: 34.7465, lon: -92.2896 },
+  { id: 'smart-tourism', city: { pt: 'Bruxelas', en: 'Brussels' }, country: { pt: 'Bélgica', en: 'Belgium' }, event: 'European Capital of Smart Tourism', year: '2024—26' },
+  { id: 'fiets-wandelbeurs-gante', city: { pt: 'Gante', en: 'Ghent' }, country: { pt: 'Bélgica', en: 'Belgium' }, event: 'Fiets en Wandelbeurs', year: '2025' },
+  { id: 'expovacaciones-bilbao', city: { pt: 'Bilbao', en: 'Bilbao' }, country: { pt: 'Espanha', en: 'Spain' }, event: 'ExpoVacaciones', year: '2024—25' },
+  { id: 'b-travel-barcelona', city: { pt: 'Barcelona', en: 'Barcelona' }, country: { pt: 'Espanha', en: 'Spain' }, event: 'B-Travel', year: '2026' },
+  { id: 'systemeu-salamanca', city: { pt: 'Salamanca', en: 'Salamanca' }, country: { pt: 'Espanha', en: 'Spain' }, event: 'Startup OLÉ & SystemEU Summit', year: '2024—25' },
+  { id: 'music-cities-awards', city: { pt: 'Arkansas', en: 'Arkansas' }, country: { pt: 'EUA', en: 'USA' }, event: 'Music Cities Awards', year: '2025' },
 ];
-
-export function distanceKm(a: { lat: number; lon: number }, b: { lat: number; lon: number }) {
-  const R = 6371;
-  const toRad = (d: number) => (d * Math.PI) / 180;
-  const dLat = toRad(b.lat - a.lat);
-  const dLon = toRad(b.lon - a.lon);
-  const h =
-    Math.sin(dLat / 2) ** 2 + Math.cos(toRad(a.lat)) * Math.cos(toRad(b.lat)) * Math.sin(dLon / 2) ** 2;
-  return Math.round(2 * R * Math.asin(Math.sqrt(h)));
-}
 
 export const byId = (id: string) => PROJECTS.find((p) => p.id === id);
 export const getProject = byId;
-export const bySection = (s: string) => PROJECTS.filter((p) => p.sectionId === s);
 
 export function neighbours(id: string): { prev: ProjectMeta; next: ProjectMeta } {
   const i = PROJECTS.findIndex((p) => p.id === id);

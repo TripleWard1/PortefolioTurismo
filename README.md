@@ -1,38 +1,34 @@
-# Hugo Barros — Portefólio Estratégico
+# Hugo Barros — Portefólio Profissional
 
-Portefólio de estratégia de destino e inovação turística (Município de Braga).
-Next.js 13 (App Router) · Tailwind · sem bibliotecas de animação.
+Portefólio de Hugo Barros, Técnico Superior de Inovação e Desenvolvimento Turístico no Município de Braga.
+Next.js 13 (App Router) · Tailwind CSS.
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Direção visual — "Granito & Brasa"
+## Identidade
 
-- **Paleta:** noite de granito (`--night`, `--granite`, `--slab`), osso (`--bone`, `--paper`) e um único sinal, brasa (`--ember`). Tokens em `app/globals.css`.
-- **Tipografia:** Instrument Serif (display), Inter Tight (texto), JetBrains Mono (etiquetas e dados).
-- **Movimento:** ligado ao scroll e escrito diretamente no DOM via `requestAnimationFrame` (sem re-renders). Respeita `prefers-reduced-motion`.
+Registo institucional: fundo branco, azul-marinho (`--navy`), cinzas neutros e um acento discreto (`--accent`).
+Títulos em Source Serif 4, texto em Public Sans. Tokens em `app/globals.css`. Sem animações decorativas.
 
-## Estrutura
+## Estrutura da página
 
-| Ficheiro | Papel |
+1. **Perfil** — apresentação, ficha profissional e indicadores
+2. **Áreas de atuação** — quatro áreas; cada uma filtra a lista de projetos
+3. **Projetos** — todos os projetos numa grelha, com filtro por área e pesquisa
+4. **Missões internacionais** — tabela de feiras, cimeiras e júris
+5. **Contacto** e rodapé
+
+Cada projeto abre um **dossier** (enquadramento, eixos, registo fotográfico, ficha do projeto e documentos),
+com link partilhável `/#projeto/<id>` e navegação por teclado (`←` `→`, `Esc`).
+
+## Onde editar
+
+| Ficheiro | Conteúdo |
 | --- | --- |
-| `app/ui/projects.ts` | Fonte única: projetos, temas, missões (coordenadas reais) |
-| `app/ui/dossiers.tsx` | Conteúdo editorial PT/EN de cada dossier |
-| `app/ui/sections.ts` | Ordem dos capítulos (navbar, menu, palette) |
-| `app/ui/hooks.ts` | Scroll lock partilhado, progresso de scroll, in-view, hora de Braga |
-| `Preloader` · `Hero` · `Manifesto` | Abertura, hero com paralaxe, manifesto lido ao scroll, marquee e métricas |
-| `Positioning` | Cap. 01 — galeria horizontal fixada (carrossel em mobile) |
-| `Missions` | Cap. 02 — atlas SVG com arcos a partir de Braga e distâncias reais |
-| `Digital` · `Heritage` | Cap. 03 e 04 — cartões com spotlight/tilt e janela fixa com troca de imagem |
-| `ProjectIndex` | Índice filtrável com pré-visualização a seguir o cursor |
-| `Dossier` | Leitor de dossier em ecrã inteiro, índice lateral, lightbox, “próximo” |
-| `CommandPalette` | ⌘K / Ctrl+K — pesquisa tolerante a acentos |
-| `Cursor` | Cursor personalizado (apenas ponteiros finos) |
-
-## Atalhos
-
-- `⌘K` / `Ctrl+K` — pesquisa
-- `←` `→` — dossier anterior / seguinte; `Esc` — fechar
-- Deep-link de dossier: `/#projeto/<id>` (ex.: `/#projeto/smart-tourism`)
+| `app/ui/projects.ts` | Lista de projetos, áreas e missões (título, ano, local, resumo, imagem) |
+| `app/ui/dossiers.tsx` | Texto completo de cada dossier, em PT e EN |
+| `app/ui/Hero.tsx` | Apresentação, ficha profissional e indicadores |
+| `app/ui/Contact.tsx` | Contactos e rodapé |

@@ -1,141 +1,118 @@
 'use client';
 
-import { useRef } from 'react';
-import { ArrowDown } from 'lucide-react';
+import { ArrowRight, Mail } from 'lucide-react';
 import { useLang } from './LanguageContext';
-import { useBragaTime, useScrollProgress } from './hooks';
-import { goTo } from './sections';
+import { goTo } from './hooks';
+import { MISSIONS, PROJECTS } from './projects';
 
-const VISIT_BRAGA = 'https://i.imgur.com/Yakcz6G.png';
-const COVER = 'https://i.imgur.com/SvJ4bdR.jpeg';
 const PORTRAIT = 'https://i.imgur.com/Dx42oze.jpeg';
+const VISIT_BRAGA = 'https://i.imgur.com/Yakcz6G.png';
 
-export default function Hero({ ready }: { ready: boolean }) {
+export default function Hero() {
   const { t } = useLang();
-  const time = useBragaTime();
-  const root = useRef<HTMLElement>(null);
-  const img = useRef<HTMLDivElement>(null);
-  const content = useRef<HTMLDivElement>(null);
 
-  // Paralaxe: a imagem afunda e o texto dissolve à medida que se desce
-  useScrollProgress(
-    root,
-    (p) => {
-      if (img.current) img.current.style.transform = `translate3d(0, ${p * 30}%, 0) scale(${1.05 + p * 0.25})`;
-      if (content.current) {
-        content.current.style.opacity = String(1 - p * 1.6);
-        content.current.style.transform = `translate3d(0, ${p * -12}%, 0)`;
-      }
+  const facts = [
+    { k: t('Função', 'Position'), v: t('Técnico Superior', 'Senior Officer') },
+    { k: t('Entidade', 'Organisation'), v: t('Município de Braga', 'Municipality of Braga') },
+    {
+      k: t('Unidade orgânica', 'Department'),
+      v: t('Divisão de Atividades Económicas e Turismo', 'Economic Activities and Tourism Division'),
     },
-    'exit'
-  );
+    { k: t('Localização', 'Location'), v: 'Braga, Portugal' },
+  ];
 
-  const In = ready ? 'is-in' : '';
+  const figures = [
+    { v: String(PROJECTS.length), l: t('projetos documentados', 'documented projects') },
+    { v: '29', l: t('experiências turísticas concebidas', 'tourism experiences designed') },
+    { v: String(MISSIONS.length), l: t('missões internacionais', 'international missions') },
+    { v: '2', l: t('candidaturas a capitais europeias', 'European capital bids') },
+  ];
 
   return (
-    <section id="top" ref={root} className="relative h-[100svh] min-h-[640px] w-full overflow-hidden bg-night">
-      {/* Imagem */}
-      <div ref={img} className="absolute inset-0 will-change-transform" style={{ transform: 'scale(1.05)' }}>
-        <img
-          src={COVER}
-          alt=""
-          fetchPriority="high"
-          className={`w-full h-full object-cover transition-all duration-[2400ms] ease-out ${
-            ready ? 'opacity-[0.42] scale-100' : 'opacity-0 scale-110'
-          }`}
-        />
-      </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-night/70 via-night/20 to-night" />
-      <div className="absolute inset-0 bg-gradient-to-r from-night/85 via-night/30 to-transparent" />
-      <div className="absolute inset-0 vignette" />
-
-      <div ref={content} className="relative z-10 h-full wrap flex flex-col pt-28 pb-6 will-change-transform">
-        {/* Cabeçalho institucional */}
-        <div className={`flex flex-wrap items-center gap-x-4 gap-y-2 label text-[var(--fg-2)] ${ready ? 'rise' : 'opacity-0'}`} style={{ ['--d' as any]: '200ms' }}>
-          <span>{t('Município de Braga', 'Municipality of Braga')}</span>
-          <span className="w-8 h-px bg-ember" />
-          <span className="text-[var(--fg-3)]">{t('Divisão de Atividades Económicas & Turismo', 'Economic Activities & Tourism Division')}</span>
+    <section id="perfil" className="bg-white">
+      <div className="wrap pt-14 md:pt-20 pb-14 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+        <div className="lg:col-span-7">
+          <p className="eyebrow text-accent">{t('Portefólio profissional', 'Professional portfolio')}</p>
+          <h1 className="mt-4 font-serif font-semibold text-ink text-[clamp(2.5rem,1.6rem+3.4vw,4rem)] leading-[1.05] tracking-[-0.01em]">
+            Hugo Barros
+          </h1>
+          <p className="mt-3 text-[clamp(1.1rem,1rem+0.4vw,1.3rem)] font-medium text-navy">
+            {t('Técnico Superior · Inovação e Desenvolvimento Turístico', 'Senior Officer · Tourism Innovation & Development')}
+          </p>
+          <div className="mt-7 space-y-4 text-[17px] leading-relaxed text-muted max-w-2xl text-pretty">
+            <p>
+              {t(
+                'Trabalho na estratégia de destino, nas candidaturas europeias e na inovação turística do Município de Braga — da preparação de dossiês técnicos para a Comissão Europeia à conceção de produto turístico, cartografia e publicações oficiais.',
+                'I work on destination strategy, European candidacies and tourism innovation at the Municipality of Braga — from preparing technical dossiers for the European Commission to designing tourism products, cartography and official publications.'
+              )}
+            </p>
+            <p>
+              {t(
+                'Acredito que o valor real nasce da interseção entre visão territorial e execução estratégica. Este portefólio reúne os projetos em que participei, organizados por área de atuação.',
+                'I believe real value is born where territorial vision meets strategic execution. This portfolio brings together the projects I have worked on, organised by area of work.'
+              )}
+            </p>
+          </div>
+          <div className="mt-9 flex flex-wrap gap-3">
+            <button
+              onClick={() => goTo('projetos')}
+              className="h-12 px-6 rounded bg-navy text-white font-semibold text-[15px] inline-flex items-center gap-2 hover:bg-navy-dark transition-colors"
+            >
+              {t('Consultar projetos', 'View projects')}
+              <ArrowRight className="w-4 h-4" />
+            </button>
+            <a
+              href="mailto:hugo.barros@cm-braga.pt"
+              className="h-12 px-6 rounded border border-line text-ink font-semibold text-[15px] inline-flex items-center gap-2 hover:border-navy hover:text-navy transition-colors"
+            >
+              <Mail className="w-4 h-4" />
+              hugo.barros@cm-braga.pt
+            </a>
+          </div>
         </div>
 
-        {/* Nome */}
-        <div className="flex-1 flex items-center">
-          <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
-            <h1 className={`lg:col-span-9 mega text-bone ${In}`}>
-              <span className="line-mask">
-                <span style={{ ['--d' as any]: '100ms' }}>Hugo</span>
-              </span>
-              <span className="line-mask">
-                <span style={{ ['--d' as any]: '220ms' }} className="italic text-ember pl-[0.5em]">
-                  Barros<span className="text-bone not-italic">.</span>
-                </span>
-              </span>
-            </h1>
-
-            {/* Retrato + selo */}
-            <div className={`hidden lg:block lg:col-span-3 pb-4 ${ready ? 'rise' : 'opacity-0'}`} style={{ ['--d' as any]: '650ms' }}>
-              <div className="relative ml-auto w-full max-w-[260px]">
-                <div className="relative aspect-[4/5] rounded-[22px] overflow-hidden border border-[var(--line-2)]">
-                  <img src={PORTRAIT} alt="Hugo Barros" className="w-full h-full object-cover object-[64%_18%] grayscale-[25%]" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-night/70 via-transparent to-transparent" />
-                  <div className="absolute left-4 right-4 bottom-4">
-                    <span className="block text-[15px] font-medium text-bone">Hugo Barros</span>
-                    <span className="block label-sm text-[var(--fg-2)] mt-1.5 leading-relaxed">
-                      {t('Técnico Superior', 'Senior Officer')}
-                    </span>
-                  </div>
-                </div>
-                <button
-                  onClick={() => goTo('manifesto')}
-                  aria-label={t('Descer', 'Scroll down')}
-                  className="group absolute -left-12 -top-12 w-[104px] h-[104px] rounded-full bg-night/80 backdrop-blur-md border border-[var(--line-2)] grid place-items-center"
-                >
-                  <svg viewBox="0 0 100 100" className="absolute inset-0 spin-slow">
-                    <defs>
-                      <path id="circ" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0" />
-                    </defs>
-                    <text className="fill-[var(--fg-2)]" style={{ fontSize: 8.4, letterSpacing: '0.24em', fontFamily: 'var(--font-mono)' }}>
-                      <textPath href="#circ">{t('ESTRATÉGIA · TERRITÓRIO · INOVAÇÃO · ', 'STRATEGY · TERRITORY · INNOVATION · ')}</textPath>
-                    </text>
-                  </svg>
-                  <ArrowDown className="w-5 h-5 text-ember transition-transform duration-500 group-hover:translate-y-1" />
-                </button>
+        {/* Ficha */}
+        <aside className="lg:col-span-5">
+          <div className="rounded-lg border border-line overflow-hidden bg-white">
+            <div className="grid grid-cols-5">
+              <div className="col-span-2 bg-surface">
+                <img
+                  src={PORTRAIT}
+                  alt="Hugo Barros"
+                  className="w-full h-full object-cover object-[64%_18%] aspect-[4/5]"
+                />
               </div>
+              <dl className="col-span-3 p-5 sm:p-6 flex flex-col justify-center gap-4">
+                {facts.map((f) => (
+                  <div key={f.k}>
+                    <dt className="text-[12px] font-semibold uppercase tracking-[0.06em] text-muted">{f.k}</dt>
+                    <dd className="mt-1 text-[15px] text-ink leading-snug">{f.v}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+            <div className="border-t border-line px-5 sm:px-6 py-4 flex items-center justify-between gap-4 bg-surface">
+              <span className="text-[13px] text-muted">{t('Marca oficial de destino', 'Official destination brand')}</span>
+              <span className="block w-[160px] h-[30px] overflow-hidden">
+                {/* o PNG original tem margens largas: recorte centrado */}
+                <img src={VISIT_BRAGA} alt="Visit Braga" className="w-full h-full object-cover scale-[1.38]" />
+              </span>
             </div>
           </div>
-        </div>
+        </aside>
+      </div>
 
-        {/* Linha de rodapé */}
-        <div
-          className={`grid grid-cols-2 md:grid-cols-12 gap-x-6 gap-y-5 items-end pt-5 border-t border-[var(--line)] ${ready ? 'rise' : 'opacity-0'}`}
-          style={{ ['--d' as any]: '500ms' }}
-        >
-          <p className="col-span-2 md:col-span-5 lead text-[var(--fg)] text-pretty max-w-md">
-            {t(
-              'Estratégia de destino, candidaturas europeias e inovação turística para Braga.',
-              'Destination strategy, European candidacies and tourism innovation for Braga.'
-            )}
-          </p>
-          <div className="md:col-span-2 flex flex-col gap-1.5">
-            <span className="label-sm text-[var(--fg-3)]">{t('Coordenadas', 'Coordinates')}</span>
-            <span className="label text-[var(--fg-2)] tabular">41.55° N · 8.43° W</span>
-          </div>
-          <div className="md:col-span-2 flex flex-col gap-1.5">
-            <span className="label-sm text-[var(--fg-3)]">{t('Hora local', 'Local time')}</span>
-            <span className="label text-[var(--fg-2)] tabular flex items-center gap-2">
-              <span className="live-dot" /> {time || '--:--'}
-            </span>
-          </div>
-          <div className="col-span-2 md:col-span-3 flex items-center justify-between md:justify-end gap-5">
-            <button onClick={() => goTo('manifesto')} className="flex items-center gap-3 label text-[var(--fg-2)] hover:text-bone transition-colors">
-              <span className="relative w-px h-8 bg-[var(--line-2)] overflow-hidden">
-                <span className="absolute inset-x-0 top-0 h-1/2 bg-ember scroll-cue" />
-              </span>
-              {t('Descer', 'Scroll')}
-            </button>
-            <span className="h-12 px-5 rounded-full bg-bone flex items-center shrink-0" title="Visit Braga">
-              <img src={VISIT_BRAGA} alt="Visit Braga" className="h-9 w-auto object-contain" />
-            </span>
-          </div>
+      {/* Indicadores */}
+      <div className="border-y border-line bg-surface">
+        <div className="wrap">
+          <ul className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-line border-x border-line">
+            {figures.map((f) => (
+              <li key={f.l} className="bg-surface px-5 sm:px-7 py-7">
+                <p className="font-serif font-semibold text-[2.5rem] leading-none text-navy">{f.v}</p>
+                <p className="mt-2 text-[14px] text-muted leading-snug">{f.l}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

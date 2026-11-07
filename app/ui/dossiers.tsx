@@ -371,8 +371,8 @@ export function getDossiers(t: T): Record<string, DossierData> {
     <div className="space-y-6">
       <p>
         {t(
-          <>A conceção e curadoria do <span className="hl">roteiro cultural e gastronómico</span> oficial da noite de Braga marca a nossa integração no projeto europeu **URBACT Cities After Dark**.</>,
-          <>The design and curatorship of Braga’s official <span className="hl">cultural and gastronomic itinerary</span> marks our integration into the European project **URBACT Cities After Dark**.</>
+          <>A conceção e curadoria do <span className="hl">roteiro cultural e gastronómico</span> oficial da noite de Braga marca a nossa integração no projeto europeu <span className="hl">URBACT Cities After Dark</span>.</>,
+          <>The design and curatorship of Braga’s official <span className="hl">cultural and gastronomic itinerary</span> marks our integration into the European project <span className="hl">URBACT Cities After Dark</span>.</>
         )}
       </p>
       <p className="sub">

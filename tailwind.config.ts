@@ -5,22 +5,18 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        display: ['var(--font-display)', 'Georgia', 'serif'],
+        serif: ['var(--font-serif)', 'Georgia', 'serif'],
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
-        mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
       },
       colors: {
-        night: 'var(--night)',
-        granite: 'var(--granite)',
-        slab: 'var(--slab)',
-        bone: 'var(--bone)',
-        paper: 'var(--paper)',
-        ember: 'var(--ember)',
-        ink: 'var(--ink)',
-      },
-      transitionTimingFunction: {
-        out: 'cubic-bezier(0.16, 1, 0.3, 1)',
-        io: 'cubic-bezier(0.76, 0, 0.24, 1)',
+        surface: 'var(--surface)',
+        'surface-2': 'var(--surface-2)',
+        line: 'var(--line)',
+        ink: 'var(--text)',
+        muted: 'var(--muted)',
+        navy: 'var(--navy)',
+        'navy-dark': 'var(--navy-dark)',
+        accent: 'var(--accent)',
       },
     },
   },

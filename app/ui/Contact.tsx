@@ -1,154 +1,127 @@
 'use client';
 
 import { useState } from 'react';
-import { ArrowUp, ArrowUpRight, Check, Copy } from 'lucide-react';
+import { ArrowUp, Building2, Check, Copy, Linkedin, Mail } from 'lucide-react';
 import { useLang } from './LanguageContext';
-import { useBragaTime } from './hooks';
-import { SECTIONS, goTo } from './sections';
+import { goTo } from './hooks';
+import { NAV } from './Navbar';
 
 const EMAIL = 'hugo.barros@cm-braga.pt';
 const LINKEDIN = 'https://www.linkedin.com/in/hugo-abreu-barros/';
 
 export default function Contact() {
   const { t, lang } = useLang();
-  const time = useBragaTime();
   const [copied, setCopied] = useState(false);
 
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(EMAIL);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2200);
+      setTimeout(() => setCopied(false), 2000);
     } catch {
       window.location.href = `mailto:${EMAIL}`;
     }
   };
 
   return (
-    <footer id="contacto" className="relative bg-granite overflow-hidden">
-      {/* Brasa de fundo */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-[30%] -translate-x-1/2 w-[110vw] h-[70vw] max-h-[900px] rounded-full opacity-[0.22] blur-[120px]"
-        style={{ background: 'radial-gradient(closest-side, #ff5a1f, transparent)' }}
-      />
+    <>
+      <section id="contacto" className="bg-surface border-t border-line py-20 md:py-24">
+        <div className="wrap grid grid-cols-1 lg:grid-cols-12 gap-10">
+          <header className="lg:col-span-5">
+            <p className="eyebrow text-accent">{t('Contacto', 'Contact')}</p>
+            <h2 className="mt-3 font-serif font-semibold text-ink text-[clamp(1.9rem,1.4rem+1.6vw,2.6rem)] leading-tight">
+              {t('Vamos conversar', 'Let’s talk')}
+            </h2>
+            <p className="mt-4 text-[17px] leading-relaxed text-muted text-pretty">
+              {t(
+                'Disponível para cooperação institucional, redes europeias, candidaturas e projetos de desenvolvimento turístico.',
+                'Available for institutional cooperation, European networks, candidacies and tourism development projects.'
+              )}
+            </p>
+          </header>
 
-      <div className="wrap relative pt-28 md:pt-40 pb-10">
-        <div data-reveal className="flex items-center gap-3 label text-[var(--fg-3)]">
-          <span className="text-ember tabular">06</span>
-          <span className="w-6 h-px bg-[var(--line-2)]" />
-          {t('Contacto', 'Contact')}
-        </div>
-
-        <h2 className="mt-10 mega text-bone">
-          <span data-reveal className="block">{t('Vamos', 'Let’s')}</span>
-          <span data-reveal className="block italic text-ember pl-[0.6em]" style={{ ['--reveal-delay' as any]: '120ms' }}>
-            {t('conversar.', 'talk.')}
-          </span>
-        </h2>
-
-        <div className="mt-16 md:mt-24 grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
-          <p data-reveal className="lg:col-span-5 lead text-[var(--fg-2)] text-pretty max-w-lg">
-            {t(
-              'Projetos que desafiem o status quo e promovam impacto sustentável no território. Candidaturas, redes europeias, produto turístico — a porta está aberta.',
-              'Projects that challenge the status quo and promote sustainable impact on the territory. Candidacies, European networks, tourism product — the door is open.'
-            )}
-          </p>
-
-          <div data-reveal className="lg:col-span-7 flex flex-col gap-3">
-            {/* Email */}
-            <div className="group flex items-stretch rounded-full border border-[var(--line-2)] bg-night/40 backdrop-blur-md overflow-hidden">
-              <a
-                href={`mailto:${EMAIL}`}
-                className="flex-1 flex items-center justify-between gap-4 pl-7 pr-4 py-5 hover:bg-bone hover:text-night transition-colors duration-500"
-              >
-                <span className="text-[clamp(1.05rem,0.8rem+1vw,1.6rem)] tracking-[-0.01em]">{EMAIL}</span>
-                <ArrowUpRight className="w-5 h-5 text-ember transition-transform duration-500 group-hover:rotate-45" />
-              </a>
+          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="sm:col-span-2 rounded-lg border border-line bg-white p-6 flex flex-wrap items-center gap-4 justify-between">
+              <div className="flex items-center gap-4 min-w-0">
+                <span className="w-11 h-11 rounded bg-navy text-white grid place-items-center shrink-0">
+                  <Mail className="w-5 h-5" />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-[13px] text-muted">{t('Email institucional', 'Institutional email')}</span>
+                  <a href={`mailto:${EMAIL}`} className="block font-semibold text-[17px] text-ink hover:text-navy break-all">
+                    {EMAIL}
+                  </a>
+                </span>
+              </div>
               <button
                 onClick={copy}
-                aria-label={t('Copiar email', 'Copy email')}
-                className="w-20 border-l border-[var(--line-2)] grid place-items-center hover:bg-ember hover:text-night transition-colors"
+                className="h-10 px-4 rounded border border-line text-[14px] font-medium text-ink inline-flex items-center gap-2 hover:border-navy"
               >
-                {copied ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
+                {copied ? <Check className="w-4 h-4 text-navy" /> : <Copy className="w-4 h-4" />}
+                {copied ? t('Copiado', 'Copied') : t('Copiar', 'Copy')}
               </button>
             </div>
-            <span aria-live="polite" className={`label-sm pl-7 transition-opacity ${copied ? 'text-ember opacity-100' : 'opacity-0'}`}>
-              {t('Copiado para a área de transferência', 'Copied to clipboard')}
-            </span>
 
-            {/* LinkedIn */}
             <a
               href={LINKEDIN}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center justify-between gap-4 rounded-full border border-[var(--line-2)] pl-7 pr-4 py-5 hover:border-ember transition-colors duration-500"
+              className="rounded-lg border border-line bg-white p-6 flex items-center gap-4 hover:border-navy transition-colors"
             >
-              <span className="flex items-center gap-4">
-                <span className="label-sm text-[var(--fg-3)]">LinkedIn</span>
-                <span className="text-[clamp(1.05rem,0.8rem+1vw,1.6rem)] tracking-[-0.01em] text-bone">Hugo Abreu Barros</span>
+              <span className="w-11 h-11 rounded bg-[#0a66c2] text-white grid place-items-center shrink-0">
+                <Linkedin className="w-5 h-5" />
               </span>
-              <span className="w-11 h-11 rounded-full bg-bone text-night grid place-items-center transition-all duration-500 group-hover:bg-ember">
-                <ArrowUpRight className="w-5 h-5 transition-transform duration-500 group-hover:rotate-45" />
+              <span>
+                <span className="block text-[13px] text-muted">LinkedIn</span>
+                <span className="block font-semibold text-ink">Hugo Abreu Barros</span>
               </span>
             </a>
+
+            <div className="rounded-lg border border-line bg-white p-6 flex items-center gap-4">
+              <span className="w-11 h-11 rounded bg-surface text-navy grid place-items-center shrink-0">
+                <Building2 className="w-5 h-5" />
+              </span>
+              <span>
+                <span className="block text-[13px] text-muted">{t('Entidade', 'Organisation')}</span>
+                <span className="block font-semibold text-ink">{t('Município de Braga', 'Municipality of Braga')}</span>
+              </span>
+            </div>
           </div>
         </div>
+      </section>
 
-        {/* Rodapé */}
-        <div className="mt-28 md:mt-40 pt-8 border-t border-[var(--line)] grid grid-cols-2 md:grid-cols-12 gap-8">
-          <div className="col-span-2 md:col-span-4">
-            <div className="font-display text-3xl text-bone">
-              Hugo Barros<em className="text-ember">.</em>
-            </div>
-            <p className="mt-3 text-[14px] text-[var(--fg-3)] leading-relaxed max-w-xs">
+      <footer className="bg-navy-dark text-white">
+        <div className="wrap py-12 grid grid-cols-1 md:grid-cols-12 gap-8">
+          <div className="md:col-span-5">
+            <p className="font-serif font-semibold text-xl">Hugo Barros</p>
+            <p className="mt-2 text-[14px] text-white/70 leading-relaxed max-w-sm">
               {t(
                 'Técnico Superior · Inovação e Desenvolvimento Turístico. Divisão de Atividades Económicas e Turismo, Município de Braga.',
                 'Senior Officer · Tourism Innovation & Development. Economic Activities and Tourism Division, Municipality of Braga.'
               )}
             </p>
           </div>
-          <nav className="md:col-span-3 md:col-start-6 flex flex-col gap-2.5" aria-label={t('Rodapé', 'Footer')}>
-            <span className="label-sm text-[var(--fg-3)] mb-2">{t('Capítulos', 'Chapters')}</span>
-            {SECTIONS.slice(1, 6).map((s) => (
-              <button key={s.id} onClick={() => goTo(s.id)} className="text-left text-[15px] text-[var(--fg-2)] hover:text-bone transition-colors w-fit">
-                {s.label[lang]}
+          <nav className="md:col-span-4 grid grid-cols-2 grid-rows-3 grid-flow-col gap-x-6 gap-y-2 content-start" aria-label={t('Rodapé', 'Footer')}>
+            {NAV.map((s) => (
+              <button key={s.id} onClick={() => goTo(s.id)} className="text-left text-[14px] text-white/75 hover:text-white w-fit">
+                {s[lang]}
               </button>
             ))}
           </nav>
-          <div className="md:col-span-2 flex flex-col gap-2.5">
-            <span className="label-sm text-[var(--fg-3)] mb-2">Braga</span>
-            <span className="text-[15px] text-[var(--fg-2)] tabular flex items-center gap-2">
-              <span className="live-dot" /> {time}
-            </span>
-            <span className="text-[15px] text-[var(--fg-2)] tabular">41.55° N, 8.43° W</span>
-            <span className="text-[15px] text-[var(--fg-2)]">Portugal</span>
-          </div>
-          <div className="col-span-2 md:col-span-2 flex md:justify-end items-start">
-            <button
-              onClick={() => goTo('top')}
-              className="group flex items-center gap-3 label text-[var(--fg-2)] hover:text-bone transition-colors"
-            >
-              {t('Topo', 'Top')}
-              <span className="w-11 h-11 rounded-full border border-[var(--line-2)] grid place-items-center group-hover:bg-ember group-hover:border-ember transition-all">
-                <ArrowUp className="w-4 h-4 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:text-night" />
-              </span>
+          <div className="md:col-span-3 flex md:justify-end items-start">
+            <button onClick={() => goTo('top')} className="text-[14px] text-white/75 hover:text-white inline-flex items-center gap-2">
+              <ArrowUp className="w-4 h-4" />
+              {t('Voltar ao topo', 'Back to top')}
             </button>
           </div>
         </div>
-
-        <div className="mt-14 flex flex-wrap items-end justify-between gap-4 label-sm text-[var(--fg-3)]">
-          <span>© {new Date().getFullYear()} Hugo Barros</span>
-          <span>{t('Portefólio estratégico · Braga', 'Strategic portfolio · Braga')}</span>
+        <div className="border-t border-white/10">
+          <div className="wrap py-5 text-[13px] text-white/55 flex flex-wrap justify-between gap-2">
+            <span>© {new Date().getFullYear()} Hugo Barros</span>
+            <span>{t('Portefólio profissional', 'Professional portfolio')}</span>
+          </div>
         </div>
-      </div>
-
-      {/* Assinatura gigante */}
-      <div aria-hidden="true" className="relative select-none pointer-events-none overflow-hidden">
-        <div className="font-display italic text-center leading-[0.75] tracking-[-0.04em] text-[23vw] outline-text translate-y-[18%]">
-          Braga
-        </div>
-      </div>
-    </footer>
+      </footer>
+    </>
   );
 }
