@@ -1,42 +1,25 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
-  content: [
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './ui/**/*.{js,ts,jsx,tsx,mdx}', // Adicionado para garantir que a pasta ui é lida
-  ],
+  content: ['./app/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
       fontFamily: {
-        // As variáveis devem bater exatamente com o que definimos no layout.tsx
-        playfair: ['var(--font-playfair)', 'serif'],
-        sans: ['var(--font-inter)', 'sans-serif'],
+        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-serif)', 'Georgia', 'serif'],
       },
+      // Hex para os modificadores de opacidade funcionarem (bg-petrol/10)
       colors: {
-        braga: {
-          gold: '#C5A059',
-          dark: '#0a0a0a',
-        },
-      },
-      animation: {
-        'fade-in': 'fadeIn 1s ease-out forwards',
-        'slide-up': 'slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-      },
-      keyframes: {
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        slideUp: {
-          '0%': { transform: 'translateY(40px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
-        },
+        cream: '#f4f1ea',
+        card: '#fbfaf6',
+        ink: '#1a1d21',
+        muted: '#5e6166',
+        line: '#ddd6c8',
+        petrol: '#0e5a6b',
+        'petrol-dark': '#0a4351',
       },
     },
   },
-  // Removi o require do typography para evitar o erro de build no StackBlitz
   plugins: [],
 };
 

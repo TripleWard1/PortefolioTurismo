@@ -1,57 +1,44 @@
 import type { Metadata } from 'next';
-import { Inter, Fraunces, JetBrains_Mono } from 'next/font/google';
+import { Newsreader, Schibsted_Grotesk } from 'next/font/google';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import './globals.css';
 import { LanguageProvider } from './ui/LanguageContext';
-import ScrollReveal from './ui/ScrollReveal';
-import { GoogleAnalytics } from '@next/third-parties/google';
+import Header from './ui/Header';
+import Footer from './ui/Footer';
+import Opening from './ui/Opening';
+import Reveal from './ui/Reveal';
+import CommandK from './ui/CommandK';
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-  weight: ['300', '400', '500', '700', '900'],
-});
-
-// Display editorial - Fraunces servida na variável --font-playfair,
-// para que todas as classes `font-playfair` existentes a adotem.
-const fraunces = Fraunces({
-  subsets: ['latin'],
-  variable: '--font-playfair',
-  display: 'swap',
-  weight: ['400', '500', '700', '900'],
-  style: ['normal', 'italic'],
-});
-
-const mono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-mono',
-  display: 'swap',
-  weight: ['400', '500', '700'],
-});
+const serif = Newsreader({ subsets: ['latin'], variable: '--font-serif', display: 'swap', weight: ['400', '500', '600'], style: ['normal', 'italic'] });
+const sans = Schibsted_Grotesk({ subsets: ['latin'], variable: '--font-sans', display: 'swap', weight: ['400', '500', '600', '700'] });
 
 export const metadata: Metadata = {
-  title: 'Hugo Barros | Portfolio Estratégico',
+  title: { default: 'Hugo Barros — Portefólio', template: '%s · Hugo Barros' },
   description:
-    'Estratégia de destino, inovação territorial e desenvolvimento turístico - Município de Braga.',
-  icons: { icon: 'https://imgur.com/Dx42oze.png' },
+    'Portefólio de Hugo Barros, Técnico Superior de Inovação e Desenvolvimento Turístico no Município de Braga: candidaturas europeias, promoção internacional, inovação digital e produto turístico.',
+  icons: { icon: 'https://i.imgur.com/Dx42oze.png' },
   openGraph: {
-    title: 'Hugo Barros | Território & Inovação',
-    description: 'Arquitetura de estratégia urbana e turismo inteligente.',
+    title: 'Hugo Barros — Portefólio',
+    description: 'Estratégia de destino, candidaturas europeias e produto turístico para Braga.',
     images: ['https://i.imgur.com/SvJ4bdR.jpeg'],
     type: 'website',
+    locale: 'pt_PT',
   },
+  twitter: { card: 'summary_large_image' },
+  themeColor: '#f4f1ea',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt" className="scroll-smooth">
-      <body
-        className={`${inter.variable} ${fraunces.variable} ${mono.variable} font-sans antialiased bg-[var(--paper)] text-[var(--text-main)]`}
-      >
+    <html lang="pt">
+      <body className={`${serif.variable} ${sans.variable} font-sans antialiased`}>
         <LanguageProvider>
-          <div className="mesh-bg fixed inset-0 z-0 pointer-events-none" aria-hidden="true" />
-          <div className="relative z-10">{children}</div>
-          <ScrollReveal />
+          <Opening />
+          <Header />
+          <main>{children}</main>
+          <Footer />
+          <Reveal />
+          <CommandK />
         </LanguageProvider>
         <GoogleAnalytics gaId="G-C9ZYJ5XB1E" />
       </body>

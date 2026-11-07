@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Hugo Barros — Portefólio
 
-## Getting Started
-
-First, run the development server:
+Portefólio de Hugo Barros, Técnico Superior de Inovação e Desenvolvimento Turístico no Município de Braga.
+Next.js 13 (App Router) · Tailwind CSS · páginas geradas de forma estática.
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Páginas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Endereço | Conteúdo |
+| --- | --- |
+| `/` | Apresentação, indicadores, 3 projetos em destaque, áreas de atuação, mapa das missões, contacto |
+| `/projetos` | Todos os projetos, com filtro por área (`?area=europeu`) e pesquisa |
+| `/projetos/<id>` | Estudo de caso: contexto, eixos, registo fotográfico, síntese e documentos |
+| `/percurso` | Mapa das missões internacionais e cronologia por ano |
+| `/contacto` | Email, LinkedIn e entidade |
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Os links antigos `/#projeto/<id>` são redirecionados para `/projetos/<id>`.
 
-## Learn More
+## Identidade
 
-To learn more about Next.js, take a look at the following resources:
+Creme claro (`#F4F1EA`), tinta (`#1A1D21`) e azul-petróleo (`#0E5A6B`).
+Títulos em Newsreader, texto em Schibsted Grotesk. Scroll normal em todas as páginas;
+tudo respeita "reduzir movimento".
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Elementos de assinatura
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+| Componente | O que faz |
+| --- | --- |
+| `app/ui/fx/ContourField.tsx` | Curvas de nível generativas (ruído de Perlin + marching squares) em canvas, em movimento lento |
+| `app/ui/fx/Globe.tsx` | Globo em Canvas 2D: continentes em pontos (`landDots.ts`), arcos de grande círculo de Braga às missões, arrastável |
+| `app/ui/fx/Motion.tsx` | Palavras que se sucedem, faixas contínuas e arquivo visual de fotografias |
+| `app/ui/viz/Gantt.tsx` | Cronologia 2024–2026 em Gantt, por área, com linha "hoje" |
+| `app/ui/viz/AreaBar.tsx` | Distribuição dos projetos pelas quatro áreas |
+| `app/ui/CommandK.tsx` | Pesquisa rápida (⌘K / Ctrl+K) por projetos e páginas |
+| `app/template.tsx` | Transição suave entre páginas (framer-motion) |
 
-## Deploy on Vercel
+## Onde editar
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+| Ficheiro | Conteúdo |
+| --- | --- |
+| `app/ui/projects.ts` | Projetos, áreas e missões (título, ano, local, resumo, imagem, coordenadas) |
+| `app/ui/dossiers.tsx` | Texto completo de cada projeto, em PT e EN |
+| `app/page.tsx` | Página inicial (incluindo os projetos em destaque) |
+| `app/globals.css` · `tailwind.config.ts` | Cores, tipografia e efeitos |

@@ -1,645 +1,342 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { ArrowRight, ArrowUpRight, MapPin, Plus, Globe } from 'lucide-react';
-
-import Hero from './ui/Hero';
-import Navbar from './ui/Navbar';
-import ChapterOverlay from './ui/ChapterOverlay';
-import Contact from './ui/Contact';
-import CommandPalette from './ui/CommandPalette';
-import ProjectIndex from './ui/ProjectIndex';
-import { neighbours, getProject } from './ui/projects';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { motion, useReducedMotion } from 'framer-motion';
+import { ArrowRight, ArrowUpRight, Briefcase, Globe2, Landmark, Mail, MonitorSmartphone } from 'lucide-react';
 import { useLang } from './ui/LanguageContext';
+import { Figures, PageHead, ProjectCard, TextLink } from './ui/parts';
+import { MISSION_POINTS } from './ui/AtlasMap';
+import { AREAS, PROJECTS, byId, type Theme } from './ui/projects';
+import { EMAIL } from './ui/Footer';
+import ContourField from './ui/fx/ContourField';
+import Globe from './ui/fx/Globe';
+import { Marquee, PhotoRiver, WordCycle } from './ui/fx/Motion';
+import AreaBar from './ui/viz/AreaBar';
+import Gantt from './ui/viz/Gantt';
+import { AREA_COLOR } from './ui/viz/palette';
 
-export default function Page() {
+const PORTRAIT = 'https://i.imgur.com/Dx42oze.jpeg';
+const FEATURED = ['smart-tourism', 'visit-braga', 'experiencias-sustentaveis'];
+const ICONS: Record<Theme, typeof Globe2> = { europeu: Landmark, internacional: Globe2, digital: MonitorSmartphone, produto: Briefcase };
+const NETWORKS = [
+  'Comissão Europeia',
+  'European Capital of Smart Tourism',
+  'European Capital of Small Retail',
+  'URBACT · Cities After Dark',
+  'Music Cities Awards',
+  'SystemEU',
+  'Visit Braga',
+  'Fiets en Wandelbeurs',
+  'ExpoVacaciones',
+  'B-Travel',
+];
+
+function Floating({ children, className, delay = 0 }: { children: React.ReactNode; className: string; delay?: number }) {
+  const reduce = useReducedMotion();
+  return (
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, y: 20 }}
+      animate={reduce ? { opacity: 1, y: 0 } : { opacity: 1, y: [0, -8, 0] }}
+      transition={
+        reduce
+          ? { duration: 0.6 }
+          : { opacity: { duration: 0.8, delay }, y: { duration: 7, delay, repeat: Infinity, ease: 'easeInOut' } }
+      }
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+export default function Home() {
   const { t, lang } = useLang();
-  const [overlay, setOverlay] = useState({ isOpen: false, projectType: 'smart-tourism' });
-  const [paletteOpen, setPaletteOpen] = useState(false);
+  const router = useRouter();
+  const [focus, setFocus] = useState<string | null>(null);
 
-  // Abrir/fechar dossier com deep-link partilhável (#projeto/<id>)
-  const openProject = (id: string, push = true) => {
-    setOverlay({ isOpen: true, projectType: id });
-    const hash = '#projeto/' + id;
-    if (push) window.history.pushState({ id }, '', hash);
-    else window.history.replaceState({ id }, '', hash);
-  };
-  const open = (id: string) => openProject(id, true);
-  const closeOverlay = () => {
-    setOverlay((o) => ({ ...o, isOpen: false }));
-    if (window.location.hash.startsWith('#projeto/')) {
-      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+  // Links antigos (/#projeto/<id>) passam para a página do projeto
+  useEffect(() => {
+    const h = window.location.hash;
+    if (h.startsWith('#projeto/')) {
+      const id = decodeURIComponent(h.slice(9));
+      if (byId(id)) router.replace(`/projetos/${id}`);
     }
-  };
-  const navProject = (id: string) => openProject(id, false);
-  const goToSection = (id: string) =>
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  }, [router]);
 
-  // Sincroniza estado <-> URL (links partilhados + botão voltar)
-  useEffect(() => {
-    const sync = () => {
-      const h = window.location.hash;
-      const id = h.startsWith('#projeto/') ? decodeURIComponent(h.slice('#projeto/'.length)) : '';
-      if (id && getProject(id)) setOverlay({ isOpen: true, projectType: id });
-      else setOverlay((o) => ({ ...o, isOpen: false }));
-    };
-    sync();
-    window.addEventListener('popstate', sync);
-    return () => window.removeEventListener('popstate', sync);
-  }, []);
-
-  // Bloqueia scroll de fundo com o dossier aberto
-  useEffect(() => {
-    if (overlay.isOpen) document.body.style.overflow = 'hidden';
-    else if (!paletteOpen) document.body.style.overflow = '';
-  }, [overlay.isOpen, paletteOpen]);
-
-  // Atalhos globais: ⌘K palette · ‹ › navegar dossiers · Esc fechar
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
-        e.preventDefault();
-        setPaletteOpen((o) => !o);
-        return;
-      }
-      if (paletteOpen) return;
-      if (overlay.isOpen) {
-        if (e.key === 'Escape') closeOverlay();
-        else if (e.key === 'ArrowRight') navProject(neighbours(overlay.projectType).next.id);
-        else if (e.key === 'ArrowLeft') navProject(neighbours(overlay.projectType).prev.id);
-      }
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [overlay.isOpen, overlay.projectType, paletteOpen]);
-
-  const nb = neighbours(overlay.projectType);
-
-  /* ---- Dados ---- */
-  const positioning = [
-    {
-      id: 'smart-tourism',
-      n: '01',
-      title: 'Smart Tourism',
-      location: t('Bruxelas / Braga', 'Brussels / Braga'),
-      image: 'https://i.imgur.com/SvJ4bdR.jpeg',
-      description: t(
-        'Defesa da candidatura de Braga ao título de European Capital of Smart Tourism junto da Comissão Europeia.',
-        'Defense of Braga’s candidacy for the European Capital of Smart Tourism title before the European Commission.'
-      ),
-      status: t('Finalista UE', 'EU Finalist'),
-    },
-    {
-      id: 'small-retail-braga',
-      n: '02',
-      title: 'Small Retail',
-      location: t('Candidatura 2026', '2026 Candidacy'),
-      image:
-        'https://transition-pathways.europa.eu/sites/default/files/styles/time_dependent_full/public/discussion_form_post/2025-12/ECOSR%20-%20Thumbnail_0.jpg?itok=1-QARVo7',
-      description: t(
-        'Dossiê técnico para a Capital Europeia do Comércio, focado na sustentabilidade do retalho local.',
-        'Technical dossier for the European Capital of Small Retail, focused on local retail sustainability.'
-      ),
-      status: t('Económico', 'Economic'),
-    },
-    {
-      id: 'braga-after-dark',
-      n: '03',
-      title: 'After Dark',
-      location: t('Rede URBACT', 'URBACT Network'),
-      image: 'https://i.imgur.com/mgdxHtt.jpeg',
-      description: t(
-        'Primeiro roteiro oficial e estratégia de governação para a vida noturna de Braga na rede europeia.',
-        'First official roadmap and governance strategy for Braga’s nightlife within the European network.'
-      ),
-      status: t('Estratégico', 'Strategic'),
-    },
-    {
-      id: 'music-cities-awards',
-      n: '04',
-      title: 'Music Cities',
-      location: t('Arkansas, EUA', 'Arkansas, USA'),
-      image: 'https://static.wixstatic.com/media/214dbc_25ced84144eb414c945f6072bd97b0c4~mv2.jpg',
-      description: t(
-        'Posicionamento de Braga como referência mundial em políticas de música, com final global nos EUA.',
-        'Positioning Braga as a global reference in music policy, with the global final in the USA.'
-      ),
-      status: t('Mundial', 'Worldwide'),
-    },
-  ];
-
-  const fairs = [
-    {
-      id: 'fiets-wandelbeurs-gante',
-      title: 'Fiets en Wandelbeurs',
-      location: t('Gante, Bélgica', 'Ghent, Belgium'),
-      image: 'https://i.imgur.com/tg4YOqy.png',
-      tag: t('Turismo Ativo', 'Active Tourism'),
-    },
-    {
-      id: 'expovacaciones-bilbao',
-      title: 'ExpoVacaciones',
-      location: t('Bilbao, Espanha', 'Bilbao, Spain'),
-      image: 'https://i.imgur.com/JL0PcZe.png',
-      tag: t('Estratégia Ibérica', 'Iberian Strategy'),
-    },
-    {
-      id: 'b-travel-barcelona',
-      title: 'B-Travel Barcelona',
-      location: t('Barcelona, Espanha', 'Barcelona, Spain'),
-      image: 'https://i.imgur.com/09Tm1r9.png',
-      tag: t('Sul da Europa', 'Southern Europe'),
-    },
-  ];
-
-  const digital = [
-    {
-      id: 'visit-braga',
-      title: t('Portal Visit Braga', 'Visit Braga Portal'),
-      location: t('Braga, Portugal', 'Braga, Portugal'),
-      image: 'https://i.imgur.com/e0wCEWM.jpeg',
-      description: t(
-        'Conceção de UX e arquitetura de dados para a principal plataforma turística da cidade.',
-        "UX design and data architecture for the city's main tourism platform."
-      ),
-      status: t('Conversão', 'Conversion'),
-    },
-    {
-      id: 'systemeu-salamanca',
-      title: 'SYSTEMEU',
-      location: t('Salamanca / Braga', 'Salamanca / Braga'),
-      image: 'https://imgur.com/SeyCGBk.jpg',
-      description: t(
-        'Redes de inovação inter-regionais para a transferência de conhecimento tecnológico.',
-        'Inter-regional innovation networks for the transfer of technological knowledge.'
-      ),
-      status: t('Europeia', 'European'),
-    },
-  ];
-
-  const heritage = [
-    {
-      id: 'cidade-bracvs',
-      title: t('A Cidade do Bracvs', 'The City of Bracvs'),
-      image: 'https://i.imgur.com/NRTWHRW.png',
-      desc: t(
-        'Roteiro lúdico-educativo para crianças e famílias, aproximando as novas gerações do património romano de Braga.',
-        'Playful-educational itinerary for children and families, bringing new generations closer to Braga’s Roman heritage.'
-      ),
-      tag: t('Educação & Família', 'Education & Family'),
-      year: '2025',
-    },
-    {
-      id: 'roteiro-3-dias',
-      title: t('Descobrir Braga em 3 Dias', 'Discover Braga in 3 Days'),
-      image: 'https://i.imgur.com/yWtlcEL.png',
-      desc: t(
-        'Coordenação editorial e estrutural do guia oficial da cidade, otimizando fluxos turísticos e experiência do utilizador.',
-        "Editorial and structural coordination of the city's official guide, optimizing tourist flows and user experience."
-      ),
-      tag: t('Coordenação Editorial', 'Editorial Coordination'),
-      year: '2025',
-    },
-    {
-      id: 'mapa-turistico-braga',
-      title: t('Novo Mapa Territorial', 'New Territorial Map'),
-      image: 'https://i.imgur.com/P54M1Ko.png',
-      desc: t(
-        'Desenvolvimento técnico e design de informação para o suporte cartográfico oficial da cidade.',
-        'Technical development and information design for the city’s official cartographic support.'
-      ),
-      tag: t('Cartografia Técnica', 'Technical Cartography'),
-      year: '2024',
-    },
-    {
-      id: 'experiencias-sustentaveis',
-      title: t('Experiências Sustentáveis', 'Sustainable Experiences'),
-      image:
-        'https://www.cm-braga.pt/archive/cache/img/sz800x600/CMB17012025SERGIOFREITAS3022624430274.jpg',
-      desc: t(
-        'Liderança técnica na conceção de 29 experiências turísticas, unindo identidade local e sustentabilidade.',
-        'Technical leadership in designing 29 tourism experiences, combining local identity and sustainability.'
-      ),
-      tag: t('Gestão de Produto', 'Product Management'),
-      year: '2025',
-    },
-  ];
-
-  const metrics = [
-    { v: '12', label: t('Dossiers estratégicos', 'Strategic dossiers') },
-    { v: '04', label: t('Candidaturas europeias', 'European candidacies') },
-    { v: '29', label: t('Experiências sustentáveis', 'Sustainable experiences') },
-    { v: '2024-26', label: t('Horizonte de mandato', 'Mandate horizon') },
-  ];
+  const [big, ...rest] = FEATURED.map((id) => byId(id)!);
+  const st = byId('smart-tourism')!;
+  const ad = byId('braga-after-dark')!;
 
   return (
-    <main className="relative min-h-screen bg-[var(--paper)] overflow-hidden">
-      {/* REDE DE SEGURANÇA: variáveis de cor garantidas mesmo sem globals.css */}
-      <style jsx global>{`
-        :root {
-          --ink: #1d2226;
-          --ink-soft: #2c343b;
-          --ink-deep: #14181b;
-          --paper: #f4f2ee;
-          --paper-warm: #ffffff;
-          --primary: #0a66c2;
-          --sky: #378fe9;
-          --accent: #70b5f9;
-        }
-      `}</style>
+    <>
+      {/* ===================== HERO ===================== */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 [mask-image:linear-gradient(90deg,transparent_5%,#000_55%),linear-gradient(0deg,transparent,#000_25%)] [mask-composite:intersect]">
+          <ContourField />
+        </div>
 
-      <div className="relative z-10">
-        <Navbar onOpenPalette={() => setPaletteOpen(true)} />
-        <Hero />
+        <div className="relative wrap pt-12 md:pt-16 pb-14 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center min-h-[min(86vh,820px)]">
+          <div className="lg:col-span-7">
+            <motion.p className="kicker flex items-center gap-2.5" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}>
+              <span className="relative flex w-2 h-2">
+                <span className="absolute inset-0 rounded-full bg-petrol animate-ping opacity-60 motion-reduce:hidden" />
+                <span className="relative w-2 h-2 rounded-full bg-petrol" />
+              </span>
+              {t('Município de Braga · Turismo', 'Municipality of Braga · Tourism')}
+            </motion.p>
+            <motion.h1
+              className="mt-5 font-serif font-medium text-ink text-[clamp(3.2rem,1.8rem+5.6vw,6.6rem)] leading-[0.95] tracking-[-0.03em]"
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            >
+              Hugo Barros
+            </motion.h1>
+            <motion.p
+              className="mt-5 font-serif text-[clamp(1.5rem,1.15rem+1.4vw,2.4rem)] leading-[1.15] text-ink/80"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
+              {t('Levar Braga a', 'Taking Braga to')}{' '}
+              <WordCycle className="italic text-petrol" words={[...MISSION_POINTS.map((m) => m.city[lang]), t('todo o lado', 'everywhere')]} />
+            </motion.p>
+            <motion.p
+              className="mt-6 text-[18px] leading-relaxed text-muted max-w-xl text-pretty"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.42 }}
+            >
+              {t(
+                'Técnico Superior de Inovação e Desenvolvimento Turístico. Estratégia de destino, candidaturas europeias, promoção internacional e produto turístico — da Comissão Europeia ao centro histórico.',
+                'Senior Officer for Tourism Innovation and Development. Destination strategy, European bids, international promotion and tourism product — from the European Commission to the historic centre.'
+              )}
+            </motion.p>
+            <motion.div className="mt-9 flex flex-wrap gap-3" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.55 }}>
+              <Link href="/projetos" className="group h-12 pl-6 pr-5 rounded-full bg-ink text-cream font-semibold text-[15px] inline-flex items-center gap-3 hover:bg-petrol transition-colors">
+                {t('Explorar projetos', 'Explore projects')}
+                <span className="w-6 h-6 rounded-full bg-cream/15 grid place-items-center transition-transform group-hover:translate-x-0.5">
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </span>
+              </Link>
+              <a href={`mailto:${EMAIL}`} className="h-12 px-6 rounded-full border border-ink/15 bg-card/70 backdrop-blur text-ink font-semibold text-[15px] inline-flex items-center gap-2 hover:border-petrol/50 transition-colors">
+                <Mail className="w-4 h-4" />
+                {t('Enviar email', 'Send an email')}
+              </a>
+            </motion.div>
+          </div>
 
-        {/* ============================================================ */}
-        {/* FAIXA DE IMPACTO                                            */}
-        {/* ============================================================ */}
-        <section id="impacto" data-nav-theme="dark" className="relative bg-[var(--ink)] text-white overflow-hidden">
-          <div className="absolute inset-0 grid-dots text-white/[0.04]" />
-          <div
-            data-reveal="stagger"
-            data-reveal-step="80"
-            className="max-w-[1320px] mx-auto px-6 py-12 grid grid-cols-2 lg:grid-cols-4 gap-px relative z-10"
-          >
-            {metrics.map((m, i) => (
-              <div key={i} className="relative px-6 py-4 lg:py-2">
-                <div className="font-playfair text-3xl md:text-4xl font-black tracking-tight text-white">
-                  {m.v}
-                </div>
-                <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/45 mt-2 leading-tight">
-                  {m.label}
-                </div>
-                {i < metrics.length - 1 && (
-                  <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 h-10 w-px bg-white/10" />
-                )}
+          {/* Colagem */}
+          <div className="lg:col-span-5 relative h-[440px] sm:h-[520px] max-w-[520px] w-full mx-auto">
+            <Floating className="absolute right-0 top-0 w-[72%] h-[86%]" delay={0.2}>
+              <div className="photo w-full h-full rounded-[28px] shadow-[0_40px_80px_-40px_rgba(26,29,33,0.55)]">
+                <img src={PORTRAIT} alt="Hugo Barros" className="object-[64%_18%]" />
               </div>
+            </Floating>
+            <Floating className="absolute left-0 top-[12%] w-[46%]" delay={0.5}>
+              <Link href={`/projetos/${st.id}`} className="group block">
+                <span className="photo block aspect-[4/3] rounded-2xl border-4 border-cream shadow-[0_24px_50px_-28px_rgba(26,29,33,0.6)]">
+                  <img src={st.image} alt="" />
+                </span>
+                <span className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-card/90 backdrop-blur border border-line px-3 py-1 text-[12px] font-medium text-ink">
+                  {st.status[lang]} · {st.title[lang]} <ArrowUpRight className="w-3 h-3" />
+                </span>
+              </Link>
+            </Floating>
+            <Floating className="absolute left-[14%] bottom-0 w-[44%]" delay={0.8}>
+              <Link href={`/projetos/${ad.id}`} className="group block">
+                <span className="photo block aspect-[4/3] rounded-2xl border-4 border-cream shadow-[0_24px_50px_-28px_rgba(26,29,33,0.6)]">
+                  <img src={ad.image} alt="" />
+                </span>
+                <span className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-card/90 backdrop-blur border border-line px-3 py-1 text-[12px] font-medium text-ink">
+                  URBACT · {ad.title[lang]} <ArrowUpRight className="w-3 h-3" />
+                </span>
+              </Link>
+            </Floating>
+          </div>
+        </div>
+
+        {/* Redes e eventos */}
+        <div className="relative border-y border-line bg-card/60 backdrop-blur py-4">
+          <Marquee speed={55} gap={40}>
+            {NETWORKS.map((n) => (
+              <span key={n} className="flex items-center gap-10 font-serif italic text-[1.15rem] text-ink/70 whitespace-nowrap">
+                {n}
+                <span className="w-1.5 h-1.5 rounded-full bg-petrol/60" />
+              </span>
             ))}
+          </Marquee>
+        </div>
+      </section>
+
+      {/* ===================== NÚMEROS ===================== */}
+      <section className="wrap mt-20">
+        <Figures />
+        <div className="mt-8" data-reveal>
+          <AreaBar />
+        </div>
+      </section>
+
+      {/* ===================== EM DESTAQUE ===================== */}
+      <section className="wrap mt-24 md:mt-32">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <PageHead kicker={t('Em destaque', 'Featured')} title={t('Três projetos, três frentes de trabalho', 'Three projects, three lines of work')} />
+          <div data-reveal>
+            <TextLink href="/projetos">{t(`Ver os ${PROJECTS.length} projetos`, `See all ${PROJECTS.length} projects`)}</TextLink>
           </div>
-        </section>
-
-        {/* ============================================================ */}
-        {/* CAPÍTULO 01 - POSICIONAMENTO GLOBAL                         */}
-        {/* ============================================================ */}
-        <section id="arquivo" className="relative py-24 md:py-28 overflow-hidden bg-[var(--paper)]">
-          <div className="absolute inset-0 grid-dots text-slate-900/[0.05]" />
-          <div className="max-w-[1320px] mx-auto px-6 relative z-10">
-            <header data-reveal className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16 items-end">
-              <div className="lg:col-span-7">
-                <div className="flex items-center gap-3 mb-5">
-                  <span className="h-px w-7 bg-[var(--primary)]" />
-                  <span className="eyebrow text-[var(--primary)]">
-                    {t('Capítulo 01 - Posicionamento', 'Chapter 01 - Positioning')}
-                  </span>
-                </div>
-                <h2 className="display font-playfair font-black text-[var(--ink)] text-balance">
-                  {t('Posicionamento', 'Global')}{' '}
-                  <span className="italic font-light text-[var(--primary)]">
-                    {t('Global.', 'Positioning.')}
-                  </span>
-                </h2>
-              </div>
-              <div className="lg:col-span-5">
-                <p className="text-slate-500 leading-relaxed border-l-2 border-slate-200 pl-5">
-                  {t(
-                    'Reforçar a presença de Braga no mapa das decisões europeias - transformando potencial em influência direta.',
-                    'Strengthening Braga’s presence on the European decision-making map - turning potential into direct influence.'
-                  )}
-                </p>
-              </div>
-            </header>
-
-            {/* Grelha de projetos compactos */}
-            <div
-              data-reveal="stagger"
-              data-reveal-step="100"
-              className="grid grid-cols-1 md:grid-cols-2 gap-6"
-            >
-              {positioning.map((p) => (
-                <article
-                  key={p.id}
-                  onClick={() => open(p.id)}
-                  className="group cursor-pointer rounded-2xl overflow-hidden bg-white border border-slate-200 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[var(--shadow-lift)]"
-                >
-                  <div className="relative aspect-[16/9] overflow-hidden">
-                    <img
-                      src={p.image}
-                      alt={p.title}
-                      className="w-full h-full object-cover grayscale-[35%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[1.2s] ease-out"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 to-transparent" />
-                    <span className="absolute top-4 left-4 font-mono text-[10px] font-bold text-white/90 bg-black/30 backdrop-blur-md px-2.5 py-1 rounded-full">
-                      {p.n}
-                    </span>
-                    <span className="absolute top-4 right-4 font-mono text-[9px] font-bold uppercase tracking-widest text-white bg-black/30 backdrop-blur-md px-3 py-1 rounded-full">
-                      {p.location}
-                    </span>
-                    <div className="absolute bottom-4 left-4">
-                      <h3 className="font-playfair text-2xl md:text-3xl font-black text-white leading-none tracking-tight">
-                        {p.title}
-                        <span className="text-[var(--sky)]">.</span>
-                      </h3>
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <div className="flex items-start justify-between gap-4">
-                      <p className="text-[15px] text-slate-500 leading-relaxed flex-1">
-                        {p.description}
-                      </p>
-                      <span className="shrink-0 px-3 py-1 rounded-full bg-[var(--primary)]/10 border border-[var(--primary)]/20 font-mono text-[9px] font-bold uppercase tracking-wider text-[var(--primary)]">
-                        {p.status}
-                      </span>
-                    </div>
-                    <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between">
-                      <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-slate-400">
-                        {t('Abrir dossier', 'Open dossier')}
-                      </span>
-                      <span className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center group-hover:bg-[var(--primary)] group-hover:border-[var(--primary)] transition-all duration-500">
-                        <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-white group-hover:rotate-45 transition-all duration-500" />
-                      </span>
-                    </div>
-                  </div>
-                </article>
-              ))}
+        </div>
+        <div className="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div className="lg:col-span-7 lg:row-span-2">
+            <ProjectCard p={big} size="lg" />
+          </div>
+          {rest.map((p, i) => (
+            <div key={p.id} className="lg:col-span-5">
+              <ProjectCard p={p} delay={(i + 1) * 100} />
             </div>
+          ))}
+        </div>
+      </section>
 
-            {/* Representação internacional (feiras) */}
-            <div data-reveal className="mt-24">
-              <div className="flex items-end justify-between gap-6 mb-8">
-                <div>
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="h-px w-7 bg-[var(--primary)]" />
-                    <span className="eyebrow text-[var(--primary)]">
-                      {t('Representação Internacional', 'International Representation')}
-                    </span>
-                  </div>
-                  <h3 className="font-playfair text-3xl md:text-4xl font-black text-[var(--ink)] tracking-tight leading-none">
-                    {t('Braga no mapa global', 'Braga on the global map')}
-                  </h3>
+      {/* ===================== ARQUIVO VISUAL ===================== */}
+      <section className="mt-24 md:mt-32">
+        <div className="wrap flex flex-wrap items-end justify-between gap-6 mb-10">
+          <PageHead
+            kicker={t('Arquivo visual', 'Visual archive')}
+            title={t('Treze projetos, num relance', 'Thirteen projects at a glance')}
+            intro={t('Clique numa fotografia para abrir o projeto.', 'Click a photo to open the project.')}
+          />
+        </div>
+        <PhotoRiver />
+      </section>
+
+      {/* ===================== ÁREAS ===================== */}
+      <section className="wrap mt-24 md:mt-32">
+        <PageHead kicker={t('Áreas de atuação', 'Areas of work')} title={t('O trabalho em quatro áreas', 'The work in four areas')} />
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5">
+          {AREAS.map((a, i) => {
+            const Icon = ICONS[a.id];
+            const items = PROJECTS.filter((p) => p.theme === a.id);
+            return (
+              <Link
+                key={a.id}
+                href={`/projetos?area=${a.id}`}
+                data-reveal
+                style={{ ['--delay' as any]: `${i * 80}ms` }}
+                className="group relative rounded-2xl bg-card border border-line p-7 md:p-8 overflow-hidden hover:border-transparent hover:shadow-[0_24px_60px_-30px_rgba(14,90,107,0.5)] transition-[border-color,box-shadow] duration-500"
+              >
+                <span className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" style={{ background: AREA_COLOR[a.id] }} />
+                <div className="flex items-start justify-between gap-6">
+                  <span className="w-12 h-12 rounded-xl grid place-items-center text-white shrink-0" style={{ background: AREA_COLOR[a.id] }}>
+                    <Icon className="w-5 h-5" strokeWidth={1.75} />
+                  </span>
+                  {/* miniaturas dos projetos da área */}
+                  <span className="flex -space-x-3">
+                    {items.slice(0, 4).map((p) => (
+                      <span key={p.id} className="photo w-11 h-11 rounded-full border-2 border-card">
+                        <img src={p.image} alt="" loading="lazy" />
+                      </span>
+                    ))}
+                  </span>
                 </div>
-                <span className="hidden md:block font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--ink)]/40 pb-2">
-                  {t('Feiras & Missões', 'Fairs & Missions')}
+                <h3 className="mt-6 font-serif text-[1.65rem] leading-tight text-ink">{a.label[lang]}</h3>
+                <p className="mt-2 text-[15px] leading-relaxed text-muted max-w-md">{a.description[lang]}</p>
+                <p className="mt-5 text-[14px] text-muted">
+                  {items.map((p) => p.title[lang]).join(' · ')}
+                </p>
+                <span className="mt-6 inline-flex items-center gap-2 text-[14px] font-semibold text-petrol">
+                  {items.length} {t('projetos', 'projects')}
+                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </span>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-                {fairs.map((f) => (
-                  <article
-                    key={f.id}
-                    onClick={() => open(f.id)}
-                    className="group relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer border border-[var(--ink)]/10 bg-[var(--ink)] shadow-sm hover:shadow-[0_28px_55px_-30px_rgba(20,22,28,0.5)] hover:-translate-y-1 transition-all duration-500"
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ===================== GLOBO ===================== */}
+      <section className="relative mt-24 md:mt-32 bg-petrol text-cream overflow-hidden">
+        <div className="absolute inset-0 opacity-60">
+          <ContourField color="244,241,234" levels={10} cell={16} />
+        </div>
+        <div className="relative wrap py-20 md:py-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-5">
+            <p className="kicker !text-cream/70">{t('Percurso internacional', 'International track record')}</p>
+            <h2 className="mt-3 h-section text-cream">{t('Seis missões, três países, um ponto de partida', 'Six missions, three countries, one point of departure')}</h2>
+            <p className="mt-4 text-[17px] leading-relaxed text-cream/75">
+              {t('Escolha uma cidade para a encontrar no globo. Arraste o globo para o rodar.', 'Pick a city to find it on the globe. Drag the globe to rotate it.')}
+            </p>
+            <ul className="mt-8 divide-y divide-cream/15 border-y border-cream/15" onMouseLeave={() => setFocus(null)}>
+              {MISSION_POINTS.map((m) => (
+                <li key={m.id}>
+                  <button
+                    onMouseEnter={() => setFocus(m.id)}
+                    onFocus={() => setFocus(m.id)}
+                    onClick={() => router.push(`/projetos/${m.id}`)}
+                    className="group w-full py-3.5 flex items-center gap-4 text-left"
                   >
-                    <img
-                      src={f.image}
-                      alt={f.title}
-                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.4s] ease-out"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink)] via-[var(--ink)]/35 to-transparent" />
-                    <span className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/12 border border-white/20 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                      <ArrowUpRight className="w-4 h-4 text-white group-hover:rotate-45 transition-transform" />
+                    <span className={`w-2 h-2 rounded-full transition-colors ${focus === m.id ? 'bg-cream' : 'bg-cream/30'}`} />
+                    <span className="flex-1">
+                      <span className={`font-serif text-[1.3rem] transition-colors ${focus === m.id ? 'text-cream' : 'text-cream/85'}`}>{m.city[lang]}</span>
+                      <span className="text-cream/55 text-[14px]"> · {m.event}</span>
                     </span>
-                    <div className="absolute inset-x-0 bottom-0 p-5">
-                      <span className="font-mono text-[9px] font-bold uppercase tracking-[0.28em] text-[var(--sky)] mb-2 block">
-                        {f.tag}
-                      </span>
-                      <h4 className="font-playfair text-2xl font-bold text-white leading-tight">
-                        {f.title}
-                      </h4>
-                      <div className="flex items-center gap-2 mt-2 text-white/65">
-                        <MapPin className="w-3.5 h-3.5" />
-                        <span className="font-mono text-[10px] uppercase tracking-widest">
-                          {f.location}
-                        </span>
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ============================================================ */}
-        {/* CAPÍTULO 02 - ECOSSISTEMA DIGITAL                           */}
-        {/* ============================================================ */}
-        <section id="capitulo-02" data-nav-theme="dark" className="relative py-24 md:py-28 overflow-hidden bg-[var(--ink)]">
-          <div className="absolute inset-0 grid-dots text-[var(--sky)]/[0.06]" />
-          <div className="max-w-[1320px] mx-auto px-6 relative z-10">
-            <header data-reveal className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16 items-end">
-              <div className="lg:col-span-7">
-                <div className="flex items-center gap-3 mb-5">
-                  <span className="h-px w-7 bg-[var(--sky)]" />
-                  <span className="eyebrow text-[var(--sky)]">
-                    {t('Capítulo 02 - Digital', 'Chapter 02 - Digital')}
-                  </span>
-                </div>
-                <h2 className="display font-playfair font-black text-white text-balance">
-                  {t('Ecossistema', 'Digital')}{' '}
-                  <span className="italic font-light text-[var(--sky)]">
-                    {t('Digital.', 'Ecosystem.')}
-                  </span>
-                </h2>
-              </div>
-              <div className="lg:col-span-5 lg:pb-2">
-                <p className="text-white/65 text-[15px] md:text-base leading-relaxed border-l-2 border-[var(--sky)]/45 pl-5">
-                  {t(
-                    'Infraestrutura tecnológica e governação de dados para suportar a nova economia urbana.',
-                    'Technological infrastructure and data governance to support the new urban economy.'
-                  )}
-                </p>
-              </div>
-            </header>
-
-            <div
-              data-reveal="stagger"
-              data-reveal-step="120"
-              className="grid grid-cols-1 lg:grid-cols-2 gap-6"
-            >
-              {digital.map((p) => (
-                <article
-                  key={p.id}
-                  onClick={() => open(p.id)}
-                  className="group relative h-[420px] rounded-2xl overflow-hidden cursor-pointer border border-white/10 bg-[var(--ink-soft)] transition-all duration-500 hover:-translate-y-1.5 hover:border-[var(--sky)]/30"
-                >
-                  <img
-                    src={p.image}
-                    alt={p.title}
-                    className="absolute inset-0 w-full h-full object-cover opacity-[0.45] group-hover:opacity-[0.62] group-hover:scale-105 transition-all duration-[1.4s]"
-                  />
-                  {/* Scrim de leitura, mais leve para deixar respirar a imagem */}
-                  <div className="absolute inset-0 bg-[var(--ink-soft)]/45" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink-soft)] via-[var(--ink-soft)]/15 to-transparent" />
-                  <div className="relative h-full p-8 flex flex-col justify-between">
-                    <div className="flex justify-between items-start">
-                      <span className="inline-flex items-center gap-1.5 font-mono text-[9px] font-bold uppercase tracking-widest text-[var(--sky)] bg-white/[0.06] border border-white/[0.12] pl-2 pr-3 py-1 rounded-full backdrop-blur-md">
-                        <span className="w-1 h-1 rounded-full bg-[var(--sky)]" />
-                        {p.location}
-                      </span>
-                      <span className="w-10 h-10 rounded-full bg-white/5 border border-white/10 backdrop-blur-md flex items-center justify-center group-hover:bg-[var(--primary)] transition-all duration-500">
-                        <ArrowUpRight className="w-4 h-4 text-white group-hover:rotate-45 transition-transform" />
-                      </span>
-                    </div>
-                    <div>
-                      <h3 className="font-playfair text-4xl font-black text-white leading-none tracking-tight mb-4">
-                        {p.title}
-                        <span className="text-[var(--sky)]">.</span>
-                      </h3>
-                      <div className="flex items-end justify-between gap-4">
-                        <p className="text-white/70 text-[15px] leading-relaxed max-w-xs">
-                          {p.description}
-                        </p>
-                        <span className="shrink-0 font-playfair text-lg italic font-bold text-[var(--sky)] border-l border-white/15 pl-4">
-                          {p.status}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </article>
+                    <span className="text-[13px] text-cream/55 tabular-nums">{m.km.toLocaleString('pt-PT')} km</span>
+                  </button>
+                </li>
               ))}
+            </ul>
+            <div className="mt-8">
+              <Link href="/percurso" className="group inline-flex items-center gap-2 text-[15px] font-semibold text-cream">
+                {t('Ver o percurso completo', 'See the full track record')}
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </Link>
             </div>
           </div>
-        </section>
+          <div className="lg:col-span-7">
+            <Globe focus={focus} className="max-w-[620px] mx-auto" />
+          </div>
+        </div>
+      </section>
 
-        {/* ============================================================ */}
-        {/* CAPÍTULO 03 - HERANÇA & FUTURO                              */}
-        {/* ============================================================ */}
-        <section id="estratégia" className="relative py-24 md:py-32 overflow-hidden bg-[var(--paper-warm)]">
-          <div className="absolute inset-0 grid-dots text-slate-900/[0.05]" />
-          <div className="max-w-[1320px] mx-auto px-6 relative z-10">
-            <header data-reveal className="mb-20 max-w-2xl">
-              <div className="flex items-center gap-3 mb-5">
-                <span className="h-px w-7 bg-[var(--primary)]" />
-                <span className="eyebrow text-[var(--primary)]">
-                  {t('Capítulo 03 - Produto & Identidade', 'Chapter 03 - Product & Identity')}
-                </span>
-              </div>
-              <h2 className="display font-playfair font-black text-[var(--ink)] text-balance">
-                {t('Herança &', 'Heritage &')}{' '}
-                <span className="italic font-light text-[var(--primary)]">
-                  {t('Futuro.', 'Future.')}
-                </span>
+      {/* ===================== CRONOLOGIA ===================== */}
+      <section className="wrap mt-24 md:mt-32">
+        <div className="flex flex-wrap items-end justify-between gap-6 mb-10">
+          <PageHead
+            kicker={t('Cronologia', 'Timeline')}
+            title={t('2024 — 2026, projeto a projeto', '2024 — 2026, project by project')}
+            intro={t('Cada barra é um projeto; a cor indica a área. Clique para abrir.', 'Each bar is a project; colour shows the area. Click to open.')}
+          />
+        </div>
+        <div data-reveal>
+          <Gantt compact />
+        </div>
+      </section>
+
+      {/* ===================== CONTACTO ===================== */}
+      <section className="wrap mt-24 md:mt-32">
+        <div className="relative rounded-[28px] bg-ink text-cream overflow-hidden" data-reveal>
+          <div className="absolute inset-0 opacity-40 [mask-image:linear-gradient(90deg,transparent,#000_70%)]">
+            <ContourField color="79,154,148" levels={9} cell={16} />
+          </div>
+          <div className="relative px-8 py-14 md:px-14 md:py-20 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+            <div className="lg:col-span-8">
+              <p className="kicker !text-[#7fbfb8]">{t('Contacto', 'Contact')}</p>
+              <h2 className="mt-3 font-serif text-[clamp(2rem,1.4rem+2.2vw,3.4rem)] leading-[1.05]">
+                {t('Cooperação institucional, redes europeias ou um novo projeto?', 'Institutional cooperation, European networks or a new project?')}
               </h2>
-              <p className="text-slate-500 leading-relaxed mt-5">
-                {t(
-                  'Produtos editoriais e experiências que ligam o património milenar de Braga às novas gerações.',
-                  'Editorial products and experiences linking Braga’s millennial heritage to new generations.'
-                )}
-              </p>
-            </header>
-
-            <div className="space-y-24 md:space-y-32">
-              {heritage.map((p, idx) => (
-                <div
-                  key={p.id}
-                  data-reveal="fade"
-                  onClick={() => open(p.id)}
-                  className={`group flex flex-col ${
-                    idx % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'
-                  } items-center gap-10 lg:gap-16 cursor-pointer`}
-                >
-                  {/* Imagem */}
-                  <div className="lg:w-7/12 w-full relative">
-                    <div className="relative aspect-[16/10] overflow-hidden rounded-2xl shadow-xl">
-                      <img
-                        src={p.image}
-                        alt={p.title}
-                        className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[1.4s] ease-out"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-tr from-slate-900/30 to-transparent" />
-                      <span className="absolute top-5 left-5 font-mono text-[9px] font-bold text-white bg-black/30 backdrop-blur-md px-3 py-1 rounded-full uppercase tracking-widest">
-                        {p.year}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Texto */}
-                  <div className="lg:w-5/12 w-full space-y-6">
-                    <div className="flex items-center gap-3">
-                      <span className="font-mono text-[11px] font-bold text-[var(--primary)]">
-                        0{idx + 1} / 04
-                      </span>
-                      <span className="h-px flex-1 bg-slate-200" />
-                      <span className="eyebrow text-slate-400">{p.tag}</span>
-                    </div>
-                    <h3 className="h1 font-playfair font-bold text-[var(--ink)] text-balance">
-                      {p.title}
-                    </h3>
-                    <p className="text-slate-500 leading-relaxed">{p.desc}</p>
-                    <div className="flex items-center gap-3 pt-2">
-                      <span className="w-11 h-11 rounded-full border border-slate-200 flex items-center justify-center group-hover:border-[var(--primary)] group-hover:bg-[var(--primary)] transition-all duration-500">
-                        <Plus className="w-5 h-5 text-slate-400 group-hover:text-white group-hover:rotate-90 transition-all duration-500" />
-                      </span>
-                      <div className="flex flex-col">
-                        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-slate-400">
-                          {t('Explorar', 'Explore')}
-                        </span>
-                        <span className="text-[13px] font-bold text-slate-800">
-                          {t('Dossier completo', 'Full dossier')}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
             </div>
-
-            {/* Nota institucional de fecho */}
-            <div
-              data-reveal
-              className="mt-28 rounded-3xl bg-[var(--ink)] text-white p-10 md:p-14 relative overflow-hidden"
-            >
-              <div className="absolute right-0 top-0 opacity-10">
-                <Globe className="w-64 h-64 text-[var(--sky)] -mr-16 -mt-16" />
-              </div>
-              <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <div className="lg:col-span-8">
-                  <span className="eyebrow text-[var(--sky)]">
-                    {t('Estratégia Territorial', 'Territorial Strategy')}
-                  </span>
-                  <p className="font-playfair text-2xl md:text-3xl font-medium leading-snug mt-4 text-balance">
-                    {t(
-                      'Cada projeto é uma peça da mesma visão: consolidar Braga como referência europeia de turismo inteligente e território.',
-                      'Every project is a piece of the same vision: consolidating Braga as a European reference in smart tourism and territory.'
-                    )}
-                  </p>
-                </div>
-                <div className="lg:col-span-4 flex flex-wrap gap-2 lg:justify-end">
-                  {[t('Networking', 'Networking'), t('Inovação', 'Innovation'), t('Governação', 'Governance')].map(
-                    (tag) => (
-                      <span
-                        key={tag}
-                        className="font-mono px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-widest text-[var(--accent)]"
-                      >
-                        {tag}
-                      </span>
-                    )
-                  )}
-                </div>
-              </div>
+            <div className="lg:col-span-4 flex flex-wrap lg:justify-end gap-3">
+              <Link href="/contacto" className="group h-12 pl-6 pr-5 rounded-full bg-cream text-ink font-semibold text-[15px] inline-flex items-center gap-3 hover:bg-white transition-colors">
+                {t('Falar comigo', 'Get in touch')}
+                <span className="w-6 h-6 rounded-full bg-ink/10 grid place-items-center transition-transform group-hover:translate-x-0.5">
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </span>
+              </Link>
             </div>
           </div>
-        </section>
-
-        <ProjectIndex onOpenProject={open} />
-
-        <Contact />
-      </div>
-
-      <ChapterOverlay
-        isOpen={overlay.isOpen}
-        projectType={overlay.projectType}
-        onClose={closeOverlay}
-        onPrev={() => navProject(nb.prev.id)}
-        onNext={() => navProject(nb.next.id)}
-        prevTitle={lang === 'pt' ? nb.prev.pt : nb.prev.en}
-        nextTitle={lang === 'pt' ? nb.next.pt : nb.next.en}
-      />
-
-      <CommandPalette
-        open={paletteOpen}
-        onClose={() => setPaletteOpen(false)}
-        onOpenProject={open}
-        onGoSection={goToSection}
-      />
-    </main>
+        </div>
+      </section>
+    </>
   );
 }
