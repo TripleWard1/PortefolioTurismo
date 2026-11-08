@@ -1,11 +1,12 @@
 import type { Theme } from '../projects';
 
-/* As quatro áreas em tons de cinzento (do preto ao cinzento médio) */
-export const AREA_COLOR: Record<Theme, string> = {
-  europeu: '#1d1d1f',
-  internacional: '#48484a',
-  digital: '#6e6e73',
-  produto: '#8e8e93',
+/* Tons suaves por área: um fundo claro (tint) e um tom profundo e dessaturado (deep)
+   para pequenos pormenores de texto. Nunca cores fortes. */
+export const TONE: Record<Theme, { tint: string; deep: string; name: string }> = {
+  europeu: { tint: '#E6ECF1', deep: '#3E5A70', name: 'névoa' },
+  internacional: { tint: '#F2E6DF', deep: '#94604B', name: 'argila' },
+  digital: { tint: '#E5ECE3', deep: '#4D6A55', name: 'salva' },
+  produto: { tint: '#F1EBE0', deep: '#86683E', name: 'areia' },
 };
 
 /* "2024—26" → [2024, 2026]; "2025" → [2025, 2025] */

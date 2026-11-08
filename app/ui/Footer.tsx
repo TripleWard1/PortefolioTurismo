@@ -16,8 +16,8 @@ export default function Footer() {
           <p className="text-ink font-semibold">Hugo Barros</p>
           <p className="mt-2 text-mute max-w-sm leading-relaxed">
             {t(
-              'Técnico Superior de Inovação e Desenvolvimento Turístico, Município de Braga.',
-              'Senior Officer for Tourism Innovation and Development, Municipality of Braga.'
+              'Projetos de turismo: estratégia de destino, candidaturas europeias, promoção internacional e produto turístico.',
+              'Tourism projects: destination strategy, European bids, international promotion and tourism product.'
             )}
           </p>
         </div>

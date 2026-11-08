@@ -15,17 +15,19 @@ npm run dev
 | `/` | Apresentação, indicadores, 3 projetos em destaque, áreas de atuação, mapa das missões, contacto |
 | `/projetos` | Todos os projetos, com filtro por área (`?area=europeu`) e pesquisa |
 | `/projetos/<id>` | Estudo de caso: contexto, eixos, registo fotográfico, síntese e documentos |
-| `/percurso` | Mapa das missões internacionais e cronologia por ano |
+| `/percurso` | Missões internacionais e projetos por ano de início |
 | `/contacto` | Email, LinkedIn e entidade |
 
 Os links antigos `/#projeto/<id>` são redirecionados para `/projetos/<id>`.
 
 ## Identidade
 
-Monocromática: branco, cinzas neutros (`soft`, `line`, `mute`) e preto (`ink`), com uma única
-secção escura (`night`) para o percurso internacional. Uma família tipográfica: Inter.
+Base neutra (branco, `soft`, `line`, `mute`, `ink`) com um tom suave por área, definido em
+`app/ui/viz/palette.ts`: névoa (candidaturas europeias), argila (promoção internacional),
+salva (inovação digital) e areia (produto turístico). Cada tom tem uma versão clara para
+fundos de painéis e uma versão escura para rótulos.
+Tipografia: Inter para o texto e Instrument Serif em itálico para acentos (classe `.em`).
 Um só tipo de movimento: entrada suave ao aparecer e zoom ligeiro nas fotografias.
-O globo (Canvas 2D, `app/ui/fx/Globe.tsx`) é o único elemento de assinatura.
 
 ## Onde editar
 
@@ -34,4 +36,5 @@ O globo (Canvas 2D, `app/ui/fx/Globe.tsx`) é o único elemento de assinatura.
 | `app/ui/projects.ts` | Projetos, áreas e missões (título, ano, local, resumo, imagem, coordenadas) |
 | `app/ui/dossiers.tsx` | Texto completo de cada projeto, em PT e EN |
 | `app/page.tsx` | Página inicial (incluindo os projetos em destaque) |
+| `app/ui/viz/palette.ts` | Tons de cada área |
 | `app/globals.css` · `tailwind.config.ts` | Cores, escala tipográfica e movimento |

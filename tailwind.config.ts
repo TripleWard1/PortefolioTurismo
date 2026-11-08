@@ -6,6 +6,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-serif)', 'Georgia', 'serif'],
       },
       // Paleta monocromática
       colors: {
@@ -14,6 +15,11 @@ const config: Config = {
         soft: '#f5f5f7', // superfícies
         line: '#e8e8ed', // divisórias
         night: '#0b0b0c', // secção escura
+        // Tons suaves (por área)
+        mist: '#E6ECF1',
+        clay: '#F2E6DF',
+        sage: '#E5ECE3',
+        sand: '#F1EBE0',
       },
       borderRadius: { '4xl': '2rem' },
     },

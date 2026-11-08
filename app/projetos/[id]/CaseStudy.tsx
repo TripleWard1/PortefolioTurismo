@@ -7,6 +7,7 @@ import { useLang } from '../../ui/LanguageContext';
 import { getDossiers } from '../../ui/dossiers';
 import { THEME_LABEL, byId, neighbours } from '../../ui/projects';
 import { useScrollLock } from '../../ui/hooks';
+import { TONE } from '../../ui/viz/palette';
 
 export default function CaseStudy({ id }: { id: string }) {
   const { lang } = useLang();
@@ -54,18 +55,19 @@ export default function CaseStudy({ id }: { id: string }) {
         {t('Projetos', 'Work')}
       </Link>
 
-      {/* Título */}
-      <header className="mt-10" data-reveal>
-        <p className="t-label text-mute">
-          {THEME_LABEL[meta.theme][lang]} · {meta.year}
-        </p>
-        <h1 className="mt-4 t-hero !text-[clamp(2.5rem,1.4rem+4vw,4.75rem)] text-ink max-w-[20ch] text-balance">{data.headerTitle}</h1>
-        <p className="mt-6 t-lead text-mute max-w-2xl text-pretty">{meta.summary[lang]}</p>
-      </header>
-
-      {/* Capa */}
-      <div className="mt-14 media rounded-4xl aspect-[4/3] md:aspect-[16/8]" data-reveal style={{ ['--delay' as any]: '100ms' }}>
-        <img src={data.watermark || meta.image} alt="" />
+      {/* Título e capa, sobre o tom da área */}
+      <div className="mt-8 rounded-4xl p-3 md:p-4" style={{ background: TONE[meta.theme].tint }}>
+        <header className="px-4 pt-8 pb-10 md:px-8 md:pt-12 md:pb-14" data-reveal>
+          <p className="t-label inline-flex items-center gap-2" style={{ color: TONE[meta.theme].deep }}>
+            <span className="w-1.5 h-1.5 rounded-full" style={{ background: TONE[meta.theme].deep }} />
+            {THEME_LABEL[meta.theme][lang]} · {meta.year}
+          </p>
+          <h1 className="mt-4 t-hero !text-[clamp(2.5rem,1.4rem+4vw,4.75rem)] text-ink max-w-[20ch] text-balance">{data.headerTitle}</h1>
+          <p className="mt-6 t-lead text-ink/70 max-w-2xl text-pretty">{meta.summary[lang]}</p>
+        </header>
+        <div className={`media rounded-3xl aspect-[4/3] md:aspect-[16/8] ${meta.logo ? 'bg-white' : ''}`} data-reveal style={{ ['--delay' as any]: '100ms' }}>
+          <img src={data.watermark || meta.image} alt="" className={meta.logo ? '!object-contain p-[12%]' : ''} />
+        </div>
       </div>
 
       {/* Ficha */}

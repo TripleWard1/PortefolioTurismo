@@ -1,68 +1,84 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
 import { useLang } from '../ui/LanguageContext';
 import { SectionHead } from '../ui/parts';
-import { MISSION_POINTS } from '../ui/projects';
-import Globe from '../ui/fx/Globe';
-import Gantt from '../ui/viz/Gantt';
+import { MISSION_POINTS, PROJECTS, byId } from '../ui/projects';
+import { TONE, yearSpan } from '../ui/viz/palette';
 
 export default function TrackRecord() {
   const { t, lang } = useLang();
-  const [focus, setFocus] = useState<string | null>(null);
+
+  // Cronologia: projetos agrupados pelo ano em que começaram
+  const years = Array.from(new Set(PROJECTS.map((p) => yearSpan(p.year)[0]))).sort();
+  const byYear = years.map((y) => ({ y, items: PROJECTS.filter((p) => yearSpan(p.year)[0] === y) }));
 
   return (
     <div className="wrap pt-16 md:pt-24">
       <header data-reveal>
         <p className="t-label text-mute">{t('Percurso', 'Track record')}</p>
-        <h1 className="mt-4 t-hero text-ink max-w-[14ch]">{t('Onde Braga foi representada.', 'Where Braga was represented.')}</h1>
+        <h1 className="mt-4 t-hero text-ink max-w-[15ch]">
+          {t('Representação', 'International')} <span className="em">{t('internacional', 'representation')}</span>.
+        </h1>
         <p className="mt-6 t-lead text-mute max-w-2xl text-pretty">
           {t(
-            'Seis missões internacionais e a cronologia dos projetos entre 2024 e 2026.',
-            'Six international missions and the timeline of projects between 2024 and 2026.'
+            'Feiras, cimeiras e júris internacionais, e a cronologia dos projetos desde 2024.',
+            'Fairs, summits and international juries, and the timeline of projects since 2024.'
           )}
         </p>
       </header>
 
-      <section className="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        <div className="lg:col-span-7 rounded-4xl bg-soft p-6 md:p-10" data-reveal>
-          <Globe focus={focus} className="max-w-[560px] mx-auto" ink="29,29,31" accent="29,29,31" />
-        </div>
-        <ol className="lg:col-span-5 border-t border-line" onMouseLeave={() => setFocus(null)} data-reveal>
-          {MISSION_POINTS.map((m) => (
-            <li key={m.id} className="border-b border-line">
-              <Link
-                href={`/projetos/${m.id}`}
-                onMouseEnter={() => setFocus(m.id)}
-                onFocus={() => setFocus(m.id)}
-                className="py-5 flex items-start justify-between gap-6"
-              >
-                <span className={`transition-opacity ${focus && focus !== m.id ? 'opacity-40' : ''}`}>
-                  <span className="block text-[1.25rem] font-semibold tracking-[-0.025em] text-ink">
-                    {m.city[lang]}, {m.country[lang]}
-                  </span>
-                  <span className="block mt-1 t-label text-mute">{m.event}</span>
-                </span>
-                <span className="t-label text-mute text-right tabular-nums shrink-0">
-                  {m.year}
-                  <br />
-                  {m.km.toLocaleString('pt-PT')} km
-                </span>
+      <ol className="mt-16 space-y-4">
+        {MISSION_POINTS.map((m, i) => {
+          const p = byId(m.id)!;
+          const tone = TONE[p.theme];
+          return (
+            <li key={m.id} data-reveal style={{ ['--delay' as any]: `${(i % 2) * 60}ms` }}>
+              <Link href={`/projetos/${m.id}`} className="group grid grid-cols-12 gap-4 md:gap-8 items-center rounded-4xl p-3 md:p-4" style={{ background: tone.tint }}>
+                <div className="col-span-4 md:col-span-3">
+                  <div className="media rounded-2xl aspect-[4/3]">
+                    <img src={p.image} alt="" loading="lazy" />
+                  </div>
+                </div>
+                <div className="col-span-8 md:col-span-6">
+                  <p className="em text-[clamp(1.75rem,1.2rem+2vw,3rem)] leading-none text-ink">{m.city[lang]}</p>
+                  <p className="mt-2 text-[15px] text-ink/70">
+                    {m.event} · {m.country[lang]}
+                  </p>
+                </div>
+                <div className="hidden md:block md:col-span-3 text-right pr-4">
+                  <p className="t-label" style={{ color: tone.deep }}>
+                    {m.year}
+                  </p>
+                  <p className="mt-1 t-label text-ink/50 tabular-nums">
+                    {m.km.toLocaleString('pt-PT')} km {t('de Braga', 'from Braga')}
+                  </p>
+                </div>
               </Link>
             </li>
-          ))}
-        </ol>
-      </section>
+          );
+        })}
+      </ol>
 
-      <section className="mt-28 md:mt-36">
-        <SectionHead
-          label={t('Cronologia', 'Timeline')}
-          title={t('2024 — 2026, projeto a projeto.', '2024 — 2026, project by project.')}
-          intro={t('Cada barra é um projeto, do ano em que começou ao ano em que terminou.', 'Each bar is a project, from the year it began to the year it ended.')}
-        />
-        <div className="mt-12" data-reveal>
-          <Gantt />
+      <section className="mt-28 md:mt-40">
+        <SectionHead label={t('Cronologia', 'Timeline')} title={t('Projetos por ano de início', 'Projects by start year')} />
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+          {byYear.map(({ y, items }) => (
+            <div key={y} data-reveal>
+              <p className="em text-[3.5rem] leading-none text-ink">{y}</p>
+              <ul className="mt-6 border-t border-line">
+                {items.map((p) => (
+                  <li key={p.id} className="border-b border-line">
+                    <Link href={`/projetos/${p.id}`} className="py-3.5 flex items-center gap-3 group">
+                      <span className="w-2 h-2 rounded-full shrink-0" style={{ background: TONE[p.theme].deep }} />
+                      <span className="text-[15px] text-ink group-hover:underline underline-offset-4">{p.title[lang]}</span>
+                      <span className="ml-auto t-label text-mute tabular-nums">{p.year}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </section>
     </div>

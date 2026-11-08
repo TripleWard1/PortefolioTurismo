@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Instrument_Serif } from 'next/font/google';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import './globals.css';
 import { LanguageProvider } from './ui/LanguageContext';
@@ -9,15 +9,17 @@ import Reveal from './ui/Reveal';
 import CommandK from './ui/CommandK';
 
 const sans = Inter({ subsets: ['latin'], variable: '--font-sans', display: 'swap' });
+// Serifada em itálico, só para palavras de destaque nos títulos
+const serif = Instrument_Serif({ subsets: ['latin'], variable: '--font-serif', display: 'swap', weight: '400', style: ['normal', 'italic'], adjustFontFallback: false });
 
 export const metadata: Metadata = {
-  title: { default: 'Hugo Barros — Portefólio', template: '%s · Hugo Barros' },
+  title: { default: 'Hugo Barros — Projetos de turismo', template: '%s · Hugo Barros' },
   description:
-    'Portefólio de Hugo Barros, Técnico Superior de Inovação e Desenvolvimento Turístico no Município de Braga: candidaturas europeias, promoção internacional, inovação digital e produto turístico.',
+    'Hugo Barros desenha e desenvolve projetos de turismo: estratégia de destino, candidaturas europeias, promoção internacional, inovação digital e produto turístico.',
   icons: { icon: 'https://i.imgur.com/Dx42oze.png' },
   openGraph: {
-    title: 'Hugo Barros — Portefólio',
-    description: 'Estratégia de destino, candidaturas europeias e produto turístico para Braga.',
+    title: 'Hugo Barros — Projetos de turismo',
+    description: 'Estratégia de destino, candidaturas europeias, promoção internacional e produto turístico.',
     images: ['https://i.imgur.com/SvJ4bdR.jpeg'],
     type: 'website',
     locale: 'pt_PT',
@@ -29,7 +31,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt">
-      <body className={`${sans.variable} font-sans antialiased`}>
+      <body className={`${sans.variable} ${serif.variable} font-sans antialiased`}>
         <LanguageProvider>
           <Header />
           <main>{children}</main>

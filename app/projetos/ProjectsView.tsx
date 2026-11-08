@@ -41,13 +41,15 @@ export default function ProjectsView() {
     <div className="wrap pt-16 md:pt-24">
       <header data-reveal>
         <p className="t-label text-mute">{t('Projetos', 'Work')}</p>
-        <h1 className="mt-4 t-hero text-ink">{area ? area.label[lang] : t('Todos os projetos', 'All projects')}</h1>
+        <h1 className="mt-4 t-hero text-ink">
+          {area ? area.label[lang] : <>{t('Todos os', 'All')} <span className="em">{t('projetos', 'projects')}</span>.</>}
+        </h1>
         <p className="mt-6 t-lead text-mute max-w-2xl text-pretty">
           {area
             ? area.description[lang]
             : t(
-                'Treze projetos do Município de Braga, entre candidaturas europeias, promoção internacional, inovação digital e produto turístico.',
-                'Thirteen projects for the Municipality of Braga, across European bids, international promotion, digital innovation and tourism product.'
+                'Treze projetos de turismo, entre candidaturas europeias, promoção internacional, inovação digital e produto turístico.',
+                'Thirteen tourism projects, across European bids, international promotion, digital innovation and tourism product.'
               )}
         </p>
       </header>

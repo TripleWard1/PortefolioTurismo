@@ -28,7 +28,9 @@ export default function ContactView() {
     <div className="wrap pt-16 md:pt-24">
       <header data-reveal>
         <p className="t-label text-mute">{t('Contacto', 'Contact')}</p>
-        <h1 className="mt-4 t-hero text-ink">{t('Vamos conversar.', 'Let’s talk.')}</h1>
+        <h1 className="mt-4 t-hero text-ink">
+          {t('Vamos', 'Let’s')} <span className="em">{t('conversar', 'talk')}</span>.
+        </h1>
         <p className="mt-6 t-lead text-mute max-w-2xl text-pretty">
           {t(
             'Para cooperação institucional, redes europeias, candidaturas ou projetos de desenvolvimento turístico, o email é a via mais rápida.',
