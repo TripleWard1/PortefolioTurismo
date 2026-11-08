@@ -7,6 +7,7 @@ import Header from './ui/Header';
 import Footer from './ui/Footer';
 import Reveal from './ui/Reveal';
 import Parallax from './ui/Parallax';
+import Intro from './ui/Intro';
 import CommandK from './ui/CommandK';
 
 const sans = Inter({ subsets: ['latin'], variable: '--font-sans', display: 'swap' });
@@ -31,7 +32,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt">
+    <html lang="pt" suppressHydrationWarning>
+      <head>
+        {/* Decide antes do primeiro desenho se o ecrã de entrada aparece (uma vez por sessão) */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{var d=document.documentElement;if(sessionStorage.getItem('hb-intro')||matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('intro-seen')}else{d.classList.add('intro-on')}}catch(e){document.documentElement.classList.add('intro-seen')}",
+          }}
+        />
+      </head>
       <body className={`${sans.variable} ${serif.variable} font-sans antialiased`}>
         <LanguageProvider>
           <Header />
@@ -39,6 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <Reveal />
           <Parallax />
+          <Intro />
           <CommandK />
         </LanguageProvider>
         <GoogleAnalytics gaId="G-C9ZYJ5XB1E" />

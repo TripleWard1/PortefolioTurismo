@@ -56,3 +56,36 @@ export function ProjectCard({ p, ratio = 'aspect-[4/3]', delay = 0 }: { p: Proje
     </Link>
   );
 }
+
+/* Título com entrada palavra a palavra. Partes em itálico serifado com { em }. */
+type Part = string | { em: string; color?: string };
+export function Split({ parts, auto = false, delay = 0 }: { parts: Part[]; auto?: boolean; delay?: number }) {
+  let i = 0;
+  const words = (text: string, em?: boolean, color?: string) =>
+    text
+      .split(' ')
+      .filter(Boolean)
+      .map((w) => {
+        const k = i++;
+        return (
+          <span key={k} className={`sw ${em ? 'em' : ''}`} style={color ? { color } : undefined}>
+            <span style={{ ['--i' as any]: k }}>{w}</span>
+          </span>
+        );
+      });
+  const out: ReactNode[] = [];
+  parts.forEach((p, n) => {
+    const ws = typeof p === 'string' ? words(p) : words(p.em, true, p.color);
+    ws.forEach((w, j) => {
+      // espaço entre palavras, exceto antes de pontuação colada
+      const nextIsPunct = typeof parts[n + 1] === 'string' && /^[.,;:]/.test(parts[n + 1] as string) && j === ws.length - 1;
+      out.push(w);
+      if (!nextIsPunct) out.push(' ');
+    });
+  });
+  return (
+    <span className={auto ? 'sw-anim' : undefined} style={auto ? { ['--d' as any]: `${delay}ms` } : undefined}>
+      {out}
+    </span>
+  );
+}

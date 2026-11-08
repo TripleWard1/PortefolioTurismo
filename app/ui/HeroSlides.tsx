@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { useLang } from './LanguageContext';
 import type { L } from './projects';
+import { Split } from './parts';
 
 /* Abertura em ecrã inteiro: fotografias de terreno em transição lenta,
    com um véu neutro apenas para garantir a leitura do texto. */
@@ -57,6 +58,7 @@ export default function HeroSlides() {
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,19,18,0.55)_0%,rgba(20,19,18,0.1)_28%,rgba(20,19,18,0.25)_55%,rgba(20,19,18,0.88)_100%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(20,19,18,0.55)_0%,rgba(20,19,18,0.2)_45%,transparent_70%)]" />
         <div className="absolute inset-0 md:hidden bg-[rgba(20,19,18,0.3)]" />
+        <div className="grain absolute inset-0" />
       </div>
 
       {/* Conteúdo */}
@@ -65,12 +67,11 @@ export default function HeroSlides() {
           <span className="w-1.5 h-1.5 rounded-full bg-[#C9B08A]" />
           {t('Hugo Barros · Portefólio profissional', 'Hugo Barros · Professional portfolio')}
         </p>
-        <h1 className="mt-6 t-hero !text-[clamp(2.75rem,1.2rem+5vw,5.75rem)] text-white max-w-[17ch] text-balance hero-in" style={{ ['--d' as any]: '220ms' }}>
-          {t('Estratégia, financiamento e promoção de', 'Strategy, funding and promotion for')}{' '}
-          <span className="em text-[#E9DCC4]">{t('destinos turísticos', 'tourism destinations')}</span>.
+        <h1 className="mt-6 t-hero !text-[clamp(2.75rem,1.2rem+5vw,5.75rem)] text-white max-w-[17ch]">
+          <Split auto delay={200} parts={[t('Estratégia, financiamento e promoção de', 'Strategy, funding and promotion for'), { em: t('destinos turísticos', 'tourism destinations'), color: '#E9DCC4' }, '.']} />
         </h1>
 
-        <div className="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end hero-in" style={{ ['--d' as any]: '380ms' }}>
+        <div className="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end hero-in" style={{ ['--d' as any]: '700ms' }}>
           <div className="lg:col-span-7">
             <p className="t-lead text-white/75 max-w-2xl text-pretty">
               {t(

@@ -29,10 +29,19 @@ musgo (inovação digital) e bronze (produto turístico). Cada tom tem quatro va
 (acentos sobre fundo escuro). `NIGHT` e `BRASS` servem a secção de distinções.
 Tipografia: Inter para o texto e Instrument Serif em itálico para acentos (classe `.em`).
 
-Movimento: abertura com fotografias em transição lenta (`HeroSlides`), parallax discreto
-(`[data-parallax]`, sem alterar o scroll), entradas suaves (`[data-reveal]`) e transições de cor
-entre áreas. Tudo respeita `prefers-reduced-motion`. O cabeçalho fica transparente sobre as
-aberturas escuras marcadas com `[data-hero]`.
+Movimento:
+- Ecrã de entrada (`Intro.tsx`), uma vez por sessão: fotografias reveladas em sequência, contador
+  e nome; a última fotografia abre até coincidir com a abertura. Pode ser saltado.
+- Abertura com fotografias em transição lenta (`HeroSlides`) e títulos que entram palavra a palavra (`Split`).
+- Projetos em destaque numa calha com profundidade (`ProjectRail`, adaptado de Focus Rail).
+- Distinções em lista que abre a fotografia ao passar o rato (adaptado de Cinematic List).
+- Redes e parceiros em faixa contínua; missões em faixa horizontal e, no percurso, numa linha de
+  metro que se preenche com o scroll (`MetroLine`).
+- Rodapé com o nome em grande revelado letra a letra (adaptado de Wordmark Reveal Footer).
+- Parallax discreto (`[data-parallax]`) e grão de filme nas secções escuras.
+
+Nenhum efeito altera o scroll da página. Tudo respeita `prefers-reduced-motion`.
+O cabeçalho fica transparente sobre as aberturas escuras marcadas com `[data-hero]`.
 
 ## Onde editar
 

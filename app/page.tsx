@@ -5,17 +5,23 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowUpRight } from 'lucide-react';
 import { useLang } from './ui/LanguageContext';
-import { SectionHead, TextLink } from './ui/parts';
+import { SectionHead, Split, TextLink } from './ui/parts';
 import HeroSlides from './ui/HeroSlides';
+import ProjectRail from './ui/ProjectRail';
 import Competences from './ui/Competences';
 import MissionStrip from './ui/MissionStrip';
-import { PROJECTS, THEME_LABEL, byId } from './ui/projects';
+import { byId } from './ui/projects';
 import { ENTITY, METHOD, NETWORKS, RECOGNITION, ROLE } from './ui/profile';
-import { BRASS, NIGHT, TONE } from './ui/viz/palette';
+import { TONE } from './ui/viz/palette';
 import { EMAIL, LINKEDIN } from './ui/Footer';
 
 const PORTRAIT = 'https://i.imgur.com/Dx42oze.jpeg';
-const FEATURED = ['smart-tourism', 'braga-after-dark', 'visit-braga', 'cidade-bracvs'];
+/* Fotografia de cada distinção */
+const AWARD_IMG: Record<string, string> = {
+  'smart-tourism': 'https://i.imgur.com/GBs8DY7.jpeg',
+};
+/* Fotografia de cada fase da metodologia */
+const METHOD_IMG = ['https://i.imgur.com/EgopK0E.png', 'https://i.imgur.com/to9jbOB.jpeg', 'https://i.imgur.com/HecgfPz.jpeg', 'https://i.imgur.com/rKEHbnY.jpeg'];
 
 export default function Home() {
   const { t, lang } = useLang();
@@ -37,46 +43,41 @@ export default function Home() {
       {/* ───────────── Perfil ───────────── */}
       <section id="perfil" className="wrap py-24 md:py-36">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          <figure className="lg:col-span-5" data-reveal>
-            <div className="relative rounded-4xl bg-sand p-3">
-              <div className="media rounded-3xl aspect-[4/5]">
-                <div className="px" data-parallax="0.06">
-                  <img src={PORTRAIT} alt="Hugo Barros" className="object-[60%_20%]" />
-                </div>
+          <figure className="lg:col-span-5 relative" data-reveal>
+            <div className="media rounded-4xl aspect-[4/5]">
+              <div className="px" data-parallax="0.06">
+                <img src={PORTRAIT} alt="Hugo Barros" className="object-[60%_20%]" />
               </div>
             </div>
-            <figcaption className="mt-4 flex items-baseline justify-between gap-4 t-label">
-              <span className="text-ink">Hugo Barros</span>
-              <span className="text-mute text-right">{t('Município de Braga', 'Municipality of Braga')}</span>
+            <figcaption className="absolute left-4 right-4 bottom-4 rounded-2xl bg-white/85 backdrop-blur-md px-5 py-4 flex items-center justify-between gap-4">
+              <span>
+                <span className="block text-[15px] font-semibold tracking-[-0.015em] text-ink">Hugo Barros</span>
+                <span className="block t-label text-mute">{ROLE[lang]}</span>
+              </span>
+              <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ background: TONE.digital.deep }} />
             </figcaption>
           </figure>
 
           <div className="lg:col-span-7" data-reveal style={{ ['--delay' as any]: '100ms' }}>
             <p className="t-label text-mute">{t('Perfil', 'Profile')}</p>
-            <p className="mt-5 text-[clamp(1.75rem,1.1rem+2.2vw,3rem)] leading-[1.12] font-medium tracking-[-0.035em] text-ink text-balance">
-              {t('Projetos que ligam', 'Projects that connect')} <span className="em" style={{ color: TONE.europeu.deep }}>{t('política pública', 'public policy')}</span>,{' '}
-              <span className="em" style={{ color: TONE.internacional.deep }}>{t('financiamento europeu', 'European funding')}</span> {t('e', 'and')}{' '}
-              <span className="em" style={{ color: TONE.digital.deep }}>{t('mercado turístico', 'the tourism market')}</span>.
+            <p className="mt-5 text-[clamp(1.875rem,1.1rem+2.6vw,3.5rem)] leading-[1.08] font-medium tracking-[-0.04em] text-ink">
+              <Split
+                parts={[
+                  t('Projetos que ligam', 'Projects that connect'),
+                  { em: t('política pública', 'public policy'), color: TONE.europeu.deep },
+                  ',',
+                  { em: t('financiamento europeu', 'European funding'), color: TONE.internacional.deep },
+                  t('e', 'and'),
+                  { em: t('mercado turístico', 'the tourism market'), color: TONE.digital.deep },
+                  '.',
+                ]}
+              />
             </p>
-            <div className="mt-8 space-y-5 text-[1.0625rem] leading-[1.75] text-mute max-w-2xl">
-              <p className="text-pretty">
-                {t(
-                  'O trabalho desenvolve-se em quatro frentes complementares: candidaturas e redes europeias, promoção internacional do destino, inovação digital e produto turístico. Cada projeto parte de uma leitura rigorosa do território e dos mercados.',
-                  'The work spans four complementary fronts: European bids and networks, international destination promotion, digital innovation and tourism product. Each project starts from a rigorous reading of the territory and its markets.'
-                )}
-              </p>
-              <p className="text-pretty">
-                {t(
-                  'A experiência inclui a defesa de candidaturas perante a Comissão Europeia, a representação institucional em feiras profissionais e a coordenação de produto com mais de trinta parceiros locais.',
-                  'Experience includes defending bids before the European Commission, institutional representation at trade fairs and product coordination with more than thirty local partners.'
-                )}
-              </p>
-            </div>
-            <dl className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-5">
+            <dl className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-5">
               {[
-                { k: t('Função atual', 'Current role'), v: ROLE[lang] },
                 { k: t('Entidade', 'Organisation'), v: ENTITY[lang] },
                 { k: t('Âmbito', 'Scope'), v: t('Portugal, Espanha, Bélgica e EUA', 'Portugal, Spain, Belgium and USA') },
+                { k: t('Parceiros', 'Partners'), v: t('Comissão Europeia, URBACT, redes de inovação e operadores locais', 'European Commission, URBACT, innovation networks and local operators') },
               ].map((f) => (
                 <div key={f.k} className="border-t border-ink pt-4">
                   <dt className="t-label text-mute">{f.k}</dt>
@@ -84,106 +85,42 @@ export default function Home() {
                 </div>
               ))}
             </dl>
+            <div className="mt-10">
+              <TextLink href="/percurso">{t('Consultar o percurso completo', 'See the full track record')}</TextLink>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ───────────── Competências (secção imersiva) ───────────── */}
-      <Competences />
-
-      {/* ───────────── Projetos em destaque ───────────── */}
-      <section className="wrap py-24 md:py-36">
-        <SectionHead
-          label={t('Projetos em destaque', 'Selected work')}
-          title={
-            <>
-              {t('Do dossiê europeu', 'From the European dossier')} <span className="em">{t('ao produto local', 'to the local product')}</span>.
-            </>
-          }
-          action={<TextLink href="/projetos">{t(`Consultar os ${PROJECTS.length} projetos`, `Browse all ${PROJECTS.length} projects`)}</TextLink>}
-        />
-        <div className="mt-14 space-y-5">
-          {FEATURED.map((id, i) => {
-            const p = byId(id)!;
-            const tone = TONE[p.theme];
-            const flip = i % 2 === 1;
-            return (
-              <Link
-                key={p.id}
-                href={`/projetos/${p.id}`}
-                data-reveal
-                className="group grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10 items-center rounded-4xl p-4 md:p-6 transition-shadow duration-500 hover:shadow-[0_30px_60px_-30px_rgba(0,0,0,0.25)]"
-                style={{ background: tone.tint }}
-              >
-                <div className={`md:col-span-7 ${flip ? 'md:order-2' : ''}`}>
-                  <div className={`media rounded-3xl aspect-[16/10] ${p.logo ? '!bg-white' : ''}`}>
-                    {p.logo ? (
-                      <img src={p.image} alt="" loading="lazy" className="!object-contain p-[14%]" />
-                    ) : (
-                      <div className="px" data-parallax="0.05">
-                        <img src={p.image} alt="" loading="lazy" />
-                      </div>
-                    )}
-                  </div>
-                </div>
-                <div className={`md:col-span-5 px-2 pb-2 md:px-4 ${flip ? 'md:order-1' : ''}`}>
-                  <p className="t-label" style={{ color: tone.deep }}>
-                    {THEME_LABEL[p.theme][lang]} · {p.year}
-                  </p>
-                  <h3 className="mt-3 text-[clamp(1.75rem,1.3rem+1.6vw,2.6rem)] leading-[1.05] font-semibold tracking-[-0.035em] text-ink text-balance">{p.title[lang]}</h3>
-                  <p className="mt-4 text-[1.0625rem] leading-relaxed text-ink/70 text-pretty">{p.summary[lang]}</p>
-                  <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-ink/10 pt-4">
-                    <div>
-                      <dt className="t-label text-ink/50">{t('Função', 'Role')}</dt>
-                      <dd className="mt-1 text-[14px] leading-snug text-ink">{p.role[lang]}</dd>
-                    </div>
-                    <div>
-                      <dt className="t-label text-ink/50">{t('Resultado', 'Outcome')}</dt>
-                      <dd className="mt-1 text-[14px] leading-snug text-ink">{p.outcome[lang]}</dd>
-                    </div>
-                  </dl>
-                  <span className="mt-6 inline-flex items-center gap-2 t-label text-ink">
-                    <span className="w-9 h-9 rounded-full bg-white grid place-items-center transition-transform duration-500 group-hover:rotate-45">
-                      <ArrowUpRight className="w-4 h-4" />
-                    </span>
-                    {t('Consultar projeto', 'View project')}
-                  </span>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-      </section>
+      {/* ───────────── Projetos em destaque (calha) ───────────── */}
+      <ProjectRail />
 
       {/* ───────────── Metodologia ───────────── */}
       <section className="bg-sand py-24 md:py-32">
         <div className="wrap">
           <SectionHead
             label={t('Metodologia', 'Approach')}
-            title={
-              <>
-                {t('Do diagnóstico', 'From assessment')} <span className="em" style={{ color: TONE.produto.deep }}>{t('à implementação', 'to delivery')}</span>.
-              </>
-            }
-            intro={t(
-              'Um processo em quatro fases, aplicado de forma consistente em projetos de escala local e europeia.',
-              'A four-stage process, applied consistently to projects at local and European scale.'
-            )}
+            title={<Split parts={[t('Do diagnóstico', 'From assessment'), { em: t('à implementação', 'to delivery'), color: TONE.produto.deep }, '.']} />}
           />
           <ol className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {METHOD.map((m, i) => {
               const ex = byId(m.example)!;
-              const tone = TONE[ex.theme];
               return (
-                <li key={m.example} className="rounded-4xl bg-white/70 p-7 flex flex-col" data-reveal style={{ ['--delay' as any]: `${i * 80}ms` }}>
-                  <p className="em text-[3.25rem] leading-none" style={{ color: tone.deep }}>
-                    {String(i + 1).padStart(2, '0')}
-                  </p>
-                  <h3 className="mt-8 text-[1.25rem] font-semibold tracking-[-0.025em] text-ink">{m.title[lang]}</h3>
-                  <p className="mt-3 text-[15px] leading-relaxed text-mute text-pretty">{m.text[lang]}</p>
-                  <Link href={`/projetos/${ex.id}`} className="group mt-auto pt-6 inline-flex items-center gap-1.5 t-label text-ink">
-                    <span className="text-mute">{t('Exemplo', 'Example')}:</span>
-                    <span className="underline decoration-1 underline-offset-4 decoration-ink/25 group-hover:decoration-ink">{ex.title[lang]}</span>
+                <li key={m.example} data-reveal style={{ ['--delay' as any]: `${i * 90}ms` }}>
+                  <Link href={`/projetos/${ex.id}`} className="group relative block rounded-4xl overflow-hidden aspect-[3/4] text-white" style={{ background: TONE[ex.theme].dark }}>
+                    <img src={METHOD_IMG[i]} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover opacity-80 transition-transform duration-[1400ms] ease-out group-hover:scale-[1.05]" />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.35)_0%,transparent_30%,rgba(0,0,0,0.25)_55%,rgba(0,0,0,0.85)_100%)]" />
+                    <span className="absolute top-5 left-6 em text-[3.5rem] leading-none text-white/90">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="absolute left-6 right-6 bottom-6">
+                      <span className="block text-[1.375rem] font-semibold tracking-[-0.025em]">{m.title[lang]}</span>
+                      <span className="mt-2 block text-[14px] leading-relaxed text-white/75 max-h-0 opacity-0 overflow-hidden transition-all duration-700 group-hover:max-h-32 group-hover:opacity-100 max-lg:max-h-32 max-lg:opacity-100">
+                        {m.text[lang]}
+                      </span>
+                      <span className="mt-3 inline-flex items-center gap-1.5 t-label text-white/60">
+                        {t('Exemplo', 'Example')}: <span className="text-white">{ex.title[lang]}</span>
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                      </span>
+                    </span>
                   </Link>
                 </li>
               );
@@ -192,67 +129,70 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ───────────── Distinções e redes (secção escura) ───────────── */}
-      <section className="py-24 md:py-36 text-white" style={{ background: NIGHT }}>
-        <div className="wrap">
-          <p className="t-label inline-flex items-center gap-2" style={{ color: BRASS }} data-reveal>
-            <span className="w-1.5 h-1.5 rounded-full" style={{ background: BRASS }} />
-            {t('Distinções', 'Recognition')}
-          </p>
-          <h2 className="mt-4 t-h2 text-white max-w-3xl text-balance" data-reveal>
-            {t('Reconhecimento', 'Recognised')} <span className="em" style={{ color: BRASS }}>{t('europeu e internacional', 'in Europe and beyond')}</span>.
-          </h2>
+      {/* ───────────── Competências (secção imersiva) ───────────── */}
+      <Competences />
 
-          <ul className="mt-14 border-t border-white/15">
+      {/* ───────────── Distinções (lista cinematográfica) ───────────── */}
+      <section className="py-24 md:py-36">
+        <div className="wrap">
+          <SectionHead
+            label={t('Distinções', 'Recognition')}
+            title={<Split parts={[t('Reconhecimento', 'Recognised'), { em: t('europeu e internacional', 'in Europe and beyond'), color: TONE.produto.deep }, '.']} />}
+          />
+          <ul className="mt-14 border-t border-line" data-reveal>
             {RECOGNITION.map((r, i) => (
-              <li key={r.id} className="border-b border-white/15" data-reveal style={{ ['--delay' as any]: `${i * 80}ms` }}>
-                <Link href={`/projetos/${r.id}`} className="group py-8 md:py-10 grid grid-cols-12 gap-4 items-baseline">
-                  <span className="col-span-12 md:col-span-4 em text-[clamp(2.25rem,1.6rem+2.4vw,4rem)] leading-none text-white transition-colors duration-500 group-hover:text-[#C9B08A]">
-                    {r.title[lang]}
+              <li key={r.id} className="border-b border-line">
+                <Link
+                  href={`/projetos/${r.id}`}
+                  className="group relative flex items-center overflow-hidden rounded-3xl my-2 h-28 md:h-32 md:hover:h-[380px] transition-[height] duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
+                >
+                  <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700" aria-hidden>
+                    <img src={AWARD_IMG[r.id] || byId(r.id)!.image} alt="" loading="lazy" className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-[1200ms] ease-out" />
+                    <span className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-black/10" />
                   </span>
-                  <span className="col-span-9 md:col-span-6">
-                    <span className="block text-[1.25rem] font-semibold tracking-[-0.02em] text-white">{r.award}</span>
-                    <span className="mt-1 block t-label text-white/55">{r.body[lang]}</span>
-                  </span>
-                  <span className="col-span-3 md:col-span-2 flex items-center justify-end gap-3 t-label text-white/55 tabular-nums">
-                    {r.year}
-                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  <span className="relative z-10 w-full px-2 md:px-8 grid grid-cols-12 gap-4 items-center">
+                    <span className="hidden md:block col-span-1 t-label text-mute tabular-nums group-hover:text-white/70 transition-colors">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="col-span-12 md:col-span-4 em text-[clamp(2rem,1.4rem+2.4vw,3.75rem)] leading-none text-ink group-hover:text-white transition-colors duration-500">{r.title[lang]}</span>
+                    <span className="col-span-10 md:col-span-5 transition-transform duration-700 group-hover:-translate-y-1">
+                      <span className="block text-[1.125rem] font-semibold tracking-[-0.02em] text-ink group-hover:text-white transition-colors duration-500">{r.award}</span>
+                      <span className="block t-label text-mute group-hover:text-white/70 transition-colors">
+                        {r.body[lang]} · {r.year}
+                      </span>
+                    </span>
+                    <span className="col-span-2 flex justify-end">
+                      <span className="w-11 h-11 rounded-full ring-1 ring-inset ring-line grid place-items-center text-mute transition-all duration-500 group-hover:bg-white group-hover:text-ink group-hover:ring-white group-hover:scale-110">
+                        <ArrowUpRight className="w-4 h-4 transition-transform duration-500 group-hover:rotate-45" />
+                      </span>
+                    </span>
                   </span>
                 </Link>
               </li>
             ))}
           </ul>
+        </div>
 
-          <div className="mt-20 grid grid-cols-1 lg:grid-cols-12 gap-8" data-reveal>
-            <p className="lg:col-span-3 t-label" style={{ color: BRASS }}>
-              {t('Redes e parceiros', 'Networks and partners')}
-            </p>
-            <ul className="lg:col-span-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10 rounded-3xl overflow-hidden">
-              {NETWORKS.map((n) => (
-                <li key={n.name} className="px-6 py-6" style={{ background: NIGHT }}>
-                  <p className="text-[1.0625rem] font-semibold tracking-[-0.015em] text-white">{n.name}</p>
-                  <p className="mt-1 t-label text-white/50">{n.note[lang]}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* Redes e parceiros em faixa contínua */}
+        <div className="mt-20 marquee-wrap overflow-hidden border-y border-line py-7 [mask-image:linear-gradient(90deg,transparent,black_10%,black_90%,transparent)]" aria-label={t('Redes e parceiros', 'Networks and partners')}>
+          <ul className="marquee flex w-max items-center">
+            {[...NETWORKS, ...NETWORKS].map((n, i) => (
+              <li key={i} className="flex items-center gap-10 pr-10" aria-hidden={i >= NETWORKS.length}>
+                <span className="whitespace-nowrap">
+                  <span className="text-[1.375rem] font-semibold tracking-[-0.025em] text-ink">{n.name}</span>
+                  <span className="ml-3 em text-[1.25rem] text-mute">{n.note[lang]}</span>
+                </span>
+                <span className="w-1.5 h-1.5 rounded-full" style={{ background: TONE.produto.deep }} />
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
       {/* ───────────── Representação internacional ───────────── */}
-      <section className="py-24 md:py-36">
+      <section className="bg-mist py-24 md:py-36">
         <div className="wrap">
           <SectionHead
             label={t('Representação internacional', 'International representation')}
-            title={
-              <>
-                {t('Seis missões,', 'Six missions,')} <span className="em" style={{ color: TONE.internacional.deep }}>{t('três países', 'three countries')}</span>.
-              </>
-            }
-            intro={t(
-              'Feiras profissionais, cimeiras e júris internacionais em que o destino foi representado, de Bruxelas ao Arkansas.',
-              'Trade fairs, summits and international juries where the destination was represented, from Brussels to Arkansas.'
-            )}
+            title={<Split parts={[t('Seis missões,', 'Six missions,'), { em: t('três países', 'three countries'), color: TONE.europeu.deep }, '.']} />}
             action={<TextLink href="/percurso">{t('Consultar o percurso', 'See the track record')}</TextLink>}
           />
         </div>
@@ -262,20 +202,27 @@ export default function Home() {
       </section>
 
       {/* ───────────── Contacto (secção imersiva) ───────────── */}
-      <section className="-mb-32 py-24 md:py-36 text-white" style={{ background: TONE.internacional.dark }}>
-        <div className="wrap grid grid-cols-1 lg:grid-cols-12 gap-10 items-end" data-reveal>
+      <section className="relative -mb-32 py-24 md:py-36 text-white overflow-hidden" style={{ background: TONE.internacional.dark }}>
+        <div className="absolute inset-0 overflow-hidden" aria-hidden>
+          <div className="px absolute inset-0" data-parallax="0.12">
+            <img src="https://i.imgur.com/zhIXUOY.png" alt="" loading="lazy" className="w-full h-full object-cover opacity-25" />
+          </div>
+          <div className="absolute inset-0" style={{ background: `linear-gradient(90deg, ${TONE.internacional.dark} 30%, ${TONE.internacional.dark}99 100%)` }} />
+          <div className="grain absolute inset-0" />
+        </div>
+        <div className="relative wrap grid grid-cols-1 lg:grid-cols-12 gap-10 items-end" data-reveal>
           <div className="lg:col-span-8">
             <p className="t-label inline-flex items-center gap-2" style={{ color: TONE.internacional.glow }}>
               <span className="w-1.5 h-1.5 rounded-full" style={{ background: TONE.internacional.glow }} />
               {t('Contacto', 'Contact')}
             </p>
-            <h2 className="mt-5 t-hero !text-[clamp(2.75rem,1.4rem+4.6vw,5.75rem)] text-white text-balance">
-              {t('Cooperação', 'Institutional')} <span className="em" style={{ color: TONE.internacional.glow }}>{t('institucional', 'cooperation')}</span>.
+            <h2 className="mt-5 t-hero !text-[clamp(2.75rem,1.4rem+4.6vw,5.75rem)] text-white">
+              <Split parts={[t('Cooperação', 'Institutional'), { em: t('institucional', 'cooperation'), color: TONE.internacional.glow }, '.']} />
             </h2>
             <p className="mt-6 t-lead text-white/70 max-w-xl text-pretty">
               {t(
-                'Disponível para parcerias em redes europeias, candidaturas conjuntas, júris, conferências e novos projetos de desenvolvimento turístico.',
-                'Available for partnerships in European networks, joint bids, juries, conferences and new tourism development projects.'
+                'Parcerias em redes europeias, candidaturas conjuntas, júris, conferências e novos projetos de desenvolvimento turístico.',
+                'Partnerships in European networks, joint bids, juries, conferences and new tourism development projects.'
               )}
             </p>
           </div>

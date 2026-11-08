@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useLang } from '../ui/LanguageContext';
 import { SectionHead } from '../ui/parts';
+import MetroLine from '../ui/MetroLine';
 import { AREAS, MISSION_POINTS, PROJECTS, byId } from '../ui/projects';
 import { ENTITY, RECOGNITION, ROLE, SCOPE } from '../ui/profile';
 import { BRASS, NIGHT, TONE, yearSpan } from '../ui/viz/palette';
@@ -82,37 +83,7 @@ export default function TrackRecord() {
             'Trade fairs, summits and international juries where the destination was represented.'
           )}
         />
-      <ol className="mt-12 space-y-4">
-        {MISSION_POINTS.map((m, i) => {
-          const p = byId(m.id)!;
-          const tone = TONE[p.theme];
-          return (
-            <li key={m.id} data-reveal style={{ ['--delay' as any]: `${(i % 2) * 60}ms` }}>
-              <Link href={`/projetos/${m.id}`} className="group grid grid-cols-12 gap-4 md:gap-8 items-center rounded-4xl p-3 md:p-4" style={{ background: tone.tint }}>
-                <div className="col-span-4 md:col-span-3">
-                  <div className="media rounded-2xl aspect-[4/3]">
-                    <img src={p.image} alt="" loading="lazy" />
-                  </div>
-                </div>
-                <div className="col-span-8 md:col-span-6">
-                  <p className="em text-[clamp(1.75rem,1.2rem+2vw,3rem)] leading-none text-ink">{m.city[lang]}</p>
-                  <p className="mt-2 text-[15px] text-ink/70">
-                    {m.event} · {m.country[lang]}
-                  </p>
-                </div>
-                <div className="hidden md:block md:col-span-3 text-right pr-4">
-                  <p className="t-label" style={{ color: tone.deep }}>
-                    {m.year}
-                  </p>
-                  <p className="mt-1 t-label text-ink/50 tabular-nums">
-                    {m.km.toLocaleString('pt-PT')} km {t('de Braga', 'from Braga')}
-                  </p>
-                </div>
-              </Link>
-            </li>
-          );
-        })}
-      </ol>
+      <MetroLine />
       </section>
 
       {/* Distinções */}
