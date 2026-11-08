@@ -1,72 +1,132 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
 import { useLang } from '../ui/LanguageContext';
-import { PageHead } from '../ui/parts';
-import AtlasMap, { MISSION_POINTS } from '../ui/AtlasMap';
-import Gantt from '../ui/viz/Gantt';
+import { SectionHead } from '../ui/parts';
+import MetroLine from '../ui/MetroLine';
+import { AREAS, MISSION_POINTS, PROJECTS, byId } from '../ui/projects';
+import { ENTITY, RECOGNITION, ROLE, SCOPE } from '../ui/profile';
+import { BRASS, NIGHT, TONE, yearSpan } from '../ui/viz/palette';
 
 export default function TrackRecord() {
   const { t, lang } = useLang();
-  const [hot, setHot] = useState<string | null>(null);
 
+  // Cronologia: projetos agrupados pelo ano em que começaram
+  const years = Array.from(new Set(PROJECTS.map((p) => yearSpan(p.year)[0]))).sort();
+  const byYear = years.map((y) => ({ y, items: PROJECTS.filter((p) => yearSpan(p.year)[0] === y) }));
 
   return (
-    <div className="wrap pt-12 md:pt-16">
-      <PageHead
-        as="h1"
-        kicker={t('Percurso', 'Track record')}
-        title={t('Missões internacionais e cronologia', 'International missions and timeline')}
-        intro={t(
-          'Onde Braga foi representada e como o trabalho se distribuiu entre 2024 e 2026.',
-          'Where Braga was represented and how the work unfolded between 2024 and 2026.'
-        )}
-      />
-
-      {/* Mapa + lista */}
-      <section className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        <div className="lg:col-span-8" data-reveal>
-          <AtlasMap hot={hot} setHot={setHot} />
+    <>
+      <header data-hero className="relative -mt-20 flex flex-col min-h-[78svh] md:min-h-[560px] md:h-[78svh] md:max-h-[860px] overflow-hidden text-white" style={{ background: NIGHT }}>
+        <div className="absolute inset-0 overflow-hidden" aria-hidden>
+          <div data-parallax="-0.2" className="absolute inset-0" style={{ ['--px-scale' as any]: 1.15 }}>
+            <img src="https://i.imgur.com/AM6Z3uu.jpeg" alt="" className="w-full h-full object-cover object-[50%_45%] hero-kb" />
+          </div>
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,19,18,0.5)_0%,rgba(20,19,18,0.1)_30%,rgba(20,19,18,0.35)_60%,rgba(20,19,18,0.9)_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(20,19,18,0.6)_0%,rgba(20,19,18,0.25)_45%,transparent_75%)]" />
         </div>
-        <ol className="lg:col-span-4 rounded-xl bg-card border border-line divide-y divide-line" onMouseLeave={() => setHot(null)} data-reveal>
-          {MISSION_POINTS.map((m, i) => (
-            <li key={m.id}>
-              <Link
-                href={`/projetos/${m.id}`}
-                onMouseEnter={() => setHot(m.id)}
-                onFocus={() => setHot(m.id)}
-                className={`group flex items-start gap-4 px-5 py-4 transition-colors ${hot === m.id ? 'bg-petrol/[0.06]' : ''}`}
-              >
-                <span className="text-[13px] font-semibold text-petrol w-5 pt-1">{i + 1}</span>
-                <span className="flex-1 min-w-0">
-                  <span className="block font-serif text-[1.3rem] leading-tight text-ink group-hover:text-petrol transition-colors">
-                    {m.city[lang]}, {m.country[lang]}
-                  </span>
-                  <span className="block mt-1 text-[14px] text-muted">{m.event}</span>
+        <div className="relative flex-1 w-full wrap flex flex-col justify-end pt-28 pb-12 md:pb-16">
+          <p className="hero-in t-label inline-flex items-center gap-2" style={{ color: BRASS }}>
+            <span className="w-1.5 h-1.5 rounded-full" style={{ background: BRASS }} />
+            {t('Percurso', 'Track record')}
+          </p>
+          <h1 className="hero-in mt-4 t-hero text-white max-w-[15ch]" style={{ ['--d' as any]: '120ms' }}>
+            {t('Percurso', 'Career and')} <span className="em text-[#E9DCC4]">{t('profissional', 'track record')}</span>.
+          </h1>
+          <p className="hero-in mt-6 t-lead text-white/75 max-w-2xl text-pretty" style={{ ['--d' as any]: '240ms' }}>
+            {t(
+              'Onde trabalho, onde estive e o que foi reconhecido: a função atual, as missões internacionais, as distinções e a cronologia dos projetos.',
+              'Where I work, where I have been and what has been recognised: current role, international missions, awards and the project timeline.'
+            )}
+          </p>
+        </div>
+      </header>
+
+    <div className="wrap">
+
+      {/* Função atual */}
+      <section className="mt-16 rounded-4xl bg-mist p-6 md:p-12 grid grid-cols-1 lg:grid-cols-12 gap-10" data-reveal>
+        <div className="lg:col-span-5">
+          <p className="t-label text-mute inline-flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#4D6A55]" />
+            {t('Função atual', 'Current role')}
+          </p>
+          <h2 className="mt-4 text-[clamp(1.75rem,1.3rem+1.4vw,2.5rem)] leading-[1.1] font-semibold tracking-[-0.035em] text-ink text-balance">{ROLE[lang]}</h2>
+          <p className="mt-4 text-[15px] leading-relaxed text-mute">{ENTITY[lang]}</p>
+        </div>
+        <div className="lg:col-span-7">
+          <p className="t-label text-mute">{t('Responsabilidades', 'Responsibilities')}</p>
+          <ul className="mt-4 divide-y divide-line border-y border-line">
+            {AREAS.map((a) => (
+              <li key={a.id} className="py-4 grid grid-cols-1 sm:grid-cols-12 gap-2">
+                <span className="sm:col-span-5 text-[15px] font-semibold text-ink inline-flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full shrink-0" style={{ background: TONE[a.id].deep }} />
+                  {a.label[lang]}
                 </span>
-                <span className="text-right text-[13px] text-muted shrink-0 pt-1">
-                  {m.year}
-                  <br />
-                  {m.km.toLocaleString('pt-PT')} km
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ol>
+                <span className="sm:col-span-7 text-[15px] leading-relaxed text-mute">{SCOPE[a.id].intro[lang]}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
-      {/* Cronologia */}
-      <section className="mt-24">
-        <PageHead
-          kicker={t('Cronologia', 'Timeline')}
-          title={t('2024 — 2026, projeto a projeto', '2024 — 2026, project by project')}
-          intro={t('Cada barra é um projeto, do ano em que começou ao ano em que terminou; a cor indica a área.', 'Each bar is a project, from the year it began to the year it ended; colour shows the area.')}
+      <section className="mt-28 md:mt-40">
+        <SectionHead
+          label={t('Representação internacional', 'International representation')}
+          title={
+            <>
+              {t('Missões em', 'Missions in')} <span className="em">{t('três países', 'three countries')}</span>.
+            </>
+          }
+          intro={t(
+            'Feiras, cimeiras e júris onde representei o destino. Desça a página para percorrer a linha.',
+            'Fairs, summits and juries where I represented the destination. Scroll down to follow the line.'
+          )}
         />
-        <div className="mt-10" data-reveal>
-          <Gantt />
+      <MetroLine />
+      </section>
+
+      {/* Distinções */}
+      <section className="mt-28 md:mt-40">
+        <SectionHead label={t('Distinções', 'Recognition')} title={<>{t('Reconhecimento', 'Recognised')} <span className="em">{t('europeu e internacional', 'in Europe and beyond')}</span>.</>} />
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4">
+          {RECOGNITION.map((r) => {
+            const tone = TONE[byId(r.id)!.theme];
+            return (
+              <Link key={r.id} href={`/projetos/${r.id}`} className="group rounded-4xl p-7 md:p-8 flex flex-col min-h-[240px]" style={{ background: tone.tint }} data-reveal>
+                <p className="em text-[2.25rem] leading-none text-ink">{r.title[lang]}</p>
+                <p className="mt-auto pt-10 text-[1.125rem] font-semibold tracking-[-0.02em] text-ink group-hover:underline underline-offset-4">{r.award}</p>
+                <p className="mt-1 t-label" style={{ color: tone.deep }}>
+                  {r.body[lang]} · {r.year}
+                </p>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="mt-28 md:mt-40">
+        <SectionHead label={t('Cronologia', 'Timeline')} title={<>{t('Projetos por', 'Projects by')} <span className="em">{t('ano de início', 'start year')}</span>.</>} />
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+          {byYear.map(({ y, items }) => (
+            <div key={y} data-reveal>
+              <p className="em text-[3.5rem] leading-none text-ink">{y}</p>
+              <ul className="mt-6 border-t border-line">
+                {items.map((p) => (
+                  <li key={p.id} className="border-b border-line">
+                    <Link href={`/projetos/${p.id}`} className="py-3.5 flex items-center gap-3 group">
+                      <span className="w-2 h-2 rounded-full shrink-0" style={{ background: TONE[p.theme].deep }} />
+                      <span className="text-[15px] text-ink group-hover:underline underline-offset-4">{p.title[lang]}</span>
+                      <span className="ml-auto t-label text-mute tabular-nums">{p.year}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </section>
     </div>
+    </>
   );
 }

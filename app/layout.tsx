@@ -1,43 +1,57 @@
 import type { Metadata } from 'next';
-import { Newsreader, Schibsted_Grotesk } from 'next/font/google';
+import { Inter, Instrument_Serif } from 'next/font/google';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import './globals.css';
 import { LanguageProvider } from './ui/LanguageContext';
 import Header from './ui/Header';
 import Footer from './ui/Footer';
-import Opening from './ui/Opening';
 import Reveal from './ui/Reveal';
+import Parallax from './ui/Parallax';
+import Intro from './ui/Intro';
+import BackToTop from './ui/BackToTop';
 import CommandK from './ui/CommandK';
 
-const serif = Newsreader({ subsets: ['latin'], variable: '--font-serif', display: 'swap', weight: ['400', '500', '600'], style: ['normal', 'italic'] });
-const sans = Schibsted_Grotesk({ subsets: ['latin'], variable: '--font-sans', display: 'swap', weight: ['400', '500', '600', '700'] });
+const sans = Inter({ subsets: ['latin'], variable: '--font-sans', display: 'swap' });
+// Serifada em itálico, só para palavras de destaque nos títulos
+const serif = Instrument_Serif({ subsets: ['latin'], variable: '--font-serif', display: 'swap', weight: '400', style: ['normal', 'italic'], adjustFontFallback: false });
 
 export const metadata: Metadata = {
-  title: { default: 'Hugo Barros — Portefólio', template: '%s · Hugo Barros' },
+  title: { default: 'Hugo Barros | Projetos de turismo', template: '%s · Hugo Barros' },
   description:
-    'Portefólio de Hugo Barros, Técnico Superior de Inovação e Desenvolvimento Turístico no Município de Braga: candidaturas europeias, promoção internacional, inovação digital e produto turístico.',
+    'Portefólio profissional de Hugo Barros: estratégia de destino, candidaturas e redes europeias, promoção internacional, inovação digital e produto turístico.',
   icons: { icon: 'https://i.imgur.com/Dx42oze.png' },
   openGraph: {
-    title: 'Hugo Barros — Portefólio',
-    description: 'Estratégia de destino, candidaturas europeias e produto turístico para Braga.',
+    title: 'Hugo Barros | Projetos de turismo',
+    description: 'Estratégia de destino, candidaturas europeias, promoção internacional e produto turístico.',
     images: ['https://i.imgur.com/SvJ4bdR.jpeg'],
     type: 'website',
     locale: 'pt_PT',
   },
   twitter: { card: 'summary_large_image' },
-  themeColor: '#f4f1ea',
+  themeColor: '#ffffff',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt">
-      <body className={`${serif.variable} ${sans.variable} font-sans antialiased`}>
+    <html lang="pt" suppressHydrationWarning>
+      <head>
+        {/* Decide antes do primeiro desenho se o ecrã de entrada aparece (uma vez por sessão) */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{var d=document.documentElement;if(sessionStorage.getItem('hb-intro')||matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('intro-seen')}else{d.classList.add('intro-on')}}catch(e){document.documentElement.classList.add('intro-seen')}",
+          }}
+        />
+      </head>
+      <body className={`${sans.variable} ${serif.variable} font-sans antialiased`}>
         <LanguageProvider>
-          <Opening />
           <Header />
-          <main>{children}</main>
+          <main id="conteudo">{children}</main>
           <Footer />
           <Reveal />
+          <Parallax />
+          <Intro />
+          <BackToTop />
           <CommandK />
         </LanguageProvider>
         <GoogleAnalytics gaId="G-C9ZYJ5XB1E" />

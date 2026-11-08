@@ -3,7 +3,7 @@ import TrackRecord from './TrackRecord';
 
 export const metadata: Metadata = {
   title: 'Percurso',
-  description: 'Missões internacionais e cronologia dos projetos de Hugo Barros, 2024–2026.',
+  description: 'Função atual, representação internacional, distinções e cronologia dos projetos de Hugo Barros.',
 };
 
 export default function Page() {

@@ -55,7 +55,7 @@ export function getDossiers(t: T): Record<string, DossierData> {
   return {
 'visit-braga': {
   watermark: 'https://i.imgur.com/e0wCEWM.jpeg',
-  tag: t('Gestão de Destino // 2024 - 2025', 'Destination Management // 2024 - 2025'),
+  tag: t('Gestão de Destino · 2024 - 2025', 'Destination Management · 2024 - 2025'),
   headerTitle: t('Portal Visit Braga: Estratégia Digital', 'Visit Braga Portal: Digital Strategy'),
   
   officialNetwork: 'Município de Braga / InvestBraga',
@@ -154,7 +154,7 @@ export function getDossiers(t: T): Record<string, DossierData> {
 },
 'smart-tourism': {
   watermark: 'https://i.imgur.com/GBs8DY7.jpeg',
-  tag: t('European Shortlisted City // 2024 - 2026', 'European Shortlisted City // 2024 - 2026'),
+  tag: t('European Shortlisted City · 2024 - 2026', 'European Shortlisted City · 2024 - 2026'),
   headerTitle: t('European Capital of Smart Tourism', 'European Capital of Smart Tourism'),
   
   // Chaves para o Footer Dinâmico
@@ -243,11 +243,11 @@ export function getDossiers(t: T): Record<string, DossierData> {
 },
 'cidade-bracvs': {
   watermark: 'https://i.imgur.com/NRTWHRW.png',
-  tag: t('Educação & Património // 2024 - 2025', 'Education & Heritage // 2024 - 2025'),
+  tag: t('Educação & Património · 2024 - 2025', 'Education & Heritage · 2024 - 2025'),
   headerTitle: t('A Cidade do Bracvs: Roteiro Educativo', 'The City of Bracvs: Educational Itinerary'),
   
   // Chaves para o Footer Dinâmico
-  officialNetwork: t('Município de Braga // Divisão de Educação', 'Municipality of Braga // Education Department'),
+  officialNetwork: t('Município de Braga · Divisão de Educação', 'Municipality of Braga · Education Department'),
   externalLink: 'https://cmbraga-my.sharepoint.com/:b:/g/personal/hugo_barros_cm-braga_pt/IQBTExVPkalaQLtE4HFUCNb2AezN7qLyt-8BYhUh2XWT23o?e=7xvekq',
   externalSource: 'VisitBraga.travel',
   externalLinkLabel: t('Visualizar PDF Oficial', 'View Official PDF'),
@@ -336,7 +336,7 @@ export function getDossiers(t: T): Record<string, DossierData> {
 },
 'braga-after-dark': {
   watermark: 'https://i.imgur.com/mgdxHtt.jpeg',
-  tag: t('Curadoria & Eventos // 2024 - 2025', 'Curatorship & Events // 2024 - 2025'),
+  tag: t('Curadoria & Eventos · 2024 - 2025', 'Curatorship & Events · 2024 - 2025'),
   headerTitle: t('Braga After Dark: Economia Noturna', 'Braga After Dark: Night-time Economy'),
   
   // Chaves para o Footer Dinâmico
@@ -434,11 +434,11 @@ export function getDossiers(t: T): Record<string, DossierData> {
 },
 'roteiro-3-dias': {
   watermark: 'https://i.imgur.com/yWtlcEL.png',
-  tag: t('Coordenação Editorial // 2024 - 2025', 'Editorial Coordination // 2024 - 2025'),
+  tag: t('Coordenação Editorial · 2024 - 2025', 'Editorial Coordination · 2024 - 2025'),
   headerTitle: t('Roteiro Oficial: Descobrir Braga', 'Official Guide: Discover Braga'),
   
   // Chaves para o Footer Dinâmico
-  officialNetwork: t('Município de Braga // Posto de Turismo', 'Municipality of Braga // Tourist Office'),
+  officialNetwork: t('Município de Braga · Posto de Turismo', 'Municipality of Braga · Tourist Office'),
   externalLink: t(
     'https://cmbraga-my.sharepoint.com/:b:/g/personal/hugo_barros_cm-braga_pt/IQAREwUp6GmPRotJifBAMTJ6AXpADZ6zTx2vddXtgOrWovA?e=KIFubd',
     'https://cmbraga-my.sharepoint.com/:b:/g/personal/hugo_barros_cm-braga_pt/IQAWCOx-0ki2SofmrdgKzurbAaLxBTL6L9PPUOqBbgaV6Dc?e=A8FAAe'
@@ -550,10 +550,10 @@ export function getDossiers(t: T): Record<string, DossierData> {
 },
 'mapa-turistico-braga': {
   watermark: 'https://i.imgur.com/P54M1Ko.png',
-  tag: t('Cartografia & Design // 2024 - 2025', 'Cartography & Design // 2024 - 2025'),
+  tag: t('Cartografia & Design · 2024 - 2025', 'Cartography & Design · 2024 - 2025'),
   headerTitle: t('Novo Mapa Turístico Oficial de Braga', 'Braga’s New Official Tourist Map'),
   
-  officialNetwork: t('Município de Braga // Divisão de Turismo', 'Municipality of Braga // Tourism Department'),
+  officialNetwork: t('Município de Braga · Divisão de Turismo', 'Municipality of Braga · Tourism Department'),
   externalLink: t(
     'https://cmbraga-my.sharepoint.com/:b:/g/personal/hugo_barros_cm-braga_pt/IQAUDJgQjgbuS7hLwJrLFGd9AXOszioW1Wd72Fm0Uz1qGok?e=vPgIYp',
     'https://cmbraga-my.sharepoint.com/:b:/g/personal/hugo_barros_cm-braga_pt/IQBfSu4RZgIcTolEh_oDtex7ATmrMQ0ghEWlEweeXAmfPBk?e=Ky4KWo'
@@ -652,11 +652,11 @@ export function getDossiers(t: T): Record<string, DossierData> {
 },
 'fiets-wandelbeurs-gante': {
   watermark: 'https://i.imgur.com/tg4YOqy.png',
-  tag: t('Missão Internacional // 2025', 'International Mission // 2025'),
+  tag: t('Missão Internacional · 2025', 'International Mission · 2025'),
   headerTitle: t('Braga na Fiets en Wandelbeurs - Bélgica', 'Braga at Fiets en Wandelbeurs - Belgium'),
   
   // Chaves para o Footer Dinâmico
-  officialNetwork: t('Visit Braga // Mercado Benelux', 'Visit Braga // Benelux Market'),
+  officialNetwork: t('Visit Braga · Mercado Benelux', 'Visit Braga · Benelux Market'),
   externalLink: 'https://www.fietsenwandelbeurs.be/',
   externalSource: 'Official Event Site',
   externalLinkLabel: t('Website do Evento', 'Event Website'),
@@ -744,11 +744,11 @@ export function getDossiers(t: T): Record<string, DossierData> {
 },
 'expovacaciones-bilbao': {
   watermark: 'https://i.imgur.com/JL0PcZe.png',
-  tag: t('Missão Estratégica // 2024 - 2025', 'Strategic Mission // 2024 - 2025'),
+  tag: t('Missão Estratégica · 2024 - 2025', 'Strategic Mission · 2024 - 2025'),
   headerTitle: t('Braga na ExpoVacaciones - Bilbao', 'Braga at ExpoVacaciones - Bilbao'),
   
   // Chaves para o Footer Dinâmico
-  officialNetwork: t('Visit Braga // Porto e Norte de Portugal', 'Visit Braga // Porto and North of Portugal'),
+  officialNetwork: t('Visit Braga · Porto e Norte de Portugal', 'Visit Braga · Porto and North of Portugal'),
   externalLink: 'https://expovacaciones.bilbaookke.eu/',
   externalSource: 'Bilbao Exhibition Centre',
   externalLinkLabel: t('Website da Expo', 'Expo Website'),
@@ -837,7 +837,7 @@ export function getDossiers(t: T): Record<string, DossierData> {
 },
     'b-travel-barcelona': {
       watermark: 'https://i.imgur.com/09Tm1r9.png',
-      tag: t('Representação Internacional // 2026', 'International Representation // 2026'),
+      tag: t('Representação Internacional · 2026', 'International Representation · 2026'),
       headerTitle: t('Braga na B-Travel - Barcelona', 'Braga at B-Travel - Barcelona'),
       officialNetwork: t('Turismo do Porto e Norte de Portugal', 'Porto and North of Portugal Tourism'),
       externalLink: 'https://www.b-travel.com/',
@@ -903,11 +903,11 @@ export function getDossiers(t: T): Record<string, DossierData> {
     },
     'experiencias-sustentaveis': {
       watermark: 'https://www.cm-braga.pt/archive/cache/img/sz800x600/CMB17012025SERGIOFREITAS3022624430274.jpg',
-      tag: t('Gestão de Produto // 2024 - 2025', 'Product Management // 2024 - 2025'),
+      tag: t('Gestão de Produto · 2024 - 2025', 'Product Management · 2024 - 2025'),
       headerTitle: t('Experiências Turísticas Sustentáveis', 'Sustainable Tourism Experiences'),
       
       // Chaves para o Footer Dinâmico
-      officialNetwork: t('Unidade de Turismo // Rede de Operadores Locais', 'Tourism Unit // Local Operators Network'),
+      officialNetwork: t('Unidade de Turismo · Rede de Operadores Locais', 'Tourism Unit · Local Operators Network'),
       externalLink: 'https://www.cm-braga.pt',
       externalSource: t('Município de Braga', 'Municipality of Braga'),
       externalLinkLabel: t('Portal Institucional', 'Institutional Portal'),
@@ -998,11 +998,11 @@ export function getDossiers(t: T): Record<string, DossierData> {
     },
     'small-retail-braga': {
       watermark: 'https://transition-pathways.europa.eu/sites/default/files/styles/time_dependent_full/public/discussion_form_post/2025-12/ECOSR%20-%20Thumbnail_0.jpg?itok=1-QARVo7',
-      tag: t('Estratégia Europeia // 2025 - 2026', 'European Strategy // 2025 - 2026'),
+      tag: t('Estratégia Europeia · 2025 - 2026', 'European Strategy · 2025 - 2026'),
       headerTitle: t('European Capital of Small Retail', 'European Capital of Small Retail'),
       
       // Chaves para o Footer Dinâmico
-      officialNetwork: 'European Commission // Transition Pathways',
+      officialNetwork: 'European Commission · Transition Pathways',
       externalLink: 'https://transition-pathways.europa.eu/retail/events/european-capitals-small-retail-awards-ceremony-2026',
       externalSource: t('Comissão Europeia', 'European Commission'),
       externalLinkLabel: t('Portal do Evento 2026', '2026 Event Portal'),
@@ -1087,11 +1087,11 @@ export function getDossiers(t: T): Record<string, DossierData> {
     },
     'music-cities-awards': {
       watermark: 'https://static.wixstatic.com/media/214dbc_25ced84144eb414c945f6072bd97b0c4~mv2.jpg/v1/fill/w_719,h_719,q_90,enc_avif,quality_auto/214dbc_25ced84144eb414c945f6072bd97b0c4~mv2.jpg',
-      tag: t('International Awards // Arkansas, USA 2025', 'International Awards // Arkansas, USA 2025'),
+      tag: t('International Awards · Arkansas, USA 2025', 'International Awards · Arkansas, USA 2025'),
       headerTitle: t('Music Cities Awards: Braga After Dark', 'Music Cities Awards: Braga After Dark'),
       
       // Chaves para o Footer Dinâmico
-      officialNetwork: 'Music Cities Events // Night-Time Economy',
+      officialNetwork: 'Music Cities Events · Night-Time Economy',
       externalLink: 'https://www.musiccitiesevents.com/2025-nominees?pgid=mbys9xbd1-c14d419a-28c9-44cd-af38-31558691727d',
       externalSource: 'Music Cities Events',
       externalLinkLabel: t('Página Oficial de Nomeados', 'Official Nominees Page'),
@@ -1176,11 +1176,11 @@ export function getDossiers(t: T): Record<string, DossierData> {
     },
     'systemeu-salamanca': {
       watermark: 'https://i.imgur.com/SeyCGBk.png',
-      tag: t('Missão Tecnológica // Salamanca 2024 - 2025', 'Tech Mission // Salamanca 2024 - 2025'),
+      tag: t('Missão Tecnológica · Salamanca 2024 - 2025', 'Tech Mission · Salamanca 2024 - 2025'),
       headerTitle: t('Startup OLÉ & SystemEU Summit', 'Startup OLÉ & SystemEU Summit'),
       
       // Chaves para o Footer Dinâmico
-      officialNetwork: 'SystemEU European Network // Startup OLÉ',
+      officialNetwork: 'SystemEU European Network · Startup OLÉ',
       externalLink: 'https://startupole.eu/',
       externalSource: 'Startup OLÉ Official',
       externalLinkLabel: t('Website do Summit', 'Summit Website'),

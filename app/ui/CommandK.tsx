@@ -79,7 +79,7 @@ export default function CommandK() {
             role="dialog"
             aria-modal="true"
             aria-label={t('Pesquisa', 'Search')}
-            className="relative w-full max-w-xl rounded-2xl bg-card border border-line shadow-[0_40px_100px_-30px_rgba(26,29,33,0.55)] overflow-hidden"
+            className="relative w-full max-w-xl rounded-2xl bg-white border border-line shadow-[0_40px_100px_-30px_rgba(26,29,33,0.55)] overflow-hidden"
             initial={{ y: -12, scale: 0.98 }}
             animate={{ y: 0, scale: 1 }}
             exit={{ y: -8, scale: 0.98 }}
@@ -87,7 +87,7 @@ export default function CommandK() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center gap-3 px-5 border-b border-line">
-              <Search className="w-5 h-5 text-petrol" />
+              <Search className="w-5 h-5 text-ink" />
               <input
                 ref={input}
                 value={q}
@@ -104,25 +104,25 @@ export default function CommandK() {
                 }}
                 placeholder={t('Procurar projetos e páginas…', 'Search projects and pages…')}
                 aria-label={t('Procurar', 'Search')}
-                className="flex-1 h-16 bg-transparent outline-none font-serif text-[1.35rem] placeholder:text-muted/70"
+                className="flex-1 h-16 bg-transparent outline-none text-[1.35rem] placeholder:text-mute"
               />
-              <kbd className="text-[11px] text-muted border border-line rounded px-1.5 py-0.5">esc</kbd>
+              <kbd className="text-[11px] text-mute border border-line rounded px-1.5 py-0.5">esc</kbd>
             </div>
             <ul className="max-h-[52vh] overflow-y-auto p-2">
-              {items.length === 0 && <li className="px-4 py-10 text-center text-muted">{t('Sem resultados.', 'No results.')}</li>}
+              {items.length === 0 && <li className="px-4 py-10 text-center text-mute">{t('Sem resultados.', 'No results.')}</li>}
               {items.map((it, k) => (
                 <li key={it.href}>
                   <button
                     onMouseMove={() => k !== i && setI(k)}
                     onClick={() => go(it)}
-                    className={`w-full flex items-center gap-3 rounded-xl px-3 py-2.5 text-left ${k === i ? 'bg-petrol text-white' : 'text-ink'}`}
+                    className={`w-full flex items-center gap-3 rounded-xl px-3 py-2.5 text-left ${k === i ? 'bg-ink text-white' : 'text-ink'}`}
                   >
-                    <span className="w-12 h-9 rounded-md overflow-hidden shrink-0 bg-cream grid place-items-center">
-                      {it.image ? <img src={it.image} alt="" className="w-full h-full object-cover" /> : <FileText className="w-4 h-4 text-petrol" />}
+                    <span className="w-12 h-9 rounded-md overflow-hidden shrink-0 bg-soft grid place-items-center">
+                      {it.image ? <img src={it.image} alt="" className="w-full h-full object-cover" /> : <FileText className="w-4 h-4 text-ink" />}
                     </span>
                     <span className="flex-1 min-w-0">
                       <span className="block truncate font-medium text-[15px]">{it.label}</span>
-                      <span className={`block truncate text-[12px] ${k === i ? 'text-white/70' : 'text-muted'}`}>{it.sub}</span>
+                      <span className={`block truncate text-[12px] ${k === i ? 'text-white/70' : 'text-mute'}`}>{it.sub}</span>
                     </span>
                     {k === i && <CornerDownLeft className="w-4 h-4 shrink-0" />}
                   </button>

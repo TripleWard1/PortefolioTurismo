@@ -3,7 +3,7 @@ import ContactView from './ContactView';
 
 export const metadata: Metadata = {
   title: 'Contacto',
-  description: 'Contactar Hugo Barros, Município de Braga.',
+  description: 'Contacto institucional: cooperação, redes europeias, candidaturas, conferências e júris.',
 };
 
 export default function Page() {
