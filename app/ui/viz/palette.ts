@@ -1,11 +1,11 @@
 import type { Theme } from '../projects';
 
-/* Paleta categórica das quatro áreas - harmonizada com o creme e o petróleo */
+/* As quatro áreas em tons de cinzento (do preto ao cinzento médio) */
 export const AREA_COLOR: Record<Theme, string> = {
-  europeu: '#0e5a6b',
-  internacional: '#4f9a94',
-  digital: '#c08a3e',
-  produto: '#4a5560',
+  europeu: '#1d1d1f',
+  internacional: '#48484a',
+  digital: '#6e6e73',
+  produto: '#8e8e93',
 };
 
 /* "2024—26" → [2024, 2026]; "2025" → [2025, 2025] */

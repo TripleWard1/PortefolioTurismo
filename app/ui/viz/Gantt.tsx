@@ -33,13 +33,13 @@ export default function Gantt({ compact = false }: { compact?: boolean }) {
   let row = 0;
 
   return (
-    <div className="rounded-2xl border border-line bg-card p-5 md:p-8 overflow-hidden">
+    <div className="rounded-3xl bg-soft p-5 md:p-8 overflow-hidden">
       {/* Eixo */}
       <div className="grid grid-cols-[minmax(0,9rem)_1fr] md:grid-cols-[minmax(0,15rem)_1fr] gap-4 pb-3 border-b border-line">
-        <span className="text-[12px] uppercase tracking-[0.1em] text-muted-foreground">{t('Projeto', 'Project')}</span>
+        <span className="t-label text-mute">{t('Projeto', 'Project')}</span>
         <div className="relative h-4">
           {[2024, 2025, 2026].map((y) => (
-            <span key={y} className="absolute top-0 text-[12px] font-semibold text-muted-foreground" style={{ left: `${pos(y)}%` }}>
+            <span key={y} className="absolute top-0 t-label text-mute tabular-nums" style={{ left: `${pos(y)}%` }}>
               {y}
             </span>
           ))}
@@ -55,8 +55,8 @@ export default function Gantt({ compact = false }: { compact?: boolean }) {
               <span key={y} className="absolute top-0 bottom-0 w-px bg-line" style={{ left: `${pos(y)}%` }} />
             ))}
             {hoje !== null && (
-              <span className="absolute top-0 bottom-0 w-px bg-petrol/70" style={{ left: `${hoje}%` }}>
-                <span className="absolute -top-0 left-1.5 text-[11px] font-semibold text-petrol whitespace-nowrap">{t('hoje', 'today')}</span>
+              <span className="absolute top-0 bottom-0 w-px bg-ink" style={{ left: `${hoje}%` }}>
+                <span className="absolute -top-0 left-1.5 text-[11px] font-semibold text-ink whitespace-nowrap">{t('hoje', 'today')}</span>
               </span>
             )}
           </div>
@@ -64,7 +64,7 @@ export default function Gantt({ compact = false }: { compact?: boolean }) {
 
         {groups.map(({ a, items }) => (
           <div key={a.id} className="relative pt-5">
-            <p className="text-[12px] font-semibold uppercase tracking-[0.1em] mb-2 flex items-center gap-2" style={{ color: AREA_COLOR[a.id] }}>
+            <p className="t-label text-ink mb-2 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full" style={{ background: AREA_COLOR[a.id] }} />
               {a.label[lang]}
             </p>
@@ -80,12 +80,12 @@ export default function Gantt({ compact = false }: { compact?: boolean }) {
                   href={`/projetos/${p.id}`}
                   onMouseEnter={() => setHot(p.id)}
                   onMouseLeave={() => setHot(null)}
-                  className={`grid grid-cols-[minmax(0,9rem)_1fr] md:grid-cols-[minmax(0,15rem)_1fr] gap-4 items-center ${compact ? 'py-1' : 'py-1.5'} rounded-md transition-colors ${on ? 'bg-cream' : ''}`}
+                  className={`grid grid-cols-[minmax(0,9rem)_1fr] md:grid-cols-[minmax(0,15rem)_1fr] gap-4 items-center ${compact ? 'py-1' : 'py-1.5'} rounded-md transition-colors ${on ? 'bg-white' : ''}`}
                 >
-                  <span className={`truncate text-[14px] transition-colors ${on ? 'text-petrol' : 'text-ink'}`}>{p.title[lang]}</span>
+                  <span className={`truncate text-[14px] transition-colors ${on ? 'text-ink font-medium' : 'text-ink/80'}`}>{p.title[lang]}</span>
                   <span className="relative h-6">
                     <motion.span
-                      className="absolute top-0 h-full rounded-md flex items-center px-2.5 text-[11px] font-medium text-white overflow-hidden whitespace-nowrap"
+                      className="absolute top-0 h-full rounded-full flex items-center px-2.5 text-[11px] font-medium text-white overflow-hidden whitespace-nowrap"
                       style={{ left: `${left}%`, width: `${width}%`, background: AREA_COLOR[a.id], transformOrigin: 'left', opacity: hot && !on ? 0.45 : 1 }}
                       initial={{ scaleX: 0 }}
                       whileInView={{ scaleX: 1 }}

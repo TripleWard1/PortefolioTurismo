@@ -13,6 +13,8 @@ export interface ProjectMeta {
   place: L;
   summary: L;
   status: L;
+  /** A imagem é um logótipo: mostra-se inteira, sem cortes */
+  logo?: boolean;
 }
 
 export interface Area {
@@ -159,6 +161,7 @@ export const PROJECTS: ProjectMeta[] = [
     title: { pt: 'Portal Visit Braga', en: 'Visit Braga Portal' },
     theme: 'digital',
     image: 'https://i.imgur.com/e0wCEWM.jpeg',
+    logo: true,
     year: '2024—25',
     place: { pt: 'Braga, Portugal', en: 'Braga, Portugal' },
     summary: {
@@ -275,3 +278,6 @@ export function distanceKm(a: { lat: number; lon: number }, b: { lat: number; lo
   const h = Math.sin(r(b.lat - a.lat) / 2) ** 2 + Math.cos(r(a.lat)) * Math.cos(r(b.lat)) * Math.sin(r(b.lon - a.lon) / 2) ** 2;
   return Math.round(2 * R * Math.asin(Math.sqrt(h)));
 }
+
+/* Missões com a distância a Braga, já calculada */
+export const MISSION_POINTS = MISSIONS.map((m) => ({ ...m, km: distanceKm(BRAGA, m) }));

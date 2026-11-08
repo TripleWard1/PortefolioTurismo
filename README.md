@@ -22,21 +22,10 @@ Os links antigos `/#projeto/<id>` são redirecionados para `/projetos/<id>`.
 
 ## Identidade
 
-Creme claro (`#F4F1EA`), tinta (`#1A1D21`) e azul-petróleo (`#0E5A6B`).
-Títulos em Newsreader, texto em Schibsted Grotesk. Scroll normal em todas as páginas;
-tudo respeita "reduzir movimento".
-
-## Elementos de assinatura
-
-| Componente | O que faz |
-| --- | --- |
-| `app/ui/fx/ContourField.tsx` | Curvas de nível generativas (ruído de Perlin + marching squares) em canvas, em movimento lento |
-| `app/ui/fx/Globe.tsx` | Globo em Canvas 2D: continentes em pontos (`landDots.ts`), arcos de grande círculo de Braga às missões, arrastável |
-| `app/ui/fx/Motion.tsx` | Palavras que se sucedem, faixas contínuas e arquivo visual de fotografias |
-| `app/ui/viz/Gantt.tsx` | Cronologia 2024–2026 em Gantt, por área, com linha "hoje" |
-| `app/ui/viz/AreaBar.tsx` | Distribuição dos projetos pelas quatro áreas |
-| `app/ui/CommandK.tsx` | Pesquisa rápida (⌘K / Ctrl+K) por projetos e páginas |
-| `app/template.tsx` | Transição suave entre páginas (framer-motion) |
+Monocromática: branco, cinzas neutros (`soft`, `line`, `mute`) e preto (`ink`), com uma única
+secção escura (`night`) para o percurso internacional. Uma família tipográfica: Inter.
+Um só tipo de movimento: entrada suave ao aparecer e zoom ligeiro nas fotografias.
+O globo (Canvas 2D, `app/ui/fx/Globe.tsx`) é o único elemento de assinatura.
 
 ## Onde editar
 
@@ -45,22 +34,4 @@ tudo respeita "reduzir movimento".
 | `app/ui/projects.ts` | Projetos, áreas e missões (título, ano, local, resumo, imagem, coordenadas) |
 | `app/ui/dossiers.tsx` | Texto completo de cada projeto, em PT e EN |
 | `app/page.tsx` | Página inicial (incluindo os projetos em destaque) |
-| `app/globals.css` · `tailwind.config.ts` | Cores, tipografia e efeitos |
-
-## Componentes integrados (`components/ui/`)
-
-Adaptados do pacote de prompts de componentes (estilo shadcn / 21st.dev) à identidade do site:
-os tokens shadcn (`background`, `muted`, `primary`, `chart-1…5`…) estão definidos em `tailwind.config.ts`
-com as cores do portefólio.
-
-| Componente | Onde | Adaptação |
-| --- | --- | --- |
-| `tilted-grid-hero` | Hero da página inicial | Fotografias dos 13 projetos numa curva 3D (CSS puro) |
-| `variable-text-proximity` | Nome no hero | Usa a Newsreader variável do site (pesos e tamanho ótico) |
-| `liquid-glass-navbar` | Cabeçalho | Água em tons de petróleo; ligado ao router do Next |
-| `arrow-fill-button` | Botão principal | Classes Tailwind v4 convertidas para v3 |
-| `focus-rail` | Carrossel de projetos | Só o scroll horizontal o move (o vertical desce a página) |
-| `metro-map-gallery` | Áreas de atuação | Cada área é uma linha; cada projeto, uma estação |
-| `cinematic-list` | `/projetos`, vista em lista | Ligado aos projetos e ao router |
-| `stepped-morph-slider` | Galeria de cada projeto | Carregado só no browser |
-| `wordmark-reveal-footer` | Rodapé | Nome gigante com reflexo, estado e horas de Braga e Bruxelas |
+| `app/globals.css` · `tailwind.config.ts` | Cores, escala tipográfica e movimento |

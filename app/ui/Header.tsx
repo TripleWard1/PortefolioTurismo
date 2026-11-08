@@ -1,27 +1,26 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Menu, Search, X } from 'lucide-react';
 import { useLang } from './LanguageContext';
 import { useScrollLock } from './hooks';
-import { LiquidNavbar, NimbusIcons } from '@/components/ui/liquid-glass-navbar';
 
 export const NAV = [
   { href: '/', pt: 'Início', en: 'Home' },
-  { href: '/projetos', pt: 'Projetos', en: 'Projects' },
+  { href: '/projetos', pt: 'Projetos', en: 'Work' },
   { href: '/percurso', pt: 'Percurso', en: 'Track record' },
   { href: '/contacto', pt: 'Contacto', en: 'Contact' },
 ];
 
-export function LangSwitch({ className = '' }: { className?: string }) {
+export function LangSwitch() {
   const { lang, toggleLang, t } = useLang();
   return (
-    <button onClick={toggleLang} aria-label={t('Mudar idioma para inglês', 'Switch language to Portuguese')} className={`text-[13px] font-semibold ${className}`}>
-      <span className={lang === 'pt' ? 'text-ink' : 'text-muted-foreground/70 hover:text-ink'}>PT</span>
-      <span className="text-line mx-1.5">/</span>
-      <span className={lang === 'en' ? 'text-ink' : 'text-muted-foreground/70 hover:text-ink'}>EN</span>
+    <button onClick={toggleLang} aria-label={t('Mudar idioma para inglês', 'Switch language to Portuguese')} className="t-label h-8 px-2.5 rounded-full hover:bg-soft transition-colors">
+      <span className={lang === 'pt' ? 'text-ink' : 'text-mute'}>PT</span>
+      <span className="text-line mx-1">/</span>
+      <span className={lang === 'en' ? 'text-ink' : 'text-mute'}>EN</span>
     </button>
   );
 }
@@ -29,74 +28,67 @@ export function LangSwitch({ className = '' }: { className?: string }) {
 export default function Header() {
   const { lang, t } = useLang();
   const path = usePathname();
-  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   useScrollLock(open);
 
   useEffect(() => setOpen(false), [path]);
   useEffect(() => {
-    const on = () => setScrolled(window.scrollY > 8);
+    const on = () => setScrolled(window.scrollY > 4);
     on();
     window.addEventListener('scroll', on, { passive: true });
     return () => window.removeEventListener('scroll', on);
   }, []);
 
   const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+  const search = () => window.dispatchEvent(new Event('open-search'));
 
   return (
-    <header className={`sticky top-0 z-[400] bg-cream/90 backdrop-blur-md transition-shadow ${scrolled ? 'shadow-[0_1px_0_#ddd6c8]' : ''}`}>
-      <div className="wrap h-[76px] flex items-center justify-between gap-6">
-        <Link href="/" className="flex items-baseline gap-3 shrink-0">
-          <span className="font-serif text-[22px] font-medium text-ink tracking-[-0.01em]">Hugo Barros</span>
-          <span className="hidden md:inline text-[13px] text-muted-foreground">{t('Turismo · Município de Braga', 'Tourism · Municipality of Braga')}</span>
+    <header className={`sticky top-0 z-[400] transition-[background-color,box-shadow] duration-300 ${scrolled || open ? 'bg-white/80 backdrop-blur-xl shadow-[0_1px_0_#e8e8ed]' : 'bg-white'}`}>
+      <div className="wrap h-16 flex items-center justify-between gap-6">
+        <Link href="/" className="text-[15px] font-semibold tracking-[-0.02em] text-ink">
+          Hugo Barros
         </Link>
 
-        {/* Navegação: pílula de "água" (Liquid Glass Navbar) ligada ao router */}
-        <nav className="hidden lg:flex items-center gap-3" aria-label={t('Navegação principal', 'Main navigation')}>
-          <LiquidNavbar
-            tone="light"
-            active={Math.max(0, NAV.findIndex((n) => isActive(n.href)))}
-            onChange={(i) => router.push(NAV[i].href)}
-            items={NAV.map((n, i) => ({
-              label: n[lang],
-              icon: [NimbusIcons.home, NimbusIcons.globe, NimbusIcons.plane, NimbusIcons.user][i],
-              fx: (['glow', 'spin', 'plane', 'wave'] as const)[i],
-            }))}
-          />
-        </nav>
-        <div className="hidden lg:flex items-center">
-          <button
-            onClick={() => window.dispatchEvent(new Event('open-search'))}
-            className="h-9 pl-3 pr-2 rounded-full border border-line bg-card/70 text-[13px] text-muted-foreground inline-flex items-center gap-2 hover:border-petrol/40 hover:text-ink transition-colors"
-          >
-            <Search className="w-3.5 h-3.5" />
-            {t('Procurar', 'Search')}
-            <kbd className="text-[11px] border border-line rounded px-1.5 py-px">⌘K</kbd>
-          </button>
-          <span className="w-px h-5 bg-line mx-3" />
-          <LangSwitch />
-        </div>
-
-        <div className="lg:hidden flex items-center gap-3">
-          <LangSwitch />
-          <button onClick={() => window.dispatchEvent(new Event('open-search'))} aria-label={t('Procurar', 'Search')} className="w-10 h-10 grid place-items-center rounded-md border border-line">
+        <nav className="hidden md:flex items-center gap-1" aria-label={t('Navegação principal', 'Main navigation')}>
+          {NAV.map((n) => (
+            <Link
+              key={n.href}
+              href={n.href}
+              aria-current={isActive(n.href) ? 'page' : undefined}
+              className={`t-label h-8 px-3 rounded-full inline-flex items-center transition-colors ${isActive(n.href) ? 'text-ink bg-soft' : 'text-mute hover:text-ink'}`}
+            >
+              {n[lang]}
+            </Link>
+          ))}
+          <span className="w-px h-4 bg-line mx-2" />
+          <button onClick={search} aria-label={t('Procurar', 'Search')} className="w-8 h-8 rounded-full grid place-items-center text-mute hover:text-ink hover:bg-soft transition-colors">
             <Search className="w-4 h-4" />
           </button>
-          <button onClick={() => setOpen((v) => !v)} aria-label="Menu" aria-expanded={open} className="w-10 h-10 grid place-items-center rounded-md border border-line">
+          <LangSwitch />
+        </nav>
+
+        <div className="md:hidden flex items-center gap-1">
+          <button onClick={search} aria-label={t('Procurar', 'Search')} className="w-9 h-9 rounded-full grid place-items-center text-ink">
+            <Search className="w-[18px] h-[18px]" />
+          </button>
+          <button onClick={() => setOpen((v) => !v)} aria-label="Menu" aria-expanded={open} className="w-9 h-9 rounded-full grid place-items-center text-ink">
             {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
       {open && (
-        <nav className="lg:hidden fixed inset-x-0 top-[76px] bottom-0 bg-cream border-t border-line" aria-label={t('Navegação principal', 'Main navigation')}>
-          <div className="wrap py-4">
+        <nav className="md:hidden fixed inset-x-0 top-16 bottom-0 bg-white" aria-label={t('Navegação principal', 'Main navigation')}>
+          <div className="wrap pt-6">
             {NAV.map((n) => (
-              <Link key={n.href} href={n.href} className={`block py-4 border-b border-line font-serif text-[1.6rem] ${isActive(n.href) ? 'text-petrol' : 'text-ink'}`}>
+              <Link key={n.href} href={n.href} className={`block py-3 text-[2rem] font-semibold tracking-[-0.035em] ${isActive(n.href) ? 'text-ink' : 'text-mute'}`}>
                 {n[lang]}
               </Link>
             ))}
+            <div className="mt-8 pt-6 border-t border-line">
+              <LangSwitch />
+            </div>
           </div>
         </nav>
       )}

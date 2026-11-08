@@ -190,7 +190,7 @@ export default function Globe({
         ctx.beginPath();
         ctx.arc(bx, by, 5.5, 0, Math.PI * 2);
         ctx.fill();
-        ctx.font = `500 ${Math.max(13, size * 0.028)}px var(--font-serif), Georgia, serif`;
+        ctx.font = `500 ${Math.max(13, size * 0.028)}px var(--font-sans), system-ui, sans-serif`;
         ctx.textAlign = 'right';
         ctx.fillText('Braga', bx - 12, by + 5);
       }

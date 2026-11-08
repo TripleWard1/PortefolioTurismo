@@ -1,17 +1,14 @@
 import type { Metadata } from 'next';
-import { Newsreader, Schibsted_Grotesk } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import './globals.css';
 import { LanguageProvider } from './ui/LanguageContext';
 import Header from './ui/Header';
 import Footer from './ui/Footer';
-import Opening from './ui/Opening';
 import Reveal from './ui/Reveal';
 import CommandK from './ui/CommandK';
 
-// Variável (wght + opsz): o nome no hero ganha peso junto ao cursor
-const serif = Newsreader({ subsets: ['latin'], variable: '--font-serif', display: 'swap', style: ['normal', 'italic'], axes: ['opsz'], adjustFontFallback: false });
-const sans = Schibsted_Grotesk({ subsets: ['latin'], variable: '--font-sans', display: 'swap', weight: ['400', '500', '600', '700'], adjustFontFallback: false });
+const sans = Inter({ subsets: ['latin'], variable: '--font-sans', display: 'swap' });
 
 export const metadata: Metadata = {
   title: { default: 'Hugo Barros — Portefólio', template: '%s · Hugo Barros' },
@@ -26,15 +23,14 @@ export const metadata: Metadata = {
     locale: 'pt_PT',
   },
   twitter: { card: 'summary_large_image' },
-  themeColor: '#f4f1ea',
+  themeColor: '#ffffff',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt">
-      <body className={`${serif.variable} ${sans.variable} font-sans antialiased`}>
+      <body className={`${sans.variable} font-sans antialiased`}>
         <LanguageProvider>
-          <Opening />
           <Header />
           <main>{children}</main>
           <Footer />
