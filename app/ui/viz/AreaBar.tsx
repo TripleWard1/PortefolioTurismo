@@ -32,7 +32,7 @@ export default function AreaBar() {
             <span className="mt-1.5 w-2.5 h-2.5 rounded-full shrink-0" style={{ background: AREA_COLOR[a.id] }} />
             <span className="text-[14px] leading-snug">
               <span className="text-ink group-hover:text-petrol transition-colors">{a.label[lang]}</span>
-              <span className="text-muted"> · {a.n}</span>
+              <span className="text-muted-foreground"> · {a.n}</span>
             </span>
           </Link>
         ))}

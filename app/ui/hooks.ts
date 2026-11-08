@@ -57,3 +57,16 @@ export function useCountUp(to: number, run: boolean, ms = 1300) {
   }, [run, to, ms]);
   return v;
 }
+
+/* Media query reativa (false no servidor e até montar) */
+export function useMedia(query: string) {
+  const [m, setM] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia(query);
+    const on = () => setM(mq.matches);
+    on();
+    mq.addEventListener('change', on);
+    return () => mq.removeEventListener('change', on);
+  }, [query]);
+  return m;
+}

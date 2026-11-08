@@ -43,9 +43,9 @@ export default function TrackRecord() {
                   <span className="block font-serif text-[1.3rem] leading-tight text-ink group-hover:text-petrol transition-colors">
                     {m.city[lang]}, {m.country[lang]}
                   </span>
-                  <span className="block mt-1 text-[14px] text-muted">{m.event}</span>
+                  <span className="block mt-1 text-[14px] text-muted-foreground">{m.event}</span>
                 </span>
-                <span className="text-right text-[13px] text-muted shrink-0 pt-1">
+                <span className="text-right text-[13px] text-muted-foreground shrink-0 pt-1">
                   {m.year}
                   <br />
                   {m.km.toLocaleString('pt-PT')} km

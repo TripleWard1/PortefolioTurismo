@@ -17,7 +17,7 @@ export function WordCycle({ words, ms = 2200, className = '' }: { words: string[
     return () => clearInterval(id);
   }, [words.length, ms]);
   return (
-    <span className={`inline-grid align-bottom overflow-hidden pb-[0.12em] -mb-[0.12em] ${className}`} aria-live="polite">
+    <span className={`inline-grid align-bottom overflow-hidden pb-[0.12em] -mb-[0.12em] text-left ${className}`} aria-live="polite">
       {words.map((w, k) => (
         <span
           key={w}

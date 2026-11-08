@@ -1,9 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowRight, Linkedin, Mail } from 'lucide-react';
 import { useLang } from './LanguageContext';
 import { NAV } from './Header';
+import { AREAS } from './projects';
+import { WordmarkRevealFooter } from '@/components/ui/wordmark-reveal-footer';
 
 export const EMAIL = 'hugo.barros@cm-braga.pt';
 export const LINKEDIN = 'https://www.linkedin.com/in/hugo-abreu-barros/';
@@ -11,41 +13,55 @@ export const LINKEDIN = 'https://www.linkedin.com/in/hugo-abreu-barros/';
 export default function Footer() {
   const { t, lang } = useLang();
   return (
-    <footer className="bg-ink text-cream mt-24">
-      <div className="wrap py-14 grid grid-cols-1 md:grid-cols-12 gap-10">
-        <div className="md:col-span-5">
-          <p className="font-serif text-[1.6rem]">Hugo Barros</p>
-          <p className="mt-3 text-[15px] leading-relaxed text-cream/65 max-w-sm">
-            {t(
-              'Técnico Superior de Inovação e Desenvolvimento Turístico. Divisão de Atividades Económicas e Turismo, Município de Braga.',
-              'Senior Officer for Tourism Innovation and Development. Economic Activities and Tourism Division, Municipality of Braga.'
-            )}
-          </p>
-        </div>
-        <nav className="md:col-span-3 flex flex-col gap-2.5" aria-label={t('Rodapé', 'Footer')}>
-          <span className="text-[12px] uppercase tracking-[0.12em] text-cream/45 mb-1">{t('Páginas', 'Pages')}</span>
-          {NAV.map((n) => (
-            <Link key={n.href} href={n.href} className="text-[15px] text-cream/80 hover:text-cream w-fit">
-              {n[lang]}
+    <div className="mt-28">
+      {/* Chamada para contacto, logo acima do rodapé */}
+      <section className="wrap">
+        <div className="rounded-[28px] border border-line bg-card px-7 py-10 md:px-12 md:py-12 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center" data-reveal>
+          <h2 className="lg:col-span-8 font-serif text-[clamp(1.8rem,1.3rem+1.8vw,2.9rem)] leading-[1.08] text-ink text-balance">
+            {t('Cooperação institucional, redes europeias ou um novo projeto?', 'Institutional cooperation, European networks or a new project?')}
+          </h2>
+          <div className="lg:col-span-4 flex lg:justify-end">
+            <Link href="/contacto" className="group h-12 pl-6 pr-5 rounded-full bg-ink text-cream font-semibold text-[15px] inline-flex items-center gap-3 hover:bg-petrol transition-colors">
+              {t('Falar comigo', 'Get in touch')}
+              <span className="w-6 h-6 rounded-full bg-cream/15 grid place-items-center transition-transform group-hover:translate-x-0.5">
+                <ArrowRight className="w-3.5 h-3.5" />
+              </span>
             </Link>
-          ))}
-        </nav>
-        <div className="md:col-span-4 flex flex-col gap-2.5">
-          <span className="text-[12px] uppercase tracking-[0.12em] text-cream/45 mb-1">{t('Contacto', 'Contact')}</span>
-          <a href={`mailto:${EMAIL}`} className="text-[15px] text-cream/80 hover:text-cream w-fit">
-            {EMAIL}
-          </a>
-          <a href={LINKEDIN} target="_blank" rel="noopener noreferrer" className="text-[15px] text-cream/80 hover:text-cream inline-flex items-center gap-1 w-fit">
-            LinkedIn <ArrowUpRight className="w-3.5 h-3.5" />
-          </a>
+          </div>
         </div>
-      </div>
-      <div className="border-t border-cream/10">
-        <div className="wrap py-5 text-[13px] text-cream/45 flex flex-wrap justify-between gap-2">
-          <span>© {new Date().getFullYear()} Hugo Barros</span>
-          <span>Braga, Portugal</span>
-        </div>
-      </div>
-    </footer>
+      </section>
+
+      <WordmarkRevealFooter
+        className="mt-16"
+        wordmark="Hugo Barros"
+        brand={{
+          name: 'Hugo Barros',
+          blurb: t(
+            'Técnico Superior de Inovação e Desenvolvimento Turístico. Divisão de Atividades Económicas e Turismo, Município de Braga.',
+            'Senior Officer for Tourism Innovation and Development. Economic Activities and Tourism Division, Municipality of Braga.'
+          ),
+        }}
+        columns={[
+          { title: t('Páginas', 'Pages'), links: NAV.map((n) => ({ label: n[lang], href: n.href })) },
+          { title: t('Áreas', 'Areas'), links: AREAS.map((a) => ({ label: a.label[lang], href: `/projetos?area=${a.id}` })) },
+          {
+            title: t('Contacto', 'Contact'),
+            links: [
+              { label: EMAIL, href: `mailto:${EMAIL}` },
+              { label: 'LinkedIn', href: LINKEDIN },
+            ],
+          },
+        ]}
+        status={{ label: t('Disponível para cooperação institucional', 'Open to institutional cooperation'), tone: 'ok' }}
+        offices={[
+          { city: 'Braga', timeZone: 'Europe/Lisbon' },
+          { city: t('Bruxelas', 'Brussels'), timeZone: 'Europe/Brussels' },
+        ]}
+        socials={[
+          { label: 'LinkedIn', href: LINKEDIN, icon: <Linkedin className="w-4 h-4" /> },
+          { label: 'Email', href: `mailto:${EMAIL}`, icon: <Mail className="w-4 h-4" /> },
+        ]}
+      />
+    </div>
   );
 }

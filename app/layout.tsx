@@ -9,8 +9,9 @@ import Opening from './ui/Opening';
 import Reveal from './ui/Reveal';
 import CommandK from './ui/CommandK';
 
-const serif = Newsreader({ subsets: ['latin'], variable: '--font-serif', display: 'swap', weight: ['400', '500', '600'], style: ['normal', 'italic'] });
-const sans = Schibsted_Grotesk({ subsets: ['latin'], variable: '--font-sans', display: 'swap', weight: ['400', '500', '600', '700'] });
+// Variável (wght + opsz): o nome no hero ganha peso junto ao cursor
+const serif = Newsreader({ subsets: ['latin'], variable: '--font-serif', display: 'swap', style: ['normal', 'italic'], axes: ['opsz'], adjustFontFallback: false });
+const sans = Schibsted_Grotesk({ subsets: ['latin'], variable: '--font-sans', display: 'swap', weight: ['400', '500', '600', '700'], adjustFontFallback: false });
 
 export const metadata: Metadata = {
   title: { default: 'Hugo Barros — Portefólio', template: '%s · Hugo Barros' },

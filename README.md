@@ -46,3 +46,21 @@ tudo respeita "reduzir movimento".
 | `app/ui/dossiers.tsx` | Texto completo de cada projeto, em PT e EN |
 | `app/page.tsx` | Página inicial (incluindo os projetos em destaque) |
 | `app/globals.css` · `tailwind.config.ts` | Cores, tipografia e efeitos |
+
+## Componentes integrados (`components/ui/`)
+
+Adaptados do pacote de prompts de componentes (estilo shadcn / 21st.dev) à identidade do site:
+os tokens shadcn (`background`, `muted`, `primary`, `chart-1…5`…) estão definidos em `tailwind.config.ts`
+com as cores do portefólio.
+
+| Componente | Onde | Adaptação |
+| --- | --- | --- |
+| `tilted-grid-hero` | Hero da página inicial | Fotografias dos 13 projetos numa curva 3D (CSS puro) |
+| `variable-text-proximity` | Nome no hero | Usa a Newsreader variável do site (pesos e tamanho ótico) |
+| `liquid-glass-navbar` | Cabeçalho | Água em tons de petróleo; ligado ao router do Next |
+| `arrow-fill-button` | Botão principal | Classes Tailwind v4 convertidas para v3 |
+| `focus-rail` | Carrossel de projetos | Só o scroll horizontal o move (o vertical desce a página) |
+| `metro-map-gallery` | Áreas de atuação | Cada área é uma linha; cada projeto, uma estação |
+| `cinematic-list` | `/projetos`, vista em lista | Ligado aos projetos e ao router |
+| `stepped-morph-slider` | Galeria de cada projeto | Carregado só no browser |
+| `wordmark-reveal-footer` | Rodapé | Nome gigante com reflexo, estado e horas de Braga e Bruxelas |

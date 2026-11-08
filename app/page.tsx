@@ -1,25 +1,28 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowRight, ArrowUpRight, Briefcase, Globe2, Landmark, Mail, MonitorSmartphone } from 'lucide-react';
+import { ArrowRight, Mail } from 'lucide-react';
 import { useLang } from './ui/LanguageContext';
-import { Figures, PageHead, ProjectCard, TextLink } from './ui/parts';
+import { Figures, PageHead } from './ui/parts';
 import { MISSION_POINTS } from './ui/AtlasMap';
-import { AREAS, PROJECTS, byId, type Theme } from './ui/projects';
+import { AREAS, PROJECTS, byId, THEME_LABEL, type Theme } from './ui/projects';
 import { EMAIL } from './ui/Footer';
 import ContourField from './ui/fx/ContourField';
 import Globe from './ui/fx/Globe';
-import { Marquee, PhotoRiver, WordCycle } from './ui/fx/Motion';
+import { Marquee, WordCycle } from './ui/fx/Motion';
 import AreaBar from './ui/viz/AreaBar';
 import Gantt from './ui/viz/Gantt';
-import { AREA_COLOR } from './ui/viz/palette';
+import { yearSpan } from './ui/viz/palette';
+import { useMedia } from './ui/hooks';
+import { TiltedGridHero } from '@/components/ui/tilted-grid-hero';
+import { ProximityLetters } from '@/components/ui/variable-text-proximity';
+import { FocusRail } from '@/components/ui/focus-rail';
+import { MetroMapGallery, type MetroLine, type MetroStation } from '@/components/ui/metro-map-gallery';
+import ArrowFillButton from '@/components/ui/arrow-fill-button';
 
 const PORTRAIT = 'https://i.imgur.com/Dx42oze.jpeg';
-const FEATURED = ['smart-tourism', 'visit-braga', 'experiencias-sustentaveis'];
-const ICONS: Record<Theme, typeof Globe2> = { europeu: Landmark, internacional: Globe2, digital: MonitorSmartphone, produto: Briefcase };
 const NETWORKS = [
   'Comissão Europeia',
   'European Capital of Smart Tourism',
@@ -32,29 +35,16 @@ const NETWORKS = [
   'ExpoVacaciones',
   'B-Travel',
 ];
-
-function Floating({ children, className, delay = 0 }: { children: React.ReactNode; className: string; delay?: number }) {
-  const reduce = useReducedMotion();
-  return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y: 20 }}
-      animate={reduce ? { opacity: 1, y: 0 } : { opacity: 1, y: [0, -8, 0] }}
-      transition={
-        reduce
-          ? { duration: 0.6 }
-          : { opacity: { duration: 0.8, delay }, y: { duration: 7, delay, repeat: Infinity, ease: 'easeInOut' } }
-      }
-    >
-      {children}
-    </motion.div>
-  );
-}
+const LINE_ORDER: Theme[] = ['europeu', 'internacional', 'digital', 'produto'];
+// Ordem pela qual os projetos aparecem no carrossel em destaque
+const RAIL = ['smart-tourism', 'braga-after-dark', 'visit-braga', 'cidade-bracvs', 'music-cities-awards', 'experiencias-sustentaveis', 'b-travel-barcelona', 'mapa-turistico-braga', 'systemeu-salamanca', 'small-retail-braga', 'roteiro-3-dias', 'fiets-wandelbeurs-gante', 'expovacaciones-bilbao'];
 
 export default function Home() {
   const { t, lang } = useLang();
   const router = useRouter();
+  const hero = useRef<HTMLDivElement>(null);
   const [focus, setFocus] = useState<string | null>(null);
+  const narrow = useMedia('(max-width: 767px)');
 
   // Links antigos (/#projeto/<id>) passam para a página do projeto
   useEffect(() => {
@@ -65,98 +55,104 @@ export default function Home() {
     }
   }, [router]);
 
-  const [big, ...rest] = FEATURED.map((id) => byId(id)!);
-  const st = byId('smart-tourism')!;
-  const ad = byId('braga-after-dark')!;
+  const go = (href: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    router.push(href);
+  };
+
+  /* Mapa de metro: cada área é uma linha, cada projeto uma estação */
+  const lines: MetroLine[] = LINE_ORDER.map((id, i) => ({ name: THEME_LABEL[id][lang], tone: (i + 1) as 1 | 2 | 3 | 4 }));
+  const stations: MetroStation[] = LINE_ORDER.flatMap((id, line) =>
+    PROJECTS.filter((p) => p.theme === id)
+      .sort((a, b) => yearSpan(a.year)[0] - yearSpan(b.year)[0])
+      .map((p, order) => ({
+        id: p.id,
+        line,
+        order,
+        title: p.title[lang],
+        label: p.status[lang],
+        date: p.year,
+        description: p.summary[lang],
+        image: p.image,
+      }))
+  );
 
   return (
     <>
       {/* ===================== HERO ===================== */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 [mask-image:linear-gradient(90deg,transparent_5%,#000_55%),linear-gradient(0deg,transparent,#000_25%)] [mask-composite:intersect]">
-          <ContourField />
-        </div>
-
-        <div className="relative wrap pt-12 md:pt-16 pb-14 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center min-h-[min(86vh,820px)]">
-          <div className="lg:col-span-7">
-            <motion.p className="kicker flex items-center gap-2.5" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}>
+      <section ref={hero} className="relative">
+        <TiltedGridHero
+          images={PROJECTS.map((p) => ({ src: p.image, alt: p.title[lang] }))}
+          className="h-[860px] md:h-[max(660px,min(100svh-76px,900px))] w-full"
+          tileHeight={narrow ? 17 : 25}
+          axis={narrow ? 84 : 73}
+          curve={76}
+          speed={4.5}
+          fade={9}
+          gap={5}
+        >
+          <div className="absolute inset-x-0 top-0 h-[60%] opacity-70 [mask-image:linear-gradient(180deg,#000_30%,transparent)] pointer-events-none">
+            <ContourField />
+          </div>
+          <div className="relative z-10 wrap pt-10 md:pt-14 flex flex-col items-center text-center">
+            <div className="rise inline-flex items-center gap-3 rounded-full border border-line bg-card/80 backdrop-blur pl-1.5 pr-4 py-1.5" style={{ ['--d' as any]: '80ms' }}>
+              <span className="w-8 h-8 rounded-full overflow-hidden">
+                <img src={PORTRAIT} alt="" className="w-full h-full object-cover object-[64%_18%]" />
+              </span>
+              <span className="text-[13px] text-ink">
+                {t('Técnico Superior', 'Senior Officer')}
+                <span className="text-muted-foreground"> · {t('Município de Braga', 'Municipality of Braga')}</span>
+              </span>
               <span className="relative flex w-2 h-2">
                 <span className="absolute inset-0 rounded-full bg-petrol animate-ping opacity-60 motion-reduce:hidden" />
                 <span className="relative w-2 h-2 rounded-full bg-petrol" />
               </span>
-              {t('Município de Braga · Turismo', 'Municipality of Braga · Tourism')}
-            </motion.p>
-            <motion.h1
-              className="mt-5 font-serif font-medium text-ink text-[clamp(3.2rem,1.8rem+5.6vw,6.6rem)] leading-[0.95] tracking-[-0.03em]"
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            </div>
+
+            <h1
+              className="rise mt-6 font-serif text-ink leading-[0.92] tracking-[-0.03em] text-[clamp(3.6rem,1.6rem+7vw,8.4rem)]"
+              style={{ ['--d' as any]: '160ms', fontVariationSettings: "'wght' 400, 'opsz' 72" }}
+              aria-label="Hugo Barros"
             >
-              Hugo Barros
-            </motion.h1>
-            <motion.p
-              className="mt-5 font-serif text-[clamp(1.5rem,1.15rem+1.4vw,2.4rem)] leading-[1.15] text-ink/80"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-            >
+              <ProximityLetters
+                label="Hugo Barros"
+                containerRef={hero}
+                radius={190}
+                falloff="gaussian"
+                fromFontVariationSettings="'wght' 400, 'opsz' 72"
+                toFontVariationSettings="'wght' 680, 'opsz' 72"
+              />
+            </h1>
+
+            <p className="rise mt-4 font-serif text-[clamp(1.4rem,1.1rem+1.2vw,2.2rem)] text-ink/80" style={{ ['--d' as any]: '260ms' }}>
               {t('Levar Braga a', 'Taking Braga to')}{' '}
               <WordCycle className="italic text-petrol" words={[...MISSION_POINTS.map((m) => m.city[lang]), t('todo o lado', 'everywhere')]} />
-            </motion.p>
-            <motion.p
-              className="mt-6 text-[18px] leading-relaxed text-muted max-w-xl text-pretty"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.42 }}
-            >
+            </p>
+            <p className="rise mt-4 max-w-xl text-[17px] leading-relaxed text-muted-foreground text-pretty" style={{ ['--d' as any]: '340ms' }}>
               {t(
-                'Técnico Superior de Inovação e Desenvolvimento Turístico. Estratégia de destino, candidaturas europeias, promoção internacional e produto turístico — da Comissão Europeia ao centro histórico.',
-                'Senior Officer for Tourism Innovation and Development. Destination strategy, European bids, international promotion and tourism product — from the European Commission to the historic centre.'
+                'Estratégia de destino, candidaturas europeias, promoção internacional e produto turístico — da Comissão Europeia ao centro histórico.',
+                'Destination strategy, European bids, international promotion and tourism product — from the European Commission to the historic centre.'
               )}
-            </motion.p>
-            <motion.div className="mt-9 flex flex-wrap gap-3" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.55 }}>
-              <Link href="/projetos" className="group h-12 pl-6 pr-5 rounded-full bg-ink text-cream font-semibold text-[15px] inline-flex items-center gap-3 hover:bg-petrol transition-colors">
-                {t('Explorar projetos', 'Explore projects')}
-                <span className="w-6 h-6 rounded-full bg-cream/15 grid place-items-center transition-transform group-hover:translate-x-0.5">
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </span>
-              </Link>
-              <a href={`mailto:${EMAIL}`} className="h-12 px-6 rounded-full border border-ink/15 bg-card/70 backdrop-blur text-ink font-semibold text-[15px] inline-flex items-center gap-2 hover:border-petrol/50 transition-colors">
+            </p>
+            <div className="rise mt-7 flex flex-wrap items-center justify-center gap-3" style={{ ['--d' as any]: '420ms' }}>
+              <ArrowFillButton
+                btnText={t('Explorar projetos', 'Explore projects')}
+                href="/projetos"
+                onClick={go('/projetos')}
+                bgColor="#1a1d21"
+                textColor="#f4f1ea"
+                fillBgColor="#0e5a6b"
+                fillTextColor="#f4f1ea"
+                hoverFillBgColor="#0e5a6b"
+                hoverFillTextColor="#f4f1ea"
+              />
+              <a href={`mailto:${EMAIL}`} className="h-12 px-6 rounded-full border border-ink/15 bg-card/80 backdrop-blur text-ink font-semibold text-[15px] inline-flex items-center gap-2 hover:border-petrol/50 transition-colors">
                 <Mail className="w-4 h-4" />
                 {t('Enviar email', 'Send an email')}
               </a>
-            </motion.div>
+            </div>
           </div>
-
-          {/* Colagem */}
-          <div className="lg:col-span-5 relative h-[440px] sm:h-[520px] max-w-[520px] w-full mx-auto">
-            <Floating className="absolute right-0 top-0 w-[72%] h-[86%]" delay={0.2}>
-              <div className="photo w-full h-full rounded-[28px] shadow-[0_40px_80px_-40px_rgba(26,29,33,0.55)]">
-                <img src={PORTRAIT} alt="Hugo Barros" className="object-[64%_18%]" />
-              </div>
-            </Floating>
-            <Floating className="absolute left-0 top-[12%] w-[46%]" delay={0.5}>
-              <Link href={`/projetos/${st.id}`} className="group block">
-                <span className="photo block aspect-[4/3] rounded-2xl border-4 border-cream shadow-[0_24px_50px_-28px_rgba(26,29,33,0.6)]">
-                  <img src={st.image} alt="" />
-                </span>
-                <span className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-card/90 backdrop-blur border border-line px-3 py-1 text-[12px] font-medium text-ink">
-                  {st.status[lang]} · {st.title[lang]} <ArrowUpRight className="w-3 h-3" />
-                </span>
-              </Link>
-            </Floating>
-            <Floating className="absolute left-[14%] bottom-0 w-[44%]" delay={0.8}>
-              <Link href={`/projetos/${ad.id}`} className="group block">
-                <span className="photo block aspect-[4/3] rounded-2xl border-4 border-cream shadow-[0_24px_50px_-28px_rgba(26,29,33,0.6)]">
-                  <img src={ad.image} alt="" />
-                </span>
-                <span className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-card/90 backdrop-blur border border-line px-3 py-1 text-[12px] font-medium text-ink">
-                  URBACT · {ad.title[lang]} <ArrowUpRight className="w-3 h-3" />
-                </span>
-              </Link>
-            </Floating>
-          </div>
-        </div>
+        </TiltedGridHero>
 
         {/* Redes e eventos */}
         <div className="relative border-y border-line bg-card/60 backdrop-blur py-4">
@@ -179,79 +175,63 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===================== EM DESTAQUE ===================== */}
-      <section className="wrap mt-24 md:mt-32">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <PageHead kicker={t('Em destaque', 'Featured')} title={t('Três projetos, três frentes de trabalho', 'Three projects, three lines of work')} />
+      {/* ===================== EM DESTAQUE (Focus Rail) ===================== */}
+      <section className="mt-24 md:mt-32 bg-ink text-cream">
+        <div className="wrap pt-16 md:pt-20 flex flex-wrap items-end justify-between gap-6">
           <div data-reveal>
-            <TextLink href="/projetos">{t(`Ver os ${PROJECTS.length} projetos`, `See all ${PROJECTS.length} projects`)}</TextLink>
+            <p className="kicker !text-[#7fbfb8]">{t('Portefólio', 'Portfolio')}</p>
+            <h2 className="mt-3 h-section text-cream">{t('Treze projetos, um de cada vez', 'Thirteen projects, one at a time')}</h2>
+            <p className="mt-3 text-[16px] text-cream/65">{t('Arraste, use as setas do teclado ou clique numa capa lateral.', 'Drag, use the arrow keys or click a side cover.')}</p>
           </div>
+          <Link href="/projetos" className="group inline-flex items-center gap-2 text-[15px] font-semibold text-cream" data-reveal>
+            {t('Ver todos em grelha', 'See them all in a grid')}
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          </Link>
         </div>
-        <div className="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <div className="lg:col-span-7 lg:row-span-2">
-            <ProjectCard p={big} size="lg" />
-          </div>
-          {rest.map((p, i) => (
-            <div key={p.id} className="lg:col-span-5">
-              <ProjectCard p={p} delay={(i + 1) * 100} />
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ===================== ARQUIVO VISUAL ===================== */}
-      <section className="mt-24 md:mt-32">
-        <div className="wrap flex flex-wrap items-end justify-between gap-6 mb-10">
-          <PageHead
-            kicker={t('Arquivo visual', 'Visual archive')}
-            title={t('Treze projetos, num relance', 'Thirteen projects at a glance')}
-            intro={t('Clique numa fotografia para abrir o projeto.', 'Click a photo to open the project.')}
-          />
-        </div>
-        <PhotoRiver />
-      </section>
-
-      {/* ===================== ÁREAS ===================== */}
-      <section className="wrap mt-24 md:mt-32">
-        <PageHead kicker={t('Áreas de atuação', 'Areas of work')} title={t('O trabalho em quatro áreas', 'The work in four areas')} />
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5">
-          {AREAS.map((a, i) => {
-            const Icon = ICONS[a.id];
-            const items = PROJECTS.filter((p) => p.theme === a.id);
-            return (
-              <Link
-                key={a.id}
-                href={`/projetos?area=${a.id}`}
-                data-reveal
-                style={{ ['--delay' as any]: `${i * 80}ms` }}
-                className="group relative rounded-2xl bg-card border border-line p-7 md:p-8 overflow-hidden hover:border-transparent hover:shadow-[0_24px_60px_-30px_rgba(14,90,107,0.5)] transition-[border-color,box-shadow] duration-500"
-              >
-                <span className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" style={{ background: AREA_COLOR[a.id] }} />
-                <div className="flex items-start justify-between gap-6">
-                  <span className="w-12 h-12 rounded-xl grid place-items-center text-white shrink-0" style={{ background: AREA_COLOR[a.id] }}>
-                    <Icon className="w-5 h-5" strokeWidth={1.75} />
-                  </span>
-                  {/* miniaturas dos projetos da área */}
-                  <span className="flex -space-x-3">
-                    {items.slice(0, 4).map((p) => (
-                      <span key={p.id} className="photo w-11 h-11 rounded-full border-2 border-card">
-                        <img src={p.image} alt="" loading="lazy" />
-                      </span>
-                    ))}
-                  </span>
-                </div>
-                <h3 className="mt-6 font-serif text-[1.65rem] leading-tight text-ink">{a.label[lang]}</h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-muted max-w-md">{a.description[lang]}</p>
-                <p className="mt-5 text-[14px] text-muted">
-                  {items.map((p) => p.title[lang]).join(' · ')}
-                </p>
-                <span className="mt-6 inline-flex items-center gap-2 text-[14px] font-semibold text-petrol">
-                  {items.length} {t('projetos', 'projects')}
-                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </span>
-              </Link>
-            );
+        <FocusRail
+          className="bg-ink"
+          items={RAIL.map((id) => {
+            const p = byId(id)!;
+            return {
+              id: p.id,
+              title: p.title[lang],
+              description: p.summary[lang],
+              meta: `${THEME_LABEL[p.theme][lang]} · ${p.year}`,
+              imageSrc: p.image,
+              href: `/projetos/${p.id}`,
+            };
           })}
+        />
+      </section>
+
+      {/* ===================== ÁREAS (Metro Map) ===================== */}
+      <section className="wrap mt-24 md:mt-32">
+        <div className="flex flex-wrap items-end justify-between gap-6 mb-8">
+          <PageHead
+            kicker={t('Áreas de atuação', 'Areas of work')}
+            title={t('Quatro linhas, treze estações', 'Four lines, thirteen stations')}
+            intro={t(
+              'Cada área de atuação é uma linha; cada projeto, uma estação. Passe por uma estação para a pré-visualizar e clique para abrir o projeto.',
+              'Each area of work is a line; each project, a station. Hover a station to preview it and click to open the project.'
+            )}
+          />
+          <div className="flex flex-wrap gap-2" data-reveal>
+            {AREAS.map((a) => (
+              <Link key={a.id} href={`/projetos?area=${a.id}`} className="h-9 px-3.5 rounded-full border border-line bg-card text-[13px] text-ink hover:border-petrol/50 transition-colors">
+                {a.label[lang]}
+              </Link>
+            ))}
+          </div>
+        </div>
+        <div className="rounded-[28px] border border-line bg-card p-3 md:p-6" data-reveal>
+          <MetroMapGallery
+            items={stations}
+            lines={lines}
+            caption={t('Os comboios param em cada projeto. Escolha uma estação.', 'The trains stop at every project. Pick a station.')}
+            trainSpeed={70}
+            onOpenChange={(id) => id && router.push(`/projetos/${id}`)}
+            labels={{ close: t('Fechar', 'Close'), previous: t('Anterior', 'Previous'), next: t('Seguinte', 'Next'), line: t('Linha', 'Line'), station: t('Estação', 'Station') }}
+          />
         </div>
       </section>
 
@@ -301,7 +281,7 @@ export default function Home() {
 
       {/* ===================== CRONOLOGIA ===================== */}
       <section className="wrap mt-24 md:mt-32">
-        <div className="flex flex-wrap items-end justify-between gap-6 mb-10">
+        <div className="mb-10">
           <PageHead
             kicker={t('Cronologia', 'Timeline')}
             title={t('2024 — 2026, projeto a projeto', '2024 — 2026, project by project')}
@@ -310,31 +290,6 @@ export default function Home() {
         </div>
         <div data-reveal>
           <Gantt compact />
-        </div>
-      </section>
-
-      {/* ===================== CONTACTO ===================== */}
-      <section className="wrap mt-24 md:mt-32">
-        <div className="relative rounded-[28px] bg-ink text-cream overflow-hidden" data-reveal>
-          <div className="absolute inset-0 opacity-40 [mask-image:linear-gradient(90deg,transparent,#000_70%)]">
-            <ContourField color="79,154,148" levels={9} cell={16} />
-          </div>
-          <div className="relative px-8 py-14 md:px-14 md:py-20 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
-            <div className="lg:col-span-8">
-              <p className="kicker !text-[#7fbfb8]">{t('Contacto', 'Contact')}</p>
-              <h2 className="mt-3 font-serif text-[clamp(2rem,1.4rem+2.2vw,3.4rem)] leading-[1.05]">
-                {t('Cooperação institucional, redes europeias ou um novo projeto?', 'Institutional cooperation, European networks or a new project?')}
-              </h2>
-            </div>
-            <div className="lg:col-span-4 flex flex-wrap lg:justify-end gap-3">
-              <Link href="/contacto" className="group h-12 pl-6 pr-5 rounded-full bg-cream text-ink font-semibold text-[15px] inline-flex items-center gap-3 hover:bg-white transition-colors">
-                {t('Falar comigo', 'Get in touch')}
-                <span className="w-6 h-6 rounded-full bg-ink/10 grid place-items-center transition-transform group-hover:translate-x-0.5">
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </span>
-              </Link>
-            </div>
-          </div>
         </div>
       </section>
     </>

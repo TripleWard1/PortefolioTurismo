@@ -37,7 +37,7 @@ export default function Opening() {
           Hugo Barros
         </p>
         <span className="block mx-auto mt-4 h-px w-28 bg-petrol origin-left" style={{ animation: 'ab-linha .8s cubic-bezier(.22,1,.36,1) .15s both' }} />
-        <p className="mt-4 text-[13px] tracking-[0.12em] uppercase text-muted" style={{ animation: 'ab-texto .6s cubic-bezier(.22,1,.36,1) .25s both' }}>
+        <p className="mt-4 text-[13px] tracking-[0.12em] uppercase text-muted-foreground" style={{ animation: 'ab-texto .6s cubic-bezier(.22,1,.36,1) .25s both' }}>
           {t('Município de Braga · Turismo', 'Municipality of Braga · Tourism')}
         </p>
       </div>

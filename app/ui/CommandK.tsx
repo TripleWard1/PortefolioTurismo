@@ -104,12 +104,12 @@ export default function CommandK() {
                 }}
                 placeholder={t('Procurar projetos e páginas…', 'Search projects and pages…')}
                 aria-label={t('Procurar', 'Search')}
-                className="flex-1 h-16 bg-transparent outline-none font-serif text-[1.35rem] placeholder:text-muted/70"
+                className="flex-1 h-16 bg-transparent outline-none font-serif text-[1.35rem] placeholder:text-muted-foreground/70"
               />
-              <kbd className="text-[11px] text-muted border border-line rounded px-1.5 py-0.5">esc</kbd>
+              <kbd className="text-[11px] text-muted-foreground border border-line rounded px-1.5 py-0.5">esc</kbd>
             </div>
             <ul className="max-h-[52vh] overflow-y-auto p-2">
-              {items.length === 0 && <li className="px-4 py-10 text-center text-muted">{t('Sem resultados.', 'No results.')}</li>}
+              {items.length === 0 && <li className="px-4 py-10 text-center text-muted-foreground">{t('Sem resultados.', 'No results.')}</li>}
               {items.map((it, k) => (
                 <li key={it.href}>
                   <button
@@ -122,7 +122,7 @@ export default function CommandK() {
                     </span>
                     <span className="flex-1 min-w-0">
                       <span className="block truncate font-medium text-[15px]">{it.label}</span>
-                      <span className={`block truncate text-[12px] ${k === i ? 'text-white/70' : 'text-muted'}`}>{it.sub}</span>
+                      <span className={`block truncate text-[12px] ${k === i ? 'text-white/70' : 'text-muted-foreground'}`}>{it.sub}</span>
                     </span>
                     {k === i && <CornerDownLeft className="w-4 h-4 shrink-0" />}
                   </button>

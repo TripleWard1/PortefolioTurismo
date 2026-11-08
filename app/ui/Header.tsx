@@ -1,11 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Menu, Search, X } from 'lucide-react';
 import { useLang } from './LanguageContext';
 import { useScrollLock } from './hooks';
+import { LiquidNavbar, NimbusIcons } from '@/components/ui/liquid-glass-navbar';
 
 export const NAV = [
   { href: '/', pt: 'Início', en: 'Home' },
@@ -18,9 +19,9 @@ export function LangSwitch({ className = '' }: { className?: string }) {
   const { lang, toggleLang, t } = useLang();
   return (
     <button onClick={toggleLang} aria-label={t('Mudar idioma para inglês', 'Switch language to Portuguese')} className={`text-[13px] font-semibold ${className}`}>
-      <span className={lang === 'pt' ? 'text-ink' : 'text-muted/70 hover:text-ink'}>PT</span>
+      <span className={lang === 'pt' ? 'text-ink' : 'text-muted-foreground/70 hover:text-ink'}>PT</span>
       <span className="text-line mx-1.5">/</span>
-      <span className={lang === 'en' ? 'text-ink' : 'text-muted/70 hover:text-ink'}>EN</span>
+      <span className={lang === 'en' ? 'text-ink' : 'text-muted-foreground/70 hover:text-ink'}>EN</span>
     </button>
   );
 }
@@ -28,6 +29,7 @@ export function LangSwitch({ className = '' }: { className?: string }) {
 export default function Header() {
   const { lang, t } = useLang();
   const path = usePathname();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   useScrollLock(open);
@@ -44,27 +46,29 @@ export default function Header() {
 
   return (
     <header className={`sticky top-0 z-[400] bg-cream/90 backdrop-blur-md transition-shadow ${scrolled ? 'shadow-[0_1px_0_#ddd6c8]' : ''}`}>
-      <div className="wrap h-[72px] flex items-center justify-between gap-6">
+      <div className="wrap h-[76px] flex items-center justify-between gap-6">
         <Link href="/" className="flex items-baseline gap-3 shrink-0">
           <span className="font-serif text-[22px] font-medium text-ink tracking-[-0.01em]">Hugo Barros</span>
-          <span className="hidden md:inline text-[13px] text-muted">{t('Turismo · Município de Braga', 'Tourism · Municipality of Braga')}</span>
+          <span className="hidden md:inline text-[13px] text-muted-foreground">{t('Turismo · Município de Braga', 'Tourism · Municipality of Braga')}</span>
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-1" aria-label={t('Navegação principal', 'Main navigation')}>
-          {NAV.map((n) => (
-            <Link
-              key={n.href}
-              href={n.href}
-              aria-current={isActive(n.href) ? 'page' : undefined}
-              className={`relative px-3.5 py-2 text-[15px] transition-colors ${isActive(n.href) ? 'text-ink' : 'text-muted hover:text-ink'}`}
-            >
-              {n[lang]}
-              <span className={`absolute left-3.5 right-3.5 -bottom-0.5 h-[2px] bg-petrol transition-transform origin-left duration-300 ${isActive(n.href) ? 'scale-x-100' : 'scale-x-0'}`} />
-            </Link>
-          ))}
+        {/* Navegação: pílula de "água" (Liquid Glass Navbar) ligada ao router */}
+        <nav className="hidden lg:flex items-center gap-3" aria-label={t('Navegação principal', 'Main navigation')}>
+          <LiquidNavbar
+            tone="light"
+            active={Math.max(0, NAV.findIndex((n) => isActive(n.href)))}
+            onChange={(i) => router.push(NAV[i].href)}
+            items={NAV.map((n, i) => ({
+              label: n[lang],
+              icon: [NimbusIcons.home, NimbusIcons.globe, NimbusIcons.plane, NimbusIcons.user][i],
+              fx: (['glow', 'spin', 'plane', 'wave'] as const)[i],
+            }))}
+          />
+        </nav>
+        <div className="hidden lg:flex items-center">
           <button
             onClick={() => window.dispatchEvent(new Event('open-search'))}
-            className="ml-3 h-9 pl-3 pr-2 rounded-full border border-line bg-card/70 text-[13px] text-muted inline-flex items-center gap-2 hover:border-petrol/40 hover:text-ink transition-colors"
+            className="h-9 pl-3 pr-2 rounded-full border border-line bg-card/70 text-[13px] text-muted-foreground inline-flex items-center gap-2 hover:border-petrol/40 hover:text-ink transition-colors"
           >
             <Search className="w-3.5 h-3.5" />
             {t('Procurar', 'Search')}
@@ -72,7 +76,7 @@ export default function Header() {
           </button>
           <span className="w-px h-5 bg-line mx-3" />
           <LangSwitch />
-        </nav>
+        </div>
 
         <div className="lg:hidden flex items-center gap-3">
           <LangSwitch />
@@ -86,7 +90,7 @@ export default function Header() {
       </div>
 
       {open && (
-        <nav className="lg:hidden fixed inset-x-0 top-[72px] bottom-0 bg-cream border-t border-line" aria-label={t('Navegação principal', 'Main navigation')}>
+        <nav className="lg:hidden fixed inset-x-0 top-[76px] bottom-0 bg-cream border-t border-line" aria-label={t('Navegação principal', 'Main navigation')}>
           <div className="wrap py-4">
             {NAV.map((n) => (
               <Link key={n.href} href={n.href} className={`block py-4 border-b border-line font-serif text-[1.6rem] ${isActive(n.href) ? 'text-petrol' : 'text-ink'}`}>

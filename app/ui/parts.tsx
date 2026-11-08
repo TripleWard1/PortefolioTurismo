@@ -14,7 +14,7 @@ export function PageHead({ kicker, title, intro, as = 'h2' }: { kicker: string; 
     <header className="max-w-3xl" data-reveal>
       <p className="kicker">{kicker}</p>
       <H className={`mt-3 text-ink text-balance ${as === 'h1' ? 'h-display' : 'h-section'}`}>{title}</H>
-      {intro && <p className="mt-5 text-[18px] leading-relaxed text-muted text-pretty">{intro}</p>}
+      {intro && <p className="mt-5 text-[18px] leading-relaxed text-muted-foreground text-pretty">{intro}</p>}
     </header>
   );
 }
@@ -35,16 +35,16 @@ export function ProjectCard({ p, size = 'md', delay = 0, animate = true }: { p: 
       <div className={size === 'lg' ? 'p-7' : 'p-6'}>
         <div className="flex items-center justify-between gap-3 text-[12px] font-semibold uppercase tracking-[0.1em]">
           <span className="text-petrol truncate">{THEME_LABEL[p.theme][lang]}</span>
-          <span className="text-muted shrink-0">{p.year}</span>
+          <span className="text-muted-foreground shrink-0">{p.year}</span>
         </div>
         <h3 className={`mt-3 font-serif font-medium text-ink leading-tight group-hover:text-petrol transition-colors ${size === 'lg' ? 'text-[2rem]' : 'text-[1.45rem]'}`}>
           {p.title[lang]}
         </h3>
-        <p className="mt-1.5 text-[14px] text-muted flex items-center gap-1.5">
+        <p className="mt-1.5 text-[14px] text-muted-foreground flex items-center gap-1.5">
           <MapPin className="w-3.5 h-3.5 shrink-0" />
           {p.place[lang]}
         </p>
-        <p className={`mt-3 leading-relaxed text-muted ${size === 'lg' ? 'text-[16px]' : 'text-[15px] line-clamp-3'}`}>{p.summary[lang]}</p>
+        <p className={`mt-3 leading-relaxed text-muted-foreground ${size === 'lg' ? 'text-[16px]' : 'text-[15px] line-clamp-3'}`}>{p.summary[lang]}</p>
         <span className="mt-5 inline-flex items-center gap-2 text-[14px] font-semibold text-petrol">
           {t('Ver projeto', 'View project')}
           <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -60,7 +60,7 @@ function Figure({ to, label, run, delay }: { to: number; label: string; run: boo
   return (
     <div className="bg-card px-6 py-7" data-reveal style={{ ['--delay' as any]: `${delay}ms` }}>
       <p className="font-serif text-[3rem] leading-none text-petrol tabular-nums">{v}</p>
-      <p className="mt-3 text-[15px] leading-snug text-muted">{label}</p>
+      <p className="mt-3 text-[15px] leading-snug text-muted-foreground">{label}</p>
     </div>
   );
 }

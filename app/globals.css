@@ -16,6 +16,11 @@
   --line: #ddd6c8;
   --petrol: #0e5a6b;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Nomes que os componentes de components/ui esperam (convenção shadcn / Tailwind v4) */
+  --color-background: #f4f1ea;
+  --color-foreground: #1a1d21;
+  --color-muted-foreground: #5e6166;
+  --color-primary: #0e5a6b;
 }
 
 @layer base {

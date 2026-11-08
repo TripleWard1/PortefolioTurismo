@@ -8,6 +8,12 @@ import { useLang } from '../../ui/LanguageContext';
 import { getDossiers } from '../../ui/dossiers';
 import { PROJECTS, THEME_LABEL, byId, neighbours } from '../../ui/projects';
 import { useScrollLock } from '../../ui/hooks';
+import dynamic from 'next/dynamic';
+// Só no browser: o slider gera formas e paisagens no cliente (evita diferenças na hidratação)
+const SteppedMorphSlider = dynamic(() => import('@/components/ui/stepped-morph-slider'), {
+  ssr: false,
+  loading: () => <div className="aspect-[16/10] rounded-xl bg-muted animate-pulse" />,
+});
 
 function H2({ children }: { children: React.ReactNode }) {
   return <h2 className="h-section text-ink !text-[clamp(1.6rem,1.3rem+0.9vw,2.1rem)] mb-6">{children}</h2>;
@@ -73,10 +79,10 @@ export default function CaseStudy({ id }: { id: string }) {
 
   return (
     <article ref={art} className="wrap pt-8 md:pt-12">
-      <motion.div className="fixed left-0 right-0 top-[72px] h-[3px] bg-petrol origin-left z-[390]" style={{ scaleX: progress }} aria-hidden="true" />
+      <motion.div className="fixed left-0 right-0 top-[76px] h-[3px] bg-petrol origin-left z-[390]" style={{ scaleX: progress }} aria-hidden="true" />
       {/* Navegação */}
       <nav className="flex flex-wrap items-center justify-between gap-4 text-[14px]" aria-label={t('Localização', 'Breadcrumb')}>
-        <div className="flex items-center gap-2 text-muted min-w-0">
+        <div className="flex items-center gap-2 text-muted-foreground min-w-0">
           <Link href="/projetos" className="hover:text-petrol inline-flex items-center gap-1.5">
             <ArrowLeft className="w-4 h-4" />
             {t('Projetos', 'Projects')}
@@ -86,7 +92,7 @@ export default function CaseStudy({ id }: { id: string }) {
             {THEME_LABEL[meta.theme][lang]}
           </Link>
         </div>
-        <span className="text-muted">
+        <span className="text-muted-foreground">
           {t('Projeto', 'Project')} {index + 1} {t('de', 'of')} {PROJECTS.length}
         </span>
       </nav>
@@ -100,7 +106,7 @@ export default function CaseStudy({ id }: { id: string }) {
           <h1 className="mt-3 font-serif font-medium text-[clamp(2.2rem,1.5rem+2.8vw,3.9rem)] leading-[1.05] tracking-[-0.02em] text-ink text-balance">
             {data.headerTitle}
           </h1>
-          <p className="mt-5 text-[19px] leading-relaxed text-muted max-w-2xl text-pretty">{meta.summary[lang]}</p>
+          <p className="mt-5 text-[19px] leading-relaxed text-muted-foreground max-w-2xl text-pretty">{meta.summary[lang]}</p>
         </div>
         <div className="lg:col-span-4 flex flex-wrap gap-2 lg:justify-end">
           <button onClick={share} className="h-10 px-4 rounded-full border border-line bg-card text-[14px] inline-flex items-center gap-2 hover:border-petrol/50">
@@ -124,7 +130,7 @@ export default function CaseStudy({ id }: { id: string }) {
       <dl className="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-px bg-line border border-line rounded-xl overflow-hidden" data-reveal>
         {facts.map((f) => (
           <div key={f.k} className="bg-card px-5 py-4">
-            <dt className="text-[12px] uppercase tracking-[0.1em] text-muted">{f.k}</dt>
+            <dt className="text-[12px] uppercase tracking-[0.1em] text-muted-foreground">{f.k}</dt>
             <dd className="mt-1.5 text-[15px] text-ink leading-snug">{f.v}</dd>
           </div>
         ))}
@@ -146,7 +152,7 @@ export default function CaseStudy({ id }: { id: string }) {
             <section id="eixos" data-sec data-reveal className="scroll-mt-28">
               <H2>{data.pillarTabLabel || t('Eixos de intervenção', 'Areas of intervention')}</H2>
               {data.pillarTitle && <h3 className="text-[1.15rem] font-semibold text-ink">{data.pillarTitle}</h3>}
-              {data.pillarDesc && <p className="mt-2 text-[16px] leading-relaxed text-muted">{data.pillarDesc}</p>}
+              {data.pillarDesc && <p className="mt-2 text-[16px] leading-relaxed text-muted-foreground">{data.pillarDesc}</p>}
               <ol className="mt-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {data.pillars.map((p, i) => {
                   const Icon = p.icon;
@@ -159,9 +165,9 @@ export default function CaseStudy({ id }: { id: string }) {
                         <span className="font-serif text-[1.4rem] text-line">{String(i + 1).padStart(2, '0')}</span>
                       </div>
                       <h4 className="mt-4 text-[17px] font-semibold text-ink leading-snug">{p.title}</h4>
-                      {p.desc && <p className="mt-2 text-[15px] leading-relaxed text-muted">{p.desc}</p>}
+                      {p.desc && <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{p.desc}</p>}
                       {p.items && (
-                        <ul className="mt-3 space-y-1 text-[14px] text-muted list-disc pl-5">
+                        <ul className="mt-3 space-y-1 text-[14px] text-muted-foreground list-disc pl-5">
                           {p.items.map((it) => (
                             <li key={it}>{it}</li>
                           ))}
@@ -178,14 +184,29 @@ export default function CaseStudy({ id }: { id: string }) {
             <section id="registo" data-sec data-reveal className="scroll-mt-28">
               <H2>{t('Registo do trabalho', 'Record of the work')}</H2>
               {data.videoEmbed && <div className="mb-6">{data.videoEmbed}</div>}
+              {gal.length > 1 && (
+                // Stepped Morph Slider: cada fotografia numa janela em degraus, que se transforma na seguinte
+                <div className="rounded-2xl border border-line bg-card p-3 md:p-5 mb-5">
+                  <SteppedMorphSlider
+                    slides={gal.map((img, i) => ({ image: img, title: `${meta.title[lang]} · ${i + 1}/${gal.length}`, seed: i * 7 + 3 }))}
+                    aspect={16 / 10}
+                    columns={8}
+                    autoplay={0}
+                    background="#fbfaf6"
+                    ink="#1a1d21"
+                    muted="#5e6166"
+                    accent="#0e5a6b"
+                  />
+                </div>
+              )}
               {gal.length > 0 && (
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                <div className="grid grid-cols-4 md:grid-cols-6 gap-2">
                   {gal.map((img, i) => (
                     <button
                       key={img + i}
                       onClick={() => setLightbox(i)}
                       aria-label={`${t('Ampliar imagem', 'Enlarge image')} ${i + 1}`}
-                      className="photo aspect-[4/3] rounded-lg border border-line"
+                      className="photo aspect-[4/3] rounded-md border border-line"
                     >
                       <img src={img} alt="" loading="lazy" />
                     </button>
@@ -199,7 +220,7 @@ export default function CaseStudy({ id }: { id: string }) {
         <aside className="lg:col-span-4">
           <div className="lg:sticky lg:top-28 space-y-6">
             <nav className="hidden lg:block" aria-label={t('Nesta página', 'On this page')}>
-              <p className="text-[12px] uppercase tracking-[0.1em] font-semibold text-muted mb-3">{t('Nesta página', 'On this page')}</p>
+              <p className="text-[12px] uppercase tracking-[0.1em] font-semibold text-muted-foreground mb-3">{t('Nesta página', 'On this page')}</p>
               <ul className="border-l border-line">
                 {[
                   { id: 'contexto', label: t('Contexto', 'Context'), show: true },
@@ -211,7 +232,7 @@ export default function CaseStudy({ id }: { id: string }) {
                     <li key={s.id}>
                       <a
                         href={`#${s.id}`}
-                        className={`-ml-px block border-l-2 pl-4 py-1.5 text-[14px] transition-colors ${active === s.id ? 'border-petrol text-petrol font-medium' : 'border-transparent text-muted hover:text-ink'}`}
+                        className={`-ml-px block border-l-2 pl-4 py-1.5 text-[14px] transition-colors ${active === s.id ? 'border-petrol text-petrol font-medium' : 'border-transparent text-muted-foreground hover:text-ink'}`}
                       >
                         {s.label}
                       </a>
@@ -221,11 +242,11 @@ export default function CaseStudy({ id }: { id: string }) {
             </nav>
             {(data.stats || []).length > 0 && (
               <div className="rounded-xl bg-card border border-line p-6" data-reveal>
-                <h2 className="text-[12px] uppercase tracking-[0.1em] font-semibold text-muted">{t('Em síntese', 'At a glance')}</h2>
+                <h2 className="text-[12px] uppercase tracking-[0.1em] font-semibold text-muted-foreground">{t('Em síntese', 'At a glance')}</h2>
                 <dl className="mt-4 divide-y divide-line">
                   {data.stats!.map((s) => (
                     <div key={s.label} className="py-3 first:pt-0 last:pb-0">
-                      <dt className="text-[13px] text-muted">{s.label}</dt>
+                      <dt className="text-[13px] text-muted-foreground">{s.label}</dt>
                       <dd className="mt-0.5 font-serif text-[1.3rem] text-petrol leading-tight">{s.value}</dd>
                     </div>
                   ))}
@@ -234,7 +255,7 @@ export default function CaseStudy({ id }: { id: string }) {
             )}
             {(mainLink || langLinks.length > 0) && (
               <div className="rounded-xl bg-card border border-line p-6" data-reveal>
-                <h2 className="text-[12px] uppercase tracking-[0.1em] font-semibold text-muted">{t('Documentos e ligações', 'Documents & links')}</h2>
+                <h2 className="text-[12px] uppercase tracking-[0.1em] font-semibold text-muted-foreground">{t('Documentos e ligações', 'Documents & links')}</h2>
                 <div className="mt-4 space-y-2.5">
                   {mainLink && (
                     <a href={mainLink} target="_blank" rel="noopener noreferrer" className="group flex items-start gap-3 rounded-lg bg-petrol text-white px-4 py-3 hover:bg-petrol-dark">
@@ -270,7 +291,7 @@ export default function CaseStudy({ id }: { id: string }) {
               <img src={p.image} alt="" loading="lazy" />
             </span>
             <span className="min-w-0">
-              <span className={`text-[13px] text-muted inline-flex items-center gap-1.5 ${dir === 'next' ? 'md:flex-row-reverse' : ''}`}>
+              <span className={`text-[13px] text-muted-foreground inline-flex items-center gap-1.5 ${dir === 'next' ? 'md:flex-row-reverse' : ''}`}>
                 {dir === 'prev' ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />}
                 {label}
               </span>

@@ -40,7 +40,7 @@ export default function ContactView() {
               <Mail className="w-5 h-5" />
             </span>
             <div className="min-w-0">
-              <p className="text-[13px] text-muted">{t('Email institucional', 'Institutional email')}</p>
+              <p className="text-[13px] text-muted-foreground">{t('Email institucional', 'Institutional email')}</p>
               <a href={`mailto:${EMAIL}`} className="block font-serif text-[1.45rem] text-ink hover:text-petrol break-all">
                 {EMAIL}
               </a>
@@ -58,23 +58,23 @@ export default function ContactView() {
               <Linkedin className="w-5 h-5" />
             </span>
             <span className="flex-1">
-              <span className="block text-[13px] text-muted">LinkedIn</span>
+              <span className="block text-[13px] text-muted-foreground">LinkedIn</span>
               <span className="block font-semibold text-ink">Hugo Abreu Barros</span>
             </span>
-            <ArrowUpRight className="w-4 h-4 text-muted group-hover:text-petrol" />
+            <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-petrol" />
           </a>
           <div className="rounded-xl bg-card border border-line p-6 flex items-center gap-4" data-reveal style={{ ['--delay' as any]: '80ms' }}>
             <span className="w-12 h-12 rounded-lg bg-petrol/10 text-petrol grid place-items-center shrink-0">
               <Building2 className="w-5 h-5" />
             </span>
             <span>
-              <span className="block text-[13px] text-muted">{t('Entidade', 'Organisation')}</span>
+              <span className="block text-[13px] text-muted-foreground">{t('Entidade', 'Organisation')}</span>
               <span className="block font-semibold text-ink">{t('Município de Braga', 'Municipality of Braga')}</span>
             </span>
           </div>
         </div>
 
-        <div className="rounded-xl border border-line p-6 flex items-start gap-4 text-[15px] text-muted" data-reveal>
+        <div className="rounded-xl border border-line p-6 flex items-start gap-4 text-[15px] text-muted-foreground" data-reveal>
           <MapPin className="w-5 h-5 text-petrol shrink-0 mt-0.5" />
           <p>
             {t(

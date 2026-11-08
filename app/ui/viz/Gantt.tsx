@@ -36,10 +36,10 @@ export default function Gantt({ compact = false }: { compact?: boolean }) {
     <div className="rounded-2xl border border-line bg-card p-5 md:p-8 overflow-hidden">
       {/* Eixo */}
       <div className="grid grid-cols-[minmax(0,9rem)_1fr] md:grid-cols-[minmax(0,15rem)_1fr] gap-4 pb-3 border-b border-line">
-        <span className="text-[12px] uppercase tracking-[0.1em] text-muted">{t('Projeto', 'Project')}</span>
+        <span className="text-[12px] uppercase tracking-[0.1em] text-muted-foreground">{t('Projeto', 'Project')}</span>
         <div className="relative h-4">
           {[2024, 2025, 2026].map((y) => (
-            <span key={y} className="absolute top-0 text-[12px] font-semibold text-muted" style={{ left: `${pos(y)}%` }}>
+            <span key={y} className="absolute top-0 text-[12px] font-semibold text-muted-foreground" style={{ left: `${pos(y)}%` }}>
               {y}
             </span>
           ))}
