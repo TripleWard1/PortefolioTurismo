@@ -42,7 +42,7 @@ export default function ProjectsView() {
 
   return (
     <div>
-      <section className="tone-shift pt-16 md:pt-24 pb-10" style={{ background: area ? TONE[area.id].tint : '#F4F1EC' }}>
+      <section className="tone-shift -mt-20 pt-36 md:pt-44 pb-10" style={{ background: area ? TONE[area.id].tint : '#F4F1EC' }}>
       <div className="wrap">
       <header data-reveal>
         <p className="t-label inline-flex items-center gap-2 tone-shift" style={{ color: area ? TONE[area.id].deep : '#6e6e73' }}>
@@ -56,8 +56,8 @@ export default function ProjectsView() {
           {area
             ? area.description[lang]
             : t(
-                'Treze projetos desenvolvidos entre 2024 e 2026, organizados por área de competência: candidaturas e redes europeias, promoção internacional, inovação digital e produto turístico.',
-                'Thirteen projects delivered between 2024 and 2026, organised by area of expertise: European bids and networks, international promotion, digital innovation and tourism product.'
+                'Treze projetos entre 2024 e 2026, da candidatura europeia ao roteiro no terreno. Filtre por área, pesquise por palavra ou mude para a vista em lista.',
+                'Thirteen projects from 2024 to 2026, from European bids to itineraries on the ground. Filter by area, search by keyword or switch to the list view.'
               )}
         </p>
       </header>

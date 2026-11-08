@@ -17,7 +17,7 @@ export default function TrackRecord() {
 
   return (
     <>
-      <header data-hero className="relative -mt-16 flex flex-col min-h-[78svh] md:min-h-[560px] md:h-[78svh] md:max-h-[860px] overflow-hidden text-white" style={{ background: NIGHT }}>
+      <header data-hero className="relative -mt-20 flex flex-col min-h-[78svh] md:min-h-[560px] md:h-[78svh] md:max-h-[860px] overflow-hidden text-white" style={{ background: NIGHT }}>
         <div className="absolute inset-0 overflow-hidden" aria-hidden>
           <div data-parallax="-0.2" className="absolute inset-0" style={{ ['--px-scale' as any]: 1.15 }}>
             <img src="https://i.imgur.com/AM6Z3uu.jpeg" alt="" className="w-full h-full object-cover object-[50%_45%] hero-kb" />
@@ -35,8 +35,8 @@ export default function TrackRecord() {
           </h1>
           <p className="hero-in mt-6 t-lead text-white/75 max-w-2xl text-pretty" style={{ ['--d' as any]: '240ms' }}>
             {t(
-              'Função atual, missões de representação internacional, distinções obtidas e cronologia dos projetos desde 2024.',
-              'Current role, international representation missions, recognition received and the timeline of projects since 2024.'
+              'Onde trabalho, onde estive e o que foi reconhecido: a função atual, as missões internacionais, as distinções e a cronologia dos projetos.',
+              'Where I work, where I have been and what has been recognised: current role, international missions, awards and the project timeline.'
             )}
           </p>
         </div>
@@ -79,8 +79,8 @@ export default function TrackRecord() {
             </>
           }
           intro={t(
-            'Feiras profissionais, cimeiras e júris internacionais em que o destino foi representado.',
-            'Trade fairs, summits and international juries where the destination was represented.'
+            'Feiras, cimeiras e júris onde representei o destino. Desça a página para percorrer a linha.',
+            'Fairs, summits and juries where I represented the destination. Scroll down to follow the line.'
           )}
         />
       <MetroLine />

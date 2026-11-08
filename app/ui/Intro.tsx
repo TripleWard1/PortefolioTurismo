@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useLang } from './LanguageContext';
 
 /* Ecrã de entrada (uma vez por sessão).
-   Fotografias de terreno reveladas em sequência, contador e nome; a última fotografia
-   abre até ocupar o ecrã e coincide com a primeira imagem da abertura. */
+   Fotografias de terreno reveladas em sequência, contador e nome; no fim a cortina
+   sobe e revela a abertura. Esc ou "Saltar" terminam de imediato. */
 const PHOTOS = [
   { src: 'https://i.imgur.com/ZCSF2lK.jpeg', city: 'Braga' },
   { src: 'https://i.imgur.com/eiRaC5f.png', city: 'Gante' },
@@ -15,9 +15,9 @@ const PHOTOS = [
 ];
 const STEP = 420; // intervalo entre fotografias
 const COUNT_MS = 2500; // duração do contador
-const EXPAND_AT = 2650; // a última fotografia abre
-const FADE_AT = 3450; // o ecrã de entrada desaparece
-const END_AT = 4150;
+const EXPAND_AT = 2700; // o texto sai e o baralho aproxima-se
+const FADE_AT = 3150; // a cortina sobe
+const END_AT = 4100;
 const ROT = [-5, 4, -3, 5, 0];
 const NAME = 'Hugo Barros';
 
@@ -57,6 +57,9 @@ export default function Intro() {
       root.style.overflow = '';
     }, FADE_AT);
     T(finish, END_AT);
+    const esc = (e: KeyboardEvent) => e.key === 'Escape' && finish();
+    window.addEventListener('keydown', esc);
+    timers.current.push(-1);
 
     // Contador com abrandamento no fim
     const t0 = performance.now();
@@ -70,6 +73,7 @@ export default function Intro() {
 
     return () => {
       timers.current.forEach(clearTimeout);
+      window.removeEventListener('keydown', esc);
       cancelAnimationFrame(raf);
       root.style.overflow = '';
     };
@@ -83,16 +87,16 @@ export default function Intro() {
     <div
       id="intro"
       aria-hidden
-      className={`fixed inset-0 z-[900] bg-[#141312] text-white overflow-hidden transition-opacity duration-700 ease-out ${phase === 'fade' ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+      className={`fixed inset-0 z-[900] bg-[#141312] text-white overflow-hidden transition-transform duration-[900ms] ease-[cubic-bezier(.76,0,.24,1)] ${phase === 'fade' ? '-translate-y-full pointer-events-none' : 'translate-y-0'}`}
     >
       <div className="grain absolute inset-0" />
 
       {/* Fotografias */}
-      <div className="absolute inset-0 grid place-items-center">
+      <div className={`absolute inset-0 grid place-items-center transition-transform duration-[900ms] ease-[cubic-bezier(.76,0,.24,1)] ${expand ? 'scale-[1.08] -translate-y-6' : ''}`}>
         {PHOTOS.map((p, i) => {
           const last = i === PHOTOS.length - 1;
           const on = i < shown;
-          const big = last && expand;
+          const big = false;
           return (
             <div
               key={p.src}
@@ -103,7 +107,7 @@ export default function Intro() {
                 borderRadius: big ? 0 : 18,
                 transform: `rotate(${big ? 0 : ROT[i]}deg) translateY(${on ? 0 : 24}px)`,
                 clipPath: on ? 'inset(0% 0% 0% 0% round 18px)' : 'inset(50% 50% 50% 50% round 18px)',
-                opacity: on ? (expand && !last ? 0 : 1) : 0,
+                opacity: on ? 1 : 0,
                 transition:
                   'clip-path 900ms cubic-bezier(.22,1,.36,1), transform 900ms cubic-bezier(.22,1,.36,1), opacity 600ms ease, width 900ms cubic-bezier(.76,0,.24,1), height 900ms cubic-bezier(.76,0,.24,1), border-radius 900ms cubic-bezier(.76,0,.24,1)',
                 boxShadow: big ? 'none' : '0 30px 60px -20px rgba(0,0,0,0.6)',

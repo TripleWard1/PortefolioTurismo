@@ -1,10 +1,10 @@
 import type { Theme } from '../projects';
 
 /* Tons por área, sempre dessaturados:
-   tint  — fundo claro de painéis
-   deep  — pormenores de texto e pontos
-   dark  — secções imersivas a toda a largura, com texto claro
-   glow  — acento claro sobre o fundo escuro */
+   tint: fundo claro de painéis
+   deep: pormenores de texto e pontos
+   dark: secções imersivas a toda a largura, com texto claro
+   glow: acento claro sobre o fundo escuro */
 export const TONE: Record<Theme, { tint: string; deep: string; dark: string; glow: string; name: string }> = {
   europeu: { tint: '#E6ECF1', deep: '#3E5A70', dark: '#1F2D38', glow: '#B9CCDA', name: 'ardósia' },
   internacional: { tint: '#F2E6DF', deep: '#94604B', dark: '#3A2620', glow: '#E3BFAE', name: 'terracota' },
@@ -16,9 +16,9 @@ export const TONE: Record<Theme, { tint: string; deep: string; dark: string; glo
 export const NIGHT = '#141312';
 export const BRASS = '#C9B08A';
 
-/* "2024—26" → [2024, 2026]; "2025" → [2025, 2025] */
+/* "2024-26" → [2024, 2026]; "2025" → [2025, 2025] */
 export function yearSpan(year: string): [number, number] {
-  const [a, b] = year.split('—');
+  const [a, b] = year.split(/[-—]/);
   const start = Number(a);
   const end = b ? Number(b.length === 2 ? `20${b}` : b) : start;
   return [start, end];

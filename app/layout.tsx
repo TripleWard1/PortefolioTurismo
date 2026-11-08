@@ -8,6 +8,7 @@ import Footer from './ui/Footer';
 import Reveal from './ui/Reveal';
 import Parallax from './ui/Parallax';
 import Intro from './ui/Intro';
+import BackToTop from './ui/BackToTop';
 import CommandK from './ui/CommandK';
 
 const sans = Inter({ subsets: ['latin'], variable: '--font-sans', display: 'swap' });
@@ -15,12 +16,12 @@ const sans = Inter({ subsets: ['latin'], variable: '--font-sans', display: 'swap
 const serif = Instrument_Serif({ subsets: ['latin'], variable: '--font-serif', display: 'swap', weight: '400', style: ['normal', 'italic'], adjustFontFallback: false });
 
 export const metadata: Metadata = {
-  title: { default: 'Hugo Barros — Inovação e Desenvolvimento Turístico', template: '%s · Hugo Barros' },
+  title: { default: 'Hugo Barros | Projetos de turismo', template: '%s · Hugo Barros' },
   description:
     'Portefólio profissional de Hugo Barros: estratégia de destino, candidaturas e redes europeias, promoção internacional, inovação digital e produto turístico.',
   icons: { icon: 'https://i.imgur.com/Dx42oze.png' },
   openGraph: {
-    title: 'Hugo Barros — Inovação e Desenvolvimento Turístico',
+    title: 'Hugo Barros | Projetos de turismo',
     description: 'Estratégia de destino, candidaturas europeias, promoção internacional e produto turístico.',
     images: ['https://i.imgur.com/SvJ4bdR.jpeg'],
     type: 'website',
@@ -45,11 +46,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${sans.variable} ${serif.variable} font-sans antialiased`}>
         <LanguageProvider>
           <Header />
-          <main>{children}</main>
+          <main id="conteudo">{children}</main>
           <Footer />
           <Reveal />
           <Parallax />
           <Intro />
+          <BackToTop />
           <CommandK />
         </LanguageProvider>
         <GoogleAnalytics gaId="G-C9ZYJ5XB1E" />

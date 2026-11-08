@@ -34,7 +34,7 @@ export default function ContactView() {
   // Prepara a mensagem no cliente de email do visitante
   const submit = (e: FormEvent) => {
     e.preventDefault();
-    const body = [form.message, '', '—', form.name, form.org].filter((l, i) => i < 3 || l).join('\n');
+    const body = [form.message, '', '--', form.name, form.org].filter((l, i) => i < 3 || l).join('\n');
     window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subjects[subject])}&body=${encodeURIComponent(body)}`;
   };
 
@@ -42,7 +42,7 @@ export default function ContactView() {
 
   return (
     <>
-      <header data-hero className="relative -mt-16 pt-40 md:pt-48 pb-20 md:pb-28 text-white overflow-hidden" style={{ background: TONE.europeu.dark }}>
+      <header data-hero className="relative -mt-20 pt-40 md:pt-48 pb-20 md:pb-28 text-white overflow-hidden" style={{ background: TONE.europeu.dark }}>
         <div className="absolute -right-40 -top-40 w-[640px] h-[640px] rounded-full opacity-40 blur-3xl" style={{ background: 'radial-gradient(circle, #3E5A70, transparent 65%)' }} aria-hidden />
         <div className="relative wrap">
           <p className="hero-in t-label inline-flex items-center gap-2" style={{ color: TONE.europeu.glow }}>

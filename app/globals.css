@@ -88,6 +88,11 @@ html.js-reveal [data-reveal].in .sw > span { transform: none; }
 .wm.in > span, html:not(.js-reveal) .wm > span { transform: none; }
 html.js-reveal .wm[data-reveal] { opacity: 1; transform: none; }
 
+/* Letra capitular no início do enquadramento */
+.dropcap > div > p:first-child::first-letter, .dropcap > p:first-child::first-letter {
+  font-family: var(--font-serif); font-style: italic; float: left; font-size: 4.6em; line-height: 0.82; padding: 0.06em 0.12em 0 0; color: #1d1d1f;
+}
+
 /* Corpo editorial dos projetos */
 .prose-case p { color: #1d1d1f; }
 .prose-case p + p { margin-top: 1.25rem; }

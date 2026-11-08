@@ -14,7 +14,7 @@ npm run dev
 | --- | --- |
 | `/` | Apresentação, perfil, áreas de competência, projetos em destaque, metodologia, distinções e redes, representação internacional, contacto |
 | `/projetos` | Todos os projetos em grelha ou lista, com filtro por área (`?area=europeu`) e pesquisa |
-| `/projetos/<id>` | Estudo de caso: ficha (função, resultado, área, período), enquadramento, eixos, registo fotográfico e documentação |
+| `/projetos/<id>` | Estudo de caso: abertura com ficha, história em três tempos (desafio, resposta, impacto), síntese e citação, enquadramento, eixos, registo fotográfico, documentação e projeto seguinte. Barra de progresso e navegação por capítulos |
 | `/percurso` | Função atual, missões internacionais, distinções e projetos por ano de início |
 | `/contacto` | Pedido de contacto por assunto (abre o cliente de email), email, LinkedIn e entidade |
 
@@ -39,6 +39,8 @@ Movimento:
   metro que se preenche com o scroll (`MetroLine`).
 - Rodapé com o nome em grande revelado letra a letra (adaptado de Wordmark Reveal Footer).
 - Parallax discreto (`[data-parallax]`) e grão de filme nas secções escuras.
+- Cabeçalho flutuante em vidro (adaptado de Liquid Glass Navbar) com monograma, indicador deslizante,
+  e que se esconde ao descer e volta ao subir. Menu móvel em ecrã inteiro.
 
 Nenhum efeito altera o scroll da página. Tudo respeita `prefers-reduced-motion`.
 O cabeçalho fica transparente sobre as aberturas escuras marcadas com `[data-hero]`.
@@ -49,6 +51,7 @@ O cabeçalho fica transparente sobre as aberturas escuras marcadas com `[data-he
 | --- | --- |
 | `app/ui/projects.ts` | Projetos, áreas e missões (título, ano, local, resumo, função, resultado, imagem, coordenadas) |
 | `app/ui/profile.ts` | Função, competências por área, metodologia, distinções e redes |
+| `app/ui/narrative.ts` | Narrativa de cada projeto: o desafio, a resposta e o impacto |
 | `app/ui/dossiers.tsx` | Texto completo de cada projeto, em PT e EN |
 | `app/page.tsx` | Página inicial (incluindo os projetos em destaque) |
 | `app/ui/viz/palette.ts` | Tons de cada área |
