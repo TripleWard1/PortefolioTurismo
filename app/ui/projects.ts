@@ -13,6 +13,10 @@ export interface ProjectMeta {
   place: L;
   summary: L;
   status: L;
+  /** Função desempenhada no projeto */
+  role: L;
+  /** Resultado ou marco principal */
+  outcome: L;
   /** A imagem é um logótipo: mostra-se inteira, sem cortes */
   logo?: boolean;
 }
@@ -76,6 +80,8 @@ export const PROJECTS: ProjectMeta[] = [
       en: 'Defending Braga’s candidacy for European Capital of Smart Tourism before the European Commission.',
     },
     status: { pt: 'Finalista UE', en: 'EU Finalist' },
+    role: { pt: 'Coordenação técnica e defesa da candidatura', en: 'Technical coordination and bid defence' },
+    outcome: { pt: 'Finalista europeu', en: 'European finalist' },
   },
   {
     id: 'small-retail-braga',
@@ -90,6 +96,8 @@ export const PROJECTS: ProjectMeta[] = [
       en: 'Technical dossier for the European Capital of Small Retail, focused on local retail sustainability.',
     },
     status: { pt: 'Económico', en: 'Economic' },
+    role: { pt: 'Redação do dossiê técnico de candidatura', en: 'Drafting of the technical bid dossier' },
+    outcome: { pt: 'Finalista 2026', en: '2026 finalist' },
   },
   {
     id: 'braga-after-dark',
@@ -103,6 +111,8 @@ export const PROJECTS: ProjectMeta[] = [
       en: 'First official roadmap and governance strategy for Braga’s nightlife within the European network.',
     },
     status: { pt: 'Estratégico', en: 'Strategic' },
+    role: { pt: 'Conceção e curadoria do roteiro', en: 'Itinerary design and curation' },
+    outcome: { pt: 'Primeiro roteiro oficial da noite', en: 'First official night-time itinerary' },
   },
   {
     id: 'music-cities-awards',
@@ -116,6 +126,8 @@ export const PROJECTS: ProjectMeta[] = [
       en: 'Positioning Braga as a global reference in music policy, with the global final in the USA.',
     },
     status: { pt: 'Mundial', en: 'Worldwide' },
+    role: { pt: 'Preparação e apresentação da candidatura', en: 'Bid preparation and presentation' },
+    outcome: { pt: 'Top 3 mundial', en: 'Global top 3' },
   },
   {
     id: 'fiets-wandelbeurs-gante',
@@ -129,6 +141,8 @@ export const PROJECTS: ProjectMeta[] = [
       en: 'Positioning Braga’s new territorial brand before the demanding Benelux market.',
     },
     status: { pt: 'Turismo Ativo', en: 'Active Tourism' },
+    role: { pt: 'Representação institucional', en: 'Institutional representation' },
+    outcome: { pt: 'Entrada no mercado Benelux', en: 'Entry into the Benelux market' },
   },
   {
     id: 'expovacaciones-bilbao',
@@ -142,6 +156,8 @@ export const PROJECTS: ProjectMeta[] = [
       en: 'Establishing Braga, 2025 Portuguese Capital of Culture, in the Basque Country and Cantabria.',
     },
     status: { pt: 'Estratégia Ibérica', en: 'Iberian Strategy' },
+    role: { pt: 'Representação institucional', en: 'Institutional representation' },
+    outcome: { pt: 'Promoção no norte de Espanha', en: 'Promotion in northern Spain' },
   },
   {
     id: 'b-travel-barcelona',
@@ -155,6 +171,8 @@ export const PROJECTS: ProjectMeta[] = [
       en: 'Representing the Municipality at one of Southern Europe’s most relevant tourism fairs.',
     },
     status: { pt: 'Sul da Europa', en: 'Southern Europe' },
+    role: { pt: 'Representação institucional', en: 'Institutional representation' },
+    outcome: { pt: 'Presença no mercado catalão', en: 'Presence in the Catalan market' },
   },
   {
     id: 'visit-braga',
@@ -169,6 +187,8 @@ export const PROJECTS: ProjectMeta[] = [
       en: 'UX design and content architecture for the city’s main tourism platform.',
     },
     status: { pt: 'Conversão', en: 'Conversion' },
+    role: { pt: 'Experiência de utilizador e arquitetura de conteúdos', en: 'User experience and content architecture' },
+    outcome: { pt: 'Plataforma oficial do destino', en: 'Official destination platform' },
   },
   {
     id: 'systemeu-salamanca',
@@ -182,6 +202,8 @@ export const PROJECTS: ProjectMeta[] = [
       en: 'Inter-regional innovation networks for the transfer of technological knowledge.',
     },
     status: { pt: 'Europeia', en: 'European' },
+    role: { pt: 'Participação em rede europeia de inovação', en: 'Participation in a European innovation network' },
+    outcome: { pt: 'Cooperação inter-regional', en: 'Inter-regional cooperation' },
   },
   {
     id: 'cidade-bracvs',
@@ -195,6 +217,8 @@ export const PROJECTS: ProjectMeta[] = [
       en: 'A playful, educational itinerary for children and families, bringing new generations closer to Braga’s Roman heritage.',
     },
     status: { pt: 'Educação', en: 'Education' },
+    role: { pt: 'Conceção do roteiro', en: 'Itinerary design' },
+    outcome: { pt: 'Novo produto para famílias', en: 'New product for families' },
   },
   {
     id: 'roteiro-3-dias',
@@ -208,6 +232,8 @@ export const PROJECTS: ProjectMeta[] = [
       en: 'Editorial and structural coordination of the city’s official guide, optimising tourist flows and visitor experience.',
     },
     status: { pt: 'Editorial', en: 'Editorial' },
+    role: { pt: 'Coordenação editorial', en: 'Editorial coordination' },
+    outcome: { pt: 'Guia oficial da cidade', en: 'Official city guide' },
   },
   {
     id: 'mapa-turistico-braga',
@@ -221,6 +247,8 @@ export const PROJECTS: ProjectMeta[] = [
       en: 'Technical development and information design for the city’s official cartographic support.',
     },
     status: { pt: 'Cartografia', en: 'Cartography' },
+    role: { pt: 'Desenvolvimento técnico e design de informação', en: 'Technical development and information design' },
+    outcome: { pt: 'Cartografia oficial', en: 'Official cartography' },
   },
   {
     id: 'experiencias-sustentaveis',
@@ -235,6 +263,8 @@ export const PROJECTS: ProjectMeta[] = [
       en: 'Technical leadership in designing 29 tourism experiences, combining local identity and sustainability.',
     },
     status: { pt: 'Produto', en: 'Product' },
+    role: { pt: 'Coordenação técnica de produto', en: 'Technical product coordination' },
+    outcome: { pt: '29 experiências, 30+ parceiros', en: '29 experiences, 30+ partners' },
   },
 ];
 

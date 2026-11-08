@@ -46,8 +46,12 @@ export default function Header() {
   return (
     <header className={`sticky top-0 z-[400] transition-[background-color,box-shadow] duration-300 ${scrolled || open ? 'bg-white/80 backdrop-blur-xl shadow-[0_1px_0_#e8e8ed]' : 'bg-white'}`}>
       <div className="wrap h-16 flex items-center justify-between gap-6">
-        <Link href="/" className="text-[15px] font-semibold tracking-[-0.02em] text-ink">
-          Hugo Barros
+        <Link href="/" className="flex items-center gap-3 min-w-0">
+          <span className="w-8 h-8 rounded-full bg-ink text-white grid place-items-center text-[12px] font-semibold tracking-tight shrink-0">HB</span>
+          <span className="leading-tight min-w-0">
+            <span className="block text-[15px] font-semibold tracking-[-0.02em] text-ink">Hugo Barros</span>
+            <span className="hidden sm:block t-label text-mute truncate">{t('Inovação e Desenvolvimento Turístico', 'Tourism Innovation and Development')}</span>
+          </span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-1" aria-label={t('Navegação principal', 'Main navigation')}>

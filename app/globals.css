@@ -40,6 +40,8 @@
 html.js-reveal [data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); transition-delay: var(--delay, 0ms); }
 html.js-reveal [data-reveal].in { opacity: 1; transform: none; }
 
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
 /* Corpo editorial dos projetos */
 .prose-case p { color: #1d1d1f; }
 .prose-case p + p { margin-top: 1.25rem; }
@@ -50,4 +52,5 @@ html.js-reveal [data-reveal].in { opacity: 1; transform: none; }
   html { scroll-behavior: auto; }
   html.js-reveal [data-reveal] { opacity: 1; transform: none; transition: none; }
   .media img { transition: none; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; }
 }

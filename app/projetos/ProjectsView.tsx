@@ -3,10 +3,12 @@
 import { useMemo, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Search, X } from 'lucide-react';
+import Link from 'next/link';
+import { ArrowUpRight, LayoutGrid, List, Search, X } from 'lucide-react';
 import { useLang } from '../ui/LanguageContext';
 import { ProjectCard } from '../ui/parts';
 import { AREAS, PROJECTS, THEME_LABEL, type Theme } from '../ui/projects';
+import { TONE } from '../ui/viz/palette';
 
 type Filter = Theme | 'todos';
 const norm = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
@@ -19,6 +21,7 @@ export default function ProjectsView() {
   const fromUrl = params.get('area') as Theme | null;
   const filter: Filter = fromUrl && AREAS.some((a) => a.id === fromUrl) ? fromUrl : 'todos';
   const [q, setQ] = useState('');
+  const [view, setView] = useState<'grid' | 'list'>('grid');
 
   const setFilter = (f: Filter) => router.replace(f === 'todos' ? path : `${path}?area=${f}`, { scroll: false });
 
@@ -48,8 +51,8 @@ export default function ProjectsView() {
           {area
             ? area.description[lang]
             : t(
-                'Treze projetos de turismo, entre candidaturas europeias, promoção internacional, inovação digital e produto turístico.',
-                'Thirteen tourism projects, across European bids, international promotion, digital innovation and tourism product.'
+                'Treze projetos desenvolvidos entre 2024 e 2026, organizados por área de competência: candidaturas e redes europeias, promoção internacional, inovação digital e produto turístico.',
+                'Thirteen projects delivered between 2024 and 2026, organised by area of expertise: European bids and networks, international promotion, digital innovation and tourism product.'
               )}
         </p>
       </header>
@@ -72,7 +75,8 @@ export default function ProjectsView() {
             );
           })}
         </div>
-        <label className="relative block lg:w-64">
+        <div className="flex items-center gap-2">
+        <label className="relative block flex-1 lg:w-64">
           <span className="sr-only">{t('Pesquisar projetos', 'Search projects')}</span>
           <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-mute" />
           <input
@@ -87,10 +91,68 @@ export default function ProjectsView() {
             </button>
           )}
         </label>
+          <div className="flex rounded-full bg-soft p-1" role="group" aria-label={t('Modo de visualização', 'View mode')}>
+            {([
+              ['grid', LayoutGrid, t('Grelha', 'Grid')],
+              ['list', List, t('Lista', 'List')],
+            ] as const).map(([v, Icon, label]) => (
+              <button
+                key={v}
+                onClick={() => setView(v)}
+                aria-pressed={view === v}
+                aria-label={label}
+                className={`w-8 h-8 rounded-full grid place-items-center transition-colors ${view === v ? 'bg-white text-ink shadow-sm' : 'text-mute hover:text-ink'}`}
+              >
+                <Icon className="w-4 h-4" />
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
 
-      {visible.length ? (
-        <motion.div layout className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-14">
+      {visible.length && view === 'list' ? (
+        <div className="mt-10 overflow-x-auto">
+          <table className="w-full min-w-[720px] text-left">
+            <thead>
+              <tr className="t-label text-mute border-b border-line">
+                <th className="py-3 pr-4 font-normal">{t('Projeto', 'Project')}</th>
+                <th className="py-3 pr-4 font-normal">{t('Área', 'Area')}</th>
+                <th className="py-3 pr-4 font-normal">{t('Função', 'Role')}</th>
+                <th className="py-3 pr-4 font-normal">{t('Resultado', 'Outcome')}</th>
+                <th className="py-3 font-normal text-right">{t('Período', 'Period')}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {visible.map((p) => (
+                <tr key={p.id} className="group border-b border-line hover:bg-soft/60 transition-colors">
+                  <td className="py-4 pr-4">
+                    <Link href={`/projetos/${p.id}`} className="flex items-center gap-3">
+                      <span className="media w-12 h-12 rounded-xl shrink-0" style={{ background: TONE[p.theme].tint }}>
+                        <img src={p.image} alt="" loading="lazy" className={p.logo ? '!object-contain p-1' : ''} />
+                      </span>
+                      <span>
+                        <span className="block text-[15px] font-semibold text-ink">{p.title[lang]}</span>
+                        <span className="block t-label text-mute">{p.place[lang]}</span>
+                      </span>
+                      <ArrowUpRight className="w-4 h-4 text-mute opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </Link>
+                  </td>
+                  <td className="py-4 pr-4 t-label">
+                    <span className="inline-flex items-center gap-2" style={{ color: TONE[p.theme].deep }}>
+                      <span className="w-1.5 h-1.5 rounded-full" style={{ background: TONE[p.theme].deep }} />
+                      {THEME_LABEL[p.theme][lang]}
+                    </span>
+                  </td>
+                  <td className="py-4 pr-4 text-[14px] text-ink/80">{p.role[lang]}</td>
+                  <td className="py-4 pr-4 text-[14px] text-ink/80">{p.outcome[lang]}</td>
+                  <td className="py-4 t-label text-mute text-right tabular-nums whitespace-nowrap">{p.year}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : visible.length ? (
+        <motion.div layout className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-16">
           <AnimatePresence mode="popLayout">
             {visible.map((p) => (
               <motion.div
@@ -100,6 +162,7 @@ export default function ProjectsView() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                className="h-full"
               >
                 <ProjectCard p={p} />
               </motion.div>

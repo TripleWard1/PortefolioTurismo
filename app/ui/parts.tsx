@@ -31,25 +31,28 @@ export function TextLink({ href, children, light = false }: { href: string; chil
   );
 }
 
-/* Cartão de projeto: imagem grande, texto por baixo, sem molduras */
-export function ProjectCard({ p, ratio = 'aspect-[4/3]', delay = 0, large = false }: { p: ProjectMeta; ratio?: string; delay?: number; large?: boolean }) {
-  const { lang } = useLang();
+/* Cartão de projeto: imagem sobre o tom da área, área, título, resumo e função */
+export function ProjectCard({ p, ratio = 'aspect-[4/3]', delay = 0 }: { p: ProjectMeta; ratio?: string; delay?: number }) {
+  const { lang, t } = useLang();
+  const tone = TONE[p.theme];
   return (
-    <Link href={`/projetos/${p.id}`} data-reveal style={{ ['--delay' as any]: `${delay}ms` }} className="group block">
-      <div className={`media rounded-3xl ${ratio} ${p.logo ? 'ring-1 ring-inset ring-line' : ''}`} style={{ background: TONE[p.theme].tint }}>
+    <Link href={`/projetos/${p.id}`} data-reveal style={{ ['--delay' as any]: `${delay}ms` }} className="group flex flex-col h-full">
+      <div className={`media rounded-3xl ${ratio}`} style={{ background: tone.tint }}>
         <img src={p.image} alt="" loading="lazy" className={p.logo ? '!object-contain p-[12%]' : ''} />
+        <span className="absolute left-3 top-3 rounded-full bg-white/90 backdrop-blur px-3 py-1 t-label text-ink">{p.outcome[lang]}</span>
       </div>
-      <div className="mt-4 flex items-start justify-between gap-4">
-        <div className="min-w-0">
-          <p className="t-label inline-flex items-center gap-2" style={{ color: TONE[p.theme].deep }}>
-            <span className="w-1.5 h-1.5 rounded-full" style={{ background: TONE[p.theme].deep }} />
-            {THEME_LABEL[p.theme][lang]}
-          </p>
-          <h3 className={`mt-1 text-ink font-semibold tracking-[-0.025em] ${large ? 'text-[1.75rem] leading-tight' : 'text-[1.25rem] leading-snug'}`}>{p.title[lang]}</h3>
-          {large && <p className="mt-2 text-[1.0625rem] leading-relaxed text-mute max-w-xl text-pretty">{p.summary[lang]}</p>}
-        </div>
-        <span className="t-label text-mute shrink-0 pt-0.5 tabular-nums">{p.year}</span>
+      <div className="mt-4 flex items-center justify-between gap-4">
+        <p className="t-label inline-flex items-center gap-2 min-w-0" style={{ color: tone.deep }}>
+          <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: tone.deep }} />
+          <span className="truncate">{THEME_LABEL[p.theme][lang]}</span>
+        </p>
+        <span className="t-label text-mute shrink-0 tabular-nums">{p.year}</span>
       </div>
+      <h3 className="mt-2 text-[1.3125rem] leading-snug text-ink font-semibold tracking-[-0.025em]">{p.title[lang]}</h3>
+      <p className="mt-2 text-[15px] leading-relaxed text-mute line-clamp-3 text-pretty">{p.summary[lang]}</p>
+      <p className="mt-auto pt-4 t-label text-ink/70">
+        <span className="text-mute">{t('Função', 'Role')}:</span> {p.role[lang]}
+      </p>
     </Link>
   );
 }

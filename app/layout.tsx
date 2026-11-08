@@ -13,12 +13,12 @@ const sans = Inter({ subsets: ['latin'], variable: '--font-sans', display: 'swap
 const serif = Instrument_Serif({ subsets: ['latin'], variable: '--font-serif', display: 'swap', weight: '400', style: ['normal', 'italic'], adjustFontFallback: false });
 
 export const metadata: Metadata = {
-  title: { default: 'Hugo Barros — Projetos de turismo', template: '%s · Hugo Barros' },
+  title: { default: 'Hugo Barros — Inovação e Desenvolvimento Turístico', template: '%s · Hugo Barros' },
   description:
-    'Hugo Barros desenha e desenvolve projetos de turismo: estratégia de destino, candidaturas europeias, promoção internacional, inovação digital e produto turístico.',
+    'Portefólio profissional de Hugo Barros: estratégia de destino, candidaturas e redes europeias, promoção internacional, inovação digital e produto turístico.',
   icons: { icon: 'https://i.imgur.com/Dx42oze.png' },
   openGraph: {
-    title: 'Hugo Barros — Projetos de turismo',
+    title: 'Hugo Barros — Inovação e Desenvolvimento Turístico',
     description: 'Estratégia de destino, candidaturas europeias, promoção internacional e produto turístico.',
     images: ['https://i.imgur.com/SvJ4bdR.jpeg'],
     type: 'website',

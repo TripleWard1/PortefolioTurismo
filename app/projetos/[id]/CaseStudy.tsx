@@ -42,6 +42,8 @@ export default function CaseStudy({ id }: { id: string }) {
     data.linkLowCost && { href: data.linkLowCost, label: t('Versão simplificada', 'Simplified version') },
   ].filter(Boolean) as { href: string; label: string; sub?: string }[];
   const facts = [
+    { k: t('Função', 'Role'), v: meta.role[lang] },
+    { k: t('Resultado', 'Outcome'), v: meta.outcome[lang] },
     { k: t('Área', 'Area'), v: THEME_LABEL[meta.theme][lang] },
     { k: t('Período', 'Period'), v: meta.year },
     { k: t('Local', 'Location'), v: meta.place[lang] },
@@ -71,7 +73,7 @@ export default function CaseStudy({ id }: { id: string }) {
       </div>
 
       {/* Ficha */}
-      <dl className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-6" data-reveal>
+      <dl className="mt-10 grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-6" data-reveal>
         {facts.map((f) => (
           <div key={f.k} className="border-t border-line pt-4">
             <dt className="t-label text-mute">{f.k}</dt>
@@ -99,7 +101,7 @@ export default function CaseStudy({ id }: { id: string }) {
             )}
             {links.length > 0 && (
               <div data-reveal>
-                <p className="t-label text-mute">{t('Documentos', 'Documents')}</p>
+                <p className="t-label text-mute">{t('Documentação', 'Documentation')}</p>
                 <ul className="mt-4 space-y-2">
                   {links.map((l, i) => (
                     <li key={l.href}>
@@ -126,7 +128,7 @@ export default function CaseStudy({ id }: { id: string }) {
         {/* Conteúdo */}
         <div className="lg:col-span-8 lg:order-1 space-y-20">
           <section data-reveal>
-            <h2 className="t-h3 text-ink">{t('Contexto', 'Context')}</h2>
+            <h2 className="t-h3 text-ink">{t('Enquadramento', 'Background')}</h2>
             <div className="mt-5 prose-case text-[1.1875rem] leading-[1.7] tracking-[-0.01em]">{data.description}</div>
             {data.quote && (
               <blockquote className="mt-12 border-l-2 border-ink pl-6">
@@ -167,7 +169,7 @@ export default function CaseStudy({ id }: { id: string }) {
 
           {(data.videoEmbed || gal.length > 0) && (
             <section data-reveal>
-              <h2 className="t-h3 text-ink">{t('Registo', 'Gallery')}</h2>
+              <h2 className="t-h3 text-ink">{t('Registo fotográfico', 'Photo record')}</h2>
               {data.videoEmbed && <div className="mt-6">{data.videoEmbed}</div>}
               {gal.length > 0 && (
                 <div className="mt-6 grid grid-cols-2 gap-3">

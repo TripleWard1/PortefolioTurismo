@@ -4,7 +4,7 @@ import ProjectsView from './ProjectsView';
 
 export const metadata: Metadata = {
   title: 'Projetos',
-  description: 'Todos os projetos de Hugo Barros no Município de Braga, organizados por área de atuação.',
+  description: 'Projetos de turismo de Hugo Barros, organizados por área de competência.',
 };
 
 export default function ProjectsPage() {
