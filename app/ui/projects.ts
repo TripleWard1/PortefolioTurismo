@@ -92,11 +92,11 @@ export const PROJECTS: ProjectMeta[] = [
     year: '2025-26',
     place: { pt: 'Braga, Portugal', en: 'Braga, Portugal' },
     summary: {
-      pt: 'Dossiê técnico da candidatura de Braga a European Capital of Small Retail, centrado no futuro do comércio de proximidade.',
+      pt: 'Dossier técnico da candidatura de Braga a European Capital of Small Retail, centrado no futuro do comércio de proximidade.',
       en: 'Technical dossier for Braga’s European Capital of Small Retail bid, focused on the future of local retail.',
     },
     status: { pt: 'Económico', en: 'Economic' },
-    role: { pt: 'Liderança técnica e editorial do dossiê', en: 'Technical and editorial lead on the dossier' },
+    role: { pt: 'Liderança técnica e editorial do dossier', en: 'Technical and editorial lead on the dossier' },
     outcome: { pt: 'Finalista 2026', en: '2026 finalist' },
   },
   {

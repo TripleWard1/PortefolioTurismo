@@ -1,5 +1,5 @@
 // Perfil profissional: função, competências, metodologia, distinções e redes.
-// Texto institucional em PT e EN. Os factos vêm dos projetos e dossiês.
+// Texto institucional em PT e EN. Os factos vêm dos projetos e dossiers.
 
 import type { L, Theme } from './projects';
 
@@ -20,7 +20,7 @@ export const SCOPE: Record<Theme, { intro: L; items: L[] }> = {
       en: 'I prepare, write and defend bids for European titles and networks, in dialogue with the European Commission and partner cities.',
     },
     items: [
-      { pt: 'Dossiês técnicos de candidatura', en: 'Technical bid dossiers' },
+      { pt: 'Dossiers técnicos de candidatura', en: 'Technical bid dossiers' },
       { pt: 'Defesa presencial perante júris europeus', en: 'In-person defence before European juries' },
       { pt: 'Participação em redes URBACT', en: 'Participation in URBACT networks' },
       { pt: 'Benchmarking e transferência de boas práticas', en: 'Benchmarking and transfer of good practice' },

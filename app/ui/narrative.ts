@@ -1,5 +1,5 @@
 // Narrativa de cada projeto em três tempos: o desafio, a resposta e o impacto.
-// Escrita a partir do conteúdo dos dossiês, em PT e EN.
+// Escrita a partir do conteúdo dos dossiers, em PT e EN.
 
 import type { L } from './projects';
 
@@ -30,7 +30,7 @@ export const STORY: Record<string, Story> = {
       en: 'Show that local retail can drive a more sustainable, digital and cohesive city.',
     },
     response: {
-      pt: 'Liderança técnica e editorial do dossiê estratégico: um modelo de distrito comercial digital, logística urbana partilhada e valorização das Lojas com História.',
+      pt: 'Liderança técnica e editorial do dossier estratégico: um modelo de distrito comercial digital, logística urbana partilhada e valorização das Lojas com História.',
       en: 'Technical and editorial lead on the strategic dossier: a digital retail district model, shared urban logistics and support for historic shops.',
     },
     impact: {

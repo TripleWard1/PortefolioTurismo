@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { ArrowUpRight, Check, Copy } from 'lucide-react';
 import { useLang } from '../ui/LanguageContext';
 import { EMAIL, LINKEDIN } from '../ui/Footer';
@@ -19,6 +19,11 @@ export default function ContactView() {
     t('Outro assunto', 'Other matter'),
   ];
   const [subject, setSubject] = useState(0);
+  // Assunto escolhido noutra página (?assunto=2)
+  useEffect(() => {
+    const n = Number(new URLSearchParams(window.location.search).get('assunto'));
+    if (Number.isInteger(n) && n >= 0 && n < 5) setSubject(n);
+  }, []);
   const [form, setForm] = useState({ name: '', org: '', message: '' });
 
   const copy = async () => {

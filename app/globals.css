@@ -64,11 +64,22 @@ html.js-reveal [data-reveal].in { opacity: 1; transform: none; }
 html:not(.intro-on):not(.intro-run) #intro { display: none; }
 html.intro-on .hero-in, html.intro-on .sw-anim .sw > span { animation-play-state: paused; }
 @keyframes letterUp { from { transform: translateY(110%); } to { transform: none; } }
-.intro-letter { animation: letterUp 0.9s cubic-bezier(.22,1,.36,1) both; animation-delay: calc(400ms + var(--i) * 45ms); }
+.intro-letter { animation: letterUp 0.9s cubic-bezier(.22,1,.36,1) both; animation-delay: calc(450ms + var(--i) * 40ms); }
+@keyframes introFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.intro-fade { animation: introFade 0.9s cubic-bezier(.22,1,.36,1) both; animation-delay: var(--d, 0ms); }
 
 /* Grão de filme, muito discreto, sobre secções escuras */
 .grain { pointer-events: none; opacity: 0.07; mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+
+/* ───────── Grelha inclinada da abertura ───────── */
+.tilt-plane { transform: translate(-50%, -50%) perspective(1800px) rotateX(24deg) rotateY(-12deg) rotateZ(10deg); transform-style: preserve-3d; }
+.tilt-mask { -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 35%); mask-image: linear-gradient(90deg, transparent 0%, #000 35%); }
+@keyframes tiltUp { from { transform: translateY(0); } to { transform: translateY(calc(-50% - 8px)); } }
+@keyframes tiltDown { from { transform: translateY(calc(-50% - 8px)); } to { transform: translateY(0); } }
+.tilt-up { animation: tiltUp var(--dur) linear infinite; }
+.tilt-down { animation: tiltDown var(--dur) linear infinite; }
+@media (max-width: 1023px) { .tilt-mask { -webkit-mask-image: none; mask-image: none; } }
 
 /* ───────── Títulos palavra a palavra ───────── */
 .sw { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 0.08em 0.1em 0; margin: 0 -0.08em -0.1em 0; }
@@ -104,5 +115,5 @@ html.js-reveal .wm[data-reveal] { opacity: 1; transform: none; }
   html.js-reveal [data-reveal] { opacity: 1; transform: none; transition: none; }
   .media img { transition: none; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0ms !important; }
-  .marquee { animation: none; }
+  .marquee, .tilt-up, .tilt-down { animation: none; }
 }

@@ -2,31 +2,21 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useLang } from './LanguageContext';
+import { BRASS, TONE } from './viz/palette';
 
-/* Ecrã de entrada (uma vez por sessão).
-   Fotografias de terreno reveladas em sequência, contador e nome; no fim a cortina
-   sobe e revela a abertura. Esc ou "Saltar" terminam de imediato. */
-const PHOTOS = [
-  { src: 'https://i.imgur.com/ZCSF2lK.jpeg', city: 'Braga' },
-  { src: 'https://i.imgur.com/eiRaC5f.png', city: 'Gante' },
-  { src: 'https://i.imgur.com/C4uKurT.png', city: 'Bilbao' },
-  { src: 'https://i.imgur.com/dYaYXb9.png', city: 'Barcelona' },
-  { src: 'https://i.imgur.com/SvJ4bdR.jpeg', city: 'Bruxelas' },
-];
-const STEP = 420; // intervalo entre fotografias
-const COUNT_MS = 2500; // duração do contador
-const EXPAND_AT = 2700; // o texto sai e o baralho aproxima-se
-const FADE_AT = 3150; // a cortina sobe
-const END_AT = 4100;
-const ROT = [-5, 4, -3, 5, 0];
+/* Ecrã de entrada (uma vez por sessão), sóbrio:
+   o anel do monograma desenha-se, o nome aparece letra a letra, uma linha fina marca o
+   progresso e, no fim, o ecrã abre-se ao meio. Esc ou "Saltar" terminam de imediato. */
 const NAME = 'Hugo Barros';
+const DRAW_MS = 1700; // anel e linha
+const OPEN_AT = 2300; // o ecrã abre-se
+const END_AT = 3300;
 
 export default function Intro() {
   const { t } = useLang();
   const [show, setShow] = useState(true);
-  const [shown, setShown] = useState(0); // fotografias visíveis
-  const [count, setCount] = useState(0);
-  const [phase, setPhase] = useState<'run' | 'expand' | 'fade'>('run');
+  const [phase, setPhase] = useState<'run' | 'open'>('run');
+  const [p, setP] = useState(0);
   const timers = useRef<number[]>([]);
 
   const finish = () => {
@@ -48,31 +38,29 @@ export default function Intro() {
     root.style.overflow = 'hidden';
     root.classList.add('intro-run');
 
-    const T = (fn: () => void, ms: number) => timers.current.push(window.setTimeout(fn, ms));
-    PHOTOS.forEach((_, i) => T(() => setShown(i + 1), 250 + i * STEP));
-    T(() => setPhase('expand'), EXPAND_AT);
-    T(() => {
-      setPhase('fade');
-      root.classList.remove('intro-on'); // a abertura começa a entrar por baixo
-      root.style.overflow = '';
-    }, FADE_AT);
-    T(finish, END_AT);
+    const list = timers.current;
+    list.push(
+      window.setTimeout(() => {
+        setPhase('open');
+        root.classList.remove('intro-on'); // a abertura começa a entrar
+        root.style.overflow = '';
+      }, OPEN_AT),
+      window.setTimeout(finish, END_AT)
+    );
     const esc = (e: KeyboardEvent) => e.key === 'Escape' && finish();
     window.addEventListener('keydown', esc);
-    timers.current.push(-1);
 
-    // Contador com abrandamento no fim
     const t0 = performance.now();
     let raf = 0;
     const tick = (now: number) => {
-      const p = Math.min(1, (now - t0) / COUNT_MS);
-      setCount(Math.round((1 - Math.pow(1 - p, 3)) * 100));
-      if (p < 1) raf = requestAnimationFrame(tick);
+      const k = Math.min(1, (now - t0) / DRAW_MS);
+      setP(1 - Math.pow(1 - k, 3));
+      if (k < 1) raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
 
     return () => {
-      timers.current.forEach(clearTimeout);
+      list.forEach(clearTimeout);
       window.removeEventListener('keydown', esc);
       cancelAnimationFrame(raf);
       root.style.overflow = '';
@@ -80,78 +68,64 @@ export default function Intro() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!show) return null;
-  const city = PHOTOS[Math.max(0, shown - 1)].city;
-  const expand = phase !== 'run';
+  const open = phase === 'open';
+  const R = 46;
+  const C = 2 * Math.PI * R;
+  const half = 'absolute inset-x-0 h-1/2 bg-[#141312] overflow-hidden transition-transform duration-[1000ms] ease-[cubic-bezier(.76,0,.24,1)]';
 
   return (
-    <div
-      id="intro"
-      aria-hidden
-      className={`fixed inset-0 z-[900] bg-[#141312] text-white overflow-hidden transition-transform duration-[900ms] ease-[cubic-bezier(.76,0,.24,1)] ${phase === 'fade' ? '-translate-y-full pointer-events-none' : 'translate-y-0'}`}
-    >
-      <div className="grain absolute inset-0" />
-
-      {/* Fotografias */}
-      <div className={`absolute inset-0 grid place-items-center transition-transform duration-[900ms] ease-[cubic-bezier(.76,0,.24,1)] ${expand ? 'scale-[1.08] -translate-y-6' : ''}`}>
-        {PHOTOS.map((p, i) => {
-          const last = i === PHOTOS.length - 1;
-          const on = i < shown;
-          const big = false;
-          return (
-            <div
-              key={p.src}
-              className="absolute overflow-hidden"
-              style={{
-                width: big ? '100vw' : 'min(60vw, 340px)',
-                height: big ? '100vh' : 'min(78vw, 440px)',
-                borderRadius: big ? 0 : 18,
-                transform: `rotate(${big ? 0 : ROT[i]}deg) translateY(${on ? 0 : 24}px)`,
-                clipPath: on ? 'inset(0% 0% 0% 0% round 18px)' : 'inset(50% 50% 50% 50% round 18px)',
-                opacity: on ? 1 : 0,
-                transition:
-                  'clip-path 900ms cubic-bezier(.22,1,.36,1), transform 900ms cubic-bezier(.22,1,.36,1), opacity 600ms ease, width 900ms cubic-bezier(.76,0,.24,1), height 900ms cubic-bezier(.76,0,.24,1), border-radius 900ms cubic-bezier(.76,0,.24,1)',
-                boxShadow: big ? 'none' : '0 30px 60px -20px rgba(0,0,0,0.6)',
-                zIndex: i,
-              }}
-            >
-              <img src={p.src} alt="" className="w-full h-full object-cover" style={{ transform: `scale(${on ? 1 : 1.25})`, transition: 'transform 1400ms cubic-bezier(.22,1,.36,1)' }} />
-              {big && <div className="absolute inset-0 bg-[rgba(20,19,18,0.35)] transition-opacity duration-700" />}
-            </div>
-          );
-        })}
+    <div id="intro" aria-hidden className={`fixed inset-0 z-[900] text-white ${open ? 'pointer-events-none' : ''}`}>
+      {/* Duas metades que se abrem */}
+      <div className={`${half} top-0 ${open ? '-translate-y-full' : ''}`}>
+        <div className="grain absolute inset-0" />
+      </div>
+      <div className={`${half} bottom-0 ${open ? 'translate-y-full' : ''}`}>
+        <div className="grain absolute inset-0" />
       </div>
 
-      {/* Moldura de texto */}
-      <div className={`absolute inset-0 flex flex-col justify-between p-6 md:p-10 transition-opacity duration-500 ${expand ? 'opacity-0' : 'opacity-100'}`}>
-        <div className="flex items-start justify-between t-label">
-          <span className="inline-flex items-center gap-3">
-            <span className="w-8 h-8 rounded-full bg-white text-ink grid place-items-center text-[12px] font-semibold">HB</span>
-            <span className="text-white/70">{t('Portefólio profissional', 'Professional portfolio')}</span>
-          </span>
-          <span className="text-white/70 text-right">
-            <span key={city} className="inline-block em text-[1.25rem] text-[#E9DCC4] animate-[fadeUp_.5s_cubic-bezier(.22,1,.36,1)]">
-              {city}
+      {/* Conteúdo central */}
+      <div className={`absolute inset-0 grid place-items-center transition-all duration-500 ${open ? 'opacity-0 scale-95' : 'opacity-100'}`}>
+        <div className="flex flex-col items-center">
+          <div className="relative w-28 h-28">
+            <svg viewBox="0 0 100 100" className="absolute inset-0 -rotate-90">
+              <defs>
+                <linearGradient id="intro-ring" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor={TONE.europeu.glow} />
+                  <stop offset="35%" stopColor={TONE.internacional.glow} />
+                  <stop offset="70%" stopColor={TONE.produto.glow} />
+                  <stop offset="100%" stopColor={TONE.digital.glow} />
+                </linearGradient>
+              </defs>
+              <circle cx="50" cy="50" r={R} fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
+              <circle cx="50" cy="50" r={R} fill="none" stroke="url(#intro-ring)" strokeWidth="1.5" strokeLinecap="round" strokeDasharray={C} strokeDashoffset={C * (1 - p)} />
+            </svg>
+            <span className="absolute inset-0 grid place-items-center em text-[2.75rem] leading-none intro-fade" style={{ ['--d' as any]: '250ms' }}>
+              hb
             </span>
-          </span>
-        </div>
+          </div>
 
-        <div className="flex items-end justify-between gap-6">
-          <span className="em text-[clamp(4rem,2rem+8vw,9rem)] leading-[0.8] tabular-nums text-white">{String(count).padStart(3, '0')}</span>
-          <span className="hidden sm:flex overflow-hidden text-[clamp(1.75rem,1rem+2.4vw,3.25rem)] font-semibold tracking-[-0.04em] leading-none pb-1" aria-label={NAME}>
+          <p className="mt-8 flex overflow-hidden text-[clamp(1.5rem,1rem+1.6vw,2.25rem)] font-semibold tracking-[-0.035em] leading-none pb-1">
             {NAME.split('').map((ch, i) => (
               <span key={i} className="inline-block intro-letter" style={{ ['--i' as any]: i }}>
                 {ch === ' ' ? ' ' : ch}
               </span>
             ))}
-          </span>
+          </p>
+          <p className="mt-3 em text-[1.0625rem] intro-fade" style={{ color: BRASS, ['--d' as any]: '900ms' }}>
+            {t('projetos de turismo', 'tourism projects')}
+          </p>
+
+          <div className="mt-10 w-40 h-px bg-white/10 overflow-hidden">
+            <div className="h-full bg-white/70 origin-left" style={{ transform: `scaleX(${p})` }} />
+          </div>
         </div>
       </div>
 
       <button
         onClick={finish}
-        className={`absolute bottom-6 left-1/2 -translate-x-1/2 md:bottom-10 t-label text-white/50 hover:text-white transition-colors ${expand ? 'opacity-0' : ''}`}
-        aria-label={t('Saltar introdução', 'Skip intro')}
         tabIndex={-1}
+        className={`absolute bottom-8 left-1/2 -translate-x-1/2 t-label text-white/40 hover:text-white transition-all ${open ? 'opacity-0' : ''}`}
+        aria-label={t('Saltar introdução', 'Skip intro')}
       >
         {t('Saltar', 'Skip')}
       </button>

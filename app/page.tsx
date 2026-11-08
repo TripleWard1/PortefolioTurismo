@@ -9,11 +9,11 @@ import { SectionHead, Split, TextLink } from './ui/parts';
 import HeroSlides from './ui/HeroSlides';
 import ProjectRail from './ui/ProjectRail';
 import Competences from './ui/Competences';
-import MissionStrip from './ui/MissionStrip';
+import MissionPanels from './ui/MissionPanels';
+import ContactBlock from './ui/ContactBlock';
 import { byId } from './ui/projects';
 import { ENTITY, METHOD, NETWORKS, RECOGNITION, ROLE } from './ui/profile';
 import { TONE } from './ui/viz/palette';
-import { EMAIL, LINKEDIN } from './ui/Footer';
 
 const PORTRAIT = 'https://i.imgur.com/Dx42oze.jpeg';
 /* Fotografia de cada distinção */
@@ -196,49 +196,13 @@ export default function Home() {
             action={<TextLink href="/percurso">{t('Consultar o percurso', 'See the track record')}</TextLink>}
           />
         </div>
-        <div className="mt-10" data-reveal>
-          <MissionStrip />
+        <div className="mt-12" data-reveal>
+          <MissionPanels />
         </div>
       </section>
 
-      {/* ───────────── Contacto (secção imersiva) ───────────── */}
-      <section className="relative -mb-32 py-24 md:py-36 text-white overflow-hidden" style={{ background: TONE.internacional.dark }}>
-        <div className="absolute inset-0 overflow-hidden" aria-hidden>
-          <div className="px absolute inset-0" data-parallax="0.12">
-            <img src="https://i.imgur.com/zhIXUOY.png" alt="" loading="lazy" className="w-full h-full object-cover opacity-25" />
-          </div>
-          <div className="absolute inset-0" style={{ background: `linear-gradient(90deg, ${TONE.internacional.dark} 30%, ${TONE.internacional.dark}99 100%)` }} />
-          <div className="grain absolute inset-0" />
-        </div>
-        <div className="relative wrap grid grid-cols-1 lg:grid-cols-12 gap-10 items-end" data-reveal>
-          <div className="lg:col-span-8">
-            <p className="t-label inline-flex items-center gap-2" style={{ color: TONE.internacional.glow }}>
-              <span className="w-1.5 h-1.5 rounded-full" style={{ background: TONE.internacional.glow }} />
-              {t('Contacto', 'Contact')}
-            </p>
-            <h2 className="mt-5 t-hero !text-[clamp(2.75rem,1.4rem+4.6vw,5.75rem)] text-white">
-              <Split parts={[t('Cooperação', 'Institutional'), { em: t('institucional', 'cooperation'), color: TONE.internacional.glow }, '.']} />
-            </h2>
-            <p className="mt-6 t-lead text-white/70 max-w-xl text-pretty">
-              {t(
-                'Parcerias em redes europeias, candidaturas conjuntas, júris, conferências e novos projetos de desenvolvimento turístico.',
-                'Partnerships in European networks, joint bids, juries, conferences and new tourism development projects.'
-              )}
-            </p>
-          </div>
-          <div className="lg:col-span-4 flex flex-col gap-3">
-            <Link href="/contacto" className="h-14 px-6 rounded-full bg-white text-ink text-[15px] font-medium inline-flex items-center justify-between gap-3 hover:bg-[#F2E6DF] transition-colors">
-              {t('Enviar pedido', 'Send a request')} <ArrowUpRight className="w-4 h-4" />
-            </Link>
-            <a href={`mailto:${EMAIL}`} className="h-14 px-6 rounded-full ring-1 ring-inset ring-white/25 text-white text-[15px] font-medium inline-flex items-center justify-between gap-3 hover:bg-white/10 transition-colors">
-              {EMAIL}
-            </a>
-            <a href={LINKEDIN} target="_blank" rel="noopener noreferrer" className="h-14 px-6 rounded-full ring-1 ring-inset ring-white/25 text-white text-[15px] font-medium inline-flex items-center justify-between gap-3 hover:bg-white/10 transition-colors">
-              LinkedIn <ArrowUpRight className="w-4 h-4" />
-            </a>
-          </div>
-        </div>
-      </section>
+      {/* ───────────── Contacto ───────────── */}
+      <ContactBlock />
     </>
   );
 }

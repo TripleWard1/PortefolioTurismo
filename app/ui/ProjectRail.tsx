@@ -77,7 +77,7 @@ export default function ProjectRail() {
               {t('Projetos em destaque', 'Selected work')}
             </p>
             <h2 className="mt-4 t-h2 text-white">
-              <Split parts={[t('Do dossiê europeu', 'From the European dossier'), { em: t('ao produto local', 'to the local product'), color: tone.glow }, '.']} />
+              <Split parts={[t('Do dossier europeu', 'From the European dossier'), { em: t('ao produto local', 'to the local product'), color: tone.glow }, '.']} />
             </h2>
           </div>
           <Link href="/projetos" className="group t-label text-white inline-flex items-center gap-1">
