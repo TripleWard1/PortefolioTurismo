@@ -6,6 +6,7 @@ import { LanguageProvider } from './ui/LanguageContext';
 import Header from './ui/Header';
 import Footer from './ui/Footer';
 import Reveal from './ui/Reveal';
+import Parallax from './ui/Parallax';
 import CommandK from './ui/CommandK';
 
 const sans = Inter({ subsets: ['latin'], variable: '--font-sans', display: 'swap' });
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main>{children}</main>
           <Footer />
           <Reveal />
+          <Parallax />
           <CommandK />
         </LanguageProvider>
         <GoogleAnalytics gaId="G-C9ZYJ5XB1E" />

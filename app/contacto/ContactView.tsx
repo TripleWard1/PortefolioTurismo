@@ -38,26 +38,34 @@ export default function ContactView() {
     window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subjects[subject])}&body=${encodeURIComponent(body)}`;
   };
 
-  const field = 'w-full rounded-2xl bg-white px-4 py-3.5 text-[15px] text-ink placeholder:text-mute outline-none ring-1 ring-inset ring-line focus:ring-ink/40 transition';
+  const field = 'w-full rounded-2xl bg-soft px-4 py-3.5 text-[15px] text-ink placeholder:text-mute outline-none ring-1 ring-inset ring-line focus:ring-ink/40 transition';
 
   return (
-    <div className="wrap pt-16 md:pt-24">
-      <header data-reveal>
-        <p className="t-label text-mute">{t('Contacto', 'Contact')}</p>
-        <h1 className="mt-4 t-hero text-ink text-balance">
-          {t('Contacto', 'Institutional')} <span className="em">{t('institucional', 'contact')}</span>.
-        </h1>
-        <p className="mt-6 t-lead text-mute max-w-2xl text-pretty">
-          {t(
-            'Pedidos de cooperação institucional, parcerias em redes europeias, candidaturas conjuntas, convites para conferências e júris.',
-            'Requests for institutional cooperation, partnerships in European networks, joint bids, and invitations to conferences and juries.'
-          )}
-        </p>
+    <>
+      <header data-hero className="relative -mt-16 pt-40 md:pt-48 pb-20 md:pb-28 text-white overflow-hidden" style={{ background: TONE.europeu.dark }}>
+        <div className="absolute -right-40 -top-40 w-[640px] h-[640px] rounded-full opacity-40 blur-3xl" style={{ background: 'radial-gradient(circle, #3E5A70, transparent 65%)' }} aria-hidden />
+        <div className="relative wrap">
+          <p className="hero-in t-label inline-flex items-center gap-2" style={{ color: TONE.europeu.glow }}>
+            <span className="w-1.5 h-1.5 rounded-full" style={{ background: TONE.europeu.glow }} />
+            {t('Contacto', 'Contact')}
+          </p>
+          <h1 className="hero-in mt-4 t-hero text-white text-balance" style={{ ['--d' as any]: '120ms' }}>
+            {t('Contacto', 'Institutional')} <span className="em" style={{ color: TONE.europeu.glow }}>{t('institucional', 'contact')}</span>.
+          </h1>
+          <p className="hero-in mt-6 t-lead text-white/70 max-w-2xl text-pretty" style={{ ['--d' as any]: '240ms' }}>
+            {t(
+              'Pedidos de cooperação institucional, parcerias em redes europeias, candidaturas conjuntas, convites para conferências e júris.',
+              'Requests for institutional cooperation, partnerships in European networks, joint bids, and invitations to conferences and juries.'
+            )}
+          </p>
+        </div>
       </header>
 
-      <div className="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-10">
+    <div className="wrap">
+
+      <div className="-mt-10 relative grid grid-cols-1 lg:grid-cols-12 gap-10">
         {/* Formulário */}
-        <form onSubmit={submit} className="lg:col-span-7 rounded-4xl bg-mist p-6 md:p-10" data-reveal>
+        <form onSubmit={submit} className="lg:col-span-7 rounded-4xl bg-white p-6 md:p-10 shadow-[0_30px_80px_-30px_rgba(31,45,56,0.35)] ring-1 ring-line" data-reveal>
           <p className="t-label" style={{ color: TONE.europeu.deep }}>
             {t('Pedido de contacto', 'Contact request')}
           </p>
@@ -71,7 +79,7 @@ export default function ContactView() {
                   key={s}
                   onClick={() => setSubject(i)}
                   aria-pressed={subject === i}
-                  className={`t-label h-9 px-4 rounded-full transition-colors ${subject === i ? 'bg-ink text-white' : 'bg-white text-ink hover:bg-white/60'}`}
+                  className={`t-label h-9 px-4 rounded-full transition-colors ${subject === i ? 'bg-ink text-white' : 'bg-soft text-ink hover:bg-line'}`}
                 >
                   {s}
                 </button>
@@ -112,7 +120,7 @@ export default function ContactView() {
         </form>
 
         {/* Dados de contacto */}
-        <aside className="lg:col-span-5" data-reveal style={{ ['--delay' as any]: '100ms' }}>
+        <aside className="lg:col-span-5 lg:pt-20" data-reveal style={{ ['--delay' as any]: '100ms' }}>
           <dl className="border-t border-line">
             <div className="py-6 border-b border-line">
               <dt className="t-label text-mute">Email</dt>
@@ -151,5 +159,6 @@ export default function ContactView() {
         </aside>
       </div>
     </div>
+    </>
   );
 }

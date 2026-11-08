@@ -41,9 +41,14 @@ export default function ProjectsView() {
   const area = AREAS.find((a) => a.id === filter);
 
   return (
-    <div className="wrap pt-16 md:pt-24">
+    <div>
+      <section className="tone-shift pt-16 md:pt-24 pb-10" style={{ background: area ? TONE[area.id].tint : '#F4F1EC' }}>
+      <div className="wrap">
       <header data-reveal>
-        <p className="t-label text-mute">{t('Projetos', 'Work')}</p>
+        <p className="t-label inline-flex items-center gap-2 tone-shift" style={{ color: area ? TONE[area.id].deep : '#6e6e73' }}>
+          <span className="w-1.5 h-1.5 rounded-full" style={{ background: area ? TONE[area.id].deep : '#1d1d1f' }} />
+          {t('Projetos', 'Work')}
+        </p>
         <h1 className="mt-4 t-hero text-ink">
           {area ? area.label[lang] : <>{t('Todos os', 'All')} <span className="em">{t('projetos', 'projects')}</span>.</>}
         </h1>
@@ -57,7 +62,7 @@ export default function ProjectsView() {
         </p>
       </header>
 
-      <div className="mt-14 flex flex-col lg:flex-row lg:items-center gap-4 justify-between border-b border-line pb-6">
+      <div className="mt-14 flex flex-col lg:flex-row lg:items-center gap-4 justify-between">
         <div className="flex flex-wrap gap-1" role="tablist" aria-label={t('Filtrar por área', 'Filter by area')}>
           {tabs.map((tb) => {
             const on = filter === tb.id;
@@ -67,7 +72,7 @@ export default function ProjectsView() {
                 role="tab"
                 aria-selected={on}
                 onClick={() => setFilter(tb.id)}
-                className={`t-label h-9 px-4 rounded-full transition-colors ${on ? 'bg-ink text-white' : 'text-mute hover:text-ink hover:bg-soft'}`}
+                className={`t-label h-9 px-4 rounded-full transition-colors ${on ? 'bg-ink text-white' : 'text-ink/60 hover:text-ink hover:bg-white/60'}`}
               >
                 {tb.label}
                 <span className={`ml-1.5 tabular-nums ${on ? 'text-white/50' : 'text-mute/70'}`}>{tb.n}</span>
@@ -83,7 +88,7 @@ export default function ProjectsView() {
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder={t('Pesquisar', 'Search')}
-            className="w-full h-10 pl-10 pr-9 rounded-full bg-soft text-[15px] text-ink placeholder:text-mute outline-none focus:bg-white focus:ring-1 focus:ring-ink/20 transition"
+            className="w-full h-10 pl-10 pr-9 rounded-full bg-white/70 text-[15px] text-ink placeholder:text-mute outline-none focus:bg-white focus:ring-1 focus:ring-ink/20 transition"
           />
           {q && (
             <button onClick={() => setQ('')} aria-label={t('Limpar', 'Clear')} className="absolute right-3 top-1/2 -translate-y-1/2 text-mute hover:text-ink">
@@ -91,7 +96,7 @@ export default function ProjectsView() {
             </button>
           )}
         </label>
-          <div className="flex rounded-full bg-soft p-1" role="group" aria-label={t('Modo de visualização', 'View mode')}>
+          <div className="flex rounded-full bg-white/60 p-1" role="group" aria-label={t('Modo de visualização', 'View mode')}>
             {([
               ['grid', LayoutGrid, t('Grelha', 'Grid')],
               ['list', List, t('Lista', 'List')],
@@ -109,6 +114,10 @@ export default function ProjectsView() {
           </div>
         </div>
       </div>
+      </div>
+      </section>
+
+      <div className="wrap pb-8">
 
       {visible.length && view === 'list' ? (
         <div className="mt-10 overflow-x-auto">
@@ -183,6 +192,7 @@ export default function ProjectsView() {
           </button>
         </div>
       )}
+      </div>
     </div>
   );
 }

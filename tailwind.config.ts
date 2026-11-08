@@ -8,7 +8,7 @@ const config: Config = {
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
         serif: ['var(--font-serif)', 'Georgia', 'serif'],
       },
-      // Paleta monocromática
+      // Paleta: neutros e tons por área
       colors: {
         ink: '#1d1d1f', // texto e elementos principais
         mute: '#6e6e73', // texto secundário
@@ -22,6 +22,8 @@ const config: Config = {
         sand: '#F1EBE0',
       },
       borderRadius: { '4xl': '2rem' },
+      // Opacidades intermédias usadas no texto sobre fotografia e fundos escuros
+      opacity: { 12: '0.12', 15: '0.15', 35: '0.35', 45: '0.45', 55: '0.55', 65: '0.65', 85: '0.85' },
     },
   },
   plugins: [],

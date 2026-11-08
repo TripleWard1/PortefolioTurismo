@@ -16,6 +16,7 @@ export default function CaseStudy({ id }: { id: string }) {
   const data = useMemo(() => getDossiers(t)[id], [lang, id]); // eslint-disable-line react-hooks/exhaustive-deps
   const meta = byId(id)!;
   const { prev, next } = neighbours(id);
+  const tone = TONE[meta.theme];
   const gal: string[] = data?.gallery || [];
   const [lightbox, setLightbox] = useState<number | null>(null);
   useScrollLock(lightbox !== null);
@@ -51,29 +52,59 @@ export default function CaseStudy({ id }: { id: string }) {
   ].filter(Boolean) as { k: string; v: string }[];
 
   return (
-    <article className="wrap pt-10 md:pt-14">
-      <Link href="/projetos" className="t-label text-mute hover:text-ink inline-flex items-center gap-1.5 transition-colors">
-        <ArrowLeft className="w-4 h-4" />
-        {t('Projetos', 'Work')}
-      </Link>
-
-      {/* Título e capa, sobre o tom da área */}
-      <div className="mt-8 rounded-4xl p-3 md:p-4" style={{ background: TONE[meta.theme].tint }}>
-        <header className="px-4 pt-8 pb-10 md:px-8 md:pt-12 md:pb-14" data-reveal>
-          <p className="t-label inline-flex items-center gap-2" style={{ color: TONE[meta.theme].deep }}>
-            <span className="w-1.5 h-1.5 rounded-full" style={{ background: TONE[meta.theme].deep }} />
-            {THEME_LABEL[meta.theme][lang]} · {meta.year}
-          </p>
-          <h1 className="mt-4 t-hero !text-[clamp(2.5rem,1.4rem+4vw,4.75rem)] text-ink max-w-[20ch] text-balance">{data.headerTitle}</h1>
-          <p className="mt-6 t-lead text-ink/70 max-w-2xl text-pretty">{meta.summary[lang]}</p>
-        </header>
-        <div className={`media rounded-3xl aspect-[4/3] md:aspect-[16/8] ${meta.logo ? 'bg-white' : ''}`} data-reveal style={{ ['--delay' as any]: '100ms' }}>
-          <img src={data.watermark || meta.image} alt="" className={meta.logo ? '!object-contain p-[12%]' : ''} />
+    <article>
+      {meta.logo ? (
+        <div className="wrap pt-10 md:pt-14">
+          <Link href="/projetos" className="t-label text-mute hover:text-ink inline-flex items-center gap-1.5 transition-colors">
+            <ArrowLeft className="w-4 h-4" />
+            {t('Projetos', 'Work')}
+          </Link>
+          <div className="mt-8 rounded-4xl p-3 md:p-4" style={{ background: tone.tint }}>
+            <header className="px-4 pt-8 pb-10 md:px-8 md:pt-12 md:pb-14" data-reveal>
+              <p className="t-label inline-flex items-center gap-2" style={{ color: tone.deep }}>
+                <span className="w-1.5 h-1.5 rounded-full" style={{ background: tone.deep }} />
+                {THEME_LABEL[meta.theme][lang]} · {meta.year}
+              </p>
+              <h1 className="mt-4 t-hero !text-[clamp(2.5rem,1.4rem+4vw,4.75rem)] text-ink max-w-[20ch] text-balance">{data.headerTitle}</h1>
+              <p className="mt-6 t-lead text-ink/70 max-w-2xl text-pretty">{meta.summary[lang]}</p>
+            </header>
+            <div className="media rounded-3xl aspect-[4/3] md:aspect-[16/8] !bg-white" data-reveal style={{ ['--delay' as any]: '100ms' }}>
+              <img src={data.watermark || meta.image} alt="" className="!object-contain p-[12%]" />
+            </div>
+          </div>
         </div>
-      </div>
+      ) : (
+        /* Capa em ecrã inteiro */
+        <header data-hero className="relative -mt-16 flex flex-col min-h-[88svh] md:min-h-[600px] md:h-[88svh] md:max-h-[980px] overflow-hidden text-white" style={{ background: tone.dark }}>
+          <div className="absolute inset-0 overflow-hidden" aria-hidden>
+            <div data-parallax="-0.2" className="absolute inset-0" style={{ ['--px-scale' as any]: 1.15 }}>
+              <img src={data.watermark || meta.image} alt="" className="w-full h-full object-cover hero-kb" />
+            </div>
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,19,18,0.5)_0%,rgba(20,19,18,0.05)_30%,rgba(20,19,18,0.3)_60%,rgba(20,19,18,0.9)_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(20,19,18,0.6)_0%,rgba(20,19,18,0.25)_45%,transparent_75%)]" />
+          </div>
+          <div className="relative flex-1 w-full wrap flex flex-col justify-end pt-28 pb-12 md:pb-16">
+            <Link href="/projetos" className="hero-in t-label text-white/70 hover:text-white inline-flex items-center gap-1.5 transition-colors w-fit">
+              <ArrowLeft className="w-4 h-4" />
+              {t('Projetos', 'Work')}
+            </Link>
+            <p className="hero-in mt-8 t-label inline-flex items-center gap-2" style={{ color: tone.glow, ['--d' as any]: '100ms' }}>
+              <span className="w-1.5 h-1.5 rounded-full" style={{ background: tone.glow }} />
+              {THEME_LABEL[meta.theme][lang]} · {meta.year}
+            </p>
+            <h1 className="hero-in mt-4 t-hero !text-[clamp(2.75rem,1.4rem+4.6vw,5.5rem)] text-white max-w-[18ch] text-balance" style={{ ['--d' as any]: '200ms' }}>
+              {data.headerTitle}
+            </h1>
+            <p className="hero-in mt-6 t-lead text-white/75 max-w-2xl text-pretty" style={{ ['--d' as any]: '320ms' }}>
+              {meta.summary[lang]}
+            </p>
+          </div>
+        </header>
+      )}
 
+      <div className="wrap">
       {/* Ficha */}
-      <dl className="mt-10 grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-6" data-reveal>
+      <dl className="mt-14 grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-6" data-reveal>
         {facts.map((f) => (
           <div key={f.k} className="border-t border-line pt-4">
             <dt className="t-label text-mute">{f.k}</dt>
@@ -87,13 +118,13 @@ export default function CaseStudy({ id }: { id: string }) {
         <aside className="lg:col-span-4 lg:order-2">
           <div className="lg:sticky lg:top-24 space-y-10">
             {(data.stats || []).length > 0 && (
-              <div data-reveal>
-                <p className="t-label text-mute">{t('Em síntese', 'At a glance')}</p>
-                <dl className="mt-4 divide-y divide-line border-y border-line">
+              <div data-reveal className="rounded-3xl p-6" style={{ background: tone.tint }}>
+                <p className="t-label" style={{ color: tone.deep }}>{t('Em síntese', 'At a glance')}</p>
+                <dl className="mt-3 divide-y divide-ink/10">
                   {data.stats!.map((s) => (
-                    <div key={s.label} className="py-4">
-                      <dt className="t-label text-mute">{s.label}</dt>
-                      <dd className="mt-1 text-[1.125rem] font-semibold tracking-[-0.02em] text-ink">{s.value}</dd>
+                    <div key={s.label} className="py-4 last:pb-0">
+                      <dt className="t-label text-ink/55">{s.label}</dt>
+                      <dd className="mt-1 em text-[1.625rem] leading-tight text-ink">{s.value}</dd>
                     </div>
                   ))}
                 </dl>
@@ -191,20 +222,26 @@ export default function CaseStudy({ id }: { id: string }) {
       </div>
 
       {/* Projeto anterior / seguinte */}
-      <nav className="mt-32 grid grid-cols-1 md:grid-cols-2 gap-6" aria-label={t('Outros projetos', 'Other projects')}>
+      <nav className="mt-32 grid grid-cols-1 md:grid-cols-2 gap-4" aria-label={t('Outros projetos', 'Other projects')}>
         {[
           { p: prev, label: t('Anterior', 'Previous') },
           { p: next, label: t('Seguinte', 'Next') },
         ].map(({ p, label }) => (
-          <Link key={label} href={`/projetos/${p.id}`} className="group block">
-            <div className="media rounded-3xl aspect-[16/9]">
-              <img src={p.image} alt="" loading="lazy" />
-            </div>
-            <p className="mt-4 t-label text-mute">{label}</p>
-            <p className="mt-1 text-[1.25rem] font-semibold tracking-[-0.025em] text-ink">{p.title[lang]}</p>
+          <Link key={label} href={`/projetos/${p.id}`} className="group relative block rounded-4xl overflow-hidden aspect-[16/10]" style={{ background: TONE[p.theme].dark }}>
+            <img src={p.image} alt="" loading="lazy" className={`absolute inset-0 w-full h-full transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04] ${p.logo ? 'object-contain p-[18%] bg-white' : 'object-cover'}`} />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_35%,rgba(0,0,0,0.75)_100%)]" />
+            <span className="absolute left-6 right-6 bottom-6 text-white">
+              <span className="block t-label" style={{ color: TONE[p.theme].glow }}>{label}</span>
+              <span className="mt-1 flex items-end justify-between gap-4">
+                <span className="text-[clamp(1.375rem,1.1rem+1vw,1.875rem)] font-semibold tracking-[-0.03em] leading-tight">{p.title[lang]}</span>
+                <ArrowUpRight className="w-5 h-5 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </span>
+            </span>
           </Link>
         ))}
       </nav>
+
+      </div>
 
       {/* Galeria ampliada */}
       {lightbox !== null && gal[lightbox] && (

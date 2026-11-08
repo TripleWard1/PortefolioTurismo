@@ -22,12 +22,17 @@ Os links antigos `/#projeto/<id>` são redirecionados para `/projetos/<id>`.
 
 ## Identidade
 
-Base neutra (branco, `soft`, `line`, `mute`, `ink`) com um tom suave por área, definido em
-`app/ui/viz/palette.ts`: névoa (candidaturas europeias), argila (promoção internacional),
-salva (inovação digital) e areia (produto turístico). Cada tom tem uma versão clara para
-fundos de painéis e uma versão escura para rótulos.
+Base neutra (branco, `soft`, `line`, `mute`, `ink`) com quatro tons por área, definidos em
+`app/ui/viz/palette.ts`: ardósia (candidaturas europeias), terracota (promoção internacional),
+musgo (inovação digital) e bronze (produto turístico). Cada tom tem quatro variantes: `tint`
+(painéis claros), `deep` (rótulos), `dark` (secções imersivas a toda a largura) e `glow`
+(acentos sobre fundo escuro). `NIGHT` e `BRASS` servem a secção de distinções.
 Tipografia: Inter para o texto e Instrument Serif em itálico para acentos (classe `.em`).
-Um só tipo de movimento: entrada suave ao aparecer e zoom ligeiro nas fotografias.
+
+Movimento: abertura com fotografias em transição lenta (`HeroSlides`), parallax discreto
+(`[data-parallax]`, sem alterar o scroll), entradas suaves (`[data-reveal]`) e transições de cor
+entre áreas. Tudo respeita `prefers-reduced-motion`. O cabeçalho fica transparente sobre as
+aberturas escuras marcadas com `[data-hero]`.
 
 ## Onde editar
 

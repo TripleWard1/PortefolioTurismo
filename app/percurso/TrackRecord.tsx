@@ -5,7 +5,7 @@ import { useLang } from '../ui/LanguageContext';
 import { SectionHead } from '../ui/parts';
 import { AREAS, MISSION_POINTS, PROJECTS, byId } from '../ui/projects';
 import { ENTITY, RECOGNITION, ROLE, SCOPE } from '../ui/profile';
-import { TONE, yearSpan } from '../ui/viz/palette';
+import { BRASS, NIGHT, TONE, yearSpan } from '../ui/viz/palette';
 
 export default function TrackRecord() {
   const { t, lang } = useLang();
@@ -15,22 +15,36 @@ export default function TrackRecord() {
   const byYear = years.map((y) => ({ y, items: PROJECTS.filter((p) => yearSpan(p.year)[0] === y) }));
 
   return (
-    <div className="wrap pt-16 md:pt-24">
-      <header data-reveal>
-        <p className="t-label text-mute">{t('Percurso', 'Track record')}</p>
-        <h1 className="mt-4 t-hero text-ink max-w-[15ch]">
-          {t('Percurso', 'Career and')} <span className="em">{t('profissional', 'track record')}</span>.
-        </h1>
-        <p className="mt-6 t-lead text-mute max-w-2xl text-pretty">
-          {t(
-            'Função atual, missões de representação internacional, distinções obtidas e cronologia dos projetos desde 2024.',
-            'Current role, international representation missions, recognition received and the timeline of projects since 2024.'
-          )}
-        </p>
+    <>
+      <header data-hero className="relative -mt-16 flex flex-col min-h-[78svh] md:min-h-[560px] md:h-[78svh] md:max-h-[860px] overflow-hidden text-white" style={{ background: NIGHT }}>
+        <div className="absolute inset-0 overflow-hidden" aria-hidden>
+          <div data-parallax="-0.2" className="absolute inset-0" style={{ ['--px-scale' as any]: 1.15 }}>
+            <img src="https://i.imgur.com/AM6Z3uu.jpeg" alt="" className="w-full h-full object-cover object-[50%_45%] hero-kb" />
+          </div>
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,19,18,0.5)_0%,rgba(20,19,18,0.1)_30%,rgba(20,19,18,0.35)_60%,rgba(20,19,18,0.9)_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(20,19,18,0.6)_0%,rgba(20,19,18,0.25)_45%,transparent_75%)]" />
+        </div>
+        <div className="relative flex-1 w-full wrap flex flex-col justify-end pt-28 pb-12 md:pb-16">
+          <p className="hero-in t-label inline-flex items-center gap-2" style={{ color: BRASS }}>
+            <span className="w-1.5 h-1.5 rounded-full" style={{ background: BRASS }} />
+            {t('Percurso', 'Track record')}
+          </p>
+          <h1 className="hero-in mt-4 t-hero text-white max-w-[15ch]" style={{ ['--d' as any]: '120ms' }}>
+            {t('Percurso', 'Career and')} <span className="em text-[#E9DCC4]">{t('profissional', 'track record')}</span>.
+          </h1>
+          <p className="hero-in mt-6 t-lead text-white/75 max-w-2xl text-pretty" style={{ ['--d' as any]: '240ms' }}>
+            {t(
+              'Função atual, missões de representação internacional, distinções obtidas e cronologia dos projetos desde 2024.',
+              'Current role, international representation missions, recognition received and the timeline of projects since 2024.'
+            )}
+          </p>
+        </div>
       </header>
 
+    <div className="wrap">
+
       {/* Função atual */}
-      <section className="mt-16 rounded-4xl bg-soft p-6 md:p-12 grid grid-cols-1 lg:grid-cols-12 gap-10" data-reveal>
+      <section className="mt-16 rounded-4xl bg-mist p-6 md:p-12 grid grid-cols-1 lg:grid-cols-12 gap-10" data-reveal>
         <div className="lg:col-span-5">
           <p className="t-label text-mute inline-flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-[#4D6A55]" />
@@ -142,5 +156,6 @@ export default function TrackRecord() {
         </div>
       </section>
     </div>
+    </>
   );
 }
