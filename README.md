@@ -42,12 +42,6 @@ Movimento:
 - Cabeçalho flutuante em vidro (adaptado de Liquid Glass Navbar) com monograma, indicador deslizante,
   e que se esconde ao descer e volta ao subir. Menu móvel em ecrã inteiro.
 
-Motion graphics vivos (nível 3 do método Living Site, desenhados em código):
-- `LivingMethod.tsx`: a metodologia como diagrama vivo. Cada volta é um projeto real que passa por
-  território, estratégia, candidatura e resultado, e termina no resultado verdadeiro. Começa vazio,
-  entra a 30% visível, repete sem parar, pausa fora do ecrã e mostra a imagem final com movimento reduzido.
-- `WordLight` (em `parts.tsx`): a frase do perfil acende palavra a palavra enquanto atravessa o ecrã.
-
 Nenhum efeito altera o scroll da página. Tudo respeita `prefers-reduced-motion`.
 O cabeçalho fica transparente sobre as aberturas escuras marcadas com `[data-hero]`.
 

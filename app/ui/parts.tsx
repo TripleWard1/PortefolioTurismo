@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useRef, type ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { useLang } from './LanguageContext';
 import { TONE } from './viz/palette';
@@ -85,70 +85,6 @@ export function Split({ parts, auto = false, delay = 0 }: { parts: Part[]; auto?
   });
   return (
     <span className={auto ? 'sw-anim' : undefined} style={auto ? { ['--d' as any]: `${delay}ms` } : undefined}>
-      {out}
-    </span>
-  );
-}
-
-/* Frase que acende palavra a palavra enquanto atravessa o ecrã (scroll normal, nada preso).
-   Mesmas partes que Split: texto simples ou { em } em itálico serifado. */
-export function WordLight({ parts }: { parts: Part[] }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  useEffect(() => {
-    const host = ref.current;
-    if (!host) return;
-    const words = Array.from(host.querySelectorAll<HTMLElement>('.w'));
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      words.forEach((w) => w.classList.add('on'));
-      return;
-    }
-    let queued = false;
-    let visible = false;
-    const tick = () => {
-      queued = false;
-      const r = host.getBoundingClientRect();
-      const vh = window.innerHeight;
-      // 0 quando o início entra a 85% do ecrã; 1 quando o fim chega a 45%
-      const k = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (vh * 0.85 - vh * 0.45 + r.height)));
-      const n = Math.floor(k * (words.length + 1));
-      words.forEach((w, i) => w.classList.toggle('on', i < n));
-    };
-    const on = () => {
-      if (visible && !queued) {
-        queued = true;
-        requestAnimationFrame(tick);
-      }
-    };
-    const io = new IntersectionObserver(([e]) => {
-      visible = e.isIntersecting;
-      if (visible) on();
-    });
-    io.observe(host);
-    window.addEventListener('scroll', on, { passive: true });
-    tick();
-    return () => {
-      io.disconnect();
-      window.removeEventListener('scroll', on);
-    };
-  }, [JSON.stringify(parts)]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const out: ReactNode[] = [];
-  let i = 0;
-  parts.forEach((p, n) => {
-    const text = typeof p === 'string' ? p : p.em;
-    const ws = text.split(' ').filter(Boolean);
-    ws.forEach((w, j) => {
-      out.push(
-        <span key={i++} className={`w ${typeof p === 'string' ? '' : 'em'}`} style={typeof p !== 'string' && p.color ? { color: p.color } : undefined}>
-          {w}
-        </span>
-      );
-      const nextIsPunct = typeof parts[n + 1] === 'string' && /^[.,;:?]/.test(parts[n + 1] as string) && j === ws.length - 1;
-      if (!nextIsPunct) out.push(' ');
-    });
-  });
-  return (
-    <span ref={ref} className="wl" data-xray="Frase que acende · scroll com requestAnimationFrame" data-xray-tool="code">
       {out}
     </span>
   );

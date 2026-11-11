@@ -5,15 +5,14 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowUpRight } from 'lucide-react';
 import { useLang } from './ui/LanguageContext';
-import { SectionHead, Split, TextLink, WordLight } from './ui/parts';
+import { SectionHead, Split, TextLink } from './ui/parts';
 import HeroSlides from './ui/HeroSlides';
 import ProjectRail from './ui/ProjectRail';
 import Competences from './ui/Competences';
-import LivingMethod from './ui/LivingMethod';
 import MissionPanels from './ui/MissionPanels';
 import ContactBlock from './ui/ContactBlock';
 import { byId } from './ui/projects';
-import { ENTITY, NETWORKS, RECOGNITION, ROLE } from './ui/profile';
+import { ENTITY, METHOD, NETWORKS, RECOGNITION, ROLE } from './ui/profile';
 import { TONE } from './ui/viz/palette';
 
 const PORTRAIT = 'https://i.imgur.com/Dx42oze.jpeg';
@@ -21,6 +20,8 @@ const PORTRAIT = 'https://i.imgur.com/Dx42oze.jpeg';
 const AWARD_IMG: Record<string, string> = {
   'smart-tourism': 'https://i.imgur.com/GBs8DY7.jpeg',
 };
+/* Fotografia de cada fase da metodologia */
+const METHOD_IMG = ['https://i.imgur.com/EgopK0E.png', 'https://i.imgur.com/to9jbOB.jpeg', 'https://i.imgur.com/HecgfPz.jpeg', 'https://i.imgur.com/rKEHbnY.jpeg'];
 
 export default function Home() {
   const { t, lang } = useLang();
@@ -60,7 +61,7 @@ export default function Home() {
           <div className="lg:col-span-7" data-reveal style={{ ['--delay' as any]: '100ms' }}>
             <p className="t-label text-mute">{t('Perfil', 'Profile')}</p>
             <p className="mt-5 text-[clamp(1.875rem,1.1rem+2.6vw,3.5rem)] leading-[1.08] font-medium tracking-[-0.04em] text-ink">
-              <WordLight
+              <Split
                 parts={[
                   t('Projetos que ligam', 'Projects that connect'),
                   { em: t('política pública', 'public policy'), color: TONE.europeu.deep },
@@ -94,8 +95,39 @@ export default function Home() {
       {/* ───────────── Projetos em destaque (calha) ───────────── */}
       <ProjectRail />
 
-      {/* ───────────── Metodologia viva ───────────── */}
-      <LivingMethod />
+      {/* ───────────── Metodologia ───────────── */}
+      <section className="bg-sand py-24 md:py-32">
+        <div className="wrap">
+          <SectionHead
+            label={t('Metodologia', 'Approach')}
+            title={<Split parts={[t('Do diagnóstico', 'From assessment'), { em: t('à implementação', 'to delivery'), color: TONE.produto.deep }, '.']} />}
+          />
+          <ol className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {METHOD.map((m, i) => {
+              const ex = byId(m.example)!;
+              return (
+                <li key={m.example} data-reveal style={{ ['--delay' as any]: `${i * 90}ms` }}>
+                  <Link href={`/projetos/${ex.id}`} className="group relative block rounded-4xl overflow-hidden aspect-[3/4] text-white" style={{ background: TONE[ex.theme].dark }}>
+                    <img src={METHOD_IMG[i]} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover opacity-80 transition-transform duration-[1400ms] ease-out group-hover:scale-[1.05]" />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.35)_0%,transparent_30%,rgba(0,0,0,0.25)_55%,rgba(0,0,0,0.85)_100%)]" />
+                    <span className="absolute top-5 left-6 em text-[3.5rem] leading-none text-white/90">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="absolute left-6 right-6 bottom-6">
+                      <span className="block text-[1.375rem] font-semibold tracking-[-0.025em]">{m.title[lang]}</span>
+                      <span className="mt-2 block text-[14px] leading-relaxed text-white/75 max-h-0 opacity-0 overflow-hidden transition-all duration-700 group-hover:max-h-32 group-hover:opacity-100 max-lg:max-h-32 max-lg:opacity-100">
+                        {m.text[lang]}
+                      </span>
+                      <span className="mt-3 inline-flex items-center gap-1.5 t-label text-white/60">
+                        {t('Exemplo', 'Example')}: <span className="text-white">{ex.title[lang]}</span>
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                      </span>
+                    </span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      </section>
 
       {/* ───────────── Competências (secção imersiva) ───────────── */}
       <Competences />
